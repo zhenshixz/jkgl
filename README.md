@@ -36,7 +36,7 @@ start_backend.bat
 默认 OCR 地址是：
 
 ```text
-http://127.0.0.1:8765/api/ocr
+http://localhost:8765/api/ocr
 ```
 
 Vue 和 Element Plus 当前通过 CDN 加载，所以打开前端页面时需要网络可访问 CDN。

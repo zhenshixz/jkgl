@@ -1,4 +1,6 @@
 backend/.venv/
+backend/.paddle-home/
+backend/.paddlex/
 backend/__pycache__/
 __pycache__/
 *.pyc
@@ -9,3 +11,4 @@ __pycache__/
 .DS_Store
 Thumbs.db
 *.log
+scratch/

@@ -909,28 +909,45 @@
 
 
 
-    <!-- 弹窗：通过 OCR 识别导入套餐 -->
+    <!-- 弹窗：通过 OCR 识别批量导入套餐 -->
     <el-dialog v-model="packageOcrDialogVisible" title="通过 OCR 截图识别导入套餐列表" width="85%" @close="clearOcr">
       <div class="ocr-grid">
         <div>
-          <div @paste="onPasteImage">
+          <div v-if="ocr.images.length === 0" @paste="onPasteImage">
             <label class="upload-box" tabindex="0">
-              <input type="file" accept="image/*" @change="onImageChange">
+              <input type="file" accept="image/*" multiple @change="onImageChange">
               <div>
                 <el-icon size="28"><UploadFilled /></el-icon>
                 <p><strong>上传或粘贴列表截图</strong></p>
-                <p class="muted">复制图片后按 Ctrl+V，也可以点击选择文件</p>
+                <p class="muted">支持单张或多张截图，Ctrl+V 可粘贴</p>
               </div>
             </label>
-            <div v-if="ocr.imageUrl" class="preview" style="margin-top: 14px;">
-              <img :src="ocr.imageUrl" alt="套餐截图预览">
+          </div>
+          <div v-else @paste="onPasteImage">
+            <div style="font-size: 13px; font-weight: 600; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+              <span>已导入图片 ({{ ocr.images.length }} 张)</span>
+              <span class="muted" style="font-size: 11px;">Ctrl+V 可追加粘贴</span>
+            </div>
+            <div class="ocr-image-gallery">
+              <div v-for="(img, idx) in ocr.images" :key="img.id" class="ocr-image-card">
+                <img :src="img.url" alt="截图">
+                <button class="card-delete-btn" @click="removeOcrImage(idx)">×</button>
+                <div class="card-overlay">
+                  {{ img.running ? '识别中...' : (img.text ? '已识别' : '待识别') }}
+                </div>
+              </div>
+              <label class="ocr-image-upload-card" tabindex="0">
+                <input type="file" accept="image/*" multiple @change="onImageChange">
+                <el-icon size="20"><Plus /></el-icon>
+                <div style="font-size: 11px; margin-top: 4px; color: var(--muted);">添加图片</div>
+              </label>
             </div>
           </div>
         </div>
 
         <div>
           <div class="table-actions">
-            <el-button type="primary" :loading="ocr.running" @click="runOcr" :disabled="!ocr.file">开始 OCR</el-button>
+            <el-button type="primary" :loading="ocr.running" @click="runOcr" :disabled="ocr.images.length === 0">开始 OCR</el-button>
             <el-button @click="parseRawText" :disabled="!ocr.rawText.trim()">从原文解析</el-button>
             <el-button @click="clearOcr">清空</el-button>
             <span class="muted" v-if="ocr.progress">{{ ocr.progress }}</span>
@@ -973,24 +990,41 @@
     <el-dialog v-model="itemOcrDialogVisible" title="通过 OCR 截图识别导入检查内容" width="85%" @close="clearOcr">
       <div class="ocr-grid">
         <div>
-          <div @paste="onPasteImage">
+          <div v-if="ocr.images.length === 0" @paste="onPasteImage">
             <label class="upload-box" tabindex="0">
-              <input type="file" accept="image/*" @change="onImageChange">
+              <input type="file" accept="image/*" multiple @change="onImageChange">
               <div>
                 <el-icon size="28"><UploadFilled /></el-icon>
                 <p><strong>上传或粘贴内容详情截图</strong></p>
-                <p class="muted">复制图片后按 Ctrl+V，也可以点击选择文件</p>
+                <p class="muted">支持单张或多张截图，Ctrl+V 可粘贴</p>
               </div>
             </label>
-            <div v-if="ocr.imageUrl" class="preview" style="margin-top: 14px;">
-              <img :src="ocr.imageUrl" alt="截图预览">
+          </div>
+          <div v-else @paste="onPasteImage">
+            <div style="font-size: 13px; font-weight: 600; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+              <span>已导入图片 ({{ ocr.images.length }} 张)</span>
+              <span class="muted" style="font-size: 11px;">Ctrl+V 可追加粘贴</span>
+            </div>
+            <div class="ocr-image-gallery">
+              <div v-for="(img, idx) in ocr.images" :key="img.id" class="ocr-image-card">
+                <img :src="img.url" alt="截图">
+                <button class="card-delete-btn" @click="removeOcrImage(idx)">×</button>
+                <div class="card-overlay">
+                  {{ img.running ? '识别中...' : (img.text ? '已识别' : '待识别') }}
+                </div>
+              </div>
+              <label class="ocr-image-upload-card" tabindex="0">
+                <input type="file" accept="image/*" multiple @change="onImageChange">
+                <el-icon size="20"><Plus /></el-icon>
+                <div style="font-size: 11px; margin-top: 4px; color: var(--muted);">添加图片</div>
+              </label>
             </div>
           </div>
         </div>
 
         <div>
           <div class="table-actions">
-            <el-button type="primary" :loading="ocr.running" @click="runOcr" :disabled="!ocr.file">开始 OCR</el-button>
+            <el-button type="primary" :loading="ocr.running" @click="runOcr" :disabled="ocr.images.length === 0">开始 OCR</el-button>
             <el-button @click="parseRawText" :disabled="!ocr.rawText.trim()">从原文解析</el-button>
             <el-button @click="clearOcr">清空</el-button>
             <span class="muted" v-if="ocr.progress">{{ ocr.progress }}</span>
@@ -1090,16 +1124,9 @@
     const nowText = () => new Date().toLocaleString('zh-CN', { hour12: false });
     const uid = (prefix) => `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
     const cleanName = (value) => String(value || '').replace(/\s+/g, '').trim();
-    const normalizeItemKey = (value) => {
-      let val = cleanName(value);
-      // 只移除包含特定噪声词（如夏禾、厦禾、加收、组合、DR）的括号，保留有业务意义的括号内容（如器官、部位、性别）
-      val = val.replace(/[（(][^）)]*(?:夏禾|厦禾|加收|组合|DR)[^）)]*[）)]/g, '');
-      // 移除噪声词本身及末尾的检测/检查后缀
-      val = val.replace(/夏禾|组合|加收/g, '').replace(/(?:检测|检查|测定)$/, '');
-      // 移除所有非中文字符和非字母数字字符（忽略各种横线、空格、加号等标点符号差异）
-      val = val.replace(/[^\w\u4e00-\u9fa5]/g, '');
-      return val;
-    };
+    const normalizeItemKey = (value) => cleanName(value)
+      .replace(/[（(].*?[）)]/g, '')
+      .replace(/夏禾|组合|加收|测定|检测|检查/g, '');
 
     const defaultData = {
       packages: [],
@@ -1316,8 +1343,7 @@
           ocr: {
             mode: 'list',
             quality: 'fast',
-            file: null,
-            imageUrl: '',
+            images: [],
             rawText: '',
             running: false,
             progress: '',
@@ -1419,7 +1445,6 @@
         plans: { deep: true, handler: 'persist' },
         'ocr.rawText': {
           handler(newText) {
-            if (this.ocr.running) return;
             this.parseRawText();
           }
         },
@@ -1470,10 +1495,12 @@
           this.selectedPackages = selection;
         },
         onImageChange(event) {
-          const file = event.target.files?.[0];
-          if (!file) return;
-          this.useImageFile(file);
+          const files = Array.from(event.target.files || []);
+          files.forEach((file) => {
+            this.useImageFile(file);
+          });
           event.target.value = '';
+          ElementPlus.ElMessage.success(`已添加 ${files.length} 张图片，可以开始 OCR。`);
         },
         onPasteImage(event) {
           if (event.defaultPrevented) return;
@@ -1487,84 +1514,106 @@
           ElementPlus.ElMessage.success('已粘贴截图，可以开始 OCR。');
         },
         useImageFile(file) {
-          this.ocr.file = file;
-          if (this.ocr.imageUrl) URL.revokeObjectURL(this.ocr.imageUrl);
-          this.ocr.imageUrl = URL.createObjectURL(file);
-          this.ocr.progress = '';
+          const url = URL.createObjectURL(file);
+          this.ocr.images.push({
+            id: uid('img'),
+            file,
+            url,
+            text: '',
+            running: false,
+            progress: ''
+          });
+        },
+        removeOcrImage(index) {
+          const img = this.ocr.images[index];
+          if (img.url) URL.revokeObjectURL(img.url);
+          this.ocr.images.splice(index, 1);
+          this.rebuildRawTextFromImages();
+        },
+        rebuildRawTextFromImages() {
+          const texts = [];
+          this.ocr.images.forEach((img, idx) => {
+            if (img.text) {
+              texts.push(`--- 第 ${idx + 1} 张图片 OCR 内容 ---\n${img.text}`);
+            }
+          });
+          this.ocr.rawText = texts.join('\n\n');
+          this.parseRawText();
         },
         async runOcr() {
-          if (!this.ocr.file) {
+          if (!this.ocr.images.length) {
             ElementPlus.ElMessage.warning('请先添加或粘贴截图。');
             return;
           }
           this.ocr.running = true;
-          this.ocr.progress = '正在调用本地 OCR...';
+          this.ocr.progress = '开始批量 OCR 识别...';
           
           try {
-            const formData = new FormData();
-            formData.append('file', this.ocr.file);
-            formData.append('mode', this.ocr.mode);
-            formData.append('quality', this.ocr.quality);
-            
-            const response = await fetch(OCR_API_URL, {
-              method: 'POST',
-              body: formData
-            });
-            
-            if (!response.ok) {
-              const message = await response.text();
-              throw new Error(message || `HTTP ${response.status}`);
+            for (let i = 0; i < this.ocr.images.length; i++) {
+              const img = this.ocr.images[i];
+              if (img.text) continue;
+              
+              img.running = true;
+              img.progress = '识别中...';
+              this.ocr.progress = `正在识别第 ${i + 1}/${this.ocr.images.length} 张图片...`;
+              
+              const formData = new FormData();
+              formData.append('file', img.file);
+              formData.append('mode', this.ocr.mode);
+              formData.append('quality', this.ocr.quality);
+              
+              const response = await fetch(OCR_API_URL, {
+                method: 'POST',
+                body: formData
+              });
+              
+              if (!response.ok) {
+                const message = await response.text();
+                throw new Error(message || `HTTP ${response.status}`);
+              }
+              
+              const data = await response.json();
+              img.text = data.rawText || '';
+              img.running = false;
+              img.progress = '已识别';
             }
             
-            const data = await response.json();
-            this.ocr.rawText = data.rawText || '';
-            if (this.ocr.mode === 'list') {
-              this.ocr.packages = (data.packages || []).map((pkg) => ({
-                id: uid('ocr_pkg'),
-                name: pkg.name || '',
-                audience: pkg.audience || '',
-                price: Number(pkg.price || 0),
-                source: pkg.source || 'OCR截图',
-                reviewStatus: 'pending'
-              }));
-              if (!this.ocr.packages.length) this.addParsedPackage();
-            } else {
-              this.ocr.items = (data.items || []).map((item) => ({
-                id: uid('item'),
-                category: item.category || '未分类',
-                name: item.name || '',
-                price: Number(item.price || 0),
-                note: item.note || '',
-                source: item.source || 'OCR截图',
-                reviewStatus: 'pending'
-              }));
-              this.ocr.detailPrice = Number(data.detailPrice || this.ocr.detailPrice || 0);
-              if (!this.ocr.items.length) this.addParsedItem();
-            }
-            this.ocr.progress = 'OCR 识别完成。';
-            ElementPlus.ElMessage.success('OCR 识别完成，请核对识别结果。');
+            this.rebuildRawTextFromImages();
+            this.ocr.progress = '所有图片识别完成。';
+            ElementPlus.ElMessage.success('批量 OCR 完成，已合并解析，请核对。');
           } catch (error) {
             console.error(error);
             ElementPlus.ElMessage.error('本地 OCR 调用失败，请确认 backend 服务已启动。');
             this.ocr.progress = 'OCR 服务异常';
           } finally {
             this.ocr.running = false;
+            this.ocr.images.forEach((img) => { img.running = false; });
           }
         },
         parseRawText() {
+          const blocks = this.ocr.rawText.split(/---\s*第\s*\d+\s*张图片 OCR 内容\s*---/);
           if (this.ocr.mode === 'list') {
-            this.ocr.packages = parsePackageList(this.ocr.rawText);
+            let pkgs = [];
+            blocks.forEach(block => {
+              if (block.trim()) pkgs = pkgs.concat(parsePackageList(block));
+            });
+            this.ocr.packages = pkgs;
             if (!this.ocr.packages.length) this.addParsedPackage();
           } else {
-            this.ocr.items = parseDetailItems(this.ocr.rawText);
+            let items = [];
+            blocks.forEach(block => {
+              if (block.trim()) items = items.concat(parseDetailItems(block));
+            });
+            this.ocr.items = items;
             this.ocr.detailPrice = parsePrice(this.ocr.rawText) || this.ocr.detailPrice;
             if (!this.ocr.items.length) this.addParsedItem();
           }
         },
         clearOcr() {
-          this.ocr.file = null;
-          if (this.ocr.imageUrl) URL.revokeObjectURL(this.ocr.imageUrl);
-          this.ocr.imageUrl = '';
+          this.ocr.images.forEach((img) => {
+            if (img.url) URL.revokeObjectURL(img.url);
+          });
+          this.ocr.images = [];
           this.ocr.rawText = '';
           this.ocr.progress = '';
           this.ocr.packages = [];
@@ -1634,53 +1683,14 @@
           const activeTabObj = this.itemTabs.find(t => t.packageId === pkg.id);
           const targetList = activeTabObj ? activeTabObj.items : (pkg.items || (pkg.items = []));
           
-          let addedCount = 0;
-          let mergedCount = 0;
-          
-          newItems.forEach((newItem, idx) => {
-            const newKey = normalizeItemKey(newItem.name);
-            const exists = newKey ? targetList.find(x => normalizeItemKey(x.name) === newKey) : null;
+          newItems.forEach(newItem => {
+            const exists = targetList.find(x => normalizeItemKey(x.name) === normalizeItemKey(newItem.name));
             if (exists) {
               exists.price = newItem.price;
               exists.category = newItem.category;
-              if (newItem.note && newItem.note.trim()) {
-                const currentNote = exists.note || '';
-                if (!currentNote.includes(newItem.note.trim())) {
-                  exists.note = currentNote ? `${currentNote}；${newItem.note.trim()}` : newItem.note.trim();
-                }
-              }
-              mergedCount++;
+              exists.note = newItem.note;
             } else {
-              // 根据原先截图的位置计算天然插入点
-              let insertIdx = -1;
-              // 1. 在新提取列表中，从当前项向前查找，找到第一个已存在于目标列表中的项
-              for (let i = idx - 1; i >= 0; i--) {
-                const k = normalizeItemKey(newItems[i].name);
-                const tIdx = k ? targetList.findIndex(x => normalizeItemKey(x.name) === k) : -1;
-                if (tIdx !== -1) {
-                  insertIdx = tIdx + 1; // 插入到该已存在项的后面
-                  break;
-                }
-              }
-              // 2. 若向前没找到，则向后查找，找到第一个已存在于目标列表中的项
-              if (insertIdx === -1) {
-                for (let i = idx + 1; i < newItems.length; i++) {
-                  const k = normalizeItemKey(newItems[i].name);
-                  const tIdx = k ? targetList.findIndex(x => normalizeItemKey(x.name) === k) : -1;
-                  if (tIdx !== -1) {
-                    insertIdx = tIdx; // 插入到该已存在项的前面
-                    break;
-                  }
-                }
-              }
-              
-              // 3. 执行插入
-              if (insertIdx !== -1) {
-                targetList.splice(insertIdx, 0, newItem);
-              } else {
-                targetList.push(newItem); // 如果整张图里所有项都是全新的，则追加到最后
-              }
-              addedCount++;
+              targetList.push(newItem);
             }
           });
           
@@ -1688,11 +1698,7 @@
             pkg.updatedAt = nowText();
           }
           this.itemOcrDialogVisible = false;
-          if (mergedCount > 0) {
-            ElementPlus.ElMessage.success(`导入完成：成功新增 ${addedCount} 个检查项目，自动去重并合并了 ${mergedCount} 个重叠项目。`);
-          } else {
-            ElementPlus.ElMessage.success(`导入完成：成功新增 ${addedCount} 个检查项目。`);
-          }
+          ElementPlus.ElMessage.success(`已成功 OCR 导入 ${newItems.length} 个内容并同步合并。`);
         },
         openPackageEditor(pkg) {
           this.packageEditor.visible = true;

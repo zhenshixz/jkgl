@@ -16,7 +16,7 @@ set NO_PROXY=*
 set no_proxy=*
 
 if not exist ".venv" (
-  py -m venv .venv
+  python -m venv .venv
 )
 
 call ".venv\Scripts\activate.bat"

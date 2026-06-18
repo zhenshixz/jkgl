@@ -10,5 +10,14 @@ if not exist ".venv\Scripts\activate.bat" (
 )
 
 call ".venv\Scripts\activate.bat"
-python -m uvicorn app:app --host 127.0.0.1 --port 8765
+if not exist ".paddle-home" mkdir ".paddle-home"
+set "HOME=%CD%\.paddle-home"
+set "USERPROFILE=%CD%\.paddle-home"
+set "XDG_CACHE_HOME=%CD%\.paddle-home\.cache"
+set "PADDLE_HOME=%CD%\.paddle-home\.cache\paddle"
+set "PADDLE_PDX_CACHE_HOME=%CD%\.paddle-home\.paddlex"
+set "PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK=True"
+set "FLAGS_enable_pir_api=0"
+set "PADDLE_PDX_ENABLE_MKLDNN_BYDEFAULT=False"
+python -m uvicorn app:app --host localhost --port 8765 --reload
 pause
