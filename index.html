@@ -1437,20 +1437,60 @@
           }
         }
       },
-      mounted() {
+      async mounted() {
         window.addEventListener('paste', this.onPasteImage);
         this.planFilterId = this.activeMemberPlans[0]?.id || '';
+        try {
+          const apiDataUrl = window.location.protocol === 'file:' ? 'http://localhost:8765/api/data' : '/api/data';
+          const response = await fetch(apiDataUrl);
+          if (response.ok) {
+            const data = await response.json();
+            if (data && (data.packages?.length || data.members?.length || data.plans?.length)) {
+              this.packages = data.packages || [];
+              this.members = data.members || [];
+              this.plans = data.plans || [];
+              this.activeMemberId = this.members[0]?.id || '';
+              this.planFilterId = this.activeMemberPlans[0]?.id || '';
+            } else {
+              const saved = localStorage.getItem(STORAGE_KEY);
+              if (saved) {
+                const parsed = JSON.parse(saved);
+                if (parsed.packages?.length || parsed.members?.length || parsed.plans?.length) {
+                  this.packages = parsed.packages || [];
+                  this.members = parsed.members || [];
+                  this.plans = parsed.plans || [];
+                  this.activeMemberId = this.members[0]?.id || '';
+                  this.planFilterId = this.activeMemberPlans[0]?.id || '';
+                  this.persist();
+                }
+              }
+            }
+          }
+        } catch (e) {
+          console.error("加载后端数据失败:", e);
+        }
       },
       beforeUnmount() {
         window.removeEventListener('paste', this.onPasteImage);
       },
       methods: {
-        persist() {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        async persist() {
+          const payload = {
             packages: this.packages,
             members: this.members,
             plans: this.plans
-          }));
+          };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+          try {
+            const apiDataUrl = window.location.protocol === 'file:' ? 'http://localhost:8765/api/data' : '/api/data';
+            await fetch(apiDataUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          } catch (e) {
+            console.error("同步数据到后端失败:", e);
+          }
         },
         openPackageOcr() {
           this.clearOcr();
