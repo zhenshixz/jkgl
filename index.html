@@ -433,6 +433,79 @@
       overflow: hidden !important;
     }
 
+    /* OCR 弹窗专属分屏锁定与独立滚动条设计，彻底消除外层滚动条，便于左右分屏对比 */
+    .ocr-dialog-container {
+      height: 90vh !important;
+      margin-top: 5vh !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .ocr-dialog-container .el-dialog__body {
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      flex: 1 !important;
+      min-height: 0 !important;
+      padding: 16px 24px !important;
+    }
+    .ocr-dialog-container .ocr-grid {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+    .ocr-left-panel,
+    .ocr-right-panel {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .ocr-left-panel .upload-box {
+      flex-shrink: 0;
+    }
+    .ocr-left-panel .preview {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #fcfcfc;
+    }
+    .ocr-left-panel .preview img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: width 0.2s ease;
+      cursor: zoom-in;
+    }
+    .ocr-left-panel .preview.zoomed img {
+      width: auto;
+      max-width: none;
+      cursor: zoom-out;
+    }
+    .ocr-right-panel .table-actions,
+    .ocr-right-panel .raw-text {
+      flex-shrink: 0;
+    }
+    .ocr-table-wrapper {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+    }
+    .ocr-table-wrapper .table-actions {
+      flex-shrink: 0;
+    }
+    .ocr-table-wrapper .el-table {
+      flex: 1;
+      min-height: 0;
+    }
+
     .table-actions {
       display: flex;
       flex-wrap: wrap;
@@ -1000,8 +1073,9 @@
                         <el-input v-model="row.note"></el-input>
                       </template>
                     </el-table-column>
-                    <el-table-column label="操作" width="90" fixed="right">
+                    <el-table-column label="操作" width="130" fixed="right">
                       <template #default="{ $index }">
+                        <el-button link type="primary" @click="insertPlanRow($index)">插入</el-button>
                         <el-button link type="danger" @click="activePlan.items.splice($index, 1)">删除</el-button>
                       </template>
                     </el-table-column>
@@ -1039,25 +1113,23 @@
 
 
     <!-- 弹窗：通过 OCR 识别导入套餐 -->
-    <el-dialog v-model="packageOcrDialogVisible" title="通过 OCR 截图识别导入套餐列表" width="85%" top="3vh" @close="clearOcr">
+    <el-dialog v-model="packageOcrDialogVisible" title="通过 OCR 截图识别导入套餐列表" width="85%" top="3vh" @close="clearOcr" class="ocr-dialog-container">
       <div class="ocr-grid">
-        <div>
-          <div @paste="onPasteImage">
-            <label class="upload-box" tabindex="0">
-              <input type="file" accept="image/*" @change="onImageChange">
-              <div>
-                <el-icon size="28"><UploadFilled /></el-icon>
-                <p><strong>上传或粘贴列表截图</strong></p>
-                <p class="muted">复制图片后按 Ctrl+V，也可以点击选择文件</p>
-              </div>
-            </label>
-            <div v-if="ocr.imageUrl" class="preview" style="margin-top: 14px;">
-              <img :src="ocr.imageUrl" alt="套餐截图预览">
+        <div class="ocr-left-panel" @paste="onPasteImage">
+          <label class="upload-box" tabindex="0">
+            <input type="file" accept="image/*" @change="onImageChange">
+            <div>
+              <el-icon size="28"><UploadFilled /></el-icon>
+              <p><strong>上传或粘贴列表截图</strong></p>
+              <p class="muted">复制图片后按 Ctrl+V，也可以点击选择文件</p>
             </div>
+          </label>
+          <div v-if="ocr.imageUrl" class="preview" :class="{ zoomed: ocr.imageZoomed }" @click="ocr.imageZoomed = !ocr.imageZoomed">
+            <img :src="ocr.imageUrl" alt="套餐截图预览">
           </div>
         </div>
 
-        <div>
+        <div class="ocr-right-panel">
           <div class="table-actions">
             <el-button type="primary" :loading="ocr.running" @click="runOcr" :disabled="!ocr.file">开始 OCR</el-button>
             <el-button @click="parseRawText" :disabled="!ocr.rawText.trim()">从原文解析</el-button>
@@ -1066,12 +1138,12 @@
           </div>
           <textarea v-model="ocr.rawText" class="raw-text" placeholder="OCR 原文会出现在这里。"></textarea>
 
-          <div style="margin-top: 16px;">
+          <div class="ocr-table-wrapper">
             <div class="table-actions">
               <el-button @click="addParsedPackage">新增一行套餐</el-button>
               <el-button type="success" @click="confirmPackageList" :disabled="!ocr.packages.length">确认并导入套餐列表</el-button>
             </div>
-            <el-table :data="ocr.packages" border height="300">
+            <el-table :data="ocr.packages" border height="100%">
               <el-table-column label="套餐名称" min-width="230">
                 <template #default="{ row }">
                   <el-input v-model="row.name" class="inline-input"></el-input>
@@ -1087,8 +1159,9 @@
                   <el-input-number v-model="row.price" :min="0" :controls="false" style="width: 96px;"></el-input-number>
                 </template>
               </el-table-column>
-              <el-table-column label="操作" width="90" fixed="right">
+              <el-table-column label="操作" width="130" fixed="right">
                 <template #default="{ $index }">
+                  <el-button link type="primary" @click="insertParsedPackage($index)">插入</el-button>
                   <el-button link type="danger" @click="ocr.packages.splice($index, 1)">删除</el-button>
                 </template>
               </el-table-column>
@@ -1099,25 +1172,23 @@
     </el-dialog>
 
     <!-- 弹窗：通过 OCR 识别导入检查内容 -->
-    <el-dialog v-model="itemOcrDialogVisible" title="通过 OCR 截图识别导入检查内容" width="85%" top="3vh" @close="clearOcr">
+    <el-dialog v-model="itemOcrDialogVisible" title="通过 OCR 截图识别导入检查内容" width="85%" top="3vh" @close="clearOcr" class="ocr-dialog-container">
       <div class="ocr-grid">
-        <div>
-          <div @paste="onPasteImage">
-            <label class="upload-box" tabindex="0">
-              <input type="file" accept="image/*" @change="onImageChange">
-              <div>
-                <el-icon size="28"><UploadFilled /></el-icon>
-                <p><strong>上传或粘贴内容详情截图</strong></p>
-                <p class="muted">复制图片后按 Ctrl+V，也可以点击选择文件</p>
-              </div>
-            </label>
-            <div v-if="ocr.imageUrl" class="preview" style="margin-top: 14px;">
-              <img :src="ocr.imageUrl" alt="截图预览">
+        <div class="ocr-left-panel" @paste="onPasteImage">
+          <label class="upload-box" tabindex="0">
+            <input type="file" accept="image/*" @change="onImageChange">
+            <div>
+              <el-icon size="28"><UploadFilled /></el-icon>
+              <p><strong>上传或粘贴内容详情截图</strong></p>
+              <p class="muted">复制图片后按 Ctrl+V，也可以点击选择文件</p>
             </div>
+          </label>
+          <div v-if="ocr.imageUrl" class="preview" :class="{ zoomed: ocr.imageZoomed }" @click="ocr.imageZoomed = !ocr.imageZoomed">
+            <img :src="ocr.imageUrl" alt="截图预览">
           </div>
         </div>
 
-        <div>
+        <div class="ocr-right-panel">
           <div class="table-actions">
             <el-button type="primary" :loading="ocr.running" @click="runOcr" :disabled="!ocr.file">开始 OCR</el-button>
             <el-button @click="parseRawText" :disabled="!ocr.rawText.trim()">从原文解析</el-button>
@@ -1126,12 +1197,12 @@
           </div>
           <textarea v-model="ocr.rawText" class="raw-text" placeholder="OCR 原文会出现在这里。"></textarea>
 
-          <div style="margin-top: 16px;">
+          <div class="ocr-table-wrapper">
             <div class="table-actions">
               <el-button @click="addParsedItem">新增一行内容</el-button>
               <el-button type="success" @click="confirmDetailItems" :disabled="!ocr.items.length">确认并导入到当前套餐</el-button>
             </div>
-            <el-table :data="ocr.items" border height="300">
+            <el-table :data="ocr.items" border height="100%">
               <el-table-column type="index" label="序号" width="60" align="center"></el-table-column>
               <el-table-column label="分类/科室" width="140">
                 <template #default="{ row }">
@@ -1239,10 +1310,18 @@
     };
 
     const parsePrice = (text) => {
-      const source = String(text || '').replace(/,/g, '');
-      // 允许匹配 1 到 5 位数的带货币符号价格，支持如 ¥6 或 y6 这种单项价格
-      const currencyMatch = source.match(/[￥¥Yy]\s*(\d{1,5})/);
+      const source = String(text || '').replace(/,/g, '').trim();
+      
+      // 1. First try currency prefix search (avoid matching letters in words like FT3)
+      const currencyMatch = source.match(/(?:^|[^a-zA-Z0-9])[￥¥YyVvFfTt*xX]\s*(\d{1,5}(?:\.\d{1,2})?)/);
       if (currencyMatch) return Number(currencyMatch[1]);
+      
+      // 2. If it's a clean standalone price line, match it exactly
+      const cleanSource = source.replace(/[.\-_ /]+$/, '');
+      const exactMatch = cleanSource.match(/^(\d{1,5}(?:\.\d{1,2})?)\s*(?:元)?$/);
+      if (exactMatch) return Number(exactMatch[1]);
+      
+      // 3. Fallback for larger block (e.g. package parsing near string)
       const numbers = Array.from(source.matchAll(/(?:^|[^\d])(\d{2,5})(?:元)?(?:$|[^\d])/g))
         .map((match) => Number(match[1]))
         .filter((value) => value >= 20 && value <= 50000);
@@ -1380,6 +1459,13 @@
       const lines = rawLines
         .map((line) => line.replace(/[|｜]/g, '').replace(/\s+/g, ' ').trim())
         .filter((line) => line && !isNoiseLine(line));
+      const isPriceText = (value) => /(?:^|[^a-zA-Z0-9])[￥¥YyVvFfTt*xX]\s*\d+(?:\.\d{1,2})?/.test(value) ||
+                            /^\d{1,5}(?:\.\d{1,2})?\s*(?:元)?$/.test(value.replace(/[.\-_ /]+$/, ''));
+      const looksLikeNote = (value) => /筛查|评估|诊断|疾病|功能|风险|了解|标志物|耗材费/.test(value);
+      const looksLikeNameSuffix = (value) => {
+        const text = cleanName(value);
+        return text.length <= 16 && (/^[（(]/.test(text) || /[）)]$/.test(text) || /发光法|化学/.test(text));
+      };
 
       for (let i = 0; i < lines.length; i += 1) {
         const line = lines[i];
@@ -1388,17 +1474,36 @@
           category = cat;
           continue;
         }
-        if (!/[￥¥Yy]\s*\d+/.test(line) && !(/^\d{1,4}$/.test(line) && i > 0)) continue;
+        const isPriceLine = isPriceText(line);
+        if (!isPriceLine) continue;
 
         const price = parsePrice(line);
-        const previous = lines[i - 1] || '';
         const sameLineName = line.replace(/[￥¥Yy]\s*\d+|^\d{1,4}$/g, '').trim();
-        let name = sameLineName || previous;
+        const nameParts = [];
+        let note = '';
+        if (sameLineName) {
+          nameParts.push(sameLineName);
+        } else {
+          for (let j = i - 1; j >= 0 && nameParts.length < 4; j -= 1) {
+            const candidate = lines[j];
+            if (!candidate || isPriceText(candidate)) break;
+            const candidateCat = likelyCategory(candidate);
+            if (candidateCat && candidate.length <= 12) break;
+            if (looksLikeNote(candidate) && !looksLikeNameSuffix(candidate)) {
+              if (!note) note = candidate;
+              if (nameParts.length && !nameParts.every(looksLikeNameSuffix)) break;
+              continue;
+            }
+            nameParts.unshift(candidate);
+          }
+        }
+
+        let name = nameParts.join('').replace(/[￥¥Yy]\s*\d+|^\d{1,4}$/g, '').trim();
         if (/套餐信息|检查项目详情|检查内容详情|返回|修改|立即预约/.test(name)) continue;
         if (likelyCategory(name) && lines[i - 2]) name = lines[i - 2];
 
         const next = lines[i + 1] || '';
-        const note = /筛查|评估|诊断|疾病|功能|风险/.test(next) ? next : '';
+        if (!note && looksLikeNote(next)) note = next;
         items.push({
           id: uid('item'),
           category: category || '未分类',
@@ -1456,7 +1561,8 @@
             packages: [],
             items: [],
             detailPackageId: '',
-            detailPrice: 0
+            detailPrice: 0,
+            imageZoomed: false
           },
           packageEditor: {
             visible: false,
@@ -1743,6 +1849,7 @@
           this.ocr.items = [];
           this.ocr.detailPackageId = '';
           this.ocr.detailPrice = 0;
+          this.ocr.imageZoomed = false;
         },
         addParsedPackage() {
           this.ocr.packages.push({
@@ -1802,6 +1909,16 @@
             note: '',
             source: 'OCR手工添加',
             updatedAt: new Date().toLocaleString()
+          });
+        },
+        insertParsedPackage(index) {
+          this.ocr.packages.splice(index + 1, 0, {
+            id: uid('ocr_pkg'),
+            name: '',
+            audience: '',
+            price: 0,
+            source: 'OCR手工添加',
+            reviewStatus: 'pending'
           });
         },
         confirmDetailItems() {
@@ -2105,6 +2222,19 @@
           this.activePlan.items.push({
             id: uid('plan_item'),
             category: '未分类',
+            name: '',
+            price: 0,
+            note: '',
+            source: '手动新增',
+            status: 'add'
+          });
+        },
+        insertPlanRow(index) {
+          if (!this.activePlan) return;
+          const category = index >= 0 && index < this.activePlan.items.length ? this.activePlan.items[index].category : '自选';
+          this.activePlan.items.splice(index + 1, 0, {
+            id: uid('plan_item'),
+            category: category,
             name: '',
             price: 0,
             note: '',

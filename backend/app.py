@@ -110,19 +110,30 @@ def parse_price(text: str) -> int:
     return values[-1] if values else 0
 
 
-def parse_item_price(text: str) -> int | None:
+def parse_item_price(text: str) -> float | int | None:
     source = str(text or "").replace(",", "").strip()
-    currency = re.search(r"[￥¥Yy]\s*(\d{1,5})", source)
+    
+    # 1. First try currency prefix search (avoid matching letters in words like FT3)
+    currency = re.search(r"(?:^|[^a-zA-Z0-9])[￥¥YyVvFfTt*xX]\s*(\d{1,5}(?:\.\d{1,2})?)", source)
     if currency:
-        return int(currency.group(1))
+        try:
+            val = float(currency.group(1))
+            return int(val) if val.is_integer() else val
+        except ValueError:
+            pass
 
-    compact = clean_text(source)
-    standalone = re.fullmatch(r"(\d{1,5})(?:元)?", compact)
+    # 2. If it's a clean standalone price line, match it exactly
+    clean_source = source.strip(".-_ /")
+    standalone = re.fullmatch(r"(\d{1,5}(?:\.\d{1,2})?)\s*(?:元)?", clean_source)
     if standalone:
-        value = int(standalone.group(1))
-        if 0 <= value <= 50000:
-            return value
+        try:
+            val = float(standalone.group(1))
+            return int(val) if val.is_integer() else val
+        except ValueError:
+            pass
+            
     return None
+
 
 
 def is_noise(text: str) -> bool:
@@ -374,6 +385,8 @@ def is_fragment_name(text: str) -> bool:
     compact = clean_text(text)
     if len(compact) <= 1:
         return True
+    if re.fullmatch(r"[（(]?(?:化|化学|学发光法|化学发光法|发光法)[）)]?", compact):
+        return True
     if re.fullmatch(r"[）)〕】]*[法术项]?([（(](?:厦禾|夏禾|厦未|夏未)[）)])?", compact):
         return True
     if compact in {"厦禾", "夏禾", "厦未", "夏未", "法", "项"}:
@@ -383,7 +396,32 @@ def is_fragment_name(text: str) -> bool:
 
 def is_same_item_column(candidate: OcrLine, price_line: OcrLine, image_width: int) -> bool:
     # 划分左右两列：左列项目名称及价格一般在图片宽度的 32% 以内
-    return candidate.x1 < image_width * 0.32
+    if candidate.x1 < image_width * 0.32:
+        return True
+
+    compact = clean_text(candidate.text)
+    if not compact:
+        return False
+
+    # 某些 OCR 会把项目名中的括号后缀切到偏右位置，例如：
+    #   癌胚抗原（CEA)
+    #   (化
+    #   学发光法)
+    # 这类短后缀应继续并入项目名，而不是被当成备注或遗漏项目。
+    if candidate.x1 >= image_width * 0.5:
+        return False
+    near_price_column = candidate.cx <= price_line.cx + image_width * 0.2
+    looks_like_name_suffix = (
+        len(compact) <= 16
+        and (
+            compact.startswith(("(", "（"))
+            or compact.endswith((")", "）"))
+            or "发光法" in compact
+            or "化学" in compact
+            or compact in {"化", "(化", "（化"}
+        )
+    )
+    return near_price_column and looks_like_name_suffix
 
 
 def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[str, Any]]:
@@ -403,6 +441,7 @@ def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[st
 
     items: list[dict[str, Any]] = []
     category = "未分类"
+    used_lines = set()
 
     for index, line in enumerate(ordered):
         category_name = is_category_header(line)
@@ -423,12 +462,20 @@ def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[st
 
         previous_name_parts_lines = []
         for prev in reversed(ordered[:index]):
-            # 增大Y轴距离差限制至350像素，确保长截图或单元格高度较大时能够正确拼凑出完整的项目名称
-            if line.cy - prev.cy > 350:
-                break
             if parse_item_price(prev.text) is not None:
                 break
             if is_same_item_column(prev, line, image_width) and not is_category_header(prev):
+                lowest_cy_so_far = previous_name_parts_lines[-1].cy if previous_name_parts_lines else line.cy
+                gap = lowest_cy_so_far - prev.cy
+                line_height = max(prev.y2 - prev.y1, 10)
+                
+                # Dynamic Left-Right Structure strict boundary constraint
+                # If the gap between lines is greater than 1.8x line height, it's a completely different item.
+                # If checking distance from the price to the first name line, allow up to 3.5x line height.
+                threshold = line_height * 3.5 if not previous_name_parts_lines else line_height * 1.8
+                
+                if gap > threshold:
+                    break
                 previous_name_parts_lines.append(prev)
 
         all_name_lines = name_texts_lines + previous_name_parts_lines
@@ -456,12 +503,14 @@ def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[st
         name = normalize_exam_item_name(name_raw or inline_name)
 
         item_lines = all_name_lines + [line]
+        item_line_ids = {id(item) for item in item_lines}
         min_y = min(item.y1 for item in item_lines)
         max_y = max(item.y2 for item in item_lines)
 
         right_column_lines = [
             item for item in ordered
-            if item.x1 >= image_width * 0.32
+            if id(item) not in item_line_ids
+            and item.x1 >= image_width * 0.32
             and parse_item_price(item.text) is None
             and not is_category_header(item)
             and min_y - 12 <= item.cy <= max_y + 15
@@ -474,6 +523,8 @@ def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[st
         if any(existing["name"] == name and existing["price"] == price for existing in items):
             continue
 
+        used_lines.update(id(l) for l in item_lines + right_column_lines)
+
         items.append({
             "category": category,
             "name": name,
@@ -481,7 +532,93 @@ def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[st
             "note": note,
             "source": "PaddleOCR截图",
             "reviewStatus": "pending",
+            "_cy": min_y
         })
+
+    # === Fallback Pass: Salvage independent items whose prices were completely missed ===
+    orphan_lines = [
+        l for l in ordered
+        if id(l) not in used_lines
+        and l.x1 < image_width * 0.35
+        and not is_category_header(l)
+        and parse_item_price(l.text) is None
+    ]
+
+    orphan_items = []
+    current_orphan = []
+    for l in sorted(orphan_lines, key=lambda x: x.cy):
+        if not current_orphan:
+            current_orphan.append(l)
+        else:
+            prev = current_orphan[-1]
+            gap = l.cy - prev.cy
+            line_height = max(prev.y2 - prev.y1, 10)
+            if gap <= line_height * 1.8:
+                current_orphan.append(l)
+            else:
+                orphan_items.append(current_orphan)
+                current_orphan = [l]
+    if current_orphan:
+        orphan_items.append(current_orphan)
+
+    for orphan_group in orphan_items:
+        rows_list = []
+        for item in sorted(orphan_group, key=lambda x: x.cy):
+            placed = False
+            for row in rows_list:
+                if abs(row[0].cy - item.cy) <= 15:
+                    row.append(item)
+                    placed = True
+                    break
+            if not placed:
+                rows_list.append([item])
+        for row in rows_list:
+            row.sort(key=lambda x: x.x1)
+        rows_list.sort(key=lambda r: sum(x.cy for x in r) / len(r))
+        all_name_lines = []
+        for row in rows_list:
+            all_name_lines.extend(row)
+            
+        name_raw = "".join(item.text for item in all_name_lines) if all_name_lines else ""
+        name = normalize_exam_item_name(name_raw)
+
+        if not name or len(name) < 2 or is_noise(name) or is_fragment_name(name):
+            continue
+        if any(existing["name"] == name for existing in items):
+            continue
+
+        min_y = min(item.y1 for item in orphan_group)
+        max_y = max(item.y2 for item in orphan_group)
+        
+        right_column_lines = [
+            item for item in ordered
+            if item.x1 >= image_width * 0.32
+            and parse_item_price(item.text) is None
+            and not is_category_header(item)
+            and min_y - 12 <= item.cy <= max_y + 15
+        ]
+        right_column_lines.sort(key=lambda x: x.y1)
+        note = "".join(clean_text(item.text) for item in right_column_lines if clean_text(item.text))
+        
+        cat_for_orphan = "未分类"
+        avg_cy = sum(item.cy for item in orphan_group) / len(orphan_group)
+        cat_lines = [l for l in ordered if is_category_header(l) and l.cy < avg_cy]
+        if cat_lines:
+            cat_for_orphan = is_category_header(cat_lines[-1]) or "未分类"
+
+        items.append({
+            "category": cat_for_orphan,
+            "name": name,
+            "price": 0,
+            "note": note,
+            "source": "遗漏恢复",
+            "reviewStatus": "pending",
+            "_cy": min_y
+        })
+
+    items.sort(key=lambda x: x.get("_cy", 0))
+    for item in items:
+        item.pop("_cy", None)
 
     return items
 
