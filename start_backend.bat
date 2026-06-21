@@ -2,6 +2,9 @@
 setlocal
 cd /d "%~dp0backend"
 
+set NO_PROXY=*
+set no_proxy=*
+
 if not exist ".venv\Scripts\activate.bat" (
   echo Backend virtual environment not found.
   echo Please run install_backend.bat first.

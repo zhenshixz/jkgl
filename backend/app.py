@@ -42,7 +42,11 @@ app.add_middleware(
 
 
 PACKAGE_RE = re.compile(r"([A-H]\s*)?套餐|CT\s*平扫|胃肠镜|彩超|肺部\s*CT", re.I)
-NOISE_RE = re.compile(r"健康体检|套餐信息|检查项目详情|返回|立即预约|修改|微信|5G|^\d{1,2}:\d{2}", re.I)
+NOISE_RE = re.compile(
+    r"健康体检|套餐信息|检查项目详情|返回|立即预约|修改|微信|5G|^\d{1,2}:\d{2}|"
+    r"项目名称|检查意义|项目说明|检查内容|单项价格|说明/备注|备注/说明|检查项目|项目分类|科室分类|检查科室|科室栏|单价",
+    re.I
+)
 AUDIENCE_RE = re.compile(r"适用男性|适用女性|不限性别|男性|女性")
 CATEGORY_NAMES = [
     "一般检查",
@@ -336,8 +340,18 @@ def extract_package_list(lines: list[OcrLine]) -> list[dict[str, Any]]:
 
 def is_category(text: str) -> str:
     compact = clean_text(text)
+    
+    # 模糊别名匹配，映射至标准科室名称
+    if "眼底" in compact and ("照" in compact or "室" in compact):
+        return "眼科"
+    if "耳鼻喉" in compact:
+        return "耳鼻喉科"
+        
     for category in CATEGORY_NAMES:
         if category in compact and len(compact) <= max(12, len(category) + 3):
+            # 如果匹配到的科室分类名称（如"眼科"、"内科"）后面跟了"普检"、"项目"等字眼，说明它是具体的项目名称而非科室标题
+            if category in {"内科", "外科", "眼科", "耳鼻喉科", "口腔科", "妇科", "男科", "科室"} and any(k in compact for k in ["普检", "项目", "功能", "筛查"]):
+                continue
             return category
     return ""
 
@@ -350,8 +364,7 @@ def normalize_exam_item_name(text: str) -> str:
     
     compact = clean_text(text)
     compact = re.sub(r"^[<>\-、.·]+", "", compact)
-    compact = re.sub(r"[（(](?:厦禾|夏禾|厦未|夏未)[）)]$", "", compact)
-    compact = re.sub(r"(?:厦禾|夏禾|厦未|夏未)$", "", compact)
+    # 不再移除“(厦禾)”等分院名称后缀，保留在项目名称中以便用户识别
     compact = compact.strip("；;，,、")
     compact = clean_parentheses(compact)
     return compact
@@ -369,8 +382,8 @@ def is_fragment_name(text: str) -> bool:
 
 
 def is_same_item_column(candidate: OcrLine, price_line: OcrLine, image_width: int) -> bool:
-    # 划分左右两列：左列项目名称及价格一般在图片宽度的 43% 以内
-    return candidate.x1 < image_width * 0.43
+    # 划分左右两列：左列项目名称及价格一般在图片宽度的 32% 以内
+    return candidate.x1 < image_width * 0.32
 
 
 def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[str, Any]]:
@@ -381,8 +394,10 @@ def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[st
         cat = is_category(l.text)
         if not cat:
             return ""
-        # 如果当前行在某个价格行的同一高度区间内（包括价格在下一行的情况），说明它是项目名称，而不是科室分类栏
-        if any(abs(l.cy - p.cy) <= 52 for p in price_lines):
+        # 核心结构判定：项目名称下方必定紧贴其单项价格（通常在 -15px 到 100px 之间）。
+        # 而真正的科室分类栏（灰底）距离下一个项目的价格通常远大于 100px，且其前一个项目的价格在上方（距离远超 -15px）。
+        # 此逻辑完美适配高分屏，既能捞回“耳鼻喉科”这样的拉伸行，又绝对不会误伤“外科”、“内科”等真正的科室栏。
+        if any(-15 <= p.cy - l.cy <= 100 for p in price_lines):
             return ""
         return cat
 
@@ -408,7 +423,8 @@ def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[st
 
         previous_name_parts_lines = []
         for prev in reversed(ordered[:index]):
-            if line.cy - prev.cy > 140:
+            # 增大Y轴距离差限制至350像素，确保长截图或单元格高度较大时能够正确拼凑出完整的项目名称
+            if line.cy - prev.cy > 350:
                 break
             if parse_item_price(prev.text) is not None:
                 break
@@ -445,7 +461,7 @@ def extract_detail_items(lines: list[OcrLine], image_width: int) -> list[dict[st
 
         right_column_lines = [
             item for item in ordered
-            if item.x1 >= image_width * 0.43
+            if item.x1 >= image_width * 0.32
             and parse_item_price(item.text) is None
             and not is_category_header(item)
             and min_y - 12 <= item.cy <= max_y + 15

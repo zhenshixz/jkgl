@@ -391,7 +391,7 @@
 
     .preview {
       overflow: auto;
-      max-height: 580px;
+      max-height: 280px; /* 限制预览图高度，避免将弹窗高度顶得过大 */
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #f8fafc;
@@ -405,13 +405,32 @@
 
     .raw-text {
       width: 100%;
-      min-height: 150px;
+      min-height: 90px; /* 减小原始文本高度 */
+      max-height: 120px;
       resize: vertical;
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 12px;
       color: var(--text);
       background: #fff;
+    }
+
+    /* 限制 Element Plus 弹窗的最大高度，并强制关闭遮罩层滚动条，彻底避免双滚动条 */
+    .el-dialog {
+      max-height: 88vh;
+      margin-top: 4vh !important;
+      margin-bottom: 4vh !important;
+      display: flex;
+      flex-direction: column;
+    }
+    .el-dialog__body {
+      flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+      padding: 20px 24px !important;
+    }
+    .el-overlay {
+      overflow: hidden !important;
     }
 
     .table-actions {
@@ -588,6 +607,114 @@
         font-size: 12px;
       }
     }
+
+    /* 桌面端单屏布局优化，彻底消除页面与表格的双滚动条问题 */
+    @media (min-width: 981px) {
+      .layout {
+        height: 100vh;
+        overflow: hidden;
+      }
+      .sidebar {
+        height: 100vh;
+        overflow-y: auto;
+      }
+      .main {
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: 24px 32px 32px 32px;
+        box-sizing: border-box;
+      }
+      .topbar {
+        flex-shrink: 0;
+        margin-bottom: 16px;
+      }
+      .stats {
+        flex-shrink: 0;
+        margin-bottom: 16px;
+      }
+      
+      .packages-view-container {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .packages-view-container > .el-tabs {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .packages-view-container .el-tabs__content {
+        flex: 1;
+        min-height: 0;
+      }
+      .packages-view-container .el-tab-pane {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .packages-view-container .panel {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        border: none;
+        box-shadow: none;
+      }
+      .packages-view-container .panel-body {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .plans-view-panel {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+      }
+      .plans-view-panel .panel-body {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .plans-view-panel .plan-board {
+        flex: 1;
+        min-height: 0;
+        height: 100%;
+        align-items: stretch;
+      }
+      .plans-view-panel .plan-board > div {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .plans-view-panel .member-list {
+        flex: 1;
+        overflow-y: auto;
+      }
+      .plans-view-panel .plan-board > div:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .plans-view-panel .plan-board > div:nth-child(2) > div {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .el-table {
+        height: 100% !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -635,7 +762,7 @@
           </div>
         </div>
 
-        <div v-show="view === 'packages'">
+        <div v-show="view === 'packages'" class="packages-view-container">
           <el-tabs v-model="activeTab" type="card" @tab-remove="handleTabRemove" style="margin-top: 16px;">
             <!-- Tab 1: 套餐列表 -->
             <el-tab-pane name="packages" label="套餐列表" :closable="false">
@@ -745,9 +872,11 @@
                     <p class="panel-subtitle">在此页面添加、修改或删除检查内容。可以批量修改科室或批量删除，修改完成后请点击页面下方的“保存修改”。</p>
                   </div>
                   <div class="toolbar">
-                    <el-button type="primary" @click="addTabItem(tab)">新增内容</el-button>
-                    <el-button type="success" @click="openItemOcr(tab.package)">OCR 导入内容</el-button>
-                    <el-button type="danger" plain @click="clearBlankTabItems(tab)">一键清空空白行</el-button>
+                    <el-button @click="closeTab(tab.packageId, true)">关闭页签</el-button>
+                    <el-button type="primary" @click="saveTabChanges(tab)">保存修改</el-button>
+                    <el-button type="primary" plain @click="addTabItem(tab)">新增内容</el-button>
+                    <el-button type="success" plain @click="openItemOcr(tab.package)">OCR 导入内容</el-button>
+                    <el-button type="danger" plain @click="clearBlankTabItems(tab)">一键清空空白</el-button>
                   </div>
                 </div>
 
@@ -764,6 +893,7 @@
 
                   <el-table :data="tab.items" border height="540" @selection-change="(val) => handleTabSelectionChange(tab, val)">
                     <el-table-column type="selection" width="55"></el-table-column>
+                    <el-table-column type="index" label="序号" width="60" align="center"></el-table-column>
                     <el-table-column label="分类/科室" width="160">
                       <template #default="{ row }">
                         <el-input v-model="row.category"></el-input>
@@ -784,24 +914,22 @@
                         <el-input v-model="row.note"></el-input>
                       </template>
                     </el-table-column>
-                    <el-table-column label="操作" width="90" fixed="right">
-                      <template #default="{ row }">
+                    <el-table-column label="操作" width="130" fixed="right">
+                      <template #default="{ row, $index }">
+                        <el-button link type="primary" @click="insertTabRow(tab, $index)">插入</el-button>
                         <el-button link type="danger" @click="deleteTabRow(tab, row)">删除</el-button>
                       </template>
                     </el-table-column>
                   </el-table>
 
-                  <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line);">
-                    <el-button @click="closeTab(tab.packageId, true)">关闭页签</el-button>
-                    <el-button type="primary" @click="saveTabChanges(tab)">保存修改</el-button>
-                  </div>
+                  <!-- Bottom actions moved to top toolbar -->
                 </div>
               </section>
             </el-tab-pane>
           </el-tabs>
         </div>
 
-        <section v-show="view === 'plans'" class="panel">
+        <section v-show="view === 'plans'" class="panel plans-view-panel">
           <div class="panel-header">
             <div>
               <h3 class="panel-title">家人体检方案</h3>
@@ -841,6 +969,7 @@
 
                   <div v-if="!activePlan" class="empty">当前家人还没有体检方案，请点击“生成方案”。</div>
                   <el-table v-else :data="activePlan.items" border height="520">
+                    <el-table-column type="index" label="序号" width="60" align="center"></el-table-column>
                     <el-table-column label="状态" width="120">
                       <template #default="{ row }">
                         <el-select v-model="row.status" size="small">
@@ -910,7 +1039,7 @@
 
 
     <!-- 弹窗：通过 OCR 识别导入套餐 -->
-    <el-dialog v-model="packageOcrDialogVisible" title="通过 OCR 截图识别导入套餐列表" width="85%" @close="clearOcr">
+    <el-dialog v-model="packageOcrDialogVisible" title="通过 OCR 截图识别导入套餐列表" width="85%" top="3vh" @close="clearOcr">
       <div class="ocr-grid">
         <div>
           <div @paste="onPasteImage">
@@ -970,7 +1099,7 @@
     </el-dialog>
 
     <!-- 弹窗：通过 OCR 识别导入检查内容 -->
-    <el-dialog v-model="itemOcrDialogVisible" title="通过 OCR 截图识别导入检查内容" width="85%" @close="clearOcr">
+    <el-dialog v-model="itemOcrDialogVisible" title="通过 OCR 截图识别导入检查内容" width="85%" top="3vh" @close="clearOcr">
       <div class="ocr-grid">
         <div>
           <div @paste="onPasteImage">
@@ -1003,6 +1132,7 @@
               <el-button type="success" @click="confirmDetailItems" :disabled="!ocr.items.length">确认并导入到当前套餐</el-button>
             </div>
             <el-table :data="ocr.items" border height="300">
+              <el-table-column type="index" label="序号" width="60" align="center"></el-table-column>
               <el-table-column label="分类/科室" width="140">
                 <template #default="{ row }">
                   <el-input v-model="row.category"></el-input>
@@ -1023,8 +1153,9 @@
                   <el-input v-model="row.note"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column label="操作" width="90" fixed="right">
+              <el-table-column label="操作" width="130" fixed="right">
                 <template #default="{ $index }">
+                  <el-button link type="primary" @click="insertParsedItem($index)">插入</el-button>
                   <el-button link type="danger" @click="ocr.items.splice($index, 1)">删除</el-button>
                 </template>
               </el-table-column>
@@ -1109,7 +1240,8 @@
 
     const parsePrice = (text) => {
       const source = String(text || '').replace(/,/g, '');
-      const currencyMatch = source.match(/[￥¥Yy]\s*(\d{2,5})/);
+      // 允许匹配 1 到 5 位数的带货币符号价格，支持如 ¥6 或 y6 这种单项价格
+      const currencyMatch = source.match(/[￥¥Yy]\s*(\d{1,5})/);
       if (currencyMatch) return Number(currencyMatch[1]);
       const numbers = Array.from(source.matchAll(/(?:^|[^\d])(\d{2,5})(?:元)?(?:$|[^\d])/g))
         .map((match) => Number(match[1]))
@@ -1256,11 +1388,11 @@
           category = cat;
           continue;
         }
-        if (!/[￥¥]\s*\d+/.test(line) && !(/^\d{1,4}$/.test(line) && i > 0)) continue;
+        if (!/[￥¥Yy]\s*\d+/.test(line) && !(/^\d{1,4}$/.test(line) && i > 0)) continue;
 
         const price = parsePrice(line);
         const previous = lines[i - 1] || '';
-        const sameLineName = line.replace(/[￥¥]\s*\d+|^\d{1,4}$/g, '').trim();
+        const sameLineName = line.replace(/[￥¥Yy]\s*\d+|^\d{1,4}$/g, '').trim();
         let name = sameLineName || previous;
         if (/套餐信息|检查项目详情|检查内容详情|返回|修改|立即预约/.test(name)) continue;
         if (likelyCategory(name) && lines[i - 2]) name = lines[i - 2];
@@ -1597,7 +1729,7 @@
             if (!this.ocr.packages.length) this.addParsedPackage();
           } else {
             this.ocr.items = parseDetailItems(this.ocr.rawText);
-            this.ocr.detailPrice = parsePrice(this.ocr.rawText) || this.ocr.detailPrice;
+            // 导入检查内容明细时，不修改套餐本身的总价格，防止误用检查项的单价覆盖套餐总价
             if (!this.ocr.items.length) this.addParsedItem();
           }
         },
@@ -1642,7 +1774,7 @@
               existing.price = row.price;
               existing.source = row.source;
               existing.items = existing.items || [];
-              existing.updatedAt = nowText();
+              existing.updatedAt = new Date().toLocaleString();
             } else {
               const pkg = {
                 id: uid('pkg'),
@@ -1652,7 +1784,7 @@
                 source: row.source,
                 rawText: this.ocr.rawText,
                 items: [],
-                updatedAt: nowText()
+                updatedAt: new Date().toLocaleString()
               };
               this.packages.push(pkg);
             }
@@ -1660,11 +1792,23 @@
           this.packageOcrDialogVisible = false;
           ElementPlus.ElMessage.success(`已导入 ${rows.length} 个套餐。`);
         },
+        insertParsedItem(index) {
+          const category = index >= 0 && index < this.ocr.items.length ? this.ocr.items[index].category : '未分类';
+          this.ocr.items.splice(index + 1, 0, {
+            id: uid('item'),
+            category: category,
+            name: '',
+            price: 0,
+            note: '',
+            source: 'OCR手工添加',
+            updatedAt: new Date().toLocaleString()
+          });
+        },
         confirmDetailItems() {
           const packageNameOrId = this.ocr.detailPackageId;
           let pkg = this.packages.find((item) => item.id === packageNameOrId);
           if (!pkg) return;
-          if (this.ocr.detailPrice) pkg.price = Number(this.ocr.detailPrice);
+          // 导入检查内容明细时，不需要修改套餐本身的价格，套餐价格仅在编辑套餐基本信息时维护
           pkg.rawText = this.ocr.rawText;
           
           const newItems = this.ocr.items
@@ -1691,34 +1835,30 @@
               }
               mergedCount++;
             } else {
-              // 根据原先截图的位置计算天然插入点
               let insertIdx = -1;
-              // 1. 在新提取列表中，从当前项向前查找，找到第一个已存在于目标列表中的项
               for (let i = idx - 1; i >= 0; i--) {
                 const k = normalizeItemKey(newItems[i].name);
                 const tIdx = k ? targetList.findIndex(x => normalizeItemKey(x.name) === k) : -1;
                 if (tIdx !== -1) {
-                  insertIdx = tIdx + 1; // 插入到该已存在项的后面
+                  insertIdx = tIdx + 1;
                   break;
                 }
               }
-              // 2. 若向前没找到，则向后查找，找到第一个已存在于目标列表中的项
               if (insertIdx === -1) {
                 for (let i = idx + 1; i < newItems.length; i++) {
                   const k = normalizeItemKey(newItems[i].name);
                   const tIdx = k ? targetList.findIndex(x => normalizeItemKey(x.name) === k) : -1;
                   if (tIdx !== -1) {
-                    insertIdx = tIdx; // 插入到该已存在项的前面
+                    insertIdx = tIdx;
                     break;
                   }
                 }
               }
               
-              // 3. 执行插入
               if (insertIdx !== -1) {
                 targetList.splice(insertIdx, 0, newItem);
               } else {
-                targetList.push(newItem); // 如果整张图里所有项都是全新的，则追加到最后
+                targetList.push(newItem);
               }
               addedCount++;
             }
@@ -1783,7 +1923,19 @@
             price: 0,
             note: '',
             source: '手动新增',
-            reviewStatus: 'confirmed'
+            updatedAt: new Date().toLocaleString()
+          });
+        },
+        insertTabRow(tab, index) {
+          const category = index >= 0 && index < tab.items.length ? tab.items[index].category : '未分类';
+          tab.items.splice(index + 1, 0, {
+            id: uid('item'),
+            category: category,
+            name: '',
+            price: 0,
+            note: '',
+            source: '手动新增',
+            updatedAt: new Date().toLocaleString()
           });
         },
         deleteTabRow(tab, row) {

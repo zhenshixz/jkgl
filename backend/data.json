@@ -4,21 +4,21 @@
       "id": "pkg_1781752810676_83e4ea155e747",
       "name": "C套餐(大众版)-男性",
       "audience": "男性",
-      "price": 120,
+      "price": 1619,
       "source": "PaddleOCR截图",
-      "rawText": "勿川5川\n<\n血清a-L-岩藻糖苷酶测定\n(厦禾)\n¥5\n异常凝血酶原(PIVKA-\nII) 测定（厦禾)\n¥120\n幽门螺旋杆菌尿素酶抗\n体检测(HP)\n￥50\n甲状腺功能测评、诊断及疗效评价\n(厦禾)\n游离T3\n(FT3)\n等\n¥50\n甲状腺功能测评、诊断及疗效评价\n游离T4（FT4）(厦禾)\n等\n¥50\n有核红细胞计数（厦\n禾)\n¥9\n放射科\nCT平扫(肺部、多层、重\n建）(厦禾)\n￥230\n计算机体层成像（CT)\n平扫-薄层扫描（加收)\n(厦禾)\n¥50\n颈椎正侧片(DR组合)(厦\n禾)\n¥82\n彩超室\n彩色B超（肝、胆、胰、\n脾)\n￥105\n(双肾、膀胱、\n彩色B超\n输尿管、\n前列腺）（男)\n¥105\n¥1619",
+      "rawText": "合川川口\n项目名称\n检查意义\n检验科\n(总部)高尔基体蛋白\n肝癌风险评估及早期筛查\n73(GP73)测定\n¥100\n胰腺癌、胆囊癌、胃癌、结直肠癌\nCA199（化学发光法)\n筛查\n¥50\nCA724（化学发光法)\n胃肠道肿瘤和卵巢癌的标志物\n¥50\n癌胚抗原（CEA)\n(化\n学发光法)\n¥34\n常规生化全套检查（厦\n肝肾心功能测评，血糖血脂筛查\n禾)\n¥170\n促甲状腺激素（TSH)\n甲状腺功能测评、诊断及疗效评价\n(厦禾)\n等\n¥50\n甲胎蛋白（AFP)\n(化学\n发光法)\n￥34\n静脉注射(静脉采血)\n耗材费\n¥6\n可筛查肾、肝、胆疾病和糖尿病等\n尿常规\n疾病，有助于发现亚健康人群，进\n¥10\n行早期诊断及疾病预防。\n尿沉渣定量(流式细胞仪\n法)（厦禾)\n¥16\n同型半胱氨酸测定（厦\n禾)\n¥55\n血常规（五分类)\n感染性、血液性疾病等早期筛查\n¥25\n血清a-L-岩藻糖苷酶测定\n(厦禾)\n¥5\n异常凝血酶原（(PIVKA-\nIⅢ)测定（厦禾)\n￥120\n幽门螺旋杆菌尿素酶抗\n体检测（HP)\n¥50\n甲状腺功能测评、诊断及疗效评价\n游离T3（FT3)\n(厦禾)\n等\n¥50\n甲状腺功能测评、诊断及疗效评价\n游离T4(FT4）（厦禾)\n等\n¥50\n有核红细胞计数（厦\n禾)\n¥9\n放射科\nCT平扫(肺部、多层、重\n建）(厦禾)\n¥230\n计算机体层成像（CT)\n平扫-薄层扫描（加收)\n(厦禾)\n¥50\n颈椎正侧片(DR组合)(厦\n禾)\n¥82\n彩超室\n彩色B超（肝、胆、胰、\n脾)\n¥105\n(双肾、膀胱、\n彩色B超\n前列腺）（男)\n输尿管、\n¥105\n甲状腺+颈部淋巴结彩超\n形态学改变及占位性病变筛查\n¥105\n心电图室\n主要反映心脏电激动过程，对了解\n(厦禾)\n常规心电图\n心脏的功能及心肌供血情况\n￥30\n耳鼻喉科\n普通检查观察耳廓、外耳道、鼓\n耳鼻喉科\n膜，听力；鼻外形、鼻中隔、下鼻\n甲、中鼻道、鼻咽部、扁桃体、咽\n¥0\n部、喉部的情况。\n登记\n建立健康档案+总检评估\n(厦禾)\n¥0\n内科\n内科\n¥12\n身高体重\n身高体重\n¥0\n外科\n外科\n¥0\n眼科\n观察眼睑、泪点、结膜、角膜、巩\n眼科普检\n膜、前房、虹膜、瞳孔，使用视力\n表检查裸眼视力、矫正视力，采用\n¥0\n标准色觉检查图谱判断辨色力。\n眼压检查(右侧)\n¥8\n眼压检查(左侧)\n¥8\n¥1619",
       "items": [
         {
-          "id": "item_1781773925765_6d5fa08c0fe4c",
+          "id": "item_1781842908533_737dc74f1e202",
           "category": "检验科",
-          "name": "(总部)高尔基体蛋白73(GP73)测定",
+          "name": "总部高尔基体蛋白73(GP73)测定",
           "price": 100,
           "note": "肝癌风险评估及早期筛查",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_c9ada7949ef3a8",
+          "id": "item_1781842908533_c4ec3ab6dcff6",
           "category": "检验科",
           "name": "CA199(化学发光法)",
           "price": 50,
@@ -27,7 +27,7 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_761c1bb562811",
+          "id": "item_1781842908533_969a8e7559183",
           "category": "检验科",
           "name": "CA724(化学发光法)",
           "price": 50,
@@ -36,7 +36,7 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_732c45927c11a8",
+          "id": "item_1781842908533_1ace7892403fa8",
           "category": "检验科",
           "name": "癌胚抗原(CEA)(化学发光法)",
           "price": 34,
@@ -45,25 +45,25 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_ffee920dbd53a8",
+          "id": "item_1781842908533_53d167e03b979",
           "category": "检验科",
-          "name": "常规生化全套检查",
+          "name": "常规生化全套检查(厦禾)",
           "price": 170,
           "note": "肝肾心功能测评，血糖血脂筛查",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_441cec9185bb7",
+          "id": "item_1781842908533_9cfec2c7f863e",
           "category": "检验科",
-          "name": "促甲状腺激素(TSH)",
+          "name": "促甲状腺激素(TSH)(厦禾)",
           "price": 50,
           "note": "甲状腺功能测评、诊断及疗效评价等",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_4a5139e436056",
+          "id": "item_1781842908533_9c247cc60e7f68",
           "category": "检验科",
           "name": "甲胎蛋白(AFP)(化学发光法)",
           "price": 34,
@@ -72,7 +72,7 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_a3b90ba5a98f38",
+          "id": "item_1781842908533_ee02b221ba12f8",
           "category": "检验科",
           "name": "静脉注射(静脉采血)",
           "price": 6,
@@ -81,7 +81,7 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_166c970a09de98",
+          "id": "item_1781842908533_7297bbbe6d22e8",
           "category": "检验科",
           "name": "尿常规",
           "price": 10,
@@ -90,25 +90,25 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_5cd53633b2da4",
+          "id": "item_1781842908533_87a77ba23b6018",
           "category": "检验科",
-          "name": "尿沉渣定量(流式细胞仪法)",
+          "name": "尿沉渣定量(流式细胞仪法)(厦禾)",
           "price": 16,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_08c75782bf462",
+          "id": "item_1781842908533_2b3d5e2ce3df18",
           "category": "检验科",
-          "name": "同型半胱氨酸测定",
+          "name": "同型半胱氨酸测定(厦禾)",
           "price": 55,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773925765_031f176ca24878",
+          "id": "item_1781842908533_32c7519ea33dc8",
           "category": "检验科",
           "name": "血常规(五分类)",
           "price": 25,
@@ -117,26 +117,26 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_99b0b2e60ebd7",
-          "category": "未分类",
-          "name": "血清a-L-岩藻糖苷酶测定",
+          "id": "item_1781842908533_c757997f63b3a8",
+          "category": "检验科",
+          "name": "血清a-L-岩藻糖苷酶测定(厦禾)",
           "price": 5,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_4fd47bcbd9f7c",
-          "category": "未分类",
-          "name": "异常凝血酶原(PIVKA-II)测定",
+          "id": "item_1781842908533_0018a7290d5668",
+          "category": "检验科",
+          "name": "异常凝血酶原(PIVKA-II)测定(厦禾)",
           "price": 120,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_8d79e5ceac003",
-          "category": "未分类",
+          "id": "item_1781842908533_ddfcf0b58881c8",
+          "category": "检验科",
           "name": "幽门螺旋杆菌尿素酶抗体检测(HP)",
           "price": 50,
           "note": "",
@@ -144,61 +144,61 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_6ae0d26d9a136",
-          "category": "未分类",
-          "name": "游离T3(FT3)",
+          "id": "item_1781842908533_53f9e38bd5525",
+          "category": "检验科",
+          "name": "游离T3(FT3)(厦禾)",
           "price": 50,
           "note": "甲状腺功能测评、诊断及疗效评价等",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_f8ab439d757588",
-          "category": "未分类",
-          "name": "游离T4(FT4)",
+          "id": "item_1781842908533_9bf4b444115728",
+          "category": "检验科",
+          "name": "游离T4(FT4)(厦禾)",
           "price": 50,
           "note": "甲状腺功能测评、诊断及疗效评价等",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_c85f5b892a6ff",
-          "category": "未分类",
-          "name": "有核红细胞计数",
+          "id": "item_1781842908533_3867059f69c9e",
+          "category": "检验科",
+          "name": "有核红细胞计数(厦禾)",
           "price": 9,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_365b7854328f38",
+          "id": "item_1781842908533_b1eeb7f302e118",
           "category": "放射科",
-          "name": "CT平扫(肺部、多层、重建)",
+          "name": "CT平扫(肺部、多层、重建)(厦禾)",
           "price": 230,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_30b77e84172fc8",
+          "id": "item_1781842908533_e54536f0844c3",
           "category": "放射科",
-          "name": "计算机体层成像(CT)平扫-薄层扫描(加收)",
+          "name": "计算机体层成像(CT)平扫-薄层扫描(加收)(厦禾)",
           "price": 50,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_c86e7aa4191dc",
+          "id": "item_1781842908533_834bf5607ea038",
           "category": "放射科",
-          "name": "颈椎正侧片(DR组合)",
+          "name": "颈椎正侧片(DR组合)(厦禾)",
           "price": 82,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781773970140_03d4f8673c5f68",
+          "id": "item_1781842908533_759bf651d5166",
           "category": "彩超室",
           "name": "彩色B超(肝、胆、胰、脾)",
           "price": 105,
@@ -207,7 +207,16 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781774489009_cbf4583cac98",
+          "id": "item_1781842908533_1cd40c54e703a",
+          "category": "彩超室",
+          "name": "彩色B超(双肾、膀胱、输尿管、前列腺)(男)",
+          "price": 105,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781842908533_c517c43bbf053",
           "category": "彩超室",
           "name": "甲状腺+颈部淋巴结彩超",
           "price": 105,
@@ -216,25 +225,34 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781774489009_dcce751e20958",
+          "id": "item_1781842908533_2c72fd08a14d4",
           "category": "心电图室",
-          "name": "常规心电图",
+          "name": "常规心电图(厦禾)",
           "price": 30,
           "note": "主要反映心脏电激动过程，对了解心脏的功能及心肌供血情况",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781774489009_bbf9a59642fc38",
+          "id": "item_1781842908533_fbc55ac96ea31",
+          "category": "耳鼻喉科",
+          "name": "耳鼻喉科",
+          "price": 0,
+          "note": "普通检查观察耳廓、外耳道、鼓膜，听力；鼻外形、鼻中隔、下鼻甲、中鼻道、鼻咽部、扁桃体、咽部、喉部的情况。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781842908533_7afeb097b8b29",
           "category": "登记",
-          "name": "建立健康档案+总检评估",
+          "name": "建立健康档案+总检评估(厦禾)",
           "price": 0,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781774489009_8a779b995888e",
+          "id": "item_1781842908533_c34019680e07d8",
           "category": "内科",
           "name": "内科",
           "price": 12,
@@ -243,7 +261,7 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781774489009_c547dbe64ba638",
+          "id": "item_1781842908533_49ede1ffa49828",
           "category": "身高体重",
           "name": "身高体重",
           "price": 0,
@@ -252,7 +270,7 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781774489009_1b5c6445071f38",
+          "id": "item_1781842908533_bf1ae4aee4c97",
           "category": "外科",
           "name": "外科",
           "price": 0,
@@ -261,26 +279,1462 @@
           "reviewStatus": "confirmed"
         },
         {
-          "id": "item_1781774680568_f15966de756528",
+          "id": "item_1781842908533_4ec469b4ed60f8",
+          "category": "眼科",
+          "name": "眼科普检",
+          "price": 0,
+          "note": "观察眼睑、泪点、结膜、角膜、巩膜、前房、虹膜、瞳孔，使用视力表检查裸眼视力、矫正视力，采用标准色觉检查图谱判断辨色力。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781842908533_443bfda8e99d5",
           "category": "眼科",
           "name": "眼压检查(右侧)",
           "price": 8,
           "note": "",
           "source": "PaddleOCR截图",
           "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781842908533_07df07dad0ed1",
+          "category": "眼科",
+          "name": "眼压检查(左侧)",
+          "price": 8,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
         }
       ],
-      "updatedAt": "2026/6/18 17:33:29"
+      "updatedAt": "2026/6/20 15:10:13"
     },
     {
       "id": "pkg_1781752810676_e8b75e480a4748",
       "name": "D套餐(大众升级版)-男性",
       "audience": "男性",
-      "price": 2621,
+      "price": 2612,
       "source": "PaddleOCR截图",
-      "rawText": "烈二川口\n<\nA套餐(基础版)-男性\n适用男性\n¥597\nB套餐(基础升级版)-男性\n适用男性\n￥1327\nCT平扫(全腹部CT)(组合)\n不限性别\n¥920\nC套餐(大众版)-男性\n适用男性\n￥1619\nD套餐(大众升级版)-男性\n适用男性\n¥2621\nE套餐(应酬版)-男性\n适用男性",
-      "items": [],
-      "updatedAt": "2026/6/18 11:20:10"
+      "rawText": "合5川川□\n<\n·\nO套餐说明\n检查意义\n项目名称\n检验科\n(总部)高尔基体蛋白\n肝癌风险评估及早期筛查\n73(GP73)测定\n¥100\n(总部)甲胎蛋白（AFP)\n(化学发光法)\n￥34\n(总部)甲胎蛋白异质体测\n定（AFP-L3%)\n¥100\n(总部)鳞状细胞癌相关抗\n原测定(SCC)\n¥50\n(总部)胃泌素释放肽前体\n胃蛋白酶原检测，胃癌早期筛查\n(PRO-GRP)\n¥50\n13碳呼气试验（厦禾)\n¥90\n胰腺癌、胆囊癌、胃癌、结直肠癌\nCA199（化学发光法)\n筛查\n¥50\nCA724（化学发光法)\n胃肠道肿瘤和卵巢癌的标志物\n¥50\nEB-EA-IgA\n¥35\nEB-VcA-IgA\n¥35\nEBV病毒抗体测定(Rta-\nlgG)\n癌胚抗原（CEA)\n(化\n学发光法)\n¥34\n常规生化全套检查（厦\n禾)\n肝肾心功能测评，血糖血脂筛查\n¥170\n促甲状腺激素（TSH)\n甲状腺功能测评、诊断及疗效评价\n(厦禾)\n等\n¥50\n促甲状腺素受体抗体测\n甲状腺功能测评、诊断及疗效评价\n定（A-TSHR)）厦禾\n等\n¥50\n甲状腺过氧化物酶抗体\n(APO-Ab)厦禾\n¥54\n静脉注射(静脉采血)\n耗材费\n¥6\n抗甲状腺球蛋白抗体测\n定(TGAb)（厦禾)\n¥30\n可筛查肾、肝、胆疾病和糖尿病等\n尿常规\n疾病，有助于发现亚健康人群，进\n¥10\n行早期诊断及疾病预防。\n尿沉渣定量(流式细胞仪\n法)（厦禾)\n¥16\n肾脏损伤和微细血管损害的早期筛\n尿微量白蛋白定量\n查\n¥52\n神经元特异性烯醇化酶\nNSE（化学发光法)\n¥50\n同型半胱氨酸测定（厦\n禾)\n¥55\n胃蛋白酶原测定(检验\n科)\n¥60\n胃蛋白酶原|测定(检验\n科)\n¥60\n胃泌素-17(检验科)\n胃蛋白酶原检测，胃癌早期筛查\n¥60\n细胞角蛋白19段测定\nCYFRA21-1（化学发光\n法)\n¥50\n血常规（五分类)\n感染性、血液性疾病等早期筛查\n￥25\n血清a-L-岩藻糖苷酶测定\n(厦禾)\n¥5\n异常凝血酶原(PIVKA-\nIⅢ)）测定（厦禾)\n￥120\n游离T3(FT3）（厦禾)\n甲状腺功能测评、诊断及疗效评价\n等\n¥50\n甲状腺功能测评、诊断及疗效评价\n游离T4(FT4）（厦禾)\n等\n¥50\n游离总前列腺特异抗原\nFPSA （化学发光法)\n¥50\n有核红细胞计数（厦\n禾)\n¥9\n总前列腺特异抗原TPSA\n(化学发光法)\n¥50\n放射科\nCT平扫(肺部、多层、重\n建）(厦禾)\n¥230\n计算机体层成像（CT)\n平扫-薄层扫描（加收)\n(厦禾)\n¥50\n颈椎正侧片(DR组合)(厦\n禾)\n￥82\n彩超室\n彩色B超（肝、胆、胰、\n脾)\n¥105\n彩色B超（双肾、膀胱、\n输尿管、前列腺）（男)\n￥105\n甲状腺+颈部淋巴结彩超\n形态学改变及占位性病变筛查\n￥105\n心电图室\n常规心电图（厦禾)\n主要反映心脏电激动过程，对了解\n心脏的功能及心肌供血情况\n￥30\n耳鼻喉科\n普通检查观察耳廓、外耳道、鼓\n耳鼻喉科\n膜，听力；鼻外形、鼻中隔、下鼻\n甲、中鼻道、鼻咽部、扁桃体、咽\n¥0\n部、喉部的情况。\n登记\n建立健康档案+总检评估\n(厦禾)\n¥0\n眼科\n裂隙灯检查(右侧)\n¥0\n裂隙灯检查(左侧)\n¥7\n观察眼睑、泪点、结膜、角膜、巩\n眼科普检\n膜、前房、虹膜、瞳孔，使用视力\n表检查裸眼视力、矫正视力，采用\n¥0\n标准色觉检查图谱判断辨色力。\n眼压检查(右侧)\n¥8\n眼压检查(左侧)\n¥8\n内科\n内科\n¥12\n身高体重\n身高体重\n¥0\n外科\n外科\n¥0\n厦禾体检眼底照相室\n眼底照像\n¥42\n眼底照像（双侧）\n￥42\n¥2621",
+      "items": [
+        {
+          "id": "item_1781849842348_5d5c513b07641",
+          "category": "检验科",
+          "name": "(总部)高尔基体蛋白73(GP73)测定",
+          "price": 100,
+          "note": "肝癌风险评估及早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_22af0853dae25",
+          "category": "检验科",
+          "name": "甲胎蛋白(AFP)(化学发光法)",
+          "price": 34,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_9f2852b3dc1628",
+          "category": "检验科",
+          "name": "甲胎蛋白异质体测定(AFP-L3%)",
+          "price": 100,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_5b930cbe4c092",
+          "category": "检验科",
+          "name": "鳞状细胞癌相关抗原测定(SCC)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_8d7bd95de2884",
+          "category": "检验科",
+          "name": "胃泌素释放肽前体(PRO-GRP)",
+          "price": 50,
+          "note": "胃蛋白酶原检测，胃癌早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_05c45a0838835",
+          "category": "检验科",
+          "name": "13碳呼气试验(厦禾)",
+          "price": 90,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_7a9317c9564248",
+          "category": "检验科",
+          "name": "CA199(化学发光法)",
+          "price": 50,
+          "note": "胰腺癌、胆囊癌、胃癌、结直肠癌筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_b80ed57e80578",
+          "category": "检验科",
+          "name": "CA724(化学发光法)",
+          "price": 50,
+          "note": "胃肠道肿瘤和卵巢癌的标志物",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_2c99f22247a45",
+          "category": "检验科",
+          "name": "EB-EA-IgA",
+          "price": 35,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_c5b4f72e54a8c8",
+          "category": "检验科",
+          "name": "EB-VcA-IgA",
+          "price": 35,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_b9858e40fb67",
+          "category": "检验科",
+          "name": "EBV病毒抗体测定(Rta-lgG)",
+          "price": 34,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781851201487_d0a45dbc6acf",
+          "category": "检验科",
+          "name": "癌胚抗原(CEA)(化学发光法)",
+          "price": 0,
+          "note": "",
+          "source": "手动新增",
+          "updatedAt": "2026/6/19 14:40:01"
+        },
+        {
+          "id": "item_1781849842348_def5f635b345d8",
+          "category": "检验科",
+          "name": "常规生化全套检查(厦禾)",
+          "price": 170,
+          "note": "肝肾心功能测评，血糖血脂筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_9e886509efd418",
+          "category": "检验科",
+          "name": "促甲状腺激素(TSH)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_78d4288b82c5c",
+          "category": "检验科",
+          "name": "促甲状腺素受体抗体测定(A-TSHR)厦禾",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_9a3f927fe8809",
+          "category": "检验科",
+          "name": "甲状腺过氧化物酶抗体(APO-Ab)厦禾",
+          "price": 54,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_7055b661154878",
+          "category": "检验科",
+          "name": "静脉注射(静脉采血)",
+          "price": 6,
+          "note": "耗材费",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_3e1d5af00a3c1",
+          "category": "检验科",
+          "name": "抗甲状腺球蛋白抗体测定(TGAb)(厦禾)",
+          "price": 30,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_933abb8522b778",
+          "category": "检验科",
+          "name": "尿常规",
+          "price": 10,
+          "note": "可筛查肾、肝、胆疾病和糖尿病等疾病，有助于发现亚健康人群，进行早期诊断及疾病预防。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_464e9fe1e36d4",
+          "category": "检验科",
+          "name": "尿沉渣定量(流式细胞仪法)(厦禾)",
+          "price": 16,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_6e269971e4e228",
+          "category": "检验科",
+          "name": "尿微量白蛋白定量",
+          "price": 52,
+          "note": "肾脏损伤和微细血管损害的早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_60e9a74d62f33",
+          "category": "检验科",
+          "name": "神经元特异性烯醇化酶NSE(化学发光法)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_e7afc592467898",
+          "category": "检验科",
+          "name": "同型半胱氨酸测定(厦禾)",
+          "price": 55,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_c5685984bbfd2",
+          "category": "检验科",
+          "name": "胃蛋白酶原II测定(检验科)",
+          "price": 60,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_60c3af06695bc8",
+          "category": "检验科",
+          "name": "胃蛋白酶原|测定(检验科)",
+          "price": 60,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_840767acd90fc",
+          "category": "检验科",
+          "name": "胃泌素-17(检验科)",
+          "price": 60,
+          "note": "胃蛋白酶原检测，胃癌早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_bcbddacd2bc8a",
+          "category": "检验科",
+          "name": "细胞角蛋白19段测定CYFRA21-1(化学发光法)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_967dfa3a90581",
+          "category": "检验科",
+          "name": "血常规(五分类)",
+          "price": 25,
+          "note": "感染性、血液性疾病等早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_e37535f56ce188",
+          "category": "检验科",
+          "name": "血清a-L-岩藻糖苷酶测定(厦禾)",
+          "price": 5,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_cdac83036a3d88",
+          "category": "检验科",
+          "name": "异常凝血酶原(PIVKA-II)测定(厦禾)",
+          "price": 120,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_fb87819da19cf",
+          "category": "检验科",
+          "name": "游离T3(FT3)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_6208e587cc9c2",
+          "category": "检验科",
+          "name": "游离T4(FT4)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_4323a5bebbdde",
+          "category": "检验科",
+          "name": "游离总前列腺特异抗原FPSA(化学发光法)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_a7890196a49598",
+          "category": "检验科",
+          "name": "有核红细胞计数(厦禾)",
+          "price": 9,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_4c4cdfd0106408",
+          "category": "检验科",
+          "name": "总前列腺特异抗原TPSA(化学发光法)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_7f0ee86c6568e",
+          "category": "放射科",
+          "name": "CT平扫(肺部、多层、重建)(厦禾)",
+          "price": 230,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_668097e8831418",
+          "category": "放射科",
+          "name": "计算机体层成像(CT)平扫-薄层扫描(加收)(厦禾)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_e067e40e11a198",
+          "category": "放射科",
+          "name": "颈椎正侧片(DR组合)(厦禾)",
+          "price": 82,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_514b7dd338e51",
+          "category": "彩超室",
+          "name": "彩色B超(肝、胆、胰、脾)",
+          "price": 105,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_12468c3aca8c28",
+          "category": "彩超室",
+          "name": "彩色B超(双肾、膀胱、输尿管、前列腺)(男)",
+          "price": 105,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_3dfa6105ff1838",
+          "category": "彩超室",
+          "name": "甲状腺+颈部淋巴结彩超",
+          "price": 105,
+          "note": "形态学改变及占位性病变筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_a507d50d682cf",
+          "category": "心电图室",
+          "name": "常规心电图(厦禾)",
+          "price": 30,
+          "note": "主要反映心脏电激动过程，对了解心脏的功能及心肌供血情况",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_871b673fe3df7",
+          "category": "耳鼻喉科",
+          "name": "耳鼻喉科",
+          "price": 0,
+          "note": "普通检查观察耳廓、外耳道、鼓膜，听力；鼻外形、鼻中隔、下鼻甲、中鼻道、鼻咽部、扁桃体、咽部、喉部的情况。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_dc67bbf6a748c",
+          "category": "登记",
+          "name": "建立健康档案+总检评估(厦禾)",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_2d8ec8af7c95a8",
+          "category": "眼科",
+          "name": "裂隙灯检查(右侧)",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_75983ac4e5d6f",
+          "category": "眼科",
+          "name": "裂隙灯检查(左侧)",
+          "price": 7,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_3a13f9e40ad7f",
+          "category": "眼科",
+          "name": "眼科普检",
+          "price": 0,
+          "note": "观察眼睑、泪点、结膜、角膜、巩膜、前房、虹膜、瞳孔，使用视力表检查裸眼视力、矫正视力，采用标准色觉检查图谱判断辨色力。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_4b048a932ed2b",
+          "category": "眼科",
+          "name": "眼压检查(右侧)",
+          "price": 8,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_aad3a30c49b87",
+          "category": "眼科",
+          "name": "眼压检查(左侧)",
+          "price": 8,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_1afb9975b89a",
+          "category": "内科",
+          "name": "内科",
+          "price": 12,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_e9583cfc601d4",
+          "category": "身高体重",
+          "name": "身高体重",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_3c86acdbcc217",
+          "category": "外科",
+          "name": "外科",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_29280854329ca",
+          "category": "厦禾体检眼底照相室",
+          "name": "眼底照像",
+          "price": 42,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781849842348_ec6edc0064e5f8",
+          "category": "厦禾体检眼底照相室",
+          "name": "眼底照像(双侧)",
+          "price": 42,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        }
+      ],
+      "updatedAt": "2026/6/20 15:08:51"
+    },
+    {
+      "id": "pkg_1781939795605_a2cc59b8aa2b18",
+      "name": "C套餐(大众版)-女性",
+      "audience": "女性",
+      "price": 2410,
+      "source": "手动录入",
+      "items": [
+        {
+          "id": "item_1781941115338_9f1b8667bda09",
+          "category": "检验科",
+          "name": "(总部)高尔基体蛋白73(GP73)测定",
+          "price": 100,
+          "note": "肝癌风险评估及早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_8521409221bf48",
+          "category": "检验科",
+          "name": "CA125(化学发光法)",
+          "price": 50,
+          "note": "卵巢癌、肺癌、胃结直肠癌等标志物",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_39d8b317d5fbe8",
+          "category": "检验科",
+          "name": "CA153(化学发光法)",
+          "price": 50,
+          "note": "乳腺癌早期风险筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_3b3d56cb12f278",
+          "category": "检验科",
+          "name": "CA199(化学发光法)",
+          "price": 50,
+          "note": "胰腺癌、胆囊癌、胃癌、结直肠癌筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_6507fd47c4cb9",
+          "category": "检验科",
+          "name": "CA724(化学发光法)",
+          "price": 50,
+          "note": "胃肠道肿瘤和卵巢癌的标志物",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_22badc121fd23",
+          "category": "检验科",
+          "name": "癌胚抗原(CEA)(化学发光法)",
+          "price": 34,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_c7eae3e3efd808",
+          "category": "检验科",
+          "name": "白带常规",
+          "price": 6,
+          "note": "了解女性生殖系统有无异常",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_35990b9cd28128",
+          "category": "检验科",
+          "name": "常规生化全套检查(厦禾)",
+          "price": 170,
+          "note": "肝肾心功能测评，血糖血脂筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_46a47c2df7d8b",
+          "category": "检验科",
+          "name": "促甲状腺激素(TSH)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_c8659a6e7da388",
+          "category": "检验科",
+          "name": "甲胎蛋白(AFP)(化学发光法)",
+          "price": 34,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_ba52336cde37",
+          "category": "检验科",
+          "name": "静脉注射(静脉采血)",
+          "price": 6,
+          "note": "耗材费",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_10b260b96c1ee",
+          "category": "检验科",
+          "name": "尿常规",
+          "price": 10,
+          "note": "可筛查肾、肝、胆疾病和糖尿病等疾病，有助于发现亚健康人群，进行早期诊断及疾病预防。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_cb39371895b9",
+          "category": "检验科",
+          "name": "尿沉渣定量(流式细胞仪法)(厦禾)",
+          "price": 16,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_92d3254f971778",
+          "category": "检验科",
+          "name": "人附睾分泌蛋白(HE4)测定(厦禾)",
+          "price": 100,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_58708edd93281",
+          "category": "检验科",
+          "name": "同型半胱氨酸测定(厦禾)",
+          "price": 55,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_52ce2ce65c4958",
+          "category": "检验科",
+          "name": "血常规(五分类)",
+          "price": 25,
+          "note": "感染性、血液性疾病等早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_f2fa560fcd754",
+          "category": "检验科",
+          "name": "血清a-L-岩藻糖苷酶测定(厦禾)",
+          "price": 5,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_ec54c5a7d09708",
+          "category": "检验科",
+          "name": "异常凝血酶原(PIVKA-II)测定(厦禾)",
+          "price": 120,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_8c30511acbd1c",
+          "category": "检验科",
+          "name": "幽门螺旋杆菌尿素酶抗体检测(HP)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115338_72e0c099f30de",
+          "category": "检验科",
+          "name": "游离T3(FT3)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_f0d38e22359a78",
+          "category": "检验科",
+          "name": "游离T4(FT4)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_8c61f422e2b168",
+          "category": "检验科",
+          "name": "有核红细胞计数(厦禾)",
+          "price": 9,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_7c4a343d18824",
+          "category": "放射科",
+          "name": "CT平扫(肺部、多层、重建)(厦禾)",
+          "price": 230,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_8eafe8c14f9f6",
+          "category": "放射科",
+          "name": "计算机体层成像(CT)平扫-薄层扫描(加收)(厦禾)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_500e238a2eeb1",
+          "category": "放射科",
+          "name": "颈椎正侧片(DR组合)(厦禾)",
+          "price": 82,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_085d10b20159",
+          "category": "放射科",
+          "name": "(总部)宫颈细胞学计算机辅助诊断",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_aeaad5f1b7299",
+          "category": "放射科",
+          "name": "(总部)宫颈液基细胞学检查",
+          "price": 180,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_0621c63d879418",
+          "category": "放射科",
+          "name": "人乳头瘤病毒(HPV)核酸检测(病理、组合)",
+          "price": 137,
+          "note": "HPV感染的宫颈癌筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_8627fb9aa5ce6",
+          "category": "彩超室",
+          "name": "彩色B超(肝、胆、胰脾)",
+          "price": 105,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_87bc8610b325d",
+          "category": "彩超室",
+          "name": "彩色B超(双肾、膀胱、输尿管)(女)",
+          "price": 105,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_c07aaa83544228",
+          "category": "彩超室",
+          "name": "彩色B超(子宫、附件)(女)",
+          "price": 105,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_c1a370ee4e6368",
+          "category": "彩超室",
+          "name": "甲状腺+颈部淋巴结彩超",
+          "price": 105,
+          "note": "形态学改变及占位性病变筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_c009537dbf5f38",
+          "category": "彩超室",
+          "name": "乳腺彩超+腋窝",
+          "price": 105,
+          "note": "形态学改变及占位性病变筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_be76d57f9ee6b8",
+          "category": "心电图室",
+          "name": "常规心电图(厦禾)",
+          "price": 30,
+          "note": "主要反映心脏电激动过程，对了解心脏的功能及心肌供血情况",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_cdfe2166e53f7",
+          "category": "耳鼻喉科",
+          "name": "耳鼻喉科",
+          "price": 0,
+          "note": "普通检查观察耳廓、外耳道、鼓膜，听力；鼻外形、鼻中隔、下鼻甲、中鼻道、鼻咽部、扁桃体、咽部、喉部的情况。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_e28f6029f030b",
+          "category": "妇科",
+          "name": "妇科",
+          "price": 8,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_972234f89e54c",
+          "category": "登记",
+          "name": "建立健康档案+总检评估(厦禾)",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_cc90002ffa7d7",
+          "category": "内科",
+          "name": "内科",
+          "price": 12,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_f08d704641701",
+          "category": "身高体重",
+          "name": "身高体重",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_ad8200930ac52",
+          "category": "外科",
+          "name": "外科",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_4f7ff798e9f44",
+          "category": "眼科",
+          "name": "眼科普检",
+          "price": 0,
+          "note": "观察眼睑、泪点、结膜、角膜、巩膜、前房、虹膜、瞳孔，使用视力表检查裸眼视力、矫正视力，采用标准色觉检查图谱判断辨色力。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_5a02bc4ff62b3",
+          "category": "眼科",
+          "name": "眼压检查(右侧)",
+          "price": 8,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781941115339_e74c7bc64b8b7",
+          "category": "眼科",
+          "name": "眼压检查(左侧)",
+          "price": 8,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        }
+      ],
+      "rawText": "D\n30{\n<\n检验科\n(总部)高尔基体蛋白\n肝癌风险评估及早期筛查\n73(GP73)测定\n¥100\n卵巢癌、肺癌、胃结直肠癌等标志\nCA125（化学发光法)\n物\n¥50\nCA153（化学发光法)\n乳腺癌早期风险筛查\n¥50\n胰腺癌、胆囊癌、胃癌、结直肠癌\nCA199（化学发光法)\n筛查\n¥50\nCA724（化学发光法)\n胃肠道肿瘤和卵巢癌的标志物\n¥50\n癌胚抗原（CEA)\n(化\n学发光法)\n¥34\n白带常规\n了解女性生殖系统有无异常\n¥6\n常规生化全套检查（厦\n肝肾心功能测评，血糖血脂筛查\n禾)\n￥170\n促甲状腺激素（TSH)\n甲状腺功能测评、诊断及疗效评价\n(厦禾)\n等\n¥50\n甲胎蛋白(AFP)\n(化学\n发光法)\n¥34\n静脉注射(静脉采血)\n耗材费\n¥6\n可筛查肾、肝、胆疾病和糖尿病等\n尿常规\n疾病，有助于发现亚健康人群，进\n￥10\n行早期诊断及疾病预防。\n尿沉渣定量(流式细胞仪\n法)（厦禾)\n¥16\n人附睾分泌蛋白(HE4)\n测定（厦禾)\n￥100\n同型半胱氨酸测定（厦\n禾)\n¥55\n血常规（五分类)\n感染性、血液性疾病等早期筛查\n¥25\n血清a-L-岩藻糖苷酶测定\n(厦禾)\n¥5\n异常凝血酶原(PIVKA-\nII)测定（厦禾)\n￥120\n幽门螺旋杆菌尿素酶抗\n体检测(HP)\n¥50\n游离T3(FT3）（厦禾)\n甲状腺功能测评、诊断及疗效评价\n等\n¥50\n甲状腺功能测评、诊断及疗效评价\n游离T4(FT4）(厦禾)\n等\n¥50\n有核红细胞计数（厦\n禾)\n¥9\n放射科\nCT平扫(肺部、多层、重\n建）(厦禾)\n¥230\n计算机体层成像（CT)\n平扫-薄层扫描（加收)\n(厦禾)\n¥50\n颈椎正侧片(DR组合)(厦\n禾)\n¥82\n病理科\n(总部）宫颈细胞学计\n算机辅助诊断\n¥50\n(总部）宫颈液基细胞\n学检查\n¥180\n人乳头瘤病毒(HPV)核酸\nHPV感染的宫颈癌筛查\n检测(病理、组合)\n￥137\n彩超室\n彩色B超（肝、胆、胰\n脾)\n￥105\n彩色B超（双肾、膀胱、\n输尿管）（女)\n¥105\n彩色B超（子宫、附件）\n(女)\n￥105\n甲状腺+颈部淋巴结彩超\n形态学改变及占位性病变筛查\n￥105\n乳腺彩超+腋窝\n形态学改变及占位性病变筛查\n¥105\n心电图室\n主要反映心脏电激动过程，对了解\n常规心电图（厦禾)\n心脏的功能及心肌供血情况\n¥30\n耳鼻喉科\n普通检查观察耳廓、外耳道、鼓\n耳鼻喉科\n膜，听力；鼻外形、鼻中隔、下鼻\n甲、中鼻道、鼻咽部、扁桃体、咽\n¥0\n部、喉部的情况。\n妇科普查\n妇科\n¥8\n登记\n建立健康档案+总检评估\n(厦禾)\n¥0\n内科\n内科\n¥12\n身高体重\n身高体重\n¥0\n外科\n外科\n¥0\n眼科\n观察眼睑、泪点、结膜、角膜、巩\n眼科普检\n膜、前房、虹膜、瞳孔，使用视力\n表检查裸眼视力、矫正视力，采用\n¥0\n标准色觉检查图谱判断辨色力。\n眼压检查(右侧)\n¥8\n眼压检查(左侧)\n¥8\n¥2410",
+      "updatedAt": "2026/6/20 15:39:28"
+    },
+    {
+      "id": "pkg_1781940836629_81f28cf33c421",
+      "name": "D套餐(大众升级版)-女性",
+      "audience": "女性",
+      "price": 3312,
+      "source": "手动录入",
+      "items": [
+        {
+          "id": "item_1781942059506_3f7d73d29e512",
+          "category": "检验科",
+          "name": "(总部)高尔基体蛋白73(GP73)测定",
+          "price": 100,
+          "note": "肝癌风险评估及早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_6591a427fb0bf8",
+          "category": "检验科",
+          "name": "(总部)甲胎蛋白(AFP)(化学发光法)(总部)甲胎蛋白异质体测定(AFP-L3%)",
+          "price": 100,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_a3d69a9482f2b",
+          "category": "检验科",
+          "name": "(总部)鳞状细胞癌相关抗原测定(SCC)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_1b35075660449",
+          "category": "检验科",
+          "name": "(总部)胃泌素释放肽前体(PRO-GRP)",
+          "price": 50,
+          "note": "胃蛋白酶原检测，胃癌早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_06a672a270db88",
+          "category": "检验科",
+          "name": "13碳呼气试验(厦禾)",
+          "price": 90,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_2d9c4d763a4fc",
+          "category": "检验科",
+          "name": "CA125(化学发光法)",
+          "price": 50,
+          "note": "卵巢癌、肺癌、胃结直肠癌等标志物",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_a1029c4416c3a8",
+          "category": "检验科",
+          "name": "CA153(化学发光法)",
+          "price": 50,
+          "note": "乳腺癌早期风险筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_66f78808e17e4",
+          "category": "检验科",
+          "name": "CA199(化学发光法)",
+          "price": 50,
+          "note": "胰腺癌、胆囊癌、胃癌、结直肠癌筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_94c707de5b79c",
+          "category": "检验科",
+          "name": "CA724(化学发光法)",
+          "price": 50,
+          "note": "胃肠道肿瘤和卵巢癌的标志物",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_a4b013eac2a1c8",
+          "category": "检验科",
+          "name": "EB-EA-IgA",
+          "price": 35,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_6573f9e3a943f",
+          "category": "检验科",
+          "name": "EB-VcA-IgA",
+          "price": 35,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_c6b47e03de4f18",
+          "category": "检验科",
+          "name": "EBV病毒抗体测定(Rta-IgG)",
+          "price": 35,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_5a19712f2d7b6",
+          "category": "检验科",
+          "name": "癌胚抗原(CEA)(化学发光法)白带常规",
+          "price": 6,
+          "note": "了解女性生殖系统有无异常",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_041d04de6f711",
+          "category": "检验科",
+          "name": "常规生化全套检查(厦禾)",
+          "price": 170,
+          "note": "肝肾心功能测评，血糖血脂筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_d4c41faa7e3d88",
+          "category": "检验科",
+          "name": "促甲状腺激素(TSH)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_b3af02c5f00098",
+          "category": "检验科",
+          "name": "促甲状腺素受体抗体测定(A-TSHR)厦禾",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_9f9e0b7d56cfc8",
+          "category": "检验科",
+          "name": "甲状腺过氧化物酶抗体(APO-Ab)厦禾",
+          "price": 54,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_12871131509b28",
+          "category": "检验科",
+          "name": "静脉注射(静脉采血)抗甲状腺球蛋白抗体测定(TGAb)(厦禾)",
+          "price": 30,
+          "note": "耗材费",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_d6537538ef6c58",
+          "category": "检验科",
+          "name": "尿常规行早期诊断及疾病预防。",
+          "price": 10,
+          "note": "可筛查肾、肝、胆疾病和糖尿病等疾病，有助于发现亚健康人群，进",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_06e48c87304d78",
+          "category": "检验科",
+          "name": "行早期诊断及疾病预防。尿沉渣定量(流式细胞仪法)(厦禾)",
+          "price": 16,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_8c7e7757d2f038",
+          "category": "检验科",
+          "name": "尿微量白蛋白定量",
+          "price": 52,
+          "note": "肾脏损伤和微细血管损害的早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_08f8bd073e05e8",
+          "category": "检验科",
+          "name": "人附睾分泌蛋白(HE4)测定(厦禾)",
+          "price": 100,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_e4b9b8cf8198f",
+          "category": "检验科",
+          "name": "神经元特异性烯醇化酶NSE(化学发光法)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_766f26a35b935",
+          "category": "检验科",
+          "name": "同型半胱氨酸测定(厦禾)",
+          "price": 55,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_2a93dca645af7",
+          "category": "检验科",
+          "name": "胃蛋白酶原测定(检验科)",
+          "price": 60,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_8c83b8d25d60f",
+          "category": "检验科",
+          "name": "胃泌素-17(检验科)",
+          "price": 60,
+          "note": "胃蛋白酶原检测，胃癌早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_ffd577a07ad738",
+          "category": "检验科",
+          "name": "细胞角蛋白19段测定CYFRA21-1(化学发光法)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_b1fb297d54d56",
+          "category": "检验科",
+          "name": "血常规(五分类)",
+          "price": 25,
+          "note": "感染性、血液性疾病等早期筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_e179b16948aa38",
+          "category": "检验科",
+          "name": "血清a-L-岩藻糖苷酶测定(厦禾)",
+          "price": 5,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_d5029336e8c5d8",
+          "category": "检验科",
+          "name": "异常凝血酶原(PIVKA-Ⅲ)测定(厦禾)",
+          "price": 120,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_9e985155e0e7d",
+          "category": "检验科",
+          "name": "游离T3(FT3)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_1b64a7e225143",
+          "category": "检验科",
+          "name": "游离T4(FT4)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_fc459904faf898",
+          "category": "检验科",
+          "name": "有核红细胞计数(厦禾)",
+          "price": 9,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_776c10b312e1f",
+          "category": "放射科",
+          "name": "CT平扫(肺部、多层、重建)(厦禾)",
+          "price": 230,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_5592e024f7914",
+          "category": "放射科",
+          "name": "计算机体层成像(CT)平扫-薄层扫描(加收)(厦禾)",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_65ec70c9ad2378",
+          "category": "放射科",
+          "name": "颈椎正侧片(DR组合)(厦禾)",
+          "price": 82,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_fd21cde68f9aa",
+          "category": "放射科",
+          "name": "(总部)宫颈细胞学计算机辅助诊断",
+          "price": 50,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_ad474bcf6354c",
+          "category": "放射科",
+          "name": "(总部)宫颈液基细胞学检查",
+          "price": 180,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_4031b91fc7d938",
+          "category": "放射科",
+          "name": "人乳头瘤病毒(HPV)核酸检测(病理、组合)",
+          "price": 137,
+          "note": "HPV感染的宫颈癌筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_160169060e9d5",
+          "category": "彩超室",
+          "name": "彩色B超(肝、胆、胰、脾)",
+          "price": 105,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_6513aca1784ed8",
+          "category": "彩超室",
+          "name": "彩色B超(双肾、膀胱输尿管)(女)",
+          "price": 105,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_c54a588f6fdcc8",
+          "category": "彩超室",
+          "name": "彩色B超(子宫、附件)(女)",
+          "price": 105,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_9ed14c6db5907",
+          "category": "彩超室",
+          "name": "甲状腺+颈部淋巴结彩超",
+          "price": 105,
+          "note": "形态学改变及占位性病变筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_b8b417c61a1dd8",
+          "category": "彩超室",
+          "name": "乳腺彩超+腋窝",
+          "price": 105,
+          "note": "形态学改变及占位性病变筛查",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_1c594818ece11",
+          "category": "心电图室",
+          "name": "常规心电图(厦禾)",
+          "price": 30,
+          "note": "主要反映心脏电激动过程，对了解心脏的功能及心肌供血情况",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_9b3a89912adda8",
+          "category": "耳鼻喉科",
+          "name": "耳鼻喉科",
+          "price": 0,
+          "note": "普通检查观察耳廓、外耳道、鼓膜，听力；鼻外形、鼻中隔、下鼻甲、中鼻道、鼻咽部、扁桃体、咽部、喉部的情况。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_67ce98af1a1b",
+          "category": "妇科",
+          "name": "妇科",
+          "price": 8,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_8bbe017e6360a",
+          "category": "登记",
+          "name": "建立健康档案+总检评估(厦禾)",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_febe1c3d5ab6a",
+          "category": "眼科",
+          "name": "裂隙灯检查(右侧)",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_1b1942afcde6f8",
+          "category": "眼科",
+          "name": "裂隙灯检查(左侧)",
+          "price": 7,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_8a832a9b4fd4",
+          "category": "眼科",
+          "name": "眼科普检",
+          "price": 0,
+          "note": "观察眼睑、泪点、结膜、角膜、巩膜、前房、虹膜、瞳孔，使用视力表检查裸眼视力、矫正视力，采用标准色觉检查图谱判断辨色力。",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_adac817b769978",
+          "category": "眼科",
+          "name": "眼压检查(右侧)",
+          "price": 8,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_fae6e1cfda7168",
+          "category": "眼科",
+          "name": "眼压检查(左侧)",
+          "price": 8,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_3f05a22cd544c8",
+          "category": "内科",
+          "name": "内科",
+          "price": 12,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_f036bba7cfb1c8",
+          "category": "身高体重",
+          "name": "身高体重",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_09de29cdb5f09",
+          "category": "外科",
+          "name": "外科",
+          "price": 0,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_dc27e29affc0b",
+          "category": "眼科",
+          "name": "眼底照像",
+          "price": 42,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        },
+        {
+          "id": "item_1781942059506_589e170cd878c",
+          "category": "眼科",
+          "name": "眼底照像(双侧)",
+          "price": 42,
+          "note": "",
+          "source": "PaddleOCR截图",
+          "reviewStatus": "confirmed"
+        }
+      ],
+      "rawText": "合川川口\n<\nO\n●·\n检验科\n(总部)高尔基体蛋白\n肝癌风险评估及早期筛查\n73(GP73)测定\n¥100\n(总部)甲胎蛋白（AFP)\n(化学发光法)\n(总部)甲胎蛋白异质体测\n定（AFP-L3%)\n¥100\n(总部)鳞状细胞癌相关抗\n原测定(SCC)\n¥50\n(总部)胃泌素释放肽前体\n(PRO-GRP)\n胃蛋白酶原检测，胃癌早期筛查\n¥50\n13碳呼气试验（厦禾)\n¥90\n卵巢癌、肺癌、胃结直肠癌等标志\nCA125（化学发光法)\n物\n¥50\nCA153（化学发光法)\n乳腺癌早期风险筛查\n¥50\nCA199（化学发光法)\n胰腺癌、胆囊癌、胃癌、结直肠癌\n筛查\n¥50\nCA724（化学发光法)\n胃肠道肿瘤和卵巢癌的标志物\n¥50\nEB-EA-IgA\n¥35\nEB-VcA-IgA\n¥35\nEBV病毒抗体测定(Rta-\nIgG)\n￥35\n(化\n癌胚抗原（CEA)\n学发光法)\n白带常规\n了解女性生殖系统有无异常\n¥6\n常规生化全套检查（厦\n肝肾心功能测评，血糖血脂筛查\n禾)\n¥170\n促甲状腺激素（TSH)\n甲状腺功能测评、诊断及疗效评价\n(厦禾)\n等\n¥50\n促甲状腺素受体抗体测\n甲状腺功能测评、诊断及疗效评价\n定（A-TSHR)厦禾\n等\n¥50\n甲状腺过氧化物酶抗体\n(APO-Ab)厦禾\n¥54\n静脉注射(静脉采血)\n耗材费\n抗甲状腺球蛋白抗体测\n定(TGAb)（厦禾)\n¥30\n可筛查肾、肝、胆疾病和糖尿病等\n尿常规\n疾病，有助于发现亚健康人群，进\n￥10\n行早期诊断及疾病预防。\n尿沉渣定量(流式细胞仪\n法)（厦禾)\n¥16\n肾脏损伤和微细血管损害的早期筛\n尿微量白蛋白定量\n查\n¥52\n人附睾分泌蛋白(HE4)\n测定（厦禾)\n¥100\n神经元特异性烯醇化酶\nNSE（化学发光法)\n¥50\n同型半胱氨酸测定（厦\n禾)\n¥55\n胃蛋白酶原测定(检验\n科)\n¥60\n胃蛋白酶原|测定(检验\n科)\n¥60\n胃泌素-17(检验科)\n胃蛋白酶原检测，胃癌早期筛查\n¥60\n细胞角蛋白19段测定\nCYFRA21-1（化学发光\n法)\n¥50\n血常规（五分类)\n感染性、血液性疾病等早期筛查\n¥25\n血清a-L-岩藻糖苷酶测定\n(厦禾)\n¥5\n异常凝血酶原（PIVKA-\nⅢ)测定（厦禾)\n¥120\n游离T3(FT3)（厦禾)\n甲状腺功能测评、诊断及疗效评价\n等\n¥50\n甲状腺功能测评、诊断及疗效评价\n游离T4（FT4）（厦禾)\n等\n¥50\n有核红细胞计数（厦\n禾)\n¥9\n放射科\nCT平扫(肺部、多层、重\n建）(厦禾)\n￥230\n计算机体层成像（CT)\n平扫-薄层扫描（加收)\n(厦禾)\n¥50\n颈椎正侧片(DR组合)(厦\n禾)\n¥82\n病理科\n(总部）宫颈细胞学计\n算机辅助诊断\n¥50\n(总部）宫颈液基细胞\n学检查\n¥180\n人乳头瘤病毒(HPV)核酸\n检测(病理、组合)\nHPV感染的宫颈癌筛查\n¥137\n彩超室\n彩色B超（肝、胆、胰、\n脾)\n¥105\n彩色B超（双肾、膀胱\n输尿管）（女)\n¥105\n彩色B超（子宫、附件）\n(女)\n¥105\n甲状腺+颈部淋巴结彩超\n形态学改变及占位性病变筛查\n¥105\n乳腺彩超+腋窝\n形态学改变及占位性病变筛查\n¥￥105\n心电图室\n常规心电图（厦禾）\n主要反映心脏电激动过程，对了解\n心脏的功能及心肌供血情况\n¥30\n耳鼻喉科\n普通检查观察耳廓、外耳道、鼓\n耳鼻喉科\n膜，听力；鼻外形、鼻中隔、下鼻\n甲、中鼻道、鼻咽部、扁桃体、咽\n¥0\n部、喉部的情况。\n妇科普查\n妇科\n¥8\n登记\n建立健康档案+总检评估\n(厦禾)\n¥0\n眼科\n裂隙灯检查(右侧)\n¥0\n裂隙灯检查(左侧)\n¥7\n观察眼睑、泪点、结膜、角膜、巩\n眼科普检\n膜、前房、虹膜、瞳孔，使用视力\n表检查裸眼视力、矫正视力，采用\n￥0\n标准色觉检查图谱判断辨色力。\n眼压检查(右侧)\n¥8\n眼压检查(左侧)\n¥8\n内科\n内科\n¥12\n身高体重\n身高体重\n¥0\n外科\n外科\n¥0\n厦禾体检眼底照相室\n眼底照像\n¥42\n眼底照像（双侧）\n￥42\n¥3312",
+      "updatedAt": "2026/6/20 15:54:29"
     }
   ],
   "members": [],
