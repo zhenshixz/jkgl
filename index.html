@@ -207,61 +207,6 @@
       padding: 24px;
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .stat {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #fff;
-      padding: 20px;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .stat:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px -4px rgba(15, 23, 42, 0.06);
-      border-color: rgba(79, 70, 229, 0.2);
-    }
-
-    .stat strong {
-      display: block;
-      font-family: 'Outfit', sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--brand);
-      margin-bottom: 4px;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    .stat::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: var(--brand-gradient);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .stat:hover::before {
-      opacity: 1;
-    }
-
     .ocr-grid {
       display: grid;
       grid-template-columns: 360px minmax(0, 1fr);
@@ -580,6 +525,70 @@
       align-items: start;
     }
 
+    .plan-workbench {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 16px;
+      min-height: 650px;
+    }
+
+    .plan-sidebar,
+    .plan-main-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      min-width: 0;
+    }
+
+    .plan-sidebar {
+      padding: 14px;
+    }
+
+    .plan-main-panel {
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .plan-section-head {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfe;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .plan-section-head h4 {
+      margin: 0;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .plan-section-body {
+      padding: 14px 16px;
+    }
+
+    .selectable-row {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .selectable-row.active {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    .selectable-row-title {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
     .member-list {
       display: grid;
       gap: 10px;
@@ -603,6 +612,19 @@
       margin-bottom: 5px;
     }
 
+    .el-table .plan-row-add td {
+      background: #ecfdf5 !important;
+    }
+
+    .el-table .plan-row-exclude td {
+      background: #fff1f2 !important;
+      color: #9f1239;
+    }
+
+    .el-table .plan-row-pending td {
+      background: #fffbeb !important;
+    }
+
     .status-include {
       color: var(--green);
     }
@@ -613,6 +635,87 @@
 
     .status-add {
       color: var(--brand);
+    }
+
+    .plan-status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .status-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .status-filter button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .status-filter button.active {
+      color: var(--brand);
+      border-color: var(--brand);
+      background: var(--brand-soft);
+      font-weight: 700;
+    }
+
+    .plan-status-summary {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 48px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .status-pill.include {
+      color: #047857;
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+    }
+
+    .status-pill.add {
+      color: #1d4ed8;
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .status-pill.exclude {
+      color: #be123c;
+      background: #fff1f2;
+      border-color: #fecdd3;
+    }
+
+    .status-pill.pending {
+      color: #92400e;
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .status-editor {
+      display: grid;
+      gap: 6px;
     }
 
     .empty {
@@ -652,9 +755,9 @@
         padding: 16px;
       }
 
-      .stats,
       .ocr-grid,
-      .plan-board {
+      .plan-board,
+      .plan-workbench {
         grid-template-columns: 1fr;
       }
 
@@ -703,11 +806,6 @@
         flex-shrink: 0;
         margin-bottom: 16px;
       }
-      .stats {
-        flex-shrink: 0;
-        margin-bottom: 16px;
-      }
-      
       .packages-view-container {
         flex: 1;
         min-height: 0;
@@ -802,9 +900,12 @@
           </div>
         </div>
         <nav class="nav">
+          <div class="nav-group-title">基础资料</div>
+          <button :class="{ active: view === 'members' }" @click="view = 'members'">家人管理</button>
           <div class="nav-group-title">体检管理</div>
           <button :class="{ active: view === 'packages' }" @click="view = 'packages'">套餐管理</button>
-          <button :class="{ active: view === 'plans' }" @click="view = 'plans'">家人体检方案</button>
+          <button :class="{ active: view === 'plans' }" @click="view = 'plans'">体检方案</button>
+          <button :class="{ active: view === 'tracking' }" @click="view = 'tracking'">体检跟踪</button>
         </nav>
       </aside>
 
@@ -815,25 +916,6 @@
             <p>{{ pageDesc }}</p>
           </div>
         </section>
-
-        <div class="stats">
-          <div class="stat">
-            <strong>{{ packages.length }}</strong>
-            <span>已确认套餐</span>
-          </div>
-          <div class="stat">
-            <strong>{{ totalItems }}</strong>
-            <span>检查内容</span>
-          </div>
-          <div class="stat">
-            <strong>{{ members.length }}</strong>
-            <span>家庭成员</span>
-          </div>
-          <div class="stat">
-            <strong>{{ plans.length }}</strong>
-            <span>体检方案</span>
-          </div>
-        </div>
 
         <div v-show="view === 'packages'" class="packages-view-container">
           <el-tabs v-model="activeTab" type="card" @tab-remove="handleTabRemove" style="margin-top: 16px;">
@@ -847,12 +929,12 @@
                   </div>
                   <div class="toolbar">
                     <el-button :disabled="selectedPackages.length < 2" type="success" @click="openCompareTab">套餐对比 (已选 {{ selectedPackages.length }} 个)</el-button>
-                    <el-button type="primary" @click="openPackageOcr">OCR 导入套餐</el-button>
+                    <el-button :disabled="!selectedPackages.length" @click="exportPackagesExcel()">导出已选 Excel ({{ selectedPackages.length }})</el-button>
                     <el-button type="primary" @click="openPackageEditor()">新增套餐</el-button>
                   </div>
                 </div>
                 <div class="panel-body">
-                  <el-table :data="packages" border height="620" empty-text="暂无套餐，请先使用 OCR 导入套餐或手动新增" @selection-change="handleSelectionChange">
+                  <el-table :data="packages" border height="620" empty-text="暂无套餐，请先手动新增套餐" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="55"></el-table-column>
                     <el-table-column prop="name" label="套餐名称" min-width="260"></el-table-column>
                     <el-table-column prop="audience" label="适用人群" width="130"></el-table-column>
@@ -864,12 +946,15 @@
                     <el-table-column label="内容数" width="100">
                       <template #default="{ row }">{{ row.items ? row.items.length : 0 }}</template>
                     </el-table-column>
+                    <el-table-column prop="remark" label="备注/建议" min-width="220" show-overflow-tooltip></el-table-column>
                     <el-table-column prop="source" label="来源" min-width="150"></el-table-column>
                     <el-table-column prop="updatedAt" label="更新时间" width="180"></el-table-column>
-                    <el-table-column label="操作" width="280" fixed="right">
+                    <el-table-column label="操作" width="360" fixed="right">
                       <template #default="{ row }">
                         <el-button link type="success" @click="openItemOcr(row)">识别内容</el-button>
                         <el-button link type="primary" @click="viewPackage(row)">内容明细</el-button>
+                        <el-button link type="primary" @click="openPackageRemarkEditor(row)">备注</el-button>
+                        <el-button link type="primary" @click="exportPackagesExcel([row])">导出</el-button>
                         <el-button link type="primary" @click="openPackageEditor(row)">编辑</el-button>
                         <el-button link type="danger" @click="deletePackage(row.id)">删除</el-button>
                       </template>
@@ -1002,87 +1087,261 @@
           </el-tabs>
         </div>
 
-        <section v-show="view === 'plans'" class="panel plans-view-panel">
+        <section v-show="view === 'members'" class="panel">
           <div class="panel-header">
             <div>
-              <h3 class="panel-title">家人体检方案</h3>
-              <p class="panel-subtitle">为家人选择基础套餐，再在内容表中增减检查内容。</p>
+              <h3 class="panel-title">家人管理</h3>
+              <p class="panel-subtitle">维护家庭成员基础信息，体检、日常检查等业务模块都会按成员归档。</p>
             </div>
             <div class="toolbar">
-              <el-button @click="openMemberEditor()">新增家人</el-button>
-              <el-button type="primary" @click="createPlan" :disabled="!activeMemberId || !packages.length">生成方案</el-button>
+              <el-button type="primary" @click="openMemberEditor()">新增家人</el-button>
             </div>
           </div>
           <div class="panel-body">
-            <div class="plan-board">
-              <div>
-                <h4 style="margin: 0 0 12px;">家庭成员</h4>
-              <div class="member-list">
-                  <div v-for="member in members" :key="member.id" class="member-card" :class="{ active: activeMemberId === member.id }" @click="activeMemberId = member.id">
-                    <div style="display: flex; justify-content: space-between; gap: 10px; align-items: center;">
-                      <strong>{{ member.name }}</strong>
-                      <el-button link type="primary" @click.stop="openMemberEditor(member)">编辑</el-button>
-                    </div>
-                    <div class="muted">{{ member.gender || '未填性别' }} · {{ member.age || '-' }} 岁</div>
-                    <div class="muted">{{ member.focus || '暂无健康关注点' }}</div>
-                  </div>
+            <el-table :data="members" border height="620" empty-text="暂无家人档案，请先新增">
+              <el-table-column prop="name" label="姓名" min-width="160"></el-table-column>
+              <el-table-column prop="gender" label="性别" width="100"></el-table-column>
+              <el-table-column prop="age" label="年龄" width="100"></el-table-column>
+              <el-table-column prop="focus" label="关注点" min-width="320" show-overflow-tooltip></el-table-column>
+              <el-table-column label="方案数" width="100">
+                <template #default="{ row }">{{ plans.filter((plan) => plan.memberId === row.id).length }}</template>
+              </el-table-column>
+              <el-table-column label="跟踪记录" width="110">
+                <template #default="{ row }">{{ trackingRecords.filter((record) => record.memberId === row.id).length }}</template>
+              </el-table-column>
+              <el-table-column label="操作" width="160" fixed="right">
+                <template #default="{ row }">
+                  <el-button link type="primary" @click="openMemberEditor(row)">编辑</el-button>
+                  <el-button link type="primary" @click="activeMemberId = row.id; view = 'plans'">做方案</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </section>
+
+        <section v-show="view === 'plans'" class="panel plans-view-panel">
+          <div class="panel-header">
+            <div>
+              <h3 class="panel-title">体检方案</h3>
+              <p class="panel-subtitle">先选成员，再从套餐生成方案；方案明细里用颜色和标签标记保留、新增、排除和待确认。</p>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div v-if="!members.length" class="empty">请先到“家人管理”新增成员。</div>
+            <div v-else class="plan-workbench">
+              <aside class="plan-sidebar">
+                <h4 style="margin: 0 0 10px;">1. 选择成员</h4>
+                <div
+                  v-for="member in members"
+                  :key="member.id"
+                  class="selectable-row"
+                  :class="{ active: activeMemberId === member.id }"
+                  @click="activeMemberId = member.id"
+                >
+                  <div class="selectable-row-title">{{ member.name }}</div>
+                  <div class="muted">{{ member.gender || '未填性别' }} · {{ member.age || '-' }} 岁</div>
+                  <div class="muted">{{ activeMemberPlansFor(member.id).length }} 个方案</div>
                 </div>
-              </div>
+
+                <h4 style="margin: 18px 0 10px;">2. 已有方案</h4>
+                <div v-if="!activeMemberPlans.length" class="empty" style="padding: 24px 12px;">当前成员还没有方案。</div>
+                <div
+                  v-for="plan in activeMemberPlans"
+                  :key="plan.id"
+                  class="selectable-row"
+                  :class="{ active: activePlan && activePlan.id === plan.id }"
+                  @click="planFilterId = plan.id"
+                >
+                  <div class="selectable-row-title">{{ plan.name }}</div>
+                  <div class="muted">{{ plan.basePackageName || '未关联套餐' }}</div>
+                  <div class="muted">{{ plan.items ? plan.items.length : 0 }} 项 · {{ plan.createdAt || '' }}</div>
+                </div>
+              </aside>
 
               <div>
-                <div v-if="!activeMember" class="empty">请先选择或新增一个家人。</div>
+                <section class="plan-main-panel">
+                  <div class="plan-section-head">
+                    <h4>3. 从套餐生成新方案</h4>
+                    <div class="toolbar">
+                      <span class="muted">已选 {{ selectedPlanPackages.length }} 个套餐</span>
+                      <el-button type="primary" @click="createPlanFromSelectedPackages" :disabled="!activeMemberId || !selectedPlanPackages.length">生成方案</el-button>
+                    </div>
+                  </div>
+                  <div class="plan-section-body">
+                    <el-table :data="packages" border height="220" @selection-change="selectedPlanPackages = $event" empty-text="暂无套餐，请先到套餐管理维护">
+                      <el-table-column type="selection" width="48"></el-table-column>
+                      <el-table-column prop="name" label="套餐名称" min-width="260"></el-table-column>
+                      <el-table-column prop="audience" label="适用人群" width="110"></el-table-column>
+                      <el-table-column label="价格" width="100">
+                        <template #default="{ row }">￥{{ row.price || 0 }}</template>
+                      </el-table-column>
+                      <el-table-column label="内容数" width="90">
+                        <template #default="{ row }">{{ row.items ? row.items.length : 0 }}</template>
+                      </el-table-column>
+                      <el-table-column prop="remark" label="备注/建议" min-width="240" show-overflow-tooltip></el-table-column>
+                    </el-table>
+                  </div>
+                </section>
+
+                <section class="plan-main-panel">
+                  <div class="plan-section-head">
+                    <div>
+                      <h4>4. 调整当前方案</h4>
+                      <div v-if="activePlan" class="muted">{{ activePlan.name }} · 预估总价 <strong class="price">￥{{ activePlanTotal }}</strong></div>
+                    </div>
+                    <div class="toolbar">
+                      <el-button @click="addPlanItem" :disabled="!activePlan">新增项目</el-button>
+                    </div>
+                  </div>
+                  <div class="plan-section-body">
+                    <div v-if="!activePlan" class="empty">左侧选择已有方案，或先从上方套餐生成新方案。</div>
+                    <div v-else>
+                      <div class="plan-status-bar">
+                        <div class="status-filter">
+                          <button :class="{ active: planStatusFilter === 'all' }" @click="planStatusFilter = 'all'">全部 {{ activePlanStatusCounts.total }}</button>
+                          <button :class="{ active: planStatusFilter === 'include' }" @click="planStatusFilter = 'include'">保留 {{ activePlanStatusCounts.include }}</button>
+                          <button :class="{ active: planStatusFilter === 'add' }" @click="planStatusFilter = 'add'">新增 {{ activePlanStatusCounts.add }}</button>
+                          <button :class="{ active: planStatusFilter === 'exclude' }" @click="planStatusFilter = 'exclude'">排除 {{ activePlanStatusCounts.exclude }}</button>
+                          <button :class="{ active: planStatusFilter === 'pending' }" @click="planStatusFilter = 'pending'">待确认 {{ activePlanStatusCounts.pending }}</button>
+                        </div>
+                        <div class="plan-status-summary">
+                          <span class="status-pill add">新增</span>
+                          <span class="status-pill exclude">排除</span>
+                          <span class="status-pill pending">待确认</span>
+                        </div>
+                      </div>
+                      <el-table :data="visiblePlanItems" border height="440" :row-class-name="planRowClassName">
+                        <el-table-column type="index" label="序号" width="60" align="center"></el-table-column>
+                        <el-table-column label="增减标记" width="150">
+                          <template #default="{ row }">
+                            <div class="status-editor">
+                              <span class="status-pill" :class="row.status || 'include'">{{ planStatusLabel(row.status) }}</span>
+                              <el-select v-model="row.status" size="small">
+                                <el-option label="保留" value="include"></el-option>
+                                <el-option label="新增" value="add"></el-option>
+                                <el-option label="排除" value="exclude"></el-option>
+                                <el-option label="待确认" value="pending"></el-option>
+                              </el-select>
+                            </div>
+                          </template>
+                        </el-table-column>
+                        <el-table-column label="分类" width="140">
+                          <template #default="{ row }"><el-input v-model="row.category"></el-input></template>
+                        </el-table-column>
+                        <el-table-column label="内容名称" min-width="260">
+                          <template #default="{ row }"><el-input v-model="row.name"></el-input></template>
+                        </el-table-column>
+                        <el-table-column label="价格" width="120">
+                          <template #default="{ row }"><el-input-number v-model="row.price" :min="0" :controls="false" style="width: 96px;"></el-input-number></template>
+                        </el-table-column>
+                        <el-table-column label="备注" min-width="220">
+                          <template #default="{ row }"><el-input v-model="row.note"></el-input></template>
+                        </el-table-column>
+                        <el-table-column label="操作" width="130" fixed="right">
+                          <template #default="{ $index }">
+                            <el-button link type="primary" @click="insertPlanRowByItem(visiblePlanItems[$index])">插入</el-button>
+                            <el-button link type="danger" @click="deletePlanItem(visiblePlanItems[$index])">删除</el-button>
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section v-show="view === 'tracking'" class="panel">
+          <div class="panel-header">
+            <div>
+              <h3 class="panel-title">体检跟踪</h3>
+              <p class="panel-subtitle">按家人记录每次体检结果，维护指标，并勾选不同时间记录做横向对比。</p>
+            </div>
+            <div class="toolbar">
+              <el-select v-model="activeMemberId" placeholder="选择家人" style="min-width: 220px;">
+                <el-option v-for="member in members" :key="member.id" :label="member.name" :value="member.id"></el-option>
+              </el-select>
+              <el-button type="primary" @click="addTrackingRecord" :disabled="!activeMemberId">新增跟踪记录</el-button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div v-if="!activeMember" class="empty">请先到“家人管理”新增并选择一个家人。</div>
+            <div v-else class="plan-board">
+              <div>
+                <h4 style="margin: 0 0 12px;">体检记录</h4>
+                <el-table :data="memberTrackingRecords" border height="300" @selection-change="selectedTrackingRecords = $event" @row-click="activeTrackingRecordId = $event.id">
+                  <el-table-column type="selection" width="48"></el-table-column>
+                  <el-table-column prop="examDate" label="体检时间" width="120"></el-table-column>
+                  <el-table-column prop="title" label="记录名称" min-width="180"></el-table-column>
+                  <el-table-column label="方案/套餐" min-width="180">
+                    <template #default="{ row }">{{ row.planName || row.packageName || '-' }}</template>
+                  </el-table-column>
+                  <el-table-column label="指标数" width="80">
+                    <template #default="{ row }">{{ row.metrics ? row.metrics.length : 0 }}</template>
+                  </el-table-column>
+                </el-table>
+              </div>
+              <div>
+                <div v-if="!activeTrackingRecord" class="empty">请选择或新增一条体检记录。</div>
                 <div v-else>
                   <div class="table-actions">
-                    <el-select v-model="planFilterId" placeholder="选择方案" style="min-width: 280px;">
+                    <el-date-picker v-model="activeTrackingRecord.examDate" type="date" value-format="YYYY-MM-DD" placeholder="体检日期"></el-date-picker>
+                    <el-input v-model="activeTrackingRecord.title" placeholder="记录名称" style="width: 220px;"></el-input>
+                    <el-select v-model="activeTrackingRecord.planId" placeholder="关联方案" clearable style="width: 240px;" @change="syncTrackingPlanName(activeTrackingRecord)">
                       <el-option v-for="plan in activeMemberPlans" :key="plan.id" :label="plan.name" :value="plan.id"></el-option>
                     </el-select>
-                    <el-button @click="addPlanItem" :disabled="!activePlan">新增自选内容</el-button>
-                    <span v-if="activePlan" class="muted">预估总价：<strong class="price">￥{{ activePlanTotal }}</strong></span>
+                    <el-button @click="addTrackingMetric" :disabled="!activeTrackingRecord">新增指标</el-button>
+                    <label class="el-button">
+                      <span>导入报告</span>
+                      <input type="file" accept="image/*,.pdf,application/pdf" style="display: none;" @change="importTrackingReport">
+                    </label>
                   </div>
-
-                  <div v-if="!activePlan" class="empty">当前家人还没有体检方案，请点击“生成方案”。</div>
-                  <el-table v-else :data="activePlan.items" border height="520">
+                  <el-table :data="activeTrackingRecord.metrics" border height="360">
                     <el-table-column type="index" label="序号" width="60" align="center"></el-table-column>
-                    <el-table-column label="状态" width="120">
+                    <el-table-column label="指标名称" min-width="220">
+                      <template #default="{ row }"><el-input v-model="row.name"></el-input></template>
+                    </el-table-column>
+                    <el-table-column label="结果" width="120">
+                      <template #default="{ row }"><el-input v-model="row.value"></el-input></template>
+                    </el-table-column>
+                    <el-table-column label="单位" width="110">
+                      <template #default="{ row }"><el-input v-model="row.unit"></el-input></template>
+                    </el-table-column>
+                    <el-table-column label="参考范围" width="150">
+                      <template #default="{ row }"><el-input v-model="row.reference"></el-input></template>
+                    </el-table-column>
+                    <el-table-column label="状态" width="110">
                       <template #default="{ row }">
                         <el-select v-model="row.status" size="small">
-                          <el-option label="保留" value="include"></el-option>
-                          <el-option label="新增" value="add"></el-option>
-                          <el-option label="排除" value="exclude"></el-option>
-                          <el-option label="待确认" value="pending"></el-option>
+                          <el-option label="正常" value="normal"></el-option>
+                          <el-option label="偏高" value="high"></el-option>
+                          <el-option label="偏低" value="low"></el-option>
+                          <el-option label="异常" value="abnormal"></el-option>
+                          <el-option label="待看" value="pending"></el-option>
                         </el-select>
                       </template>
                     </el-table-column>
-                    <el-table-column label="分类" width="140">
-                      <template #default="{ row }">
-                        <el-input v-model="row.category"></el-input>
-                      </template>
+                    <el-table-column label="备注" min-width="180">
+                      <template #default="{ row }"><el-input v-model="row.note"></el-input></template>
                     </el-table-column>
-                    <el-table-column label="内容名称" min-width="260">
-                      <template #default="{ row }">
-                        <el-input v-model="row.name"></el-input>
-                      </template>
-                    </el-table-column>
-                    <el-table-column label="价格" width="120">
-                      <template #default="{ row }">
-                        <el-input-number v-model="row.price" :min="0" :controls="false" style="width: 96px;"></el-input-number>
-                      </template>
-                    </el-table-column>
-                    <el-table-column label="备注" min-width="220">
-                      <template #default="{ row }">
-                        <el-input v-model="row.note"></el-input>
-                      </template>
-                    </el-table-column>
-                    <el-table-column label="操作" width="130" fixed="right">
-                      <template #default="{ $index }">
-                        <el-button link type="primary" @click="insertPlanRow($index)">插入</el-button>
-                        <el-button link type="danger" @click="activePlan.items.splice($index, 1)">删除</el-button>
-                      </template>
+                    <el-table-column label="操作" width="90" fixed="right">
+                      <template #default="{ $index }"><el-button link type="danger" @click="activeTrackingRecord.metrics.splice($index, 1)">删除</el-button></template>
                     </el-table-column>
                   </el-table>
                 </div>
               </div>
             </div>
+            <section v-if="selectedTrackingRecords.length >= 2" style="margin-top: 18px;">
+              <h4 style="margin: 0 0 12px;">指标对比</h4>
+              <el-table :data="trackingCompareRows" border height="320">
+                <el-table-column prop="name" label="指标名称" min-width="220" fixed="left"></el-table-column>
+                <el-table-column prop="unit" label="单位" width="100"></el-table-column>
+                <el-table-column v-for="record in selectedTrackingRecords" :key="record.id" :label="record.examDate || record.title" min-width="150">
+                  <template #default="{ row }">{{ row.values[record.id] || '-' }}</template>
+                </el-table-column>
+              </el-table>
+            </section>
           </div>
         </section>
       </main>
@@ -1110,65 +1369,17 @@
       </template>
     </el-dialog>
 
-
-
-    <!-- 弹窗：通过 OCR 识别导入套餐 -->
-    <el-dialog v-model="packageOcrDialogVisible" title="通过 OCR 截图识别导入套餐列表" width="85%" top="3vh" @close="clearOcr" class="ocr-dialog-container">
-      <div class="ocr-grid">
-        <div class="ocr-left-panel" @paste="onPasteImage">
-          <label class="upload-box" tabindex="0">
-            <input type="file" accept="image/*" @change="onImageChange">
-            <div>
-              <el-icon size="28"><UploadFilled /></el-icon>
-              <p><strong>上传或粘贴列表截图</strong></p>
-              <p class="muted">复制图片后按 Ctrl+V，也可以点击选择文件</p>
-            </div>
-          </label>
-          <div v-if="ocr.imageUrl" class="preview" :class="{ zoomed: ocr.imageZoomed }" @click="ocr.imageZoomed = !ocr.imageZoomed">
-            <img :src="ocr.imageUrl" alt="套餐截图预览">
-          </div>
-        </div>
-
-        <div class="ocr-right-panel">
-          <div class="table-actions">
-            <el-button type="primary" :loading="ocr.running" @click="runOcr" :disabled="!ocr.file">开始 OCR</el-button>
-            <el-button @click="parseRawText" :disabled="!ocr.rawText.trim()">从原文解析</el-button>
-            <el-button @click="clearOcr">清空</el-button>
-            <span class="muted" v-if="ocr.progress">{{ ocr.progress }}</span>
-          </div>
-          <textarea v-model="ocr.rawText" class="raw-text" placeholder="OCR 原文会出现在这里。"></textarea>
-
-          <div class="ocr-table-wrapper">
-            <div class="table-actions">
-              <el-button @click="addParsedPackage">新增一行套餐</el-button>
-              <el-button type="success" @click="confirmPackageList" :disabled="!ocr.packages.length">确认并导入套餐列表</el-button>
-            </div>
-            <el-table :data="ocr.packages" border height="100%">
-              <el-table-column label="套餐名称" min-width="230">
-                <template #default="{ row }">
-                  <el-input v-model="row.name" class="inline-input"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column label="适用人群" min-width="130">
-                <template #default="{ row }">
-                  <el-input v-model="row.audience"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column label="价格" width="120">
-                <template #default="{ row }">
-                  <el-input-number v-model="row.price" :min="0" :controls="false" style="width: 96px;"></el-input-number>
-                </template>
-              </el-table-column>
-              <el-table-column label="操作" width="130" fixed="right">
-                <template #default="{ $index }">
-                  <el-button link type="primary" @click="insertParsedPackage($index)">插入</el-button>
-                  <el-button link type="danger" @click="ocr.packages.splice($index, 1)">删除</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-          </div>
-        </div>
-      </div>
+    <el-dialog v-model="packageRemarkEditor.visible" :title="`备注/建议 - ${packageRemarkEditor.packageName || '套餐'}`" width="760px">
+      <el-input
+        v-model="packageRemarkEditor.remark"
+        type="textarea"
+        :rows="10"
+        placeholder="可以记录这个套餐的建议增减项、原因、适合/不适合的人群、对比结论等"
+      ></el-input>
+      <template #footer>
+        <el-button @click="packageRemarkEditor.visible = false">取消</el-button>
+        <el-button type="primary" @click="savePackageRemark">保存</el-button>
+      </template>
     </el-dialog>
 
     <!-- 弹窗：通过 OCR 识别导入检查内容 -->
@@ -1261,25 +1472,6 @@
       </template>
     </el-dialog>
 
-    <el-dialog v-model="planCreator.visible" title="生成体检方案" width="620px">
-      <el-form label-width="96px">
-        <el-form-item label="家庭成员">
-          <el-input :model-value="activeMember ? activeMember.name : ''" disabled></el-input>
-        </el-form-item>
-        <el-form-item label="基础套餐">
-          <el-select v-model="planCreator.packageId" filterable placeholder="选择一个基础套餐" style="width: 100%;">
-            <el-option v-for="pkg in packages" :key="pkg.id" :label="`${pkg.name} · ￥${pkg.price || 0}`" :value="pkg.id"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="方案名称">
-          <el-input v-model="planCreator.name"></el-input>
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <el-button @click="planCreator.visible = false">取消</el-button>
-        <el-button type="primary" @click="savePlanCreator">生成</el-button>
-      </template>
-    </el-dialog>
   </div>
 
   <script src="vendor/vue.global.prod.js"></script>
@@ -1302,18 +1494,143 @@
       val = val.replace(/[^\w\u4e00-\u9fa5]/g, '');
       return val;
     };
+    const xmlText = (value) => {
+      const text = String(value ?? '');
+      const safeText = /^[=+\-@]/.test(text) ? `'${text}` : text;
+      return safeText
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    };
+    const safeFilePart = (value) => {
+      const text = cleanName(value).replace(/[\\/:*?"<>|]/g, '_');
+      return text.slice(0, 40) || 'package';
+    };
+    const columnName = (index) => {
+      let name = '';
+      let value = index + 1;
+      while (value > 0) {
+        const mod = (value - 1) % 26;
+        name = String.fromCharCode(65 + mod) + name;
+        value = Math.floor((value - mod) / 26);
+      }
+      return name;
+    };
+    const crcTable = (() => {
+      const table = new Uint32Array(256);
+      for (let n = 0; n < 256; n += 1) {
+        let c = n;
+        for (let k = 0; k < 8; k += 1) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+        table[n] = c >>> 0;
+      }
+      return table;
+    })();
+    const crc32 = (bytes) => {
+      let crc = 0xffffffff;
+      for (let i = 0; i < bytes.length; i += 1) crc = crcTable[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
+      return (crc ^ 0xffffffff) >>> 0;
+    };
+    const u16 = (value) => [value & 0xff, (value >>> 8) & 0xff];
+    const u32 = (value) => [value & 0xff, (value >>> 8) & 0xff, (value >>> 16) & 0xff, (value >>> 24) & 0xff];
+    const concatBytes = (parts) => {
+      const total = parts.reduce((sum, part) => sum + part.length, 0);
+      const out = new Uint8Array(total);
+      let offset = 0;
+      parts.forEach((part) => {
+        out.set(part, offset);
+        offset += part.length;
+      });
+      return out;
+    };
+    const buildZip = (files) => {
+      const encoder = new TextEncoder();
+      const localParts = [];
+      const centralParts = [];
+      let offset = 0;
+      files.forEach((file) => {
+        const nameBytes = encoder.encode(file.name);
+        const dataBytes = encoder.encode(file.content);
+        const crc = crc32(dataBytes);
+        const localHeader = Uint8Array.from([
+          ...u32(0x04034b50), ...u16(20), ...u16(0x0800), ...u16(0), ...u16(0), ...u16(0),
+          ...u32(crc), ...u32(dataBytes.length), ...u32(dataBytes.length), ...u16(nameBytes.length), ...u16(0)
+        ]);
+        localParts.push(localHeader, nameBytes, dataBytes);
+        const centralHeader = Uint8Array.from([
+          ...u32(0x02014b50), ...u16(20), ...u16(20), ...u16(0x0800), ...u16(0), ...u16(0), ...u16(0),
+          ...u32(crc), ...u32(dataBytes.length), ...u32(dataBytes.length), ...u16(nameBytes.length), ...u16(0), ...u16(0),
+          ...u16(0), ...u16(0), ...u32(0), ...u32(offset)
+        ]);
+        centralParts.push(centralHeader, nameBytes);
+        offset += localHeader.length + nameBytes.length + dataBytes.length;
+      });
+      const centralSize = centralParts.reduce((sum, part) => sum + part.length, 0);
+      const end = Uint8Array.from([
+        ...u32(0x06054b50), ...u16(0), ...u16(0), ...u16(files.length), ...u16(files.length),
+        ...u32(centralSize), ...u32(offset), ...u16(0)
+      ]);
+      return concatBytes([...localParts, ...centralParts, end]);
+    };
+    const buildXlsxBlob = (headers, rows) => {
+      const colWidths = [24, 10, 10, 8, 28, 14, 42, 10, 50, 16, 20];
+      const sheetRows = [headers, ...rows].map((row, rowIndex) => {
+        const r = rowIndex + 1;
+        const cells = row.map((cell, colIndex) => {
+          const ref = `${columnName(colIndex)}${r}`;
+          const isHeader = rowIndex === 0;
+          const isNumber = !isHeader && [2, 3, 7].includes(colIndex);
+          const style = isHeader ? 1 : isNumber ? 2 : [4, 6, 8].includes(colIndex) ? 3 : 0;
+          if (isNumber) return `<c r="${ref}" s="${style}"><v>${Number(cell || 0)}</v></c>`;
+          return `<c r="${ref}" s="${style}" t="inlineStr"><is><t>${xmlText(cell)}</t></is></c>`;
+        }).join('');
+        return `<row r="${r}" ht="${rowIndex === 0 ? 22 : 18}" customHeight="1">${cells}</row>`;
+      }).join('');
+      const cols = colWidths.map((width, index) => `<col min="${index + 1}" max="${index + 1}" width="${width}" customWidth="1"/>`).join('');
+      const worksheet = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>
+  <cols>${cols}</cols>
+  <sheetData>${sheetRows}</sheetData>
+</worksheet>`;
+      const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+  <fonts count="2"><font><sz val="11"/><name val="Microsoft YaHei"/></font><font><b/><sz val="11"/><name val="Microsoft YaHei"/></font></fonts>
+  <fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF3F6FB"/><bgColor indexed="64"/></patternFill></fill></fills>
+  <borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color rgb="FF999999"/></left><right style="thin"><color rgb="FF999999"/></right><top style="thin"><color rgb="FF999999"/></top><bottom style="thin"><color rgb="FF999999"/></bottom><diagonal/></border></borders>
+  <cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>
+  <cellXfs count="4">
+    <xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1"/>
+    <xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center"/></xf>
+    <xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment horizontal="right" vertical="center"/></xf>
+    <xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment vertical="center" wrapText="1"/></xf>
+  </cellXfs>
+</styleSheet>`;
+      const files = [
+        { name: '[Content_Types].xml', content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>' },
+        { name: '_rels/.rels', content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>' },
+        { name: 'xl/workbook.xml', content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="套餐明细" sheetId="1" r:id="rId1"/></sheets></workbook>' },
+        { name: 'xl/_rels/workbook.xml.rels', content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>' },
+        { name: 'xl/worksheets/sheet1.xml', content: worksheet },
+        { name: 'xl/styles.xml', content: styles }
+      ];
+      return new Blob([buildZip(files)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    };
 
     const defaultData = {
       packages: [],
       members: [],
-      plans: []
+      plans: [],
+      trackingRecords: []
     };
 
     const parsePrice = (text) => {
       const source = String(text || '').replace(/,/g, '').trim();
       
       // 1. First try currency prefix search (avoid matching letters in words like FT3)
-      const currencyMatch = source.match(/(?:^|[^a-zA-Z0-9])[￥¥YyVvFfTt*xX]\s*(\d{1,5}(?:\.\d{1,2})?)/);
+      const currencyMatch = source.match(/[￥¥]\s*(\d{1,5}(?:\.\d{1,2})?)/)
+        || source.match(/(?:^|[\s:：])[YyVvFfTt*xX]\s*(\d{1,5}(?:\.\d{1,2})?)/);
       if (currencyMatch) return Number(currencyMatch[1]);
       
       // 2. If it's a clean standalone price line, match it exactly
@@ -1328,81 +1645,12 @@
       return numbers.length ? numbers[numbers.length - 1] : 0;
     };
 
-    const preprocessImageForOcr = (file) => new Promise((resolve) => {
-      const image = new Image();
-      const url = URL.createObjectURL(file);
-      image.onload = () => {
-        const scale = Math.min(2.4, Math.max(1.6, 1800 / image.width));
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d', { willReadFrequently: true });
-        canvas.width = Math.round(image.width * scale);
-        canvas.height = Math.round(image.height * scale);
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imageData.data;
-        for (let i = 0; i < data.length; i += 4) {
-          const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
-          const boosted = gray < 185 ? Math.max(0, gray - 35) : Math.min(255, gray + 20);
-          const value = boosted < 205 ? 0 : 255;
-          data[i] = value;
-          data[i + 1] = value;
-          data[i + 2] = value;
-          data[i + 3] = 255;
-        }
-        ctx.putImageData(imageData, 0, 0);
-        canvas.toBlob((blob) => {
-          URL.revokeObjectURL(url);
-          resolve(blob || file);
-        }, 'image/png');
-      };
-      image.onerror = () => {
-        URL.revokeObjectURL(url);
-        resolve(file);
-      };
-      image.src = url;
-    });
-
     const likelyCategory = (line) => {
       const categories = ['放射科', '彩超室', '检验科', '内科', '外科', '眼科', '耳鼻喉科', '口腔科', '妇科', '男科', '心电图室', '功能科', '一般检查'];
       return categories.find((item) => line.includes(item)) || '';
     };
 
     const isNoiseLine = (line) => /健康体检|套餐信息|检查项目详情|检查内容详情|返回|立即预约|修改|recognizing|微信|5G|^\d{1,2}:\d{2}/i.test(line);
-
-    const parsePackageList = (rawText) => {
-      const lines = rawText.split(/\n+/)
-        .map((line) => line.replace(/[|｜]/g, '').replace(/\s+/g, ' ').trim())
-        .filter((line) => line && !isNoiseLine(line));
-      const result = [];
-      for (let i = 0; i < lines.length; i += 1) {
-        const line = lines[i];
-        const isPackage = /(^|[^A-Z])([A-H]\s*)?套餐[（(].+[）)]|CT\s*平扫|彩超|胃肠镜|肺部CT/i.test(line);
-        if (!isPackage) continue;
-        const near = lines.slice(i, i + 5).join(' ');
-        const price = parsePrice(near);
-        const audienceMatch = near.match(/适用男[性件]?|适用女[性件]?|不限性别|男[性件]|女[性件]/);
-        const name = line
-          .replace(/[￥¥]\s*\d+.*/, '')
-          .replace(/^[<>、.\s]+/, '')
-          .replace(/\s+/g, '')
-          .trim();
-        if (!name || name.length < 4 || result.some((item) => item.name === name)) continue;
-        result.push({
-          id: uid('ocr_pkg'),
-          name,
-          audience: audienceMatch ? audienceMatch[0].replace('件', '性') : '',
-          price,
-          source: 'OCR截图',
-          reviewStatus: 'pending'
-        });
-      }
-      return result;
-    };
 
     const parseDetailItems = (rawText) => {
       const rawLines = rawText.split(/\n+/);
@@ -1459,7 +1707,8 @@
       const lines = rawLines
         .map((line) => line.replace(/[|｜]/g, '').replace(/\s+/g, ' ').trim())
         .filter((line) => line && !isNoiseLine(line));
-      const isPriceText = (value) => /(?:^|[^a-zA-Z0-9])[￥¥YyVvFfTt*xX]\s*\d+(?:\.\d{1,2})?/.test(value) ||
+      const isPriceText = (value) => /[￥¥]\s*\d+(?:\.\d{1,2})?/.test(value) ||
+                            /(?:^|[\s:：])[YyVvFfTt*xX]\s*\d+(?:\.\d{1,2})?/.test(value) ||
                             /^\d{1,5}(?:\.\d{1,2})?\s*(?:元)?$/.test(value.replace(/[.\-_ /]+$/, ''));
       const looksLikeNote = (value) => /筛查|评估|诊断|疾病|功能|风险|了解|标志物|耗材费/.test(value);
       const looksLikeNameSuffix = (value) => {
@@ -1517,10 +1766,25 @@
       return items;
     };
 
-    const looksLikeDetailText = (rawText) => {
-      const text = cleanName(rawText);
-      return /检查项目详情|检查内容详情|项目名称|内容名称|检查意义|检验科|放射科|彩超室/.test(text)
-        && /[￥¥]\d+|\n\d{1,5}\n/.test(rawText);
+    const parseReportMetrics = (rawText) => {
+      const rows = [];
+      const lines = String(rawText || '').split(/\n+/)
+        .map((line) => line.replace(/[|｜]/g, ' ').replace(/\s+/g, ' ').trim())
+        .filter((line) => line && !isNoiseLine(line));
+      lines.forEach((line) => {
+        const match = line.match(/^(.{2,28}?)\s+([<>]?\d+(?:\.\d+)?)\s*([a-zA-Z%/μuU\u4e00-\u9fa5]*)\s*([0-9.]+\s*[-~至]\s*[0-9.]+)?\s*(偏高|偏低|异常|阳性|阴性|正常)?$/);
+        if (!match) return;
+        rows.push({
+          id: uid('metric'),
+          name: match[1].trim(),
+          value: match[2].trim(),
+          unit: match[3] || '',
+          reference: match[4] || '',
+          status: match[5] && match[5] !== '正常' ? (match[5] === '偏高' ? 'high' : match[5] === '偏低' ? 'low' : 'abnormal') : 'normal',
+          note: ''
+        });
+      });
+      return rows;
     };
 
     const { createApp } = Vue;
@@ -1534,24 +1798,20 @@
           packages: parsed.packages || [],
           members: parsed.members || [],
           plans: parsed.plans || [],
+          trackingRecords: parsed.trackingRecords || [],
           compareIds: [],
           selectedPackages: [],
+          selectedPlanPackages: [],
+          planStatusFilter: 'all',
           compareOnlyDiff: false,
           compareTabPackages: [],
-          packageOcrDialogVisible: false,
           itemOcrDialogVisible: false,
           activeMemberId: parsed.members?.[0]?.id || '',
           planFilterId: '',
-          ocrModeOptions: [
-            { label: '识别套餐', value: 'list' },
-            { label: '识别内容', value: 'detail' }
-          ],
-          ocrQualityOptions: [
-            { label: '快速', value: 'fast' },
-            { label: '准确', value: 'accurate' }
-          ],
+          activeTrackingRecordId: '',
+          selectedTrackingRecords: [],
           ocr: {
-            mode: 'list',
+            mode: 'detail',
             quality: 'fast',
             file: null,
             imageUrl: '',
@@ -1569,15 +1829,16 @@
             editingId: '',
             form: { name: '', audience: '', price: 0, source: '手动录入' }
           },
+          packageRemarkEditor: {
+            visible: false,
+            packageId: '',
+            packageName: '',
+            remark: ''
+          },
           memberEditor: {
             visible: false,
             editingId: '',
             form: { name: '', gender: '', age: 0, focus: '' }
-          },
-          planCreator: {
-            visible: false,
-            packageId: '',
-            name: ''
           },
           activeTab: 'packages',
           itemTabs: []
@@ -1587,13 +1848,17 @@
         pageTitle() {
           return {
             packages: '体检套餐管理',
-            plans: '家人体检方案'
+            members: '家人管理',
+            plans: '体检方案',
+            tracking: '体检跟踪'
           }[this.view];
         },
         pageDesc() {
           return {
-            packages: '管理所有体检套餐，可通过 OCR 截图快速导入或手动维护，支持多选对比内容。',
-            plans: '给家人选择基础套餐，并在此基础上增减内容。'
+            packages: '管理所有体检套餐，维护内容明细，并支持多套餐横向对比。',
+            members: '维护家庭成员资料，后续方案和体检结果按家人归档。',
+            plans: '按成员勾选套餐生成体检方案，用标记管理增减项。',
+            tracking: '跟踪每年或阶段性体检结果，并对比不同时间的指标变化。'
           }[this.view];
         },
         totalItems() {
@@ -1646,6 +1911,44 @@
             return sum + Number(item.price || 0);
           }, 0);
         },
+        activePlanStatusCounts() {
+          const counts = { include: 0, add: 0, exclude: 0, pending: 0, total: 0 };
+          if (!this.activePlan) return counts;
+          (this.activePlan.items || []).forEach((item) => {
+            const status = item.status || 'include';
+            counts[status] = (counts[status] || 0) + 1;
+            counts.total += 1;
+          });
+          return counts;
+        },
+        visiblePlanItems() {
+          if (!this.activePlan) return [];
+          const items = this.activePlan.items || [];
+          if (this.planStatusFilter === 'all') return items;
+          return items.filter((item) => (item.status || 'include') === this.planStatusFilter);
+        },
+        activeTrackingRecord() {
+          return this.trackingRecords.find((record) => record.id === this.activeTrackingRecordId);
+        },
+        memberTrackingRecords() {
+          return this.trackingRecords.filter((record) => record.memberId === this.activeMemberId);
+        },
+        trackingCompareRows() {
+          const selected = this.selectedTrackingRecords;
+          if (!selected.length) return [];
+          const map = new Map();
+          selected.forEach((record) => {
+            (record.metrics || []).forEach((metric) => {
+              const key = normalizeItemKey(metric.name) || metric.name;
+              if (!map.has(key)) {
+                map.set(key, { key, name: metric.name, unit: metric.unit || '', values: {} });
+              }
+              map.get(key).values[record.id] = metric.value || '';
+              if (!map.get(key).unit && metric.unit) map.get(key).unit = metric.unit;
+            });
+          });
+          return Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+        },
         selectedDetailPackageName() {
           const pkg = this.packages.find((item) => item.id === this.ocr.detailPackageId);
           return pkg?.name || this.ocr.detailPackageId || '';
@@ -1655,6 +1958,7 @@
         packages: { deep: true, handler: 'persist' },
         members: { deep: true, handler: 'persist' },
         plans: { deep: true, handler: 'persist' },
+        trackingRecords: { deep: true, handler: 'persist' },
         'ocr.rawText': {
           handler(newText) {
             if (this.ocr.running) return;
@@ -1683,20 +1987,22 @@
           const response = await fetch(apiDataUrl);
           if (response.ok) {
             const data = await response.json();
-            if (data && (data.packages?.length || data.members?.length || data.plans?.length)) {
+            if (data && (data.packages?.length || data.members?.length || data.plans?.length || data.trackingRecords?.length)) {
               this.packages = data.packages || [];
               this.members = data.members || [];
               this.plans = data.plans || [];
+              this.trackingRecords = data.trackingRecords || [];
               this.activeMemberId = this.members[0]?.id || '';
               this.planFilterId = this.activeMemberPlans[0]?.id || '';
             } else {
               const saved = localStorage.getItem(STORAGE_KEY);
               if (saved) {
                 const parsed = JSON.parse(saved);
-                if (parsed.packages?.length || parsed.members?.length || parsed.plans?.length) {
+                if (parsed.packages?.length || parsed.members?.length || parsed.plans?.length || parsed.trackingRecords?.length) {
                   this.packages = parsed.packages || [];
                   this.members = parsed.members || [];
                   this.plans = parsed.plans || [];
+                  this.trackingRecords = parsed.trackingRecords || [];
                   this.activeMemberId = this.members[0]?.id || '';
                   this.planFilterId = this.activeMemberPlans[0]?.id || '';
                   this.persist();
@@ -1716,7 +2022,8 @@
           const payload = {
             packages: this.packages,
             members: this.members,
-            plans: this.plans
+            plans: this.plans,
+            trackingRecords: this.trackingRecords
           };
           localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
           try {
@@ -1730,12 +2037,6 @@
             console.error("同步数据到后端失败:", e);
           }
         },
-        openPackageOcr() {
-          this.clearOcr();
-          this.ocr.mode = 'list';
-          this.ocr.quality = 'fast';
-          this.packageOcrDialogVisible = true;
-        },
         openItemOcr(pkg) {
           this.clearOcr();
           this.ocr.mode = 'detail';
@@ -1746,6 +2047,9 @@
         },
         handleSelectionChange(selection) {
           this.selectedPackages = selection;
+        },
+        activeMemberPlansFor(memberId) {
+          return this.plans.filter((plan) => plan.memberId === memberId);
         },
         onImageChange(event) {
           const file = event.target.files?.[0];
@@ -1796,29 +2100,17 @@
             
             const data = await response.json();
             this.ocr.rawText = data.rawText || '';
-            if (this.ocr.mode === 'list') {
-              this.ocr.packages = (data.packages || []).map((pkg) => ({
-                id: uid('ocr_pkg'),
-                name: pkg.name || '',
-                audience: pkg.audience || '',
-                price: Number(pkg.price || 0),
-                source: pkg.source || 'OCR截图',
-                reviewStatus: 'pending'
-              }));
-              if (!this.ocr.packages.length) this.addParsedPackage();
-            } else {
-              this.ocr.items = (data.items || []).map((item) => ({
-                id: uid('item'),
-                category: item.category || '未分类',
-                name: item.name || '',
-                price: Number(item.price || 0),
-                note: item.note || '',
-                source: item.source || 'OCR截图',
-                reviewStatus: 'pending'
-              }));
-              this.ocr.detailPrice = Number(data.detailPrice || this.ocr.detailPrice || 0);
-              if (!this.ocr.items.length) this.addParsedItem();
-            }
+            this.ocr.items = (data.items || []).map((item) => ({
+              id: uid('item'),
+              category: item.category || '未分类',
+              name: item.name || '',
+              price: Number(item.price || 0),
+              note: item.note || '',
+              source: item.source || 'OCR截图',
+              reviewStatus: 'pending'
+            }));
+            this.ocr.detailPrice = Number(data.detailPrice || this.ocr.detailPrice || 0);
+            if (!this.ocr.items.length) this.addParsedItem();
             this.ocr.progress = 'OCR 识别完成。';
             ElementPlus.ElMessage.success('OCR 识别完成，请核对识别结果。');
           } catch (error) {
@@ -1830,14 +2122,9 @@
           }
         },
         parseRawText() {
-          if (this.ocr.mode === 'list') {
-            this.ocr.packages = parsePackageList(this.ocr.rawText);
-            if (!this.ocr.packages.length) this.addParsedPackage();
-          } else {
-            this.ocr.items = parseDetailItems(this.ocr.rawText);
-            // 导入检查内容明细时，不修改套餐本身的总价格，防止误用检查项的单价覆盖套餐总价
-            if (!this.ocr.items.length) this.addParsedItem();
-          }
+          this.ocr.items = parseDetailItems(this.ocr.rawText);
+          // 导入检查内容明细时，不修改套餐本身的总价格，防止误用检查项的单价覆盖套餐总价
+          if (!this.ocr.items.length) this.addParsedItem();
         },
         clearOcr() {
           this.ocr.file = null;
@@ -1851,16 +2138,6 @@
           this.ocr.detailPrice = 0;
           this.ocr.imageZoomed = false;
         },
-        addParsedPackage() {
-          this.ocr.packages.push({
-            id: uid('ocr_pkg'),
-            name: '',
-            audience: '',
-            price: 0,
-            source: 'OCR截图',
-            reviewStatus: 'pending'
-          });
-        },
         addParsedItem() {
           this.ocr.items.push({
             id: uid('item'),
@@ -1872,33 +2149,6 @@
             reviewStatus: 'pending'
           });
         },
-        confirmPackageList() {
-          const rows = this.ocr.packages.filter((pkg) => pkg.name.trim());
-          rows.forEach((row) => {
-            const existing = this.packages.find((pkg) => pkg.name === row.name);
-            if (existing) {
-              existing.audience = row.audience;
-              existing.price = row.price;
-              existing.source = row.source;
-              existing.items = existing.items || [];
-              existing.updatedAt = new Date().toLocaleString();
-            } else {
-              const pkg = {
-                id: uid('pkg'),
-                name: row.name,
-                audience: row.audience,
-                price: Number(row.price || 0),
-                source: row.source,
-                rawText: this.ocr.rawText,
-                items: [],
-                updatedAt: new Date().toLocaleString()
-              };
-              this.packages.push(pkg);
-            }
-          });
-          this.packageOcrDialogVisible = false;
-          ElementPlus.ElMessage.success(`已导入 ${rows.length} 个套餐。`);
-        },
         insertParsedItem(index) {
           const category = index >= 0 && index < this.ocr.items.length ? this.ocr.items[index].category : '未分类';
           this.ocr.items.splice(index + 1, 0, {
@@ -1909,16 +2159,6 @@
             note: '',
             source: 'OCR手工添加',
             updatedAt: new Date().toLocaleString()
-          });
-        },
-        insertParsedPackage(index) {
-          this.ocr.packages.splice(index + 1, 0, {
-            id: uid('ocr_pkg'),
-            name: '',
-            audience: '',
-            price: 0,
-            source: 'OCR手工添加',
-            reviewStatus: 'pending'
           });
         },
         confirmDetailItems() {
@@ -2011,12 +2251,27 @@
             this.packages.push({
               id: uid('pkg'),
               ...form,
+              remark: '',
               items: [],
               rawText: '',
               updatedAt: nowText()
             });
           }
           this.packageEditor.visible = false;
+        },
+        openPackageRemarkEditor(pkg) {
+          this.packageRemarkEditor.visible = true;
+          this.packageRemarkEditor.packageId = pkg.id;
+          this.packageRemarkEditor.packageName = pkg.name;
+          this.packageRemarkEditor.remark = pkg.remark || '';
+        },
+        savePackageRemark() {
+          const pkg = this.packages.find((item) => item.id === this.packageRemarkEditor.packageId);
+          if (!pkg) return;
+          pkg.remark = this.packageRemarkEditor.remark;
+          pkg.updatedAt = nowText();
+          this.packageRemarkEditor.visible = false;
+          ElementPlus.ElMessage.success('套餐备注已保存。');
         },
         viewPackage(pkg) {
           const existing = this.itemTabs.find(tab => tab.packageId === pkg.id);
@@ -2182,41 +2437,47 @@
           }
           this.memberEditor.visible = false;
         },
-        createPlan() {
-          const selected = this.packages[0];
+        createPlanFromSelectedPackages() {
           const member = this.activeMember;
-          this.planCreator.packageId = selected?.id || '';
-          this.planCreator.name = selected && member ? `${member.name} ${new Date().getFullYear()} 体检方案 - ${selected.name}` : '';
-          this.planCreator.visible = true;
-        },
-        savePlanCreator() {
-          const selected = this.packages.find((pkg) => pkg.id === this.planCreator.packageId);
-          const member = this.activeMember;
-          if (!selected || !member) {
-            ElementPlus.ElMessage.warning('请选择家庭成员 and 基础套餐。');
+          if (!member || !this.selectedPlanPackages.length) {
+            ElementPlus.ElMessage.warning('请先选择家人并勾选套餐。');
             return;
           }
+          const itemMap = new Map();
+          this.selectedPlanPackages.forEach((pkg) => {
+            (pkg.items || []).forEach((item) => {
+              const key = normalizeItemKey(item.name) || item.name;
+              if (!itemMap.has(key)) {
+                itemMap.set(key, {
+                  id: uid('plan_item'),
+                  category: item.category,
+                  name: item.name,
+                  price: Number(item.price || 0),
+                  note: item.note || '',
+                  source: pkg.name,
+                  status: 'include'
+                });
+              } else {
+                const existing = itemMap.get(key);
+                if (!String(existing.source || '').includes(pkg.name)) {
+                  existing.source = `${existing.source} / ${pkg.name}`;
+                }
+              }
+            });
+          });
           const plan = {
             id: uid('plan'),
             memberId: member.id,
-            packageId: selected.id,
-            name: this.planCreator.name || `${member.name} ${new Date().getFullYear()} 体检方案 - ${selected.name}`,
-            basePackageName: selected.name,
+            packageIds: this.selectedPlanPackages.map((pkg) => pkg.id),
+            packageId: this.selectedPlanPackages[0]?.id || '',
+            name: `${member.name} ${new Date().getFullYear()} 体检方案 - ${this.selectedPlanPackages.map((pkg) => pkg.name).join(' + ')}`,
+            basePackageName: this.selectedPlanPackages.map((pkg) => pkg.name).join(' + '),
             createdAt: nowText(),
-            items: selected.items.map((item) => ({
-              id: uid('plan_item'),
-              category: item.category,
-              name: item.name,
-              price: Number(item.price || 0),
-              note: item.note || '',
-              source: '套餐自带',
-              status: 'include'
-            }))
+            items: Array.from(itemMap.values())
           };
           this.plans.push(plan);
           this.planFilterId = plan.id;
-          this.planCreator.visible = false;
-          ElementPlus.ElMessage.success('已生成方案，可继续增减内容。');
+          ElementPlus.ElMessage.success('已生成方案，可继续标记增减项。');
         },
         addPlanItem() {
           this.activePlan.items.push({
@@ -2241,6 +2502,100 @@
             source: '手动新增',
             status: 'add'
           });
+        },
+        insertPlanRowByItem(item) {
+          if (!this.activePlan) return;
+          const index = this.activePlan.items.findIndex((row) => row.id === item?.id);
+          this.insertPlanRow(index);
+        },
+        deletePlanItem(item) {
+          if (!this.activePlan || !item) return;
+          const index = this.activePlan.items.findIndex((row) => row.id === item.id);
+          if (index !== -1) this.activePlan.items.splice(index, 1);
+        },
+        planStatusLabel(status) {
+          return {
+            include: '保留',
+            add: '新增',
+            exclude: '排除',
+            pending: '待确认'
+          }[status || 'include'] || '保留';
+        },
+        planRowClassName({ row }) {
+          if (row.status === 'add') return 'plan-row-add';
+          if (row.status === 'exclude') return 'plan-row-exclude';
+          if (row.status === 'pending') return 'plan-row-pending';
+          return '';
+        },
+        addTrackingRecord() {
+          const member = this.activeMember;
+          if (!member) {
+            ElementPlus.ElMessage.warning('请先选择家人。');
+            return;
+          }
+          const plan = this.activeMemberPlans[0];
+          const record = {
+            id: uid('track'),
+            memberId: member.id,
+            planId: plan?.id || '',
+            planName: plan?.name || '',
+            packageName: plan?.basePackageName || '',
+            title: `${member.name} ${new Date().getFullYear()} 体检结果`,
+            examDate: new Date().toISOString().slice(0, 10),
+            source: '',
+            rawText: '',
+            metrics: []
+          };
+          this.trackingRecords.push(record);
+          this.activeTrackingRecordId = record.id;
+        },
+        syncTrackingPlanName(record) {
+          const plan = this.plans.find((item) => item.id === record.planId);
+          record.planName = plan?.name || '';
+          record.packageName = plan?.basePackageName || '';
+        },
+        addTrackingMetric() {
+          if (!this.activeTrackingRecord) return;
+          this.activeTrackingRecord.metrics.push({
+            id: uid('metric'),
+            name: '',
+            value: '',
+            unit: '',
+            reference: '',
+            status: 'pending',
+            note: ''
+          });
+        },
+        async importTrackingReport(event) {
+          const file = event.target.files?.[0];
+          event.target.value = '';
+          if (!file || !this.activeTrackingRecord) return;
+          if (file.type === 'application/pdf' || /\.pdf$/i.test(file.name)) {
+            ElementPlus.ElMessage.warning('当前本地 OCR 后端还未接 PDF 转图片能力，请先导入报告截图；PDF 解析需要后续加后端依赖。');
+            return;
+          }
+          try {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('mode', 'detail');
+            formData.append('quality', 'accurate');
+            const response = await fetch(OCR_API_URL, { method: 'POST', body: formData });
+            if (!response.ok) throw new Error(await response.text());
+            const data = await response.json();
+            const rawText = data.rawText || '';
+            const metrics = parseReportMetrics(rawText);
+            this.activeTrackingRecord.rawText = rawText;
+            this.activeTrackingRecord.source = file.name;
+            if (metrics.length) {
+              this.activeTrackingRecord.metrics.push(...metrics);
+              ElementPlus.ElMessage.success(`已从报告截图解析 ${metrics.length} 个指标，请核对。`);
+            } else {
+              ElementPlus.ElMessage.warning('已识别报告文字，但没有自动匹配到指标行，请手动补充或调整截图。');
+            }
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error('报告 OCR 失败，请确认后端已启动。');
+          }
         },
         seedDemo() {
           if (this.packages.length || this.members.length) {
@@ -2294,8 +2649,48 @@
           this.compareIds = [pkgA.id, pkgC.id];
           ElementPlus.ElMessage.success('示例数据已添加。');
         },
+        exportPackagesExcel(packageList = this.selectedPackages) {
+          const packagesToExport = Array.isArray(packageList) ? packageList : [];
+          if (!packagesToExport.length) {
+            ElementPlus.ElMessage.warning('请先勾选要导出的套餐，或在单个套餐行点击“导出”。');
+            return;
+          }
+
+          const headers = ['套餐名称', '适用人群', '套餐价格', '内容数', '套餐备注', '分类/科室', '检查内容', '单项价格', '说明/备注', '项目来源', '更新时间'];
+          const rows = [];
+          packagesToExport.forEach((pkg) => {
+            const items = pkg.items && pkg.items.length ? pkg.items : [{}];
+            items.forEach((item) => {
+              rows.push([
+                pkg.name,
+                pkg.audience,
+                Number(pkg.price || 0),
+                pkg.items ? pkg.items.length : 0,
+                pkg.remark || '',
+                item.category || '',
+                item.name || '',
+                item.price === undefined ? '' : Number(item.price || 0),
+                item.note || '',
+                item.source || pkg.source || '',
+                pkg.updatedAt || ''
+              ]);
+            });
+          });
+
+          const blob = buildXlsxBlob(headers, rows);
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          const filePrefix = packagesToExport.length === 1
+            ? `jkgl-${safeFilePart(packagesToExport[0].name)}`
+            : `jkgl-selected-${packagesToExport.length}`;
+          link.download = `${filePrefix}-${Date.now()}.xlsx`;
+          link.click();
+          URL.revokeObjectURL(url);
+          ElementPlus.ElMessage.success(`已导出 ${packagesToExport.length} 个套餐、${rows.length} 行明细。`);
+        },
         exportData() {
-          const blob = new Blob([JSON.stringify({ packages: this.packages, members: this.members, plans: this.plans }, null, 2)], { type: 'application/json' });
+          const blob = new Blob([JSON.stringify({ packages: this.packages, members: this.members, plans: this.plans, trackingRecords: this.trackingRecords }, null, 2)], { type: 'application/json' });
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = url;
@@ -2311,6 +2706,7 @@
               this.packages = data.packages || [];
               this.members = data.members || [];
               this.plans = data.plans || [];
+              this.trackingRecords = data.trackingRecords || [];
               this.activeMemberId = this.members[0]?.id || '';
               this.compareIds = this.packages.slice(0, 3).map((pkg) => pkg.id);
               ElementPlus.ElMessage.success('导入成功。');

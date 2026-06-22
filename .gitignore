@@ -1,7 +1,9 @@
 backend/.venv/
 backend/.paddle-home/
 backend/.paddlex/
+backend/data.backup.json
 backend/__pycache__/
+tests/__pycache__/
 __pycache__/
 *.pyc
 *.pyo

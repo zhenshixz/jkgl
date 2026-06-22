@@ -114,7 +114,9 @@ def parse_item_price(text: str) -> float | int | None:
     source = str(text or "").replace(",", "").strip()
     
     # 1. First try currency prefix search (avoid matching letters in words like FT3)
-    currency = re.search(r"(?:^|[^a-zA-Z0-9])[￥¥YyVvFfTt*xX]\s*(\d{1,5}(?:\.\d{1,2})?)", source)
+    currency = re.search(r"[￥¥]\s*(\d{1,5}(?:\.\d{1,2})?)", source)
+    if not currency:
+        currency = re.search(r"(?:^|[\s:：])[YyVvFfTt*xX]\s*(\d{1,5}(?:\.\d{1,2})?)", source)
     if currency:
         try:
             val = float(currency.group(1))
@@ -629,24 +631,60 @@ def health() -> dict[str, str]:
 
 
 DATA_FILE_PATH = Path(__file__).resolve().parent / "data.json"
+DATA_BACKUP_PATH = Path(__file__).resolve().parent / "data.backup.json"
+EMPTY_DATA: dict[str, list[Any]] = {"packages": [], "members": [], "plans": [], "trackingRecords": []}
+
+
+def normalize_data_payload(payload: Any) -> dict[str, Any]:
+    if not isinstance(payload, dict):
+        raise HTTPException(status_code=400, detail="数据格式必须是 JSON 对象。")
+
+    normalized = dict(payload)
+    for key in ["packages", "members", "plans", "trackingRecords"]:
+        value = normalized.get(key, [])
+        if value is None:
+            value = []
+        if not isinstance(value, list):
+            raise HTTPException(status_code=400, detail=f"{key} 必须是数组。")
+        normalized[key] = value
+    return normalized
+
+
+def write_json_with_backup(path: Path, payload: dict[str, Any]) -> None:
+    if path.exists():
+        DATA_BACKUP_PATH.write_bytes(path.read_bytes())
+
+    tmp_path = path.with_suffix(f".{uuid.uuid4().hex}.tmp")
+    try:
+        tmp_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        tmp_path.replace(path)
+    finally:
+        if tmp_path.exists():
+            try:
+                tmp_path.unlink()
+            except OSError:
+                pass
 
 
 @app.get("/api/data")
 def get_data() -> dict[str, Any]:
     if DATA_FILE_PATH.exists():
         try:
-            return json.loads(DATA_FILE_PATH.read_text(encoding="utf-8"))
+            return normalize_data_payload(json.loads(DATA_FILE_PATH.read_text(encoding="utf-8")))
         except Exception:
             pass
-    return {"packages": [], "members": [], "plans": []}
+    return dict(EMPTY_DATA)
 
 
 @app.post("/api/data")
 async def save_data(payload: dict[str, Any]) -> dict[str, str]:
     try:
-        DATA_FILE_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        normalized = normalize_data_payload(payload)
+        write_json_with_backup(DATA_FILE_PATH, normalized)
         return {"status": "ok"}
     except Exception as e:
+        if isinstance(e, HTTPException):
+            raise e
         raise HTTPException(status_code=500, detail=str(e))
 
 
