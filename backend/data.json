@@ -306,8 +306,8 @@
           "reviewStatus": "confirmed"
         }
       ],
-      "updatedAt": "2026/6/22 16:55:43",
-      "remark": "共同点：\n1.新增：肠镜\nPSA（TPSA + FPSA）、尿微量白蛋白、13碳呼气试验\n2.删除：、GP73、PIVKA-II、CA724、a-L-岩藻糖苷酶、有核红细胞计数\n\n3.分歧点\nGLM 保留CEA、AFP、CA199，加尿肌酐"
+      "updatedAt": "2026/6/23 09:09:59",
+      "remark": "共同点：\n1.新增：肠镜\nPSA（TPSA + FPSA）、尿微量白蛋白、13碳呼气试验\n2.删除：、GP73、PIVKA-II、CA724、a-L-岩藻糖苷酶、有核红细胞计数、颈椎正侧片\n\n3.分歧点\nGLM 保留CEA、AFP、CA199，加尿肌酐"
     },
     {
       "id": "pkg_1781752810676_e8b75e480a4748",
@@ -1202,7 +1202,8 @@
         }
       ],
       "rawText": "D\n30{\n<\n检验科\n(总部)高尔基体蛋白\n肝癌风险评估及早期筛查\n73(GP73)测定\n¥100\n卵巢癌、肺癌、胃结直肠癌等标志\nCA125（化学发光法)\n物\n¥50\nCA153（化学发光法)\n乳腺癌早期风险筛查\n¥50\n胰腺癌、胆囊癌、胃癌、结直肠癌\nCA199（化学发光法)\n筛查\n¥50\nCA724（化学发光法)\n胃肠道肿瘤和卵巢癌的标志物\n¥50\n癌胚抗原（CEA)\n(化\n学发光法)\n¥34\n白带常规\n了解女性生殖系统有无异常\n¥6\n常规生化全套检查（厦\n肝肾心功能测评，血糖血脂筛查\n禾)\n￥170\n促甲状腺激素（TSH)\n甲状腺功能测评、诊断及疗效评价\n(厦禾)\n等\n¥50\n甲胎蛋白(AFP)\n(化学\n发光法)\n¥34\n静脉注射(静脉采血)\n耗材费\n¥6\n可筛查肾、肝、胆疾病和糖尿病等\n尿常规\n疾病，有助于发现亚健康人群，进\n￥10\n行早期诊断及疾病预防。\n尿沉渣定量(流式细胞仪\n法)（厦禾)\n¥16\n人附睾分泌蛋白(HE4)\n测定（厦禾)\n￥100\n同型半胱氨酸测定（厦\n禾)\n¥55\n血常规（五分类)\n感染性、血液性疾病等早期筛查\n¥25\n血清a-L-岩藻糖苷酶测定\n(厦禾)\n¥5\n异常凝血酶原(PIVKA-\nII)测定（厦禾)\n￥120\n幽门螺旋杆菌尿素酶抗\n体检测(HP)\n¥50\n游离T3(FT3）（厦禾)\n甲状腺功能测评、诊断及疗效评价\n等\n¥50\n甲状腺功能测评、诊断及疗效评价\n游离T4(FT4）(厦禾)\n等\n¥50\n有核红细胞计数（厦\n禾)\n¥9\n放射科\nCT平扫(肺部、多层、重\n建）(厦禾)\n¥230\n计算机体层成像（CT)\n平扫-薄层扫描（加收)\n(厦禾)\n¥50\n颈椎正侧片(DR组合)(厦\n禾)\n¥82\n病理科\n(总部）宫颈细胞学计\n算机辅助诊断\n¥50\n(总部）宫颈液基细胞\n学检查\n¥180\n人乳头瘤病毒(HPV)核酸\nHPV感染的宫颈癌筛查\n检测(病理、组合)\n￥137\n彩超室\n彩色B超（肝、胆、胰\n脾)\n￥105\n彩色B超（双肾、膀胱、\n输尿管）（女)\n¥105\n彩色B超（子宫、附件）\n(女)\n￥105\n甲状腺+颈部淋巴结彩超\n形态学改变及占位性病变筛查\n￥105\n乳腺彩超+腋窝\n形态学改变及占位性病变筛查\n¥105\n心电图室\n主要反映心脏电激动过程，对了解\n常规心电图（厦禾)\n心脏的功能及心肌供血情况\n¥30\n耳鼻喉科\n普通检查观察耳廓、外耳道、鼓\n耳鼻喉科\n膜，听力；鼻外形、鼻中隔、下鼻\n甲、中鼻道、鼻咽部、扁桃体、咽\n¥0\n部、喉部的情况。\n妇科普查\n妇科\n¥8\n登记\n建立健康档案+总检评估\n(厦禾)\n¥0\n内科\n内科\n¥12\n身高体重\n身高体重\n¥0\n外科\n外科\n¥0\n眼科\n观察眼睑、泪点、结膜、角膜、巩\n眼科普检\n膜、前房、虹膜、瞳孔，使用视力\n表检查裸眼视力、矫正视力，采用\n¥0\n标准色觉检查图谱判断辨色力。\n眼压检查(右侧)\n¥8\n眼压检查(左侧)\n¥8\n¥2410",
-      "updatedAt": "2026/6/20 15:39:28"
+      "updatedAt": "2026/6/23 09:56:38",
+      "remark": "共同点：\n1.新增：13碳呼气试验\n2.删除：\n删掉GP73、PIVKA-II、a-L-岩藻糖苷酶、CA724、CA125、CA153、HE4、有核红细胞计数\nTCT＋HPV（2~3年一次）\n\n3.分歧点\nGLM 可选保留CEA、AFP"
     },
     {
       "id": "pkg_1781940836629_81f28cf33c421",
@@ -1763,6 +1764,26 @@
       ],
       "rawText": "合川川口\n<\nO\n检验科\n(总部)高尔基体蛋白\n肝癌风险评估及早期筛查\n73(GP73)测定\n¥100\n(总部)甲胎蛋白（AFP)\n(化学发光法)\n￥34\n(总部)甲胎蛋白异质体测\n定（AFP-L3%)\n¥100\n(总部)鳞状细胞癌相关抗\n原测定(SCC)\n¥50\n(总部)胃泌素释放肽前体\n胃蛋白酶原检测，胃癌早期筛查\n(PRO-GRP)\n¥50\n13碳呼气试验（厦禾)\n¥90\n卵巢癌、肺癌、胃结直肠癌等标志\nCA125（化学发光法）\n物\n¥50\nCA153（化学发光法)\n乳腺癌早期风险筛查\n¥50\nCA199（化学发光法)\n胰腺癌、胆囊癌、胃癌、结直肠癌\n筛查\n¥50\nCA724（化学发光法)\n胃肠道肿瘤和卵巢癌的标志物\n¥50\nEB-EA-IgA\n¥35\nEB-VcA-IgA\n￥35\nEBV病毒抗体测定(Rta-\nIgG)\n￥35\n癌胚抗原（CEA)\n(化\n学发光法)\n¥34\n白带常规\n了解女性生殖系统有无异常\n¥6\n常规生化全套检查（厦\n肝肾心功能测评，血糖血脂筛查\n禾)\n¥170\n促甲状腺激素（TSH)\n甲状腺功能测评、诊断及疗效评价\n(厦禾)\n等\n¥50\n促甲状腺素受体抗体测\n甲状腺功能测评、诊断及疗效评价\n定（A-TSHR)厦禾\n等\n¥50\n甲状腺过氧化物酶抗体\n(APO-Ab)厦禾\n¥54\n静脉注射(静脉采血)\n耗材费\n抗甲状腺球蛋白抗体测\n定(TGAb)（厦禾)\n￥30\n可筛查肾、肝、胆疾病和糖尿病等\n尿常规\n疾病，有助于发现亚健康人群，进\n¥10\n行早期诊断及疾病预防。\n尿沉渣定量(流式细胞仪\n法)（厦禾)\n¥16\n尿微量白蛋白定量\n肾脏损伤和微细血管损害的早期筛\n查\n¥52\n人附睾分泌蛋白（HE4)\n测定（厦禾)\n¥100\n神经元特异性烯醇化酶\nNSE（化学发光法)\n¥50\n同型半胱氨酸测定（厦\n禾)\n¥55\n胃蛋白酶原测定(检验\n科)\n¥60\n胃蛋白酶原|测定(检验\n科)\n¥60\n胃泌素-17(检验科)\n胃蛋白酶原检测，胃癌早期筛查\n¥60\n细胞角蛋白19段测定\nCYFRA21-1（化学发光\n法)\n¥50\n血常规（五分类)\n感染性、血液性疾病等早期筛查\n¥25\n血清a-L-岩藻糖苷酶测定\n(厦禾)\n¥5\n异常凝血酶原（PIVKA-\nIⅢ)测定（厦禾)\n¥120\n游离T3(FT3)(厦禾)\n甲状腺功能测评、诊断及疗效评价\n等\n¥50\n甲状腺功能测评、诊断及疗效评价\n游离T4（FT4）（厦禾)\n等\n¥50\n有核红细胞计数（厦\n禾)\n¥9\n放射科\nCT平扫(肺部、多层、重\n建）(厦禾)\n¥230\n计算机体层成像（CT)\n平扫-薄层扫描（加收)\n(厦禾)\n¥50\n颈椎正侧片(DR组合)(厦\n禾)\n¥82\n病理科\n（总部）宫颈细胞学计\n算机辅助诊断\n¥50\n(总部）宫颈液基细胞\n学检查\n¥180\n人乳头瘤病毒(HPV)核酸\n检测(病理、组合)\nHPV感染的宫颈癌筛查\n￥137\n彩超室\n彩色B超（肝、胆、胰、\n脾)\n¥105\n彩色B超（双肾、膀胱\n输尿管）（女)\n¥105\n彩色B超（子宫、附件）\n(女)\n¥105\n甲状腺+颈部淋巴结彩超\n形态学改变及占位性病变筛查\n¥105\n乳腺彩超+腋窝\n形态学改变及占位性病变筛查\n¥105\n心电图室\n主要反映心脏电激动过程，对了解\n常规心电图（厦禾)\n心脏的功能及心肌供血情况\n￥30\n耳鼻喉科\n普通检查观察耳廓、外耳道、鼓\n耳鼻喉科\n膜，听力；鼻外形、鼻中隔、下鼻\n甲、中鼻道、鼻咽部、扁桃体、咽\n¥0\n部、喉部的情况。\n妇科普查\n妇科\n¥8\n登记\n建立健康档案+总检评估\n(厦禾)\n¥0\n眼科\n裂隙灯检查(右侧)\n¥0\n裂隙灯检查(左侧)\n观察眼睑、泪点、结膜、角膜、巩\n眼科普检\n膜、前房、虹膜、瞳孔，使用视力\n表检查裸眼视力、矫正视力，采用\n¥0\n标准色觉检查图谱判断辨色力。\n眼压检查(右侧)\n¥8\n眼压检查(左侧)\n¥8\n内科\n内科\n¥12\n身高体重\n身高体重\n¥0\n外科\n外科\n¥0\n厦禾体检眼底照相室\n眼底照像\n¥42\n眼底照像（双侧）\n¥42\n¥3312",
       "updatedAt": "2026/6/21 21:25:51"
+    },
+    {
+      "id": "pkg_1782198238669_0aba7b7ddff098",
+      "name": "通用",
+      "audience": "通用",
+      "price": 0,
+      "source": "手动录入",
+      "items": [
+        {
+          "id": "item_1782198247157_9230f01b203fa8",
+          "category": "检验科",
+          "name": "（总部）尿肌酐",
+          "price": 6,
+          "note": "肾脏早期筛查",
+          "source": "手动新增",
+          "updatedAt": "2026/6/23 15:04:07"
+        }
+      ],
+      "rawText": "",
+      "updatedAt": "2026/6/23 15:06:02"
     }
   ],
   "members": [
@@ -1771,50 +1792,68 @@
       "name": "长辈1",
       "gender": "男",
       "age": 56,
-      "focus": ""
+      "focus": "",
+      "_activePlanId": "plan_1782199692503_733d6fa73110e8",
+      "dailyDepartments": [
+        "呼吸内科",
+        "妇科",
+        "内科",
+        "消化内科",
+        "ca"
+      ]
+    },
+    {
+      "id": "member_1782185341979_54d8baf342556",
+      "name": "长辈2",
+      "gender": "女",
+      "age": 56,
+      "focus": "",
+      "dailyDepartments": []
     }
   ],
   "plans": [
     {
-      "id": "plan_1782119983590_eac5c8842c3638",
+      "id": "plan_1782195903925_4e2970b41512a8",
       "memberId": "member_1782119959973_56aa3eb94b15c",
       "packageIds": [
         "pkg_1781752810676_83e4ea155e747"
       ],
       "packageId": "pkg_1781752810676_83e4ea155e747",
-      "name": "长辈1 2026 体检方案 - C套餐(大众版)-男性",
+      "name": "长辈1 2026-06 体检",
       "basePackageName": "C套餐(大众版)-男性",
-      "createdAt": "2026/6/22 17:19:43",
+      "examMonth": "2026-06",
+      "createdAt": "2026/6/23 14:25:03",
       "items": [
         {
-          "id": "plan_item_1782119983590_57ec2ae0a77e5",
+          "id": "plan_item_1782195903925_9b32d6baba627",
           "category": "检验科",
           "name": "总部高尔基体蛋白73(GP73)测定",
           "price": 100,
           "note": "肝癌风险评估及早期筛查",
           "source": "C套餐(大众版)-男性",
-          "status": "include"
+          "status": "exclude"
         },
         {
-          "id": "plan_item_1782119983590_038bdddb1b9ca",
+          "id": "plan_item_1782195903925_70f459f8174998",
           "category": "检验科",
           "name": "CA199(化学发光法)",
           "price": 50,
           "note": "胰腺癌、胆囊癌、胃癌、结直肠癌筛查",
           "source": "C套餐(大众版)-男性",
-          "status": "include"
+          "status": "include",
+          "suggestion": ""
         },
         {
-          "id": "plan_item_1782119983590_02f38132a7e878",
+          "id": "plan_item_1782195903925_ae79fe42709858",
           "category": "检验科",
           "name": "CA724(化学发光法)",
           "price": 50,
           "note": "胃肠道肿瘤和卵巢癌的标志物",
           "source": "C套餐(大众版)-男性",
-          "status": "include"
+          "status": "exclude"
         },
         {
-          "id": "plan_item_1782119983590_0af17a18b3996",
+          "id": "plan_item_1782195903925_de55efc05fbc3",
           "category": "检验科",
           "name": "癌胚抗原(CEA)(化学发光法)",
           "price": 34,
@@ -1823,7 +1862,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_b63096df5d33c",
+          "id": "plan_item_1782195903925_a494b11d9a5268",
           "category": "检验科",
           "name": "常规生化全套检查(厦禾)",
           "price": 170,
@@ -1832,7 +1871,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_7b231d9f37ea1",
+          "id": "plan_item_1782195903925_8c9701734fbe2",
           "category": "检验科",
           "name": "促甲状腺激素(TSH)(厦禾)",
           "price": 50,
@@ -1841,7 +1880,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_29c2aad1df83a8",
+          "id": "plan_item_1782195903925_a57bb076b1684",
           "category": "检验科",
           "name": "甲胎蛋白(AFP)(化学发光法)",
           "price": 34,
@@ -1850,7 +1889,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_c49013ec20d54",
+          "id": "plan_item_1782195903925_9321790d857d1",
           "category": "检验科",
           "name": "静脉注射(静脉采血)",
           "price": 6,
@@ -1859,7 +1898,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_1a78e90369ab8",
+          "id": "plan_item_1782195903925_0e2daa414fb27",
           "category": "检验科",
           "name": "尿常规",
           "price": 10,
@@ -1868,7 +1907,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_77d5373423235",
+          "id": "plan_item_1782195903925_5818d4d626c3f8",
           "category": "检验科",
           "name": "尿沉渣定量(流式细胞仪法)(厦禾)",
           "price": 16,
@@ -1877,7 +1916,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_6ee8f1dd68db",
+          "id": "plan_item_1782195903925_652b66699abb1",
           "category": "检验科",
           "name": "同型半胱氨酸测定(厦禾)",
           "price": 55,
@@ -1886,7 +1925,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_05bbee2af3a42",
+          "id": "plan_item_1782195903925_c7f1a976c2d2e8",
           "category": "检验科",
           "name": "血常规(五分类)",
           "price": 25,
@@ -1895,25 +1934,25 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_8d0323f48f49e8",
+          "id": "plan_item_1782195903925_5362bf1f365ad8",
           "category": "检验科",
           "name": "血清a-L-岩藻糖苷酶测定(厦禾)",
           "price": 5,
           "note": "",
           "source": "C套餐(大众版)-男性",
-          "status": "include"
+          "status": "exclude"
         },
         {
-          "id": "plan_item_1782119983590_585da6a1b4b2b8",
+          "id": "plan_item_1782195903925_a54301ab63536",
           "category": "检验科",
           "name": "异常凝血酶原(PIVKA-II)测定(厦禾)",
           "price": 120,
           "note": "",
           "source": "C套餐(大众版)-男性",
-          "status": "include"
+          "status": "exclude"
         },
         {
-          "id": "plan_item_1782119983590_04d0c4b31b6068",
+          "id": "plan_item_1782195903925_827d0924b97f4",
           "category": "检验科",
           "name": "幽门螺旋杆菌尿素酶抗体检测(HP)",
           "price": 50,
@@ -1922,7 +1961,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_2f7122ee04523",
+          "id": "plan_item_1782195903925_49bb231901e87",
           "category": "检验科",
           "name": "游离T3(FT3)(厦禾)",
           "price": 50,
@@ -1931,7 +1970,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_88a64e4bf3759",
+          "id": "plan_item_1782195903925_1a76ce06aeefc",
           "category": "检验科",
           "name": "游离T4(FT4)(厦禾)",
           "price": 50,
@@ -1940,16 +1979,16 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_d37164ed8625e",
+          "id": "plan_item_1782195903925_f5a2dd29e9556",
           "category": "检验科",
           "name": "有核红细胞计数(厦禾)",
           "price": 9,
           "note": "",
           "source": "C套餐(大众版)-男性",
-          "status": "include"
+          "status": "exclude"
         },
         {
-          "id": "plan_item_1782119983590_18788d9b56af4",
+          "id": "plan_item_1782195903925_aa9e9ea0a4a348",
           "category": "放射科",
           "name": "CT平扫(肺部、多层、重建)(厦禾)",
           "price": 230,
@@ -1958,7 +1997,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_7083ed4b02b6a8",
+          "id": "plan_item_1782195903925_def6889b949d48",
           "category": "放射科",
           "name": "计算机体层成像(CT)平扫-薄层扫描(加收)(厦禾)",
           "price": 50,
@@ -1967,16 +2006,16 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_e45822e955d548",
+          "id": "plan_item_1782195903925_d2f6ba3e3d105",
           "category": "放射科",
           "name": "颈椎正侧片(DR组合)(厦禾)",
           "price": 82,
           "note": "",
           "source": "C套餐(大众版)-男性",
-          "status": "include"
+          "status": "exclude"
         },
         {
-          "id": "plan_item_1782119983590_93bd6e40ccd878",
+          "id": "plan_item_1782195903925_23cd83209fd73",
           "category": "彩超室",
           "name": "彩色B超(肝、胆、胰、脾)",
           "price": 105,
@@ -1985,7 +2024,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_ec536786232958",
+          "id": "plan_item_1782195903925_eb0f4d3cd132b",
           "category": "彩超室",
           "name": "彩色B超(双肾、膀胱、输尿管、前列腺)(男)",
           "price": 105,
@@ -1994,7 +2033,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_3a0e97c2f0e2a8",
+          "id": "plan_item_1782195903925_6f5222701f7c8",
           "category": "彩超室",
           "name": "甲状腺+颈部淋巴结彩超",
           "price": 105,
@@ -2003,7 +2042,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_87175095c88d2",
+          "id": "plan_item_1782195903925_c057b587cdbcf8",
           "category": "心电图室",
           "name": "常规心电图(厦禾)",
           "price": 30,
@@ -2012,7 +2051,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_cc406f01afdda",
+          "id": "plan_item_1782195903925_31a41e3f45073",
           "category": "耳鼻喉科",
           "name": "耳鼻喉科",
           "price": 0,
@@ -2021,7 +2060,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_fcb29a76e25998",
+          "id": "plan_item_1782195903925_5af76c6ed9757",
           "category": "登记",
           "name": "建立健康档案+总检评估(厦禾)",
           "price": 0,
@@ -2030,7 +2069,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_d522fecada525",
+          "id": "plan_item_1782195903925_5c35c1b614f01",
           "category": "内科",
           "name": "内科",
           "price": 12,
@@ -2039,7 +2078,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_b39e165933ac58",
+          "id": "plan_item_1782195903925_86ee8903a073a",
           "category": "身高体重",
           "name": "身高体重",
           "price": 0,
@@ -2048,7 +2087,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_cd71a7e1eb013",
+          "id": "plan_item_1782195903925_6336956f03be68",
           "category": "外科",
           "name": "外科",
           "price": 0,
@@ -2057,7 +2096,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_c3e5e1b41bbaa8",
+          "id": "plan_item_1782195903925_cbc20a1d0beef",
           "category": "眼科",
           "name": "眼科普检",
           "price": 0,
@@ -2066,7 +2105,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_62b607277b7ff8",
+          "id": "plan_item_1782195903925_2eecc784453e6",
           "category": "眼科",
           "name": "眼压检查(右侧)",
           "price": 8,
@@ -2075,7 +2114,7 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782119983590_8f71f0a3bc4a38",
+          "id": "plan_item_1782195903925_f2e29ca3502048",
           "category": "眼科",
           "name": "眼压检查(左侧)",
           "price": 8,
@@ -2084,33 +2123,367 @@
           "status": "include"
         },
         {
-          "id": "plan_item_1782120432910_3faa63d1ddff6",
-          "category": "未分类",
-          "name": "",
-          "price": 0,
+          "id": "plan_item_1782197563567_2c3f9d0fbfdc7",
+          "category": "检验科",
+          "name": "游离总前列腺特异抗原FPSA(化学发光法)",
+          "price": 50,
           "note": "",
-          "source": "手动新增",
+          "source": "D套餐(大众升级版)-男性",
           "status": "add"
         },
         {
-          "id": "plan_item_1782120433877_b2590262d8a43",
-          "category": "未分类",
-          "name": "",
-          "price": 0,
+          "id": "plan_item_1782197570519_49f29ab3f4fb",
+          "category": "检验科",
+          "name": "总前列腺特异抗原TPSA(化学发光法)",
+          "price": 50,
           "note": "",
-          "source": "手动新增",
+          "source": "D套餐(大众升级版)-男性",
           "status": "add"
         },
         {
-          "id": "plan_item_1782120474518_f96c9bef7160f8",
-          "category": "未分类",
-          "name": "",
-          "price": 0,
+          "id": "plan_item_1782197584334_b87ecfaa979918",
+          "category": "检验科",
+          "name": "尿微量白蛋白定量",
+          "price": 52,
+          "note": "肾脏损伤和微细血管损害的早期筛查",
+          "source": "D套餐(大众升级版)-男性 / D套餐(大众升级版)-女性",
+          "status": "add"
+        },
+        {
+          "id": "plan_item_1782197592734_9490ceb3fa4348",
+          "category": "检验科",
+          "name": "13碳呼气试验(厦禾)",
+          "price": 90,
           "note": "",
-          "source": "手动新增",
+          "source": "D套餐(大众升级版)-男性 / D套餐(大众升级版)-女性",
+          "status": "add"
+        },
+        {
+          "id": "plan_item_1782198372886_e3539d7785d04",
+          "category": "检验科",
+          "name": "（总部）尿肌酐",
+          "price": 6,
+          "note": "肾脏早期筛查",
+          "source": "通用",
           "status": "add"
         }
-      ]
+      ],
+      "_totalPrice": 1501,
+      "_trackingExpanded": true
+    },
+    {
+      "id": "plan_1782199692503_733d6fa73110e8",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "packageIds": [
+        "pkg_1781752810676_83e4ea155e747"
+      ],
+      "packageId": "pkg_1781752810676_83e4ea155e747",
+      "name": "长辈1 2026-07 体检",
+      "basePackageName": "C套餐(大众版)-男性",
+      "examMonth": "2026-07",
+      "enabled": true,
+      "createdAt": "2026/6/23 15:28:12",
+      "items": [
+        {
+          "id": "plan_item_1782199692502_2f4e7e9219d4c8",
+          "category": "检验科",
+          "name": "总部高尔基体蛋白73(GP73)测定",
+          "price": 100,
+          "note": "肝癌风险评估及早期筛查",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_8a48b8f45fd8c",
+          "category": "检验科",
+          "name": "CA199(化学发光法)",
+          "price": 50,
+          "note": "胰腺癌、胆囊癌、胃癌、结直肠癌筛查",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_c23cb10a7eaf5",
+          "category": "检验科",
+          "name": "CA724(化学发光法)",
+          "price": 50,
+          "note": "胃肠道肿瘤和卵巢癌的标志物",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_2aaa702166a7b8",
+          "category": "检验科",
+          "name": "癌胚抗原(CEA)(化学发光法)",
+          "price": 34,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_e80b64ff3bfb98",
+          "category": "检验科",
+          "name": "常规生化全套检查(厦禾)",
+          "price": 170,
+          "note": "肝肾心功能测评，血糖血脂筛查",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_15922eb05aae8",
+          "category": "检验科",
+          "name": "促甲状腺激素(TSH)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_f6bcc554a3ca08",
+          "category": "检验科",
+          "name": "甲胎蛋白(AFP)(化学发光法)",
+          "price": 34,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_07eafb9662cb68",
+          "category": "检验科",
+          "name": "静脉注射(静脉采血)",
+          "price": 6,
+          "note": "耗材费",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_7b172acc69d9b",
+          "category": "检验科",
+          "name": "尿常规",
+          "price": 10,
+          "note": "可筛查肾、肝、胆疾病和糖尿病等疾病，有助于发现亚健康人群，进行早期诊断及疾病预防。",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_ae3d31665a6d98",
+          "category": "检验科",
+          "name": "尿沉渣定量(流式细胞仪法)(厦禾)",
+          "price": 16,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_a361ed607862a8",
+          "category": "检验科",
+          "name": "同型半胱氨酸测定(厦禾)",
+          "price": 55,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_d12285d80d56e",
+          "category": "检验科",
+          "name": "血常规(五分类)",
+          "price": 25,
+          "note": "感染性、血液性疾病等早期筛查",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_5645206efd42",
+          "category": "检验科",
+          "name": "血清a-L-岩藻糖苷酶测定(厦禾)",
+          "price": 5,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_f0ca42c6aff388",
+          "category": "检验科",
+          "name": "异常凝血酶原(PIVKA-II)测定(厦禾)",
+          "price": 120,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_6f453a517f558",
+          "category": "检验科",
+          "name": "幽门螺旋杆菌尿素酶抗体检测(HP)",
+          "price": 50,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_4c0e5826d6494",
+          "category": "检验科",
+          "name": "游离T3(FT3)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_7e77cd3c5dc118",
+          "category": "检验科",
+          "name": "游离T4(FT4)(厦禾)",
+          "price": 50,
+          "note": "甲状腺功能测评、诊断及疗效评价等",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_9b32c9166cd6a",
+          "category": "检验科",
+          "name": "有核红细胞计数(厦禾)",
+          "price": 9,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_6c5936d6c6a94",
+          "category": "放射科",
+          "name": "CT平扫(肺部、多层、重建)(厦禾)",
+          "price": 230,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_540b992a2de99",
+          "category": "放射科",
+          "name": "计算机体层成像(CT)平扫-薄层扫描(加收)(厦禾)",
+          "price": 50,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_d75f82216376d",
+          "category": "放射科",
+          "name": "颈椎正侧片(DR组合)(厦禾)",
+          "price": 82,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_bfaf9e86c837d8",
+          "category": "彩超室",
+          "name": "彩色B超(肝、胆、胰、脾)",
+          "price": 105,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_c3c6dd47126648",
+          "category": "彩超室",
+          "name": "彩色B超(双肾、膀胱、输尿管、前列腺)(男)",
+          "price": 105,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_215d15b693b18",
+          "category": "彩超室",
+          "name": "甲状腺+颈部淋巴结彩超",
+          "price": 105,
+          "note": "形态学改变及占位性病变筛查",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_96e60b87603858",
+          "category": "心电图室",
+          "name": "常规心电图(厦禾)",
+          "price": 30,
+          "note": "主要反映心脏电激动过程，对了解心脏的功能及心肌供血情况",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_45a1aee32705b8",
+          "category": "耳鼻喉科",
+          "name": "耳鼻喉科",
+          "price": 0,
+          "note": "普通检查观察耳廓、外耳道、鼓膜，听力；鼻外形、鼻中隔、下鼻甲、中鼻道、鼻咽部、扁桃体、咽部、喉部的情况。",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_56220150ad0748",
+          "category": "登记",
+          "name": "建立健康档案+总检评估(厦禾)",
+          "price": 0,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_46bd9e6c7d5878",
+          "category": "内科",
+          "name": "内科",
+          "price": 12,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_eddfbdfc7810a8",
+          "category": "身高体重",
+          "name": "身高体重",
+          "price": 0,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_dbe313957db0d",
+          "category": "外科",
+          "name": "外科",
+          "price": 0,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_47e466dc320668",
+          "category": "眼科",
+          "name": "眼科普检",
+          "price": 0,
+          "note": "观察眼睑、泪点、结膜、角膜、巩膜、前房、虹膜、瞳孔，使用视力表检查裸眼视力、矫正视力，采用标准色觉检查图谱判断辨色力。",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_955ed76db57c",
+          "category": "眼科",
+          "name": "眼压检查(右侧)",
+          "price": 8,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        },
+        {
+          "id": "plan_item_1782199692502_dd535b60ce341",
+          "category": "眼科",
+          "name": "眼压检查(左侧)",
+          "price": 8,
+          "note": "",
+          "source": "C套餐(大众版)-男性",
+          "status": "include"
+        }
+      ],
+      "_totalPrice": 1619,
+      "_trackingExpanded": true
     }
   ],
   "trackingRecords": []
