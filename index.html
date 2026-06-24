@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>家庭健康管理 - 体检套餐管理</title>
   <link rel="stylesheet" href="vendor/element-plus.index.css">
-  <link href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css" rel="stylesheet">
   <style>
     :root {
       --bg: #f4f8f6;
@@ -45,6 +44,15 @@
 
     #app {
       min-height: 100vh;
+    }
+
+    #app[v-cloak] {
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    #app[v-cloak] > * {
+      display: none !important;
     }
 
     .layout {
@@ -1109,11 +1117,28 @@
     
       .tracking-time-tabs .el-tabs__item { font-size: 14px; padding: 0 20px; }
       .tracking-time-tabs .el-tabs__content { padding-left: 20px; }
+      .el-month-table td.daily-month-has-data .el-date-table-cell__text::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 4px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--brand);
+        transform: translateX(-50%);
+      }
+      .el-month-table td.daily-month-has-data.current .el-date-table-cell__text::after {
+        background: #fff;
+      }
+      .el-month-table td.daily-month-has-data:not(.current) .el-date-table-cell__text {
+        font-weight: 700;
+        color: var(--brand);
+      }
 </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
 <body>
-  <div id="app">
+  <div id="app" v-cloak>
     <div class="layout">
       <aside class="sidebar">
         <div class="brand">
@@ -1535,14 +1560,24 @@
           <div class="panel-header" style="margin-bottom: 20px;">
             <div>
               <h3 class="panel-title">日常检查与就诊记录</h3>
-              <p class="panel-subtitle">以科室为维度，记录每次就诊的时间、医生、内容及长期的注意事项。</p>
+              <p class="panel-subtitle">从腾讯文档 Excel 导入月度台账，并在系统内关联检查报告、OCR 和解析结果。</p>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <el-date-picker v-model="dailyFilterMonth" type="month" placeholder="按年月筛选" value-format="YYYY-MM" clearable style="width: 140px;"></el-date-picker>
+              <el-date-picker
+                v-model="dailyFilterMonth"
+                type="month"
+                placeholder="选择月份"
+                value-format="YYYY-MM"
+                format="YYYY年M月"
+                :cell-class-name="dailyMonthCellClass"
+                clearable
+                style="width: 150px;"
+                @change="onDailyMemberChange"
+              ></el-date-picker>
               <input type="file" ref="dailyExcelUpload" accept=".xlsx,.xls" style="display: none" @change="importDailyFromExcel">
               <el-button type="warning" plain @click="clearDailyTestData">清空测试数据</el-button>
               <el-button type="primary" plain @click="$refs.dailyExcelUpload.click()">导入历史 Excel</el-button>
-              <el-button type="success" @click="openDailyEditor()">新增就诊记录</el-button>
+              <el-button type="success" @click="addDailyMonthRow">新增月份</el-button>
             </div>
           </div>
           
@@ -1556,7 +1591,7 @@
                   </template>
                   
                   <div v-if="getDailyDepartments(member.id).length === 0" class="muted" style="text-align: center; padding: 40px 20px; font-size: 14px; background: #fff; border-radius: 10px; border: 1px dashed var(--line);">
-                    该家人暂无日常就诊记录。<br><br>点击右上角“新增就诊记录”或“导入历史 Excel”开始。
+                    该家人暂无日常检查台账。<br><br>点击右上角“新增月份”或“导入历史 Excel”开始。
                   </div>
                   <div v-else>
                     <div style="display: flex; align-items: flex-end; justify-content: space-between; padding-right: 12px;">
@@ -1568,29 +1603,69 @@
                       </el-button>
                     </div>
                     
-                    <div v-if="activeDailyDepartment" style="display: flex; flex-direction: column; gap: 16px;">
-                      <div v-for="record in getDailyRecords(member.id, activeDailyDepartment)" :key="record.id" style="border: 1px solid var(--brand-light, #a7f3d0); border-radius: 10px; background: #fff; overflow: hidden; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.04);">
-                        <div style="background: #ecfdf5; padding: 12px 20px; border-bottom: 1px solid #d1fae5; display: flex; justify-content: space-between; align-items: center;">
-                          <div style="display: flex; align-items: center; gap: 12px;">
-                            <el-tag type="success" effect="dark" size="small">{{ record.visitDate }}</el-tag>
-                            <strong style="font-size: 16px; color: #065f46;">{{ record.doctor || '未知医生' }}</strong>
-                          </div>
-                          <div style="display: flex; gap: 8px;">
-                            <el-button size="small" plain @click="openDailyEditor(record)">编辑</el-button>
-                            <el-button size="small" type="danger" plain @click="deleteDailyRecord(record.id)">删除</el-button>
-                          </div>
-                        </div>
-                        <div style="padding: 16px 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
-                          <div>
-                            <div style="font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: 600;">就诊内容与建议</div>
-                            <div class="wang-editor-content" style="font-size: 15px; color: var(--text); line-height: 1.6; white-space: pre-wrap;" v-html="record.content || '无详细内容'"></div>
-                          </div>
-                          <div style="border-left: 1px dashed var(--line); padding-left: 20px;">
-                            <div style="font-size: 13px; color: var(--amber); margin-bottom: 6px; font-weight: 600;">日常注意事项</div>
-                            <div style="font-size: 14px; color: #475569; line-height: 1.5; white-space: pre-wrap;">{{ record.notes || '无' }}</div>
-                          </div>
-                        </div>
-                      </div>
+                    <div v-if="activeDailyDepartment">
+                      <el-table :data="getDailyMonthRows(member.id, activeDailyDepartment)" border style="width: 100%;" empty-text="该科室暂无月度记录">
+                        <el-table-column label="月份" width="150" fixed>
+                          <template #default="{ row }">
+                            <el-date-picker
+                              v-model="row.month"
+                              type="month"
+                              value-format="YYYY-MM"
+                              format="YYYY年M月"
+                              style="width: 128px;"
+                              @change="onDailyMonthRowChange(row)"
+                            ></el-date-picker>
+                          </template>
+                        </el-table-column>
+                        <el-table-column label="问诊记录" min-width="420">
+                          <template #default="{ row }">
+                            <el-input
+                              v-model="row.content"
+                              type="textarea"
+                              :autosize="{ minRows: 5, maxRows: 14 }"
+                              placeholder="按日期记录本月检查、复查、问诊内容..."
+                              @change="touchDailyMonthRow(row)"
+                            ></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column label="检查结果" width="170">
+                          <template #default="{ row }">
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                              <el-button size="small" plain @click="openDailyReportDialog(row)">查看/上传报告 ({{ row.reports?.length || 0 }})</el-button>
+                              <el-tag size="small" :type="row.reports?.length ? 'success' : 'info'" effect="plain">
+                                {{ row.reports?.length ? '已预留解析' : '待上传' }}
+                              </el-tag>
+                            </div>
+                          </template>
+                        </el-table-column>
+                        <el-table-column label="日常注意事项" min-width="260">
+                          <template #default="{ row }">
+                            <el-input
+                              v-model="row.notes"
+                              type="textarea"
+                              :autosize="{ minRows: 5, maxRows: 14 }"
+                              placeholder="饮食、用药、复查周期、日常观察..."
+                              @change="touchDailyMonthRow(row)"
+                            ></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column label="备注" min-width="220">
+                          <template #default="{ row }">
+                            <el-input
+                              v-model="row.remark"
+                              type="textarea"
+                              :autosize="{ minRows: 5, maxRows: 14 }"
+                              placeholder="额外备注"
+                              @change="touchDailyMonthRow(row)"
+                            ></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column label="操作" width="90" fixed="right">
+                          <template #default="{ row }">
+                            <el-button size="small" type="danger" plain @click="deleteDailyMonthRow(row.id)">删除</el-button>
+                          </template>
+                        </el-table-column>
+                      </el-table>
                     </div>
                   </div>
                 </el-tab-pane>
@@ -1653,6 +1728,31 @@
         <el-button @click="dailyDeptEditor.visible = false">取消</el-button>
         <el-button type="primary" @click="saveDailyDeptEditor">保存</el-button>
       </template>
+    </el-dialog>
+    <!-- 弹窗：月度检查报告预留 -->
+    <el-dialog v-model="dailyReportDialog.visible" title="检查结果与报告" width="760px">
+      <div v-if="dailyReportDialog.row" style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 14px;">
+          <span>{{ dailyReportDialog.row.department }} / {{ dailyReportDialog.row.month }}</span>
+          <span>已关联 {{ dailyReportDialog.row.reports?.length || 0 }} 份报告</span>
+        </div>
+        <div style="border: 1px dashed var(--line); border-radius: 8px; padding: 18px; background: #fafafa;">
+          <div style="font-weight: 700; margin-bottom: 8px;">报告解析功能预留</div>
+          <div style="color: var(--muted); line-height: 1.8;">
+            后续这里会支持上传图片或 PDF，并保存 OCR 原文、解析后的检查指标、异常标记和报告文件关联。当前版本先保留入口，方便从外部 Excel 导入台账后继续补充报告。
+          </div>
+        </div>
+        <el-table :data="dailyReportDialog.row.reports || []" border empty-text="暂无报告文件">
+          <el-table-column label="文件名" prop="name" min-width="180"></el-table-column>
+          <el-table-column label="类型" prop="type" width="120"></el-table-column>
+          <el-table-column label="解析状态" prop="status" width="120"></el-table-column>
+          <el-table-column label="备注" prop="remark" min-width="180"></el-table-column>
+        </el-table>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <el-button disabled>上传图片/PDF（预留）</el-button>
+          <el-button type="primary" disabled>解析报告（预留）</el-button>
+        </div>
+      </div>
     </el-dialog>
     <!-- 弹窗：新建/编辑套餐 -->
     <el-dialog v-model="packageEditor.visible" title="套餐编辑" width="620px">
@@ -2005,11 +2105,8 @@
   </div>
 
   <script src="vendor/vue.global.prod.js"></script>
-  <script src="vendor/xlsx.full.min.js"></script>
   <script src="vendor/element-plus.index.full.min.js"></script>
   <script src="vendor/element-plus-icons-vue.iife.min.js"></script>
-  <script src="https://unpkg.com/element-plus/dist/locale/zh-cn.js"></script>
-  <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
   <script>
     const STORAGE_KEY = 'jkgl-exam-manager-v1';
     const OCR_API_URL = window.location.protocol === 'file:' ? 'http://localhost:8765/api/ocr' : '/api/ocr';
@@ -2018,6 +2115,152 @@
     const uid = (prefix) => `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
     const cleanName = (value) => String(value || '').replace(/\s+/g, '').trim();
     const safeFilePart = (str) => String(str || '').replace(/[\\/:*?"<>|]/g, '_');
+    const fetchWithTimeout = (url, options = {}, timeoutMs = 1800) => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer));
+    };
+    const loadStyleOnce = (id, href) => new Promise((resolve, reject) => {
+      const existing = document.getElementById(id);
+      if (existing) {
+        resolve();
+        return;
+      }
+      const link = document.createElement('link');
+      link.id = id;
+      link.rel = 'stylesheet';
+      link.href = href;
+      link.onload = resolve;
+      link.onerror = reject;
+      document.head.appendChild(link);
+    });
+    const loadScriptOnce = (id, src) => new Promise((resolve, reject) => {
+      const existing = document.getElementById(id);
+      if (existing) {
+        if (existing.dataset.loaded === 'true') resolve();
+        else existing.addEventListener('load', resolve, { once: true });
+        return;
+      }
+      const script = document.createElement('script');
+      script.id = id;
+      script.src = src;
+      script.async = true;
+      script.onload = () => {
+        script.dataset.loaded = 'true';
+        resolve();
+      };
+      script.onerror = reject;
+      document.body.appendChild(script);
+    });
+    const pad2 = (value) => String(value || '').padStart(2, '0');
+    const excelSerialToDateText = (value) => {
+      const serial = Number(value);
+      if (!Number.isFinite(serial) || serial < 20000 || serial > 80000) return '';
+      const date = new Date(Math.round((serial - 25569) * 86400 * 1000));
+      return `${date.getUTCFullYear()}-${pad2(date.getUTCMonth() + 1)}-${pad2(date.getUTCDate())}`;
+    };
+    const normalizeDailyMonth = (value) => {
+      if (value instanceof Date && !Number.isNaN(value.getTime())) {
+        return `${value.getFullYear()}-${pad2(value.getMonth() + 1)}`;
+      }
+      if (typeof value === 'number') {
+        return excelSerialToDateText(value).slice(0, 7);
+      }
+      const text = String(value || '').trim();
+      if (!text) return '';
+      if (/^\d{5}$/.test(text)) return excelSerialToDateText(Number(text)).slice(0, 7);
+      const normalized = text.replace(/[./]/g, '-');
+      let match = normalized.match(/^(\d{4})-(\d{1,2})(?:-\d{1,2})?/);
+      if (!match) match = text.match(/^(\d{4})\s*年\s*(\d{1,2})\s*月/);
+      return match ? `${match[1]}-${pad2(match[2])}` : '';
+    };
+    const normalizeDailyDate = (value, fallbackMonth = '') => {
+      if (value instanceof Date && !Number.isNaN(value.getTime())) {
+        return `${value.getFullYear()}-${pad2(value.getMonth() + 1)}-${pad2(value.getDate())}`;
+      }
+      if (typeof value === 'number') return excelSerialToDateText(value);
+      const text = String(value || '').trim();
+      if (!text) return '';
+      if (/^\d{5}$/.test(text)) return excelSerialToDateText(Number(text));
+      const normalized = text.replace(/[./]/g, '-');
+      let match = normalized.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+      if (match) return `${match[1]}-${pad2(match[2])}-${pad2(match[3])}`;
+      match = text.match(/^(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日?/);
+      if (match) return `${match[1]}-${pad2(match[2])}-${pad2(match[3])}`;
+      match = text.match(/^(\d{1,2})\s*月\s*(\d{1,2})\s*日?/);
+      if (match && fallbackMonth) return `${fallbackMonth}-${pad2(match[2])}`;
+      const month = normalizeDailyMonth(text);
+      return month ? `${month}-01` : text;
+    };
+    const htmlToPlainText = (value) => {
+      const text = String(value || '');
+      if (!/<[a-z][\s\S]*>/i.test(text)) return text.trim();
+      const container = document.createElement('div');
+      container.innerHTML = text
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<\/p>/gi, '\n');
+      return (container.textContent || container.innerText || '').replace(/\n{3,}/g, '\n\n').trim();
+    };
+    const ELEMENT_PLUS_ZH_CN = {
+      name: 'zh-cn',
+      el: {
+        datepicker: {
+          now: '此刻',
+          today: '今天',
+          cancel: '取消',
+          clear: '清空',
+          confirm: '确定',
+          selectDate: '选择日期',
+          selectTime: '选择时间',
+          startDate: '开始日期',
+          startTime: '开始时间',
+          endDate: '结束日期',
+          endTime: '结束时间',
+          prevYear: '上一年',
+          nextYear: '下一年',
+          prevMonth: '上个月',
+          nextMonth: '下个月',
+          year: '年',
+          month1: '1月',
+          month2: '2月',
+          month3: '3月',
+          month4: '4月',
+          month5: '5月',
+          month6: '6月',
+          month7: '7月',
+          month8: '8月',
+          month9: '9月',
+          month10: '10月',
+          month11: '11月',
+          month12: '12月',
+          weeks: {
+            sun: '日',
+            mon: '一',
+            tue: '二',
+            wed: '三',
+            thu: '四',
+            fri: '五',
+            sat: '六'
+          },
+          months: {
+            jan: '一月',
+            feb: '二月',
+            mar: '三月',
+            apr: '四月',
+            may: '五月',
+            jun: '六月',
+            jul: '七月',
+            aug: '八月',
+            sep: '九月',
+            oct: '十月',
+            nov: '十一月',
+            dec: '十二月'
+          }
+        },
+        select: { loading: '加载中', noMatch: '无匹配数据', noData: '无数据', placeholder: '请选择' },
+        messagebox: { title: '提示', confirm: '确定', cancel: '取消', error: '输入的数据不合法' }
+      }
+    };
 
     const normalizeItemKey = (value) => {
       let val = cleanName(value);
@@ -2034,7 +2277,9 @@
       packages: [],
       members: [],
       plans: [],
-      trackingRecords: []
+      trackingRecords: [],
+      dailyMonthRecords: [],
+      dailyRecords: []
     };
 
     const parsePrice = (text) => {
@@ -2328,7 +2573,12 @@
           activeDailyMemberId: parsed.members?.[0]?.id || '',
           activeDailyDepartment: '',
           dailyFilterMonth: '',
+          dailyMonthRecords: parsed.dailyMonthRecords || [],
           dailyRecords: parsed.dailyRecords || [],
+          dailyReportDialog: {
+            visible: false,
+            row: null
+          },
           dailyDeptEditor: {
             visible: false,
             memberId: '',
@@ -2433,6 +2683,18 @@
             });
           });
           return Array.from(metricMap.values()).sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+        },
+        dailyMonthsWithData() {
+          const months = new Set();
+          this.dailyMonthRecords.forEach((record) => {
+            const month = normalizeDailyMonth(record.month);
+            if (month) months.add(month);
+          });
+          this.dailyRecords.forEach((record) => {
+            const month = normalizeDailyMonth(record.visitDate);
+            if (month) months.add(month);
+          });
+          return months;
         },
         enabledPlans() {
           return this.plans
@@ -2606,6 +2868,7 @@
         members: { deep: true, handler: 'persist' },
         plans: { deep: true, handler: 'persist' },
         trackingRecords: { deep: true, handler: 'persist' },
+        dailyMonthRecords: { deep: true, handler: 'persist' },
         dailyRecords: { deep: true, handler: 'persist' },
         dailyFilterMonth() {
           this.onDailyMemberChange();
@@ -2626,15 +2889,17 @@
         window.addEventListener('paste', this.onPasteImage);
         try {
           const apiDataUrl = window.location.protocol === 'file:' ? 'http://localhost:8765/api/data' : '/api/data';
-          const response = await fetch(apiDataUrl);
+          const response = await fetchWithTimeout(apiDataUrl, {}, 1200);
           if (response.ok) {
             const data = await response.json();
-            if (data && (data.packages?.length || data.members?.length || data.plans?.length || data.trackingRecords?.length)) {
+            if (data && (data.packages?.length || data.members?.length || data.plans?.length || data.trackingRecords?.length || data.dailyMonthRecords?.length || data.dailyRecords?.length)) {
               this.packages = data.packages || [];
               this.members = data.members || [];
               this.plans = data.plans || [];
               this.trackingRecords = data.trackingRecords || [];
+              this.dailyMonthRecords = data.dailyMonthRecords || [];
               this.dailyRecords = data.dailyRecords || [];
+              this.ensureDailyMonthRecords();
               if (this.activeDailyMemberId === '' && this.members.length > 0) {
                  this.activeDailyMemberId = this.members[0].id;
               }
@@ -2650,11 +2915,17 @@
               const saved = localStorage.getItem(STORAGE_KEY);
               if (saved) {
                 const parsed = JSON.parse(saved);
-                if (parsed.packages?.length || parsed.members?.length || parsed.plans?.length || parsed.trackingRecords?.length) {
+                if (parsed.packages?.length || parsed.members?.length || parsed.plans?.length || parsed.trackingRecords?.length || parsed.dailyMonthRecords?.length || parsed.dailyRecords?.length) {
                   this.packages = parsed.packages || [];
                   this.members = parsed.members || [];
                   this.plans = parsed.plans || [];
                   this.trackingRecords = parsed.trackingRecords || [];
+                  this.dailyMonthRecords = parsed.dailyMonthRecords || [];
+                  this.dailyRecords = parsed.dailyRecords || [];
+                  this.ensureDailyMonthRecords();
+                  if (this.activeDailyMemberId === '' && this.members.length > 0) {
+                     this.activeDailyMemberId = this.members[0].id;
+                  }
                   this.activeMemberId = parsed.members[0]?.id || '';
                   
                   if (this.plans && this.plans.length) {
@@ -2675,39 +2946,20 @@
         window.removeEventListener('paste', this.onPasteImage);
       },
       methods: {
-        persist() {
-          const dataToSave = {
-            packages: this.packages,
-            members: this.members,
-            plans: this.plans,
-            trackingRecords: this.trackingRecords,
-            dailyRecords: this.dailyRecords
-          };
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-          fetch(window.location.protocol === 'file:' ? 'http://localhost:8765/api/data' : '/api/data', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dataToSave)
-          }).catch(e => console.error("保存后端数据失败:", e));
-        },
-        
         getDailyDepartments(memberId) {
           const member = this.members.find(m => m.id === memberId);
           if (!member) return [];
-          
-          const filteredRecs = this.dailyRecords.filter(r => {
-            if (r.memberId !== memberId) return false;
-            if (this.dailyFilterMonth && !r.visitDate.startsWith(this.dailyFilterMonth)) return false;
-            return true;
-          });
-          const activeDepts = [...new Set(filteredRecs.map(r => r.department))];
-          
-          const allRecs = this.dailyRecords.filter(r => r.memberId === memberId);
-          const allDepts = [...new Set(allRecs.map(r => r.department))];
-          
-          if (!member.dailyDepartments) {
-             member.dailyDepartments = [];
-          }
+
+          const activeDepts = [...new Set(this.dailyMonthRecords
+            .filter(r => r.memberId === memberId && this.isDailyMonthRowInFilter(r))
+            .map(r => r.department)
+            .filter(Boolean))];
+          const allDepts = [...new Set([
+            ...this.dailyMonthRecords.filter(r => r.memberId === memberId).map(r => r.department).filter(Boolean),
+            ...this.dailyRecords.filter(r => r.memberId === memberId).map(r => r.department).filter(Boolean)
+          ])];
+
+          if (!member.dailyDepartments) member.dailyDepartments = [];
           allDepts.forEach(d => {
              if (!member.dailyDepartments.includes(d)) {
                  member.dailyDepartments.push(d);
@@ -2722,13 +2974,177 @@
              return indexA - indexB;
           });
         },
+        isDailyRecordInMonth(record) {
+          if (!this.dailyFilterMonth) return true;
+          return normalizeDailyMonth(record?.visitDate) === this.dailyFilterMonth;
+        },
+        isDailyMonthRowInFilter(row) {
+          if (!this.dailyFilterMonth) return true;
+          return normalizeDailyMonth(row?.month) === this.dailyFilterMonth;
+        },
+        dailyMonthCellClass(date) {
+          return this.dailyMonthsWithData.has(normalizeDailyMonth(date)) ? 'daily-month-has-data' : '';
+        },
+        getDailyMonthRows(memberId, dept) {
+          return this.dailyMonthRecords
+            .filter(row => row.memberId === memberId && row.department === dept && this.isDailyMonthRowInFilter(row))
+            .sort((a, b) => String(b.month || '').localeCompare(String(a.month || '')));
+        },
+        ensureDailyMonthRecords() {
+          const groups = new Map();
+          this.dailyRecords.forEach(record => {
+            const memberId = record.memberId;
+            const department = (record.department || '未分类').trim();
+            const month = normalizeDailyMonth(record.visitDate);
+            if (!memberId || !month) return;
+            const key = `${memberId}__${department}__${month}`;
+            if (!groups.has(key)) groups.set(key, { memberId, department, month, records: [] });
+            groups.get(key).records.push(record);
+          });
+
+          let added = 0;
+          groups.forEach(group => {
+            const exists = this.dailyMonthRecords.some(row =>
+              row.memberId === group.memberId &&
+              row.department === group.department &&
+              normalizeDailyMonth(row.month) === group.month
+            );
+            if (exists) return;
+
+            const records = group.records.sort((a, b) => String(a.visitDate || '').localeCompare(String(b.visitDate || '')));
+            const content = records.map(record => {
+              const date = normalizeDailyDate(record.visitDate);
+              const label = date ? `${Number(date.slice(5, 7))}月${Number(date.slice(8, 10))}日` : '';
+              const doctor = record.doctor ? ` ${record.doctor}` : '';
+              const body = htmlToPlainText(record.content || '');
+              return `${label}${doctor}${body ? `\n${body}` : ''}`.trim();
+            }).filter(Boolean).join('\n\n');
+            const notes = [...new Set(records.map(record => String(record.notes || '').trim()).filter(Boolean))].join('\n\n');
+
+            this.dailyMonthRecords.push({
+              id: uid('daily_month'),
+              memberId: group.memberId,
+              department: group.department,
+              month: group.month,
+              content,
+              notes,
+              remark: '',
+              reports: [],
+              source: 'legacy-dailyRecords',
+              createdAt: nowText(),
+              updatedAt: nowText()
+            });
+            added++;
+          });
+          if (added > 0) this.persist();
+        },
+        upsertDailyMonthRecord({ memberId, department, month, content, notes = '', remark, source = 'manual' }) {
+          const normalizedMonth = normalizeDailyMonth(month);
+          const normalizedDept = (department || '未分类').trim();
+          if (!memberId || !normalizedMonth) return null;
+          const existing = this.dailyMonthRecords.find(row =>
+            row.memberId === memberId &&
+            row.department === normalizedDept &&
+            normalizeDailyMonth(row.month) === normalizedMonth
+          );
+          if (existing) {
+            existing.month = normalizedMonth;
+            existing.content = String(content || '').trim();
+            existing.notes = String(notes || '').trim();
+            if (remark !== undefined) existing.remark = String(remark || '').trim();
+            existing.reports = existing.reports || [];
+            existing.source = source;
+            existing.updatedAt = nowText();
+            return existing;
+          }
+          const row = {
+            id: uid('daily_month'),
+            memberId,
+            department: normalizedDept,
+            month: normalizedMonth,
+            content: String(content || '').trim(),
+            notes: String(notes || '').trim(),
+            remark: String(remark || '').trim(),
+            reports: [],
+            source,
+            createdAt: nowText(),
+            updatedAt: nowText()
+          };
+          this.dailyMonthRecords.push(row);
+          return row;
+        },
+        addDailyMonthRow() {
+          const memberId = this.activeDailyMemberId || this.members[0]?.id;
+          if (!memberId) {
+            ElementPlus.ElMessage.warning('请先添加家人');
+            return;
+          }
+          const month = this.dailyFilterMonth || new Date().toISOString().slice(0, 7);
+          const department = this.activeDailyDepartment || this.getDailyDepartments(memberId)[0] || '未分类';
+          const existing = this.dailyMonthRecords.find(row =>
+            row.memberId === memberId &&
+            row.department === department &&
+            normalizeDailyMonth(row.month) === month
+          );
+          if (existing) {
+            this.dailyFilterMonth = month;
+            this.activeDailyDepartment = department;
+            ElementPlus.ElMessage.info('该月份已存在，已定位到原记录');
+            return;
+          }
+          this.dailyMonthRecords.push({
+            id: uid('daily_month'),
+            memberId,
+            department,
+            month,
+            content: '',
+            notes: '',
+            remark: '',
+            reports: [],
+            source: 'manual',
+            createdAt: nowText(),
+            updatedAt: nowText()
+          });
+          this.persist();
+          this.onDailyMemberChange();
+          this.activeDailyDepartment = department;
+        },
+        touchDailyMonthRow(row) {
+          if (!row) return;
+          row.month = normalizeDailyMonth(row.month) || row.month;
+          row.reports = row.reports || [];
+          row.updatedAt = nowText();
+          this.persist();
+        },
+        onDailyMonthRowChange(row) {
+          this.touchDailyMonthRow(row);
+          this.onDailyMemberChange();
+        },
+        deleteDailyMonthRow(id) {
+          ElementPlus.ElMessageBox.confirm('确定要删除这个月份的台账记录吗？', '提示', { type: 'warning' }).then(() => {
+            this.dailyMonthRecords = this.dailyMonthRecords.filter(row => row.id !== id);
+            this.persist();
+            this.onDailyMemberChange();
+            ElementPlus.ElMessage.success('已删除');
+          }).catch(() => {});
+        },
+        openDailyReportDialog(row) {
+          row.reports = row.reports || [];
+          this.dailyReportDialog.row = row;
+          this.dailyReportDialog.visible = true;
+        },
         openDailyDeptEditor() {
           const memberId = this.activeDailyMemberId || this.members[0]?.id;
           if (!memberId) return;
           const member = this.members.find(m => m.id === memberId);
           this.getDailyDepartments(memberId);
+          const allDepts = [...new Set([
+            ...(member.dailyDepartments || []),
+            ...this.dailyMonthRecords.filter(row => row.memberId === memberId).map(row => row.department).filter(Boolean),
+            ...this.dailyRecords.filter(row => row.memberId === memberId).map(row => row.department).filter(Boolean)
+          ])];
           this.dailyDeptEditor.memberId = memberId;
-          this.dailyDeptEditor.departments = (member.dailyDepartments || []).map(d => ({ original: d, current: d }));
+          this.dailyDeptEditor.departments = allDepts.map(d => ({ original: d, current: d }));
           this.dailyDeptEditor.visible = true;
         },
         moveDailyDept(index, direction) {
@@ -2755,6 +3171,11 @@
                       r.department = curr;
                    }
                 });
+                this.dailyMonthRecords.forEach(r => {
+                   if (r.memberId === member.id && r.department === orig) {
+                      r.department = curr;
+                   }
+                });
              }
           });
           member.dailyDepartments = this.dailyDeptEditor.departments.map(d => (d.current || '').trim()).filter(Boolean);
@@ -2767,7 +3188,7 @@
           return this.dailyRecords
             .filter(r => {
               if (r.memberId !== memberId || r.department !== dept) return false;
-              if (this.dailyFilterMonth && !r.visitDate.startsWith(this.dailyFilterMonth)) return false;
+              if (!this.isDailyRecordInMonth(r)) return false;
               return true;
             })
             .sort((a, b) => new Date(b.visitDate) - new Date(a.visitDate));
@@ -2792,8 +3213,13 @@
           }
           this.dailyEditor.visible = true;
         },
-        initWangEditor() {
-          this.$nextTick(() => {
+        async initWangEditor() {
+          try {
+            await Promise.all([
+              loadStyleOnce('wang-editor-style', 'https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css'),
+              loadScriptOnce('wang-editor-script', 'https://unpkg.com/@wangeditor/editor@latest/dist/index.js')
+            ]);
+            await this.$nextTick();
             if (!window.wangEditor) return;
             const { createEditor, createToolbar } = window.wangEditor;
             document.getElementById('wang-toolbar').innerHTML = '';
@@ -2822,7 +3248,10 @@
                 toolbarKeys: ['bold', 'underline', 'italic', 'color', 'bgColor', '|', 'bulletedList', 'numberedList', '|', 'clearStyle']
               }
             });
-          });
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error('富文本编辑器加载失败，请检查网络后重试。');
+          }
         },
         destroyWangEditor() {
           if (this.wangEditorInstance) {
@@ -2850,6 +3279,7 @@
               id: 'daily_' + Date.now() + '_' + Math.floor(Math.random() * 1000)
             });
           }
+          this.ensureDailyMonthRecords();
           this.dailyEditor.visible = false;
           this.persist();
           this.onDailyMemberChange();
@@ -2865,14 +3295,23 @@
         clearDailyTestData() {
           ElementPlus.ElMessageBox.confirm('这会清空当前所有家庭成员的日常就诊记录（主要用于测试导入功能）。确认清空？', '清空测试数据', { type: 'warning' }).then(() => {
             this.dailyRecords = [];
+            this.dailyMonthRecords = [];
             this.persist();
             this.onDailyMemberChange();
             ElementPlus.ElMessage.success('就诊记录数据已清空');
           }).catch(() => {});
         },
-        importDailyFromExcel(e) {
+        async importDailyFromExcel(e) {
           const file = e.target.files[0];
           if (!file) return;
+          try {
+            await loadScriptOnce('xlsx-script', 'vendor/xlsx.full.min.js');
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error('Excel导入库加载失败，请确认 vendor/xlsx.full.min.js 存在。');
+            e.target.value = '';
+            return;
+          }
           const reader = new FileReader();
           reader.onload = (evt) => {
             try {
@@ -2881,106 +3320,53 @@
               
               let importedCount = 0;
               const currentMemberId = this.activeDailyMemberId || this.members[0]?.id;
+              if (!currentMemberId) {
+                ElementPlus.ElMessage.warning('请先添加并选择家人后再导入。');
+                e.target.value = '';
+                return;
+              }
               
-              // Each sheet is a department
               workbook.SheetNames.forEach(sheetName => {
                 const worksheet = workbook.Sheets[sheetName];
                 const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-                // We skip row 0 (headers: 月份, 内容, 日常注意事项)
+                const header = (json[0] || []).map(cell => String(cell || '').trim());
+                const monthHeader = header[0];
+                const contentHeader = header[1];
+                if (monthHeader !== '月份' || contentHeader !== '内容') return;
                 
                 let currentMonthStr = "";
-                let currentNotes = "";
-                
                 for (let i = 1; i < json.length; i++) {
                   const row = json[i];
                   if (!row || row.length === 0) continue;
                   
-                  if (row[0] && typeof row[0] === 'string' && row[0].trim() !== '') {
-                     currentMonthStr = row[0].trim();
+                  if (row[0] !== undefined && row[0] !== null && String(row[0]).trim() !== '') {
+                     currentMonthStr = row[0];
                   }
-                  if (row[2] && typeof row[2] === 'string' && row[2].trim() !== '') {
-                     currentNotes = row[2].trim();
-                  }
+                  const currentNotes = row[2] !== undefined && row[2] !== null ? String(row[2]).trim() : '';
+                  const currentRemark = row[3] !== undefined && row[3] !== null ? String(row[3]).trim() : '';
                   
                   const contentCell = row[1] ? String(row[1]).trim() : '';
-                  if (!contentCell) continue;
-                  
-                  // Split multiple visits inside the cell by regex matching 'X月Y日' at the start of a line
-                  const blocks = contentCell.split(/(?=(?:^|\n)\s*(?:\d{4}年)?\d{1,2}月\d{1,2}日)/);
-                  
-                  blocks.forEach(block => {
-                     block = block.trim();
-                     if (!block) return;
-                     
-                     let visitDate = currentMonthStr; 
-                     let doctor = "";
-                     let content = block;
-                     
-                     const dateMatch = content.match(/^\s*(?:(\d{4})年)?(\d{1,2})月(\d{1,2})日/);
-                     if (dateMatch) {
-                        let year = dateMatch[1] || new Date().getFullYear();
-                        if (!dateMatch[1]) {
-                            const yearMatch = currentMonthStr.match(/(\d{4})年/);
-                            if (yearMatch) year = yearMatch[1];
-                        }
-                        
-                        const m = dateMatch[2].padStart(2, '0');
-                        const d = dateMatch[3].padStart(2, '0');
-                        visitDate = `${year}-${m}-${d}`;
-                        
-                        content = content.substring(dateMatch[0].length).trim();
-                     } else {
-                         const ymMatch = currentMonthStr.match(/(\d{4})年(\d{1,2})月/);
-                         if (ymMatch) {
-                             visitDate = `${ymMatch[1]}-${ymMatch[2].padStart(2, '0')}-01`;
-                         }
-                     }
-                     
-                     let docMatch = content.match(/([一-龥]{1,4}(?:主任|医生|医师|大夫|专家|教授))/);
-                     if (docMatch) {
-                         doctor = docMatch[1];
-                     }
-                     
-                     let lines = content.split('\n').map(l => l.trim()).filter(l => l);
-                     if (lines.length > 0) {
-                         let first = lines[0];
-                         // 如果第一行很短且没有明显的句子标点，极大可能是“医生/科室”的表头
-                         if (first.length <= 15 && !/[。，！？,.!?\d]/.test(first)) {
-                             // 如果我们用正则已经提取到了医生，且这行包含了医生名字，就直接删掉这一行防重复
-                             if (doctor && first.includes(doctor)) {
-                                 lines.shift();
-                             } 
-                             // 如果没找到明确的头衔，但第一行像是个名字（比如单字“范”或两三字名字）
-                             else if (!doctor) {
-                                 let parts = first.split(/\s+/);
-                                 let potentialDoc = parts[parts.length - 1];
-                                 if (potentialDoc.length >= 1 && potentialDoc.length <= 3 && !/检查|复查|结果|今天/.test(potentialDoc)) {
-                                     doctor = potentialDoc;
-                                     lines.shift();
-                                 }
-                             }
-                         }
-                     }
-                     content = lines.join('\n');
-                     
-                     this.dailyRecords.push({
-                        id: 'daily_' + Date.now() + '_' + Math.floor(Math.random() * 10000) + importedCount,
-                        memberId: currentMemberId,
-                        department: sheetName,
-                        visitDate: visitDate,
-                        doctor: doctor,
-                        content: content,
-                        notes: currentNotes
-                     });
-                     importedCount++;
+                  if (!contentCell && !currentNotes && !currentRemark) continue;
+
+                  const month = normalizeDailyMonth(currentMonthStr);
+                  if (!month) continue;
+                  this.upsertDailyMonthRecord({
+                    memberId: currentMemberId,
+                    department: sheetName,
+                    month,
+                    content: contentCell,
+                    notes: currentNotes,
+                    remark: currentRemark,
+                    source: 'excel-import'
                   });
+                  importedCount++;
                 }
               });
               
               if (importedCount > 0) {
                  this.persist();
                  this.onDailyMemberChange();
-                 ElementPlus.ElMessage.success(`成功解析并导入 ${importedCount} 条记录！`);
+                 ElementPlus.ElMessage.success(`成功导入 ${importedCount} 条月度台账记录`);
               } else {
                  ElementPlus.ElMessage.warning('未能识别到任何记录，请检查Excel格式。');
               }
@@ -2991,6 +3377,59 @@
             e.target.value = '';
           };
           reader.readAsArrayBuffer(file);
+        },
+        async exportDailyMonthExcel() {
+          const memberId = this.activeDailyMemberId || this.members[0]?.id;
+          const member = this.members.find(item => item.id === memberId);
+          if (!memberId || !member) {
+            ElementPlus.ElMessage.warning('请先选择家人');
+            return;
+          }
+          const rows = this.dailyMonthRecords
+            .filter(row => row.memberId === memberId)
+            .filter(row => !this.activeDailyDepartment || row.department === this.activeDailyDepartment)
+            .filter(row => this.isDailyMonthRowInFilter(row))
+            .sort((a, b) => String(b.month || '').localeCompare(String(a.month || '')));
+          if (rows.length === 0) {
+            ElementPlus.ElMessage.warning('当前没有可导出的日常检查台账');
+            return;
+          }
+          try {
+            await loadScriptOnce('xlsx-script', 'vendor/xlsx.full.min.js');
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error('Excel导出库加载失败，请确认 vendor/xlsx.full.min.js 存在。');
+            return;
+          }
+          const workbook = XLSX.utils.book_new();
+          const grouped = new Map();
+          rows.forEach(row => {
+            const dept = row.department || '未分类';
+            if (!grouped.has(dept)) grouped.set(dept, []);
+            grouped.get(dept).push(row);
+          });
+          grouped.forEach((deptRows, dept) => {
+            const sheetRows = [
+              ['月份', '内容', '日常注意事项', '备注'],
+              ...deptRows
+                .sort((a, b) => String(b.month || '').localeCompare(String(a.month || '')))
+                .map(row => [
+                  row.month || '',
+                  row.content || '',
+                  row.notes || '',
+                  row.remark || ''
+                ])
+            ];
+            const sheet = XLSX.utils.aoa_to_sheet(sheetRows);
+            sheet['!cols'] = [
+              { wch: 14 },
+              { wch: 72 },
+              { wch: 38 },
+              { wch: 42 }
+            ];
+            XLSX.utils.book_append_sheet(workbook, sheet, safeFilePart(dept).slice(0, 31) || '未分类');
+          });
+          XLSX.writeFile(workbook, `日常检查-${safeFilePart(member.name)}.xlsx`);
         },
         getMemberEnabledPlans(memberId) {
           return this.plans.filter(p => p.memberId === memberId && this.isPlanEnabled(p)).sort((a, b) => b.examMonth.localeCompare(a.examMonth));
@@ -3068,24 +3507,22 @@
         },
 
 
-        async persist() {
+        persist() {
           const payload = {
             packages: this.packages,
             members: this.members,
             plans: this.plans,
-            trackingRecords: this.trackingRecords
+            trackingRecords: this.trackingRecords,
+            dailyMonthRecords: this.dailyMonthRecords,
+            dailyRecords: this.dailyRecords
           };
           localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-          try {
-            const apiDataUrl = window.location.protocol === 'file:' ? 'http://localhost:8765/api/data' : '/api/data';
-            await fetch(apiDataUrl, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
-          } catch (e) {
-            console.error("同步数据到后端失败:", e);
-          }
+          const apiDataUrl = window.location.protocol === 'file:' ? 'http://localhost:8765/api/data' : '/api/data';
+          fetchWithTimeout(apiDataUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          }, 1500).catch(e => console.error("同步数据到后端失败:", e));
         },
         openItemOcr(pkg) {
           this.clearOcr();
@@ -3118,6 +3555,7 @@
         async processPdfFile(file) {
           this.ocr.progress = '正在本地提取 PDF 文本...';
           try {
+            await loadScriptOnce('pdfjs-script', 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js');
             const arrayBuffer = await file.arrayBuffer();
             const pdfjsLib = window['pdfjs-dist/build/pdf'];
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
@@ -3776,9 +4214,12 @@
         exportSinglePlanExcel(plan) {
           this.exportPlansExcel([plan]);
         },
-        exportPackagesExcel(packagesToExport) {
-          if (typeof XLSX === 'undefined') {
-            ElementPlus.ElMessage.error('Excel导出库未加载完成，请确认 vendor/xlsx.full.min.js 存在后刷新页面。');
+        async exportPackagesExcel(packagesToExport) {
+          try {
+            await loadScriptOnce('xlsx-script', 'vendor/xlsx.full.min.js');
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error('Excel导出库加载失败，请确认 vendor/xlsx.full.min.js 存在。');
             return;
           }
           const headers = ['套餐名称', '适用人群', '套餐价格', '内容数', '分类/科室', '检查内容', '单项价格', '说明/备注', '项目来源', '更新时间', '套餐备注'];
@@ -3814,7 +4255,7 @@
           XLSX.writeFile(workbook, `${filePrefix}-${Date.now()}.xlsx`);
           ElementPlus.ElMessage.success(`成功导出 ${packagesToExport.length} 个套餐，共 ${rows.length} 行明细。`);
         },
-        exportPlansExcel(plansToExport) {
+        async exportPlansExcel(plansToExport) {
           const headers = ['家人姓名', '计划时间', '计划名称', '原基础套餐', '预估最终总价', '项目属性', '科室分类', '检查项目名称', '单项价格', '说明/建议备注', '项目来源'];
           const rows = [];
           
@@ -3843,8 +4284,11 @@
             });
           });
 
-          if (typeof XLSX === 'undefined') {
-            ElementPlus.ElMessage.error('Excel导出库未加载完成，请确认 vendor/xlsx.full.min.js 存在后刷新页面。');
+          try {
+            await loadScriptOnce('xlsx-script', 'vendor/xlsx.full.min.js');
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error('Excel导出库加载失败，请确认 vendor/xlsx.full.min.js 存在。');
             return;
           }
 
@@ -4085,9 +4529,10 @@
       app.component(key, component);
     });
     app.use(ElementPlus, {
-      locale: ElementPlusLocaleZhCn,
+      locale: ELEMENT_PLUS_ZH_CN,
     });
     app.mount('#app');
+    document.getElementById('app')?.removeAttribute('v-cloak');
   </script>
 </body>
 </html>
