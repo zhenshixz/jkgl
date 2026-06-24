@@ -1135,11 +1135,103 @@
         font-weight: 700;
         color: var(--brand);
       }
+      .daily-rich-editor {
+        min-height: 96px;
+        overflow: hidden;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+        white-space: pre-wrap;
+        line-height: 1.7;
+        font-size: 14px;
+        outline: none;
+      }
+      .daily-rich-editor:focus {
+        border-color: var(--brand);
+        box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.12);
+      }
+      .daily-rich-editor:empty::before {
+        content: attr(data-placeholder);
+        color: var(--muted);
+      }
+      .daily-ledger-table .el-table__cell {
+        vertical-align: top;
+      }
+      .daily-ledger-table .cell {
+        overflow: visible;
+      }
+      .daily-rich-editor.is-collapsed {
+        max-height: 238px;
+        position: relative;
+      }
+      .daily-rich-wrap {
+        position: relative;
+      }
+      .daily-rich-wrap.is-collapsed::after {
+        content: "";
+        position: absolute;
+        left: 1px;
+        right: 1px;
+        bottom: 1px;
+        height: 42px;
+        pointer-events: none;
+        background: linear-gradient(rgba(255,255,255,0), #fff);
+      }
+      .daily-rich-wrap.has-toggle.is-collapsed::after {
+        bottom: 32px;
+      }
+      .daily-expand-btn {
+        margin-top: 6px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--action);
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .daily-filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        min-width: 0;
+      }
+      .daily-month-chip {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--text);
+        border-radius: 999px;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .daily-month-chip.active {
+        border-color: var(--action);
+        background: var(--action-hover-bg);
+        color: var(--action);
+        font-weight: 700;
+      }
+      .daily-layout .main,
+      .daily-layout {
+        height: auto !important;
+        min-height: 100vh;
+        overflow: visible !important;
+      }
+      .daily-layout .main {
+        display: block;
+      }
+      .daily-layout .daily-ledger-table,
+      .daily-layout .daily-ledger-table .el-table__inner-wrapper,
+      .daily-layout .daily-ledger-table .el-table__body-wrapper {
+        height: auto !important;
+        overflow: visible !important;
+      }
 </style>
 </head>
 <body>
   <div id="app" v-cloak>
-    <div class="layout">
+    <div class="layout" :class="{ 'daily-layout': view === 'daily' }">
       <aside class="sidebar">
         <div class="brand">
           <div class="brand-mark">健</div>
@@ -1556,32 +1648,41 @@
         </section>
 
         <!-- 日常检查视图 -->
-        <section v-show="view === 'daily'" class="panel daily-view-panel" style="display: flex; flex-direction: column; height: 100%; margin-top: 0; border: none; box-shadow: none; background: transparent;">
+        <section v-show="view === 'daily'" class="panel daily-view-panel" style="display: flex; flex-direction: column; min-height: 100%; margin-top: 0; border: none; box-shadow: none; background: transparent; overflow: visible;">
           <div class="panel-header" style="margin-bottom: 20px;">
             <div>
               <h3 class="panel-title">日常检查与就诊记录</h3>
               <p class="panel-subtitle">从腾讯文档 Excel 导入月度台账，并在系统内关联检查报告、OCR 和解析结果。</p>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
-              <el-date-picker
-                v-model="dailyFilterMonth"
-                type="month"
-                placeholder="选择月份"
-                value-format="YYYY-MM"
-                format="YYYY年M月"
-                :cell-class-name="dailyMonthCellClass"
-                clearable
-                style="width: 150px;"
-                @change="onDailyMemberChange"
-              ></el-date-picker>
               <input type="file" ref="dailyExcelUpload" accept=".xlsx,.xls" style="display: none" @change="importDailyFromExcel">
-              <el-button type="warning" plain @click="clearDailyTestData">清空测试数据</el-button>
-              <el-button type="primary" plain @click="$refs.dailyExcelUpload.click()">导入历史 Excel</el-button>
-              <el-button type="success" @click="addDailyMonthRow">新增月份</el-button>
+              <el-button type="primary" @click="$refs.dailyExcelUpload.click()">导入历史 Excel</el-button>
             </div>
           </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px;">
+            <div class="daily-filter-bar">
+              <el-select v-model="dailyFilterYear" placeholder="全部年份" clearable style="width: 120px;" @change="onDailyYearChange">
+                <el-option v-for="year in dailyAvailableYears" :key="year" :label="`${year}年`" :value="year"></el-option>
+              </el-select>
+              <button
+                class="daily-month-chip"
+                :class="{ active: !dailyFilterMonth }"
+                type="button"
+                @click="setDailyMonthFilter('')"
+              >全部月份</button>
+              <button
+                v-for="month in dailyVisibleMonths"
+                :key="month.value"
+                class="daily-month-chip"
+                :class="{ active: dailyFilterMonth === month.value }"
+                type="button"
+                @click="setDailyMonthFilter(month.value)"
+              >{{ month.label }}</button>
+            </div>
+            <el-button type="warning" text @click="clearDailyTestData">清空测试数据</el-button>
+          </div>
           
-          <div class="panel-body" style="flex: 1; padding: 0; overflow-y: auto; min-height: 0; display: flex; flex-direction: column; background: transparent;">
+          <div class="panel-body" style="flex: 1; padding: 0; overflow: visible; min-height: 0; display: flex; flex-direction: column; background: transparent;">
             <div v-if="members.length === 0" class="empty" style="background: #fff; padding: 40px; text-align: center; border-radius: 8px;">请先在"基础信息-家人管理"中添加家人。</div>
             <div v-else style="display: flex; flex-direction: column;">
               <el-tabs v-model="activeDailyMemberId" class="member-plan-tabs" style="display: flex; flex-direction: column;" @tab-change="onDailyMemberChange">
@@ -1591,7 +1692,7 @@
                   </template>
                   
                   <div v-if="getDailyDepartments(member.id).length === 0" class="muted" style="text-align: center; padding: 40px 20px; font-size: 14px; background: #fff; border-radius: 10px; border: 1px dashed var(--line);">
-                    该家人暂无日常检查台账。<br><br>点击右上角“新增月份”或“导入历史 Excel”开始。
+                    该家人暂无日常检查台账。<br><br>点击右上角“导入历史 Excel”开始。
                   </div>
                   <div v-else>
                     <div style="display: flex; align-items: flex-end; justify-content: space-between; padding-right: 12px;">
@@ -1604,28 +1705,35 @@
                     </div>
                     
                     <div v-if="activeDailyDepartment">
-                      <el-table :data="getDailyMonthRows(member.id, activeDailyDepartment)" border style="width: 100%;" empty-text="该科室暂无月度记录">
-                        <el-table-column label="月份" width="150" fixed>
+                      <el-table class="daily-ledger-table" :data="getDailyMonthRows(member.id, activeDailyDepartment)" border style="width: 100%;" empty-text="该科室暂无月度记录">
+                        <el-table-column label="月份" width="170" fixed>
                           <template #default="{ row }">
                             <el-date-picker
                               v-model="row.month"
                               type="month"
                               value-format="YYYY-MM"
                               format="YYYY年M月"
-                              style="width: 128px;"
+                              style="width: 148px;"
                               @change="onDailyMonthRowChange(row)"
                             ></el-date-picker>
                           </template>
                         </el-table-column>
                         <el-table-column label="问诊记录" min-width="420">
                           <template #default="{ row }">
-                            <el-input
-                              v-model="row.content"
-                              type="textarea"
-                              :autosize="{ minRows: 5, maxRows: 14 }"
-                              placeholder="按日期记录本月检查、复查、问诊内容..."
-                              @change="touchDailyMonthRow(row)"
-                            ></el-input>
+                            <div class="daily-rich-wrap has-toggle" :class="{ 'is-collapsed': !isDailyRowExpanded(row.id) }">
+                              <div
+                                class="daily-rich-editor"
+                                :class="{ 'is-collapsed': !isDailyRowExpanded(row.id) }"
+                                contenteditable="true"
+                                data-placeholder="按日期记录本月检查、复查、问诊内容..."
+                                v-html="getDailyRichHtml(row, 'content')"
+                                @input="updateDailyRichField(row, 'content', $event)"
+                                @blur="touchDailyMonthRow(row)"
+                              ></div>
+                              <button v-if="shouldShowDailyExpand(row)" class="daily-expand-btn" type="button" @click="toggleDailyRowExpanded(row.id)">
+                                {{ isDailyRowExpanded(row.id) ? '收起本月内容' : '展开本月全部内容' }}
+                              </button>
+                            </div>
                           </template>
                         </el-table-column>
                         <el-table-column label="检查结果" width="170">
@@ -1640,24 +1748,32 @@
                         </el-table-column>
                         <el-table-column label="日常注意事项" min-width="260">
                           <template #default="{ row }">
-                            <el-input
-                              v-model="row.notes"
-                              type="textarea"
-                              :autosize="{ minRows: 5, maxRows: 14 }"
-                              placeholder="饮食、用药、复查周期、日常观察..."
-                              @change="touchDailyMonthRow(row)"
-                            ></el-input>
+                            <div class="daily-rich-wrap" :class="{ 'is-collapsed': !isDailyRowExpanded(row.id) }">
+                              <div
+                                class="daily-rich-editor"
+                                :class="{ 'is-collapsed': !isDailyRowExpanded(row.id) }"
+                                contenteditable="true"
+                                data-placeholder="饮食、用药、复查周期、日常观察..."
+                                v-html="getDailyRichHtml(row, 'notes')"
+                                @input="updateDailyRichField(row, 'notes', $event)"
+                                @blur="touchDailyMonthRow(row)"
+                              ></div>
+                            </div>
                           </template>
                         </el-table-column>
                         <el-table-column label="备注" min-width="220">
                           <template #default="{ row }">
-                            <el-input
-                              v-model="row.remark"
-                              type="textarea"
-                              :autosize="{ minRows: 5, maxRows: 14 }"
-                              placeholder="额外备注"
-                              @change="touchDailyMonthRow(row)"
-                            ></el-input>
+                            <div class="daily-rich-wrap" :class="{ 'is-collapsed': !isDailyRowExpanded(row.id) }">
+                              <div
+                                class="daily-rich-editor"
+                                :class="{ 'is-collapsed': !isDailyRowExpanded(row.id) }"
+                                contenteditable="true"
+                                data-placeholder="额外备注"
+                                v-html="getDailyRichHtml(row, 'remark')"
+                                @input="updateDailyRichField(row, 'remark', $event)"
+                                @blur="touchDailyMonthRow(row)"
+                              ></div>
+                            </div>
                           </template>
                         </el-table-column>
                         <el-table-column label="操作" width="90" fixed="right">
@@ -2201,6 +2317,93 @@
         .replace(/<\/p>/gi, '\n');
       return (container.textContent || container.innerText || '').replace(/\n{3,}/g, '\n\n').trim();
     };
+    const escapeHtml = (value) => String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+    const plainTextToHtml = (value) => escapeHtml(value).replace(/\r?\n/g, '<br>');
+    const sanitizeRichHtml = (value) => {
+      const source = String(value || '').trim();
+      if (!source) return '';
+      const allowedTags = new Set(['SPAN', 'B', 'STRONG', 'I', 'EM', 'U', 'S', 'BR', 'DIV', 'P', 'OL', 'UL', 'LI']);
+      const template = document.createElement('template');
+      template.innerHTML = source;
+      const cleanNode = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) return document.createTextNode(node.textContent || '');
+        if (node.nodeType !== Node.ELEMENT_NODE) return document.createTextNode('');
+        const tag = node.tagName;
+        if (!allowedTags.has(tag)) {
+          const fragment = document.createDocumentFragment();
+          Array.from(node.childNodes).forEach(child => fragment.appendChild(cleanNode(child)));
+          return fragment;
+        }
+        const el = document.createElement(tag.toLowerCase());
+        const style = node.getAttribute('style') || '';
+        const safeStyle = [];
+        const fontWeight = style.match(/font-weight\s*:\s*([^;]+)/i)?.[1];
+        const fontStyle = style.match(/font-style\s*:\s*([^;]+)/i)?.[1];
+        const textDecoration = style.match(/text-decoration\s*:\s*([^;]+)/i)?.[1];
+        const fontSize = style.match(/font-size\s*:\s*([0-9.]+(?:px|pt|em|rem))/i)?.[1];
+        const color = style.match(/color\s*:\s*(#[0-9a-fA-F]{3,8}|rgb\([^)]+\)|[a-zA-Z]+)\b/i)?.[1];
+        if (fontWeight) safeStyle.push(`font-weight:${fontWeight}`);
+        if (fontStyle) safeStyle.push(`font-style:${fontStyle}`);
+        if (textDecoration) safeStyle.push(`text-decoration:${textDecoration}`);
+        if (fontSize) safeStyle.push(`font-size:${fontSize}`);
+        if (color) safeStyle.push(`color:${color}`);
+        if (safeStyle.length) el.setAttribute('style', safeStyle.join(';'));
+        Array.from(node.childNodes).forEach(child => el.appendChild(cleanNode(child)));
+        return el;
+      };
+      const fragment = document.createDocumentFragment();
+      Array.from(template.content.childNodes).forEach(child => fragment.appendChild(cleanNode(child)));
+      const container = document.createElement('div');
+      container.appendChild(fragment);
+      return container.innerHTML;
+    };
+    const xmlFlagOn = (node, tagName) => {
+      const child = node?.getElementsByTagName(tagName)?.[0];
+      if (!child) return false;
+      const val = child.getAttribute('val');
+      return val === null || !['0', 'false', 'none'].includes(String(val).toLowerCase());
+    };
+    const richTextXmlToHtml = (xml) => {
+      const source = String(xml || '').trim();
+      if (!source) return '';
+      try {
+        const doc = new DOMParser().parseFromString(`<root>${source}</root>`, 'application/xml');
+        if (doc.getElementsByTagName('parsererror').length) return '';
+        const runs = Array.from(doc.getElementsByTagName('r'));
+        const renderText = (text) => escapeHtml(text).replace(/\r?\n/g, '<br>');
+        if (runs.length === 0) {
+          const text = Array.from(doc.getElementsByTagName('t')).map(node => node.textContent || '').join('');
+          return plainTextToHtml(text);
+        }
+        return sanitizeRichHtml(runs.map(run => {
+          const rpr = run.getElementsByTagName('rPr')[0];
+          const text = Array.from(run.getElementsByTagName('t')).map(node => node.textContent || '').join('');
+          const styles = [];
+          if (xmlFlagOn(rpr, 'b')) styles.push('font-weight:700');
+          if (xmlFlagOn(rpr, 'i')) styles.push('font-style:italic');
+          if (xmlFlagOn(rpr, 'u')) styles.push('text-decoration:underline');
+          if (xmlFlagOn(rpr, 'strike')) styles.push('text-decoration:line-through');
+          const size = rpr?.getElementsByTagName('sz')?.[0]?.getAttribute('val');
+          if (size) styles.push(`font-size:${size}pt`);
+          const color = rpr?.getElementsByTagName('color')?.[0]?.getAttribute('rgb');
+          if (color && /^[0-9a-fA-F]{8}$/.test(color)) styles.push(`color:#${color.slice(2)}`);
+          return `<span${styles.length ? ` style="${styles.join(';')}"` : ''}>${renderText(text)}</span>`;
+        }).join(''));
+      } catch (error) {
+        return '';
+      }
+    };
+    const cellToPlainText = (cell) => String(cell?.v ?? cell?.w ?? '').trim();
+    const cellToRichHtml = (cell) => {
+      const fromXml = richTextXmlToHtml(cell?.r || '');
+      if (fromXml) return fromXml;
+      return plainTextToHtml(cellToPlainText(cell));
+    };
     const ELEMENT_PLUS_ZH_CN = {
       name: 'zh-cn',
       el: {
@@ -2572,7 +2775,9 @@
           },
           activeDailyMemberId: parsed.members?.[0]?.id || '',
           activeDailyDepartment: '',
+          dailyFilterYear: '',
           dailyFilterMonth: '',
+          dailyExpandedRowIds: [],
           dailyMonthRecords: parsed.dailyMonthRecords || [],
           dailyRecords: parsed.dailyRecords || [],
           dailyReportDialog: {
@@ -2695,6 +2900,23 @@
             if (month) months.add(month);
           });
           return months;
+        },
+        dailyAvailableYears() {
+          return Array.from(this.dailyMonthsWithData)
+            .map(month => month.slice(0, 4))
+            .filter(Boolean)
+            .filter((year, index, arr) => arr.indexOf(year) === index)
+            .sort((a, b) => b.localeCompare(a));
+        },
+        dailyVisibleMonths() {
+          const year = this.dailyFilterYear || '';
+          return Array.from(this.dailyMonthsWithData)
+            .filter(month => !year || month.startsWith(`${year}-`))
+            .sort((a, b) => b.localeCompare(a))
+            .map(month => ({
+              value: month,
+              label: year ? `${Number(month.slice(5, 7))}月` : `${month.slice(0, 4)}年${Number(month.slice(5, 7))}月`
+            }));
         },
         enabledPlans() {
           return this.plans
@@ -2975,12 +3197,16 @@
           });
         },
         isDailyRecordInMonth(record) {
-          if (!this.dailyFilterMonth) return true;
-          return normalizeDailyMonth(record?.visitDate) === this.dailyFilterMonth;
+          const month = normalizeDailyMonth(record?.visitDate);
+          if (this.dailyFilterMonth) return month === this.dailyFilterMonth;
+          if (this.dailyFilterYear) return month.startsWith(`${this.dailyFilterYear}-`);
+          return true;
         },
         isDailyMonthRowInFilter(row) {
-          if (!this.dailyFilterMonth) return true;
-          return normalizeDailyMonth(row?.month) === this.dailyFilterMonth;
+          const month = normalizeDailyMonth(row?.month);
+          if (this.dailyFilterMonth) return month === this.dailyFilterMonth;
+          if (this.dailyFilterYear) return month.startsWith(`${this.dailyFilterYear}-`);
+          return true;
         },
         dailyMonthCellClass(date) {
           return this.dailyMonthsWithData.has(normalizeDailyMonth(date)) ? 'daily-month-has-data' : '';
@@ -2989,6 +3215,32 @@
           return this.dailyMonthRecords
             .filter(row => row.memberId === memberId && row.department === dept && this.isDailyMonthRowInFilter(row))
             .sort((a, b) => String(b.month || '').localeCompare(String(a.month || '')));
+        },
+        onDailyYearChange() {
+          if (this.dailyFilterMonth && this.dailyFilterYear && !this.dailyFilterMonth.startsWith(`${this.dailyFilterYear}-`)) {
+            this.dailyFilterMonth = '';
+          }
+          this.onDailyMemberChange();
+        },
+        setDailyMonthFilter(month) {
+          this.dailyFilterMonth = month || '';
+          if (month) this.dailyFilterYear = month.slice(0, 4);
+          this.onDailyMemberChange();
+        },
+        isDailyRowExpanded(id) {
+          return this.dailyExpandedRowIds.includes(id);
+        },
+        toggleDailyRowExpanded(id) {
+          if (!id) return;
+          if (this.isDailyRowExpanded(id)) {
+            this.dailyExpandedRowIds = this.dailyExpandedRowIds.filter(rowId => rowId !== id);
+          } else {
+            this.dailyExpandedRowIds.push(id);
+          }
+        },
+        shouldShowDailyExpand(row) {
+          const text = `${row?.content || ''}\n${row?.notes || ''}\n${row?.remark || ''}`;
+          return text.length > 180 || text.split(/\n/).length > 7;
         },
         ensureDailyMonthRecords() {
           const groups = new Map();
@@ -3027,8 +3279,11 @@
               department: group.department,
               month: group.month,
               content,
+              contentHtml: plainTextToHtml(content),
               notes,
+              notesHtml: plainTextToHtml(notes),
               remark: '',
+              remarkHtml: '',
               reports: [],
               source: 'legacy-dailyRecords',
               createdAt: nowText(),
@@ -3038,7 +3293,7 @@
           });
           if (added > 0) this.persist();
         },
-        upsertDailyMonthRecord({ memberId, department, month, content, notes = '', remark, source = 'manual' }) {
+        upsertDailyMonthRecord({ memberId, department, month, content, notes = '', remark, contentHtml, notesHtml, remarkHtml, source = 'manual' }) {
           const normalizedMonth = normalizeDailyMonth(month);
           const normalizedDept = (department || '未分类').trim();
           if (!memberId || !normalizedMonth) return null;
@@ -3050,21 +3305,34 @@
           if (existing) {
             existing.month = normalizedMonth;
             existing.content = String(content || '').trim();
+            existing.contentHtml = sanitizeRichHtml(contentHtml || plainTextToHtml(existing.content));
             existing.notes = String(notes || '').trim();
-            if (remark !== undefined) existing.remark = String(remark || '').trim();
+            existing.notesHtml = sanitizeRichHtml(notesHtml || plainTextToHtml(existing.notes));
+            if (remark !== undefined) {
+              existing.remark = String(remark || '').trim();
+              existing.remarkHtml = sanitizeRichHtml(remarkHtml || plainTextToHtml(existing.remark));
+            } else if (!existing.remarkHtml && existing.remark) {
+              existing.remarkHtml = plainTextToHtml(existing.remark);
+            }
             existing.reports = existing.reports || [];
             existing.source = source;
             existing.updatedAt = nowText();
             return existing;
           }
+          const plainContent = String(content || '').trim();
+          const plainNotes = String(notes || '').trim();
+          const plainRemark = String(remark || '').trim();
           const row = {
             id: uid('daily_month'),
             memberId,
             department: normalizedDept,
             month: normalizedMonth,
-            content: String(content || '').trim(),
-            notes: String(notes || '').trim(),
-            remark: String(remark || '').trim(),
+            content: plainContent,
+            contentHtml: sanitizeRichHtml(contentHtml || plainTextToHtml(plainContent)),
+            notes: plainNotes,
+            notesHtml: sanitizeRichHtml(notesHtml || plainTextToHtml(plainNotes)),
+            remark: plainRemark,
+            remarkHtml: sanitizeRichHtml(remarkHtml || plainTextToHtml(plainRemark)),
             reports: [],
             source,
             createdAt: nowText(),
@@ -3098,8 +3366,11 @@
             department,
             month,
             content: '',
+            contentHtml: '',
             notes: '',
+            notesHtml: '',
             remark: '',
+            remarkHtml: '',
             reports: [],
             source: 'manual',
             createdAt: nowText(),
@@ -3109,9 +3380,24 @@
           this.onDailyMemberChange();
           this.activeDailyDepartment = department;
         },
+        getDailyRichHtml(row, field) {
+          const htmlField = `${field}Html`;
+          return sanitizeRichHtml(row?.[htmlField] || plainTextToHtml(row?.[field] || ''));
+        },
+        updateDailyRichField(row, field, event) {
+          if (!row) return;
+          const html = sanitizeRichHtml(event.target.innerHTML || '');
+          row[`${field}Html`] = html;
+          row[field] = htmlToPlainText(html);
+          row.updatedAt = nowText();
+        },
         touchDailyMonthRow(row) {
           if (!row) return;
           row.month = normalizeDailyMonth(row.month) || row.month;
+          ['content', 'notes', 'remark'].forEach(field => {
+            const htmlField = `${field}Html`;
+            if (!row[htmlField] && row[field]) row[htmlField] = plainTextToHtml(row[field]);
+          });
           row.reports = row.reports || [];
           row.updatedAt = nowText();
           this.persist();
@@ -3316,7 +3602,7 @@
           reader.onload = (evt) => {
             try {
               const data = new Uint8Array(evt.target.result);
-              const workbook = XLSX.read(data, { type: 'array' });
+              const workbook = XLSX.read(data, { type: 'array', cellHTML: false, cellStyles: true });
               
               let importedCount = 0;
               const currentMemberId = this.activeDailyMemberId || this.members[0]?.id;
@@ -3338,14 +3624,17 @@
                 for (let i = 1; i < json.length; i++) {
                   const row = json[i];
                   if (!row || row.length === 0) continue;
+                  const contentCellObject = worksheet[XLSX.utils.encode_cell({ r: i, c: 1 })];
+                  const notesCellObject = worksheet[XLSX.utils.encode_cell({ r: i, c: 2 })];
+                  const remarkCellObject = worksheet[XLSX.utils.encode_cell({ r: i, c: 3 })];
                   
                   if (row[0] !== undefined && row[0] !== null && String(row[0]).trim() !== '') {
                      currentMonthStr = row[0];
                   }
-                  const currentNotes = row[2] !== undefined && row[2] !== null ? String(row[2]).trim() : '';
-                  const currentRemark = row[3] !== undefined && row[3] !== null ? String(row[3]).trim() : '';
+                  const currentNotes = cellToPlainText(notesCellObject);
+                  const currentRemark = cellToPlainText(remarkCellObject);
                   
-                  const contentCell = row[1] ? String(row[1]).trim() : '';
+                  const contentCell = cellToPlainText(contentCellObject);
                   if (!contentCell && !currentNotes && !currentRemark) continue;
 
                   const month = normalizeDailyMonth(currentMonthStr);
@@ -3357,6 +3646,9 @@
                     content: contentCell,
                     notes: currentNotes,
                     remark: currentRemark,
+                    contentHtml: cellToRichHtml(contentCellObject),
+                    notesHtml: cellToRichHtml(notesCellObject),
+                    remarkHtml: cellToRichHtml(remarkCellObject),
                     source: 'excel-import'
                   });
                   importedCount++;
