@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 2,
   "packages": [
     {
       "id": "pkg_1781752810676_83e4ea155e747",
@@ -1799,7 +1800,11 @@
         "妇科",
         "内科",
         "消化内科",
-        "ca"
+        "ca",
+        "肾",
+        "泌尿",
+        "内分泌",
+        "其他"
       ]
     },
     {
@@ -2487,6 +2492,1242 @@
     }
   ],
   "trackingRecords": [],
-  "dailyMonthRecords": [],
+  "dailyMonthRecords": [
+    {
+      "id": "daily_month_1782437499366_b21aa0a86f1638",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "肾",
+      "month": "2026-03",
+      "content": "3月29日 复查 凌\n1.甘油三酯高就是吃出来，如果先天高可能代谢体质、如果胃口好多吃主食（面条、米饭等）也会高\n2.肌酐高还是要控制饮食，控制饮食（主食、油脂、高蛋白少吃）\n3.各方面略微好一点（正常波动范围，医学主要看大趋势），炎症程度，egfr正常60左右 应该在80左右，现在65-70 尿蛋白不多好好保护一下\n4.如果蛋白尿和肌酐有进展，还是考虑SC明确病因，目前相对稳定\n5.达格列净在于稳定蛋白尿（吃完可以自己买），稳定控制,感冒有可能引起肌酐升高，egfr下降\n6.非诺贝特现在血脂太高（4.52）还是得吃，要吃到指标能控制正常，目前几种药暂时看指标没有太大影响，要定期复查，建议非诺贝特吃完药复查（1个月），肝肾功能在生化常规里\n7.查尿是看蛋白尿有没有减轻，抽血生化是看对肾功能肌酐等有没有稳定，其他指标有没有受影响\n8.适量运动要保持，运动提高代谢，肉类吃的多肌酐也会往上冒\n8.建议2个月再来复查（5月29日）   (去年轻度脂肪肝复查问下是否要查彩超）\n3月28日复查 凌\n1.开单复查尿常规、血常规、生化常规、尿蛋白定量、尿免疫蛋白等\n2.尿常规（尿蛋白还是弱阳）无感染、血常规正常,达格列净要补回去",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">3月29日 复查 凌</span><span style=\"font-size:12pt;color:#000000\"><br>1.甘油三酯高就是</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">吃出来</span><span style=\"font-size:12pt;color:#000000\">，如果先天高可能代谢体质、如果胃口好多吃主食（面条、米饭等）也会高<br>2.肌酐高还是要控制饮食，</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">控制饮食（主食、油脂、高蛋白少吃）</span><span style=\"font-size:12pt;color:#000000\"><br>3.各方面略微好一点（正常波动范围，医学主要看大趋势），炎症程度，egfr正常60左右 应该在80左右，现在65-70 </span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿蛋白不多好好保护一下</span><span style=\"font-size:12pt;color:#000000\"><br>4.如果蛋白尿和肌酐有进展，还是考虑SC明确病因，目前相对稳定<br>5.达格列净在于</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">稳定蛋白尿（吃完可以自己买）</span><span style=\"font-size:12pt;color:#000000\">，稳定控制,</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">感冒</span><span style=\"font-size:12pt;color:#000000\">有可能引起肌酐升高，egfr下降<br>6.非诺贝特现在血脂太高（4.52）还是得吃，</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">要吃到指标能控制正常，</span><span style=\"font-size:12pt;color:#000000\">目前几种药暂时看指标没有太大影响，要定期复查，建议非诺贝特吃完药复查（1个月），肝肾功能在生化常规里<br>7.查尿是看蛋白尿有没有减轻，抽血生化是看对肾功能肌酐等有没有稳定，其他指标有没有受影响<br>8.适量运动要保持，运动提高代谢，肉类吃的多肌酐也会往上冒<br>8.建议</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">2个月再来复查（5月29日） </span><span style=\"font-size:12pt;color:#000000\">  (去年轻度脂肪肝复查问下是否要查彩超）<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">3月28日</span><span style=\"font-size:12pt;color:#000000\">复查 凌<br>1.开单复查尿常规、血常规、生化常规、尿蛋白定量、尿免疫蛋白等<br>2.尿常规（尿蛋白还是弱阳）无感染、血常规正常,达格列净要补回去</span>",
+      "notes": "日常特别注意：\n1.主任强调管住嘴，控制饮食，才能保护肾（甘油三酯、肌酐高都和饮食有关）\n2.主食（面条、米饭等）和肉类（肉汤）减量、不吃零食、甜食、加工食品，戒烟酒\n3.低蛋白饮食要继续（少吃豆制品、豆浆、冲调的豆奶等，控制尿酸不吃贝壳类、海蛎等）\n4.适度运动走路，改善代谢，预防感冒\n\n\n【服用非诺贝特期间】\n严格禁酒，避免肝损伤\n【服用达格列净期间】\n特别比平时多喝水，多排尿，避免尿路感染，避免久坐、不憋尿",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\"><br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">日常特别注意</span><span style=\"font-size:12pt;color:#000000\">：<br>1.主任强调管住嘴，控制饮食，才能保护肾（甘油三酯、肌酐高都和饮食有关）<br>2.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">主食</span><span style=\"font-size:12pt;color:#000000\">（面条、米饭等）和肉类（肉汤）减量、不吃零食、甜食、加工食品，戒烟酒<br>3.低蛋白饮食要继续（少吃豆制品、豆浆、冲调的豆奶等，控制尿酸不吃贝壳类、海蛎等）<br>4.适度运动走路，改善代谢，预防感冒<br><br><br>【服用非诺贝特期间】<br>严格禁酒，避免肝损伤<br>【服用达格列净期间】<br>特别比平时多喝水，多排尿，避免尿路感染，避免久坐、不憋尿<br><br></span>",
+      "remark": "",
+      "remarkHtml": "",
+      "reports": [
+        {
+          "id": "daily_report_1782439190886_9493a6bceaa59",
+          "reportType": "lab",
+          "title": "尿常规;尿沉渣定量(流式法)",
+          "reportDate": "2026-03-01",
+          "department": "肾",
+          "sampleType": "合格",
+          "rawOcrText": "尿常规;尿沉渣定量(流式法)\n条码号2414082406\n类型:\n患者姓名：\n罗宏智\n门诊检验\n病历号：\nP12056597-床号：\n0\n尿液\n标本状态：\n标本类型：\n合格\n申请医生：\n泌尿外科\n申请科室：\n报告时间：\n2025-08-16 10:29:35\n参考值\n标志\n单位\n说明\n检验值\n尿颜色\n黄色\n清亮\n()\n尿透明度\n阴性\n尿葡萄糖\n(阴性)\n(阴性)\n尿胆红素\n阴性\n尿酮体\n阴性\n(阴性)\n尿比重\n1.013\n(1.003~\n1.030)\n尿pH\n(5.0~8.0)\n6.0\n(阴性)\n尿蛋白定性\n阴性\n尿胆原\n阴性\n(阴性)\n阴性\n(阴性)\n尿亚硝酸盐\n尿隐血\n阴性\n(阴性)\n(阴性)\n阴性\n尿白细胞酯酶\n红细胞\n/μL\n(0.0~15.0)\n1.9\n白细胞\n/μL\n(0.0~18.0)\n1.9\n/μL\n上皮细胞\n(0.0~5.7)\n1.1\n/μL\n鳞状上皮细胞\n0.7\n()\n/μL\n0.4\n非鳞状上皮细胞\n()\n管型\n/μL\n(0.0~1.3)\n0.0\n/μL\n透明管型\n(0.0~1.3)\n0.0\n(0.0)\n/μL\n病理管型\n0\n/μL\n结晶\n(0.0~6.0)\n0.0\n细菌\n/μL\n(0.0~11.4)\n2.3\n/μL\n(0.0)\n酵母菌\n0\n/μL\n粘液丝\n0.1\n()",
+          "items": [
+            {
+              "id": "lab_item_1782442777529_71b01e5fa78028",
+              "name": "尿颜色",
+              "normalizedName": "尿颜色",
+              "value": "黄色",
+              "valueText": "黄色",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": {
+                "type": "empty",
+                "text": ""
+              },
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "[objectObject]"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777529_be6e5a82d9173",
+              "name": "尿透明度",
+              "normalizedName": "尿透明度",
+              "value": "清亮",
+              "valueText": "清亮",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": {
+                "type": "empty",
+                "text": ""
+              },
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "[objectObject]"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777529_69df00bbc2c5d",
+              "name": "尿葡萄糖",
+              "normalizedName": "尿葡萄糖",
+              "value": "阴性",
+              "valueText": "阴性",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": "阴性",
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "阴性"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777529_dff28766f4183",
+              "name": "尿胆红素",
+              "normalizedName": "尿胆红素",
+              "value": "阴性",
+              "valueText": "阴性",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": "阴性",
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "阴性"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777529_581d13bb12c818",
+              "name": "尿酮体",
+              "normalizedName": "尿酮体",
+              "value": "阴性",
+              "valueText": "阴性",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": "阴性",
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "阴性"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777530_66b603e2e4d75",
+              "name": "尿比重",
+              "normalizedName": "尿比重",
+              "value": "1.013",
+              "valueText": "1.013",
+              "valueNumber": 1.013,
+              "valueType": "number",
+              "reference": "1.003~1.030",
+              "referenceRange": {
+                "type": "range",
+                "text": "1.003~1.030",
+                "low": 1.003,
+                "high": 1.03
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": ""
+            },
+            {
+              "id": "lab_item_1782442777530_fae721c85b964",
+              "name": "尿pH",
+              "normalizedName": "尿ph",
+              "value": "6.0",
+              "valueText": "6.0",
+              "valueNumber": 6,
+              "valueType": "number",
+              "reference": "5.0~8.0",
+              "referenceRange": {
+                "type": "range",
+                "text": "5.0~8.0",
+                "low": 5,
+                "high": 8
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "(阴性)"
+            },
+            {
+              "id": "lab_item_1782442777530_0e5e64f459fdc8",
+              "name": "尿蛋白定性",
+              "normalizedName": "尿蛋白定性",
+              "value": "阴性",
+              "valueText": "阴性",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": "阴性",
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "阴性"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777530_57773d77ffe0b",
+              "name": "尿胆原",
+              "normalizedName": "尿胆原",
+              "value": "阴性",
+              "valueText": "阴性",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": "阴性",
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "阴性"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777530_c854e90187e898",
+              "name": "尿亚硝酸盐",
+              "normalizedName": "尿亚硝酸盐",
+              "value": "阴性",
+              "valueText": "阴性",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": "阴性",
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "阴性"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777530_1c54db66ee51e",
+              "name": "尿隐血",
+              "normalizedName": "尿隐血",
+              "value": "阴性",
+              "valueText": "阴性",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": "阴性",
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "阴性"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777530_9cd211f1a3fd48",
+              "name": "尿白细胞酯酶",
+              "normalizedName": "尿白细胞酯酶",
+              "value": "阴性",
+              "valueText": "阴性",
+              "valueNumber": null,
+              "valueType": "text",
+              "reference": "阴性",
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "阴性"
+              },
+              "flag": "normal",
+              "unit": "",
+              "note": "按尿常规报告结构校正"
+            },
+            {
+              "id": "lab_item_1782442777530_29f7fcb50a0ca8",
+              "name": "红细胞",
+              "normalizedName": "红细胞",
+              "value": "1.9",
+              "valueText": "1.9",
+              "valueNumber": 1.9,
+              "valueType": "number",
+              "reference": "0.0~15.0",
+              "referenceRange": {
+                "type": "range",
+                "text": "0.0~15.0",
+                "low": 0,
+                "high": 15
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": ""
+            },
+            {
+              "id": "lab_item_1782442777530_12129f1e25e3c8",
+              "name": "白细胞",
+              "normalizedName": "白细胞",
+              "value": "1.9",
+              "valueText": "1.9",
+              "valueNumber": 1.9,
+              "valueType": "number",
+              "reference": "0.0~18.0",
+              "referenceRange": {
+                "type": "range",
+                "text": "0.0~18.0",
+                "low": 0,
+                "high": 18
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": "/μL"
+            },
+            {
+              "id": "lab_item_1782442777530_21c64c948c4c1",
+              "name": "上皮细胞",
+              "normalizedName": "上皮细胞",
+              "value": "1.1",
+              "valueText": "1.1",
+              "valueNumber": 1.1,
+              "valueType": "number",
+              "reference": "0.0~5.7",
+              "referenceRange": {
+                "type": "range",
+                "text": "0.0~5.7",
+                "low": 0,
+                "high": 5.7
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": ""
+            },
+            {
+              "id": "lab_item_1782442777530_25acee5bf276c8",
+              "name": "鳞状上皮细胞",
+              "normalizedName": "鳞状上皮细胞",
+              "value": "0.7",
+              "valueText": "0.7",
+              "valueNumber": 0.7,
+              "valueType": "number",
+              "reference": {
+                "type": "empty",
+                "text": ""
+              },
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "[objectObject]"
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": "0.4"
+            },
+            {
+              "id": "lab_item_1782442777530_6fb85b171b8a38",
+              "name": "非鳞状上皮细胞",
+              "normalizedName": "非鳞状上皮细胞",
+              "value": "0.4",
+              "valueText": "0.4",
+              "valueNumber": 0.4,
+              "valueType": "number",
+              "reference": {
+                "type": "empty",
+                "text": ""
+              },
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "[objectObject]"
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": ""
+            },
+            {
+              "id": "lab_item_1782442777530_574104227b0748",
+              "name": "管型",
+              "normalizedName": "管型",
+              "value": "0.0",
+              "valueText": "0.0",
+              "valueNumber": 0,
+              "valueType": "number",
+              "reference": "0.0~1.3",
+              "referenceRange": {
+                "type": "range",
+                "text": "0.0~1.3",
+                "low": 0,
+                "high": 1.3
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": "/μL"
+            },
+            {
+              "id": "lab_item_1782442777530_be9fa1eed629d8",
+              "name": "透明管型",
+              "normalizedName": "透明管型",
+              "value": "0.0",
+              "valueText": "0.0",
+              "valueNumber": 0,
+              "valueType": "number",
+              "reference": "0.0~1.3",
+              "referenceRange": {
+                "type": "range",
+                "text": "0.0~1.3",
+                "low": 0,
+                "high": 1.3
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": "(0.0)"
+            },
+            {
+              "id": "lab_item_1782442777530_db40a717c381c8",
+              "name": "病理管型",
+              "normalizedName": "病理管型",
+              "value": "0",
+              "valueText": "0",
+              "valueNumber": 0,
+              "valueType": "number",
+              "reference": {
+                "type": "empty",
+                "text": ""
+              },
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "[objectObject]"
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": ""
+            },
+            {
+              "id": "lab_item_1782442777530_70afbf67e42eb",
+              "name": "结晶",
+              "normalizedName": "结晶",
+              "value": "0.0",
+              "valueText": "0.0",
+              "valueNumber": 0,
+              "valueType": "number",
+              "reference": "0.0~6.0",
+              "referenceRange": {
+                "type": "range",
+                "text": "0.0~6.0",
+                "low": 0,
+                "high": 6
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": ""
+            },
+            {
+              "id": "lab_item_1782442777530_b561953fdc88c8",
+              "name": "细菌",
+              "normalizedName": "细菌",
+              "value": "2.3",
+              "valueText": "2.3",
+              "valueNumber": 2.3,
+              "valueType": "number",
+              "reference": "0.0~11.4",
+              "referenceRange": {
+                "type": "range",
+                "text": "0.0~11.4",
+                "low": 0,
+                "high": 11.4
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": "/μL (0.0)"
+            },
+            {
+              "id": "lab_item_1782442777530_a5b454ba04c548",
+              "name": "酵母菌",
+              "normalizedName": "酵母菌",
+              "value": "0",
+              "valueText": "0",
+              "valueNumber": 0,
+              "valueType": "number",
+              "reference": {
+                "type": "empty",
+                "text": ""
+              },
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "[objectObject]"
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": ""
+            },
+            {
+              "id": "lab_item_1782442777530_1795ac288cbb58",
+              "name": "粘液丝",
+              "normalizedName": "粘液丝",
+              "value": "0.1",
+              "valueText": "0.1",
+              "valueNumber": 0.1,
+              "valueType": "number",
+              "reference": {
+                "type": "empty",
+                "text": ""
+              },
+              "referenceRange": {
+                "type": "qualitative",
+                "text": "[objectObject]"
+              },
+              "flag": "normal",
+              "unit": "/μL",
+              "note": ""
+            }
+          ],
+          "status": "confirmed",
+          "confirmedAt": "2026/6/26 11:00:18",
+          "files": [
+            {
+              "id": "report_file_1782439627900_650c644aa299c8",
+              "name": "paste-1782439618247.png",
+              "type": "image/jpeg",
+              "size": 408250,
+              "uploadedAt": "2026/6/26 10:07:07"
+            },
+            {
+              "id": "report_file_1782440328396_5a25744d472f48",
+              "name": "paste-1782440323406.png",
+              "type": "image/jpeg",
+              "size": 408250,
+              "uploadedAt": "2026/6/26 10:18:48"
+            },
+            {
+              "id": "report_file_1782441239680_9fdc645c600b6",
+              "name": "paste-1782441234526.png",
+              "type": "image/jpeg",
+              "size": 408250,
+              "uploadedAt": "2026/6/26 10:33:59"
+            },
+            {
+              "id": "report_file_1782441788738_44c42747cd87b8",
+              "name": "paste-1782441783351.png",
+              "type": "image/jpeg",
+              "size": 408250,
+              "uploadedAt": "2026/6/26 10:43:08"
+            },
+            {
+              "id": "report_file_1782442777526_85b60c638c15",
+              "name": "paste-1782442772591.png",
+              "type": "image/jpeg",
+              "size": 408250,
+              "uploadedAt": "2026/6/26 10:59:37"
+            }
+          ],
+          "createdAt": "2026/6/26 09:59:50",
+          "updatedAt": "2026/6/26 10:50:25",
+          "schemaVersion": 2,
+          "meta": {
+            "title": "尿常规;尿沉渣定量(流式法)",
+            "reportDate": "2026-03-01",
+            "department": "肾",
+            "sampleType": "合格",
+            "reportDoctor": "",
+            "reviewDoctor": "",
+            "status": "confirmed",
+            "confirmedAt": "2026/6/26 11:00:18"
+          },
+          "source": {
+            "kind": "ocr-image",
+            "rawOcrText": "尿常规;尿沉渣定量(流式法)\n条码号2414082406\n类型:\n患者姓名：\n罗宏智\n门诊检验\n病历号：\nP12056597-床号：\n0\n尿液\n标本状态：\n标本类型：\n合格\n申请医生：\n泌尿外科\n申请科室：\n报告时间：\n2025-08-16 10:29:35\n参考值\n标志\n单位\n说明\n检验值\n尿颜色\n黄色\n清亮\n()\n尿透明度\n阴性\n尿葡萄糖\n(阴性)\n(阴性)\n尿胆红素\n阴性\n尿酮体\n阴性\n(阴性)\n尿比重\n1.013\n(1.003~\n1.030)\n尿pH\n(5.0~8.0)\n6.0\n(阴性)\n尿蛋白定性\n阴性\n尿胆原\n阴性\n(阴性)\n阴性\n(阴性)\n尿亚硝酸盐\n尿隐血\n阴性\n(阴性)\n(阴性)\n阴性\n尿白细胞酯酶\n红细胞\n/μL\n(0.0~15.0)\n1.9\n白细胞\n/μL\n(0.0~18.0)\n1.9\n/μL\n上皮细胞\n(0.0~5.7)\n1.1\n/μL\n鳞状上皮细胞\n0.7\n()\n/μL\n0.4\n非鳞状上皮细胞\n()\n管型\n/μL\n(0.0~1.3)\n0.0\n/μL\n透明管型\n(0.0~1.3)\n0.0\n(0.0)\n/μL\n病理管型\n0\n/μL\n结晶\n(0.0~6.0)\n0.0\n细菌\n/μL\n(0.0~11.4)\n2.3\n/μL\n(0.0)\n酵母菌\n0\n/μL\n粘液丝\n0.1\n()",
+            "files": [
+              {
+                "id": "report_file_1782439627900_650c644aa299c8",
+                "name": "paste-1782439618247.png",
+                "type": "image/jpeg",
+                "size": 408250,
+                "uploadedAt": "2026/6/26 10:07:07"
+              },
+              {
+                "id": "report_file_1782440328396_5a25744d472f48",
+                "name": "paste-1782440323406.png",
+                "type": "image/jpeg",
+                "size": 408250,
+                "uploadedAt": "2026/6/26 10:18:48"
+              },
+              {
+                "id": "report_file_1782441239680_9fdc645c600b6",
+                "name": "paste-1782441234526.png",
+                "type": "image/jpeg",
+                "size": 408250,
+                "uploadedAt": "2026/6/26 10:33:59"
+              },
+              {
+                "id": "report_file_1782441788738_44c42747cd87b8",
+                "name": "paste-1782441783351.png",
+                "type": "image/jpeg",
+                "size": 408250,
+                "uploadedAt": "2026/6/26 10:43:08"
+              },
+              {
+                "id": "report_file_1782442777526_85b60c638c15",
+                "name": "paste-1782442772591.png",
+                "type": "image/jpeg",
+                "size": 408250,
+                "uploadedAt": "2026/6/26 10:59:37"
+              }
+            ]
+          },
+          "structured": {
+            "type": "lab",
+            "title": "尿常规;尿沉渣定量(流式法)",
+            "reportDate": "2026-03-01",
+            "sampleType": "合格",
+            "metrics": [
+              {
+                "id": "lab_item_1782442777529_71b01e5fa78028",
+                "name": "尿颜色",
+                "normalizedName": "尿颜色",
+                "value": "黄色",
+                "valueText": "黄色",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": {
+                  "type": "empty",
+                  "text": ""
+                },
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "[objectObject]"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777529_be6e5a82d9173",
+                "name": "尿透明度",
+                "normalizedName": "尿透明度",
+                "value": "清亮",
+                "valueText": "清亮",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": {
+                  "type": "empty",
+                  "text": ""
+                },
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "[objectObject]"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777529_69df00bbc2c5d",
+                "name": "尿葡萄糖",
+                "normalizedName": "尿葡萄糖",
+                "value": "阴性",
+                "valueText": "阴性",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": "阴性",
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "阴性"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777529_dff28766f4183",
+                "name": "尿胆红素",
+                "normalizedName": "尿胆红素",
+                "value": "阴性",
+                "valueText": "阴性",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": "阴性",
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "阴性"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777529_581d13bb12c818",
+                "name": "尿酮体",
+                "normalizedName": "尿酮体",
+                "value": "阴性",
+                "valueText": "阴性",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": "阴性",
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "阴性"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777530_66b603e2e4d75",
+                "name": "尿比重",
+                "normalizedName": "尿比重",
+                "value": "1.013",
+                "valueText": "1.013",
+                "valueNumber": 1.013,
+                "valueType": "number",
+                "reference": "1.003~1.030",
+                "referenceRange": {
+                  "type": "range",
+                  "text": "1.003~1.030",
+                  "low": 1.003,
+                  "high": 1.03
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": ""
+              },
+              {
+                "id": "lab_item_1782442777530_fae721c85b964",
+                "name": "尿pH",
+                "normalizedName": "尿ph",
+                "value": "6.0",
+                "valueText": "6.0",
+                "valueNumber": 6,
+                "valueType": "number",
+                "reference": "5.0~8.0",
+                "referenceRange": {
+                  "type": "range",
+                  "text": "5.0~8.0",
+                  "low": 5,
+                  "high": 8
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "(阴性)"
+              },
+              {
+                "id": "lab_item_1782442777530_0e5e64f459fdc8",
+                "name": "尿蛋白定性",
+                "normalizedName": "尿蛋白定性",
+                "value": "阴性",
+                "valueText": "阴性",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": "阴性",
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "阴性"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777530_57773d77ffe0b",
+                "name": "尿胆原",
+                "normalizedName": "尿胆原",
+                "value": "阴性",
+                "valueText": "阴性",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": "阴性",
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "阴性"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777530_c854e90187e898",
+                "name": "尿亚硝酸盐",
+                "normalizedName": "尿亚硝酸盐",
+                "value": "阴性",
+                "valueText": "阴性",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": "阴性",
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "阴性"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777530_1c54db66ee51e",
+                "name": "尿隐血",
+                "normalizedName": "尿隐血",
+                "value": "阴性",
+                "valueText": "阴性",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": "阴性",
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "阴性"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777530_9cd211f1a3fd48",
+                "name": "尿白细胞酯酶",
+                "normalizedName": "尿白细胞酯酶",
+                "value": "阴性",
+                "valueText": "阴性",
+                "valueNumber": null,
+                "valueType": "text",
+                "reference": "阴性",
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "阴性"
+                },
+                "flag": "normal",
+                "unit": "",
+                "note": "按尿常规报告结构校正"
+              },
+              {
+                "id": "lab_item_1782442777530_29f7fcb50a0ca8",
+                "name": "红细胞",
+                "normalizedName": "红细胞",
+                "value": "1.9",
+                "valueText": "1.9",
+                "valueNumber": 1.9,
+                "valueType": "number",
+                "reference": "0.0~15.0",
+                "referenceRange": {
+                  "type": "range",
+                  "text": "0.0~15.0",
+                  "low": 0,
+                  "high": 15
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": ""
+              },
+              {
+                "id": "lab_item_1782442777530_12129f1e25e3c8",
+                "name": "白细胞",
+                "normalizedName": "白细胞",
+                "value": "1.9",
+                "valueText": "1.9",
+                "valueNumber": 1.9,
+                "valueType": "number",
+                "reference": "0.0~18.0",
+                "referenceRange": {
+                  "type": "range",
+                  "text": "0.0~18.0",
+                  "low": 0,
+                  "high": 18
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": "/μL"
+              },
+              {
+                "id": "lab_item_1782442777530_21c64c948c4c1",
+                "name": "上皮细胞",
+                "normalizedName": "上皮细胞",
+                "value": "1.1",
+                "valueText": "1.1",
+                "valueNumber": 1.1,
+                "valueType": "number",
+                "reference": "0.0~5.7",
+                "referenceRange": {
+                  "type": "range",
+                  "text": "0.0~5.7",
+                  "low": 0,
+                  "high": 5.7
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": ""
+              },
+              {
+                "id": "lab_item_1782442777530_25acee5bf276c8",
+                "name": "鳞状上皮细胞",
+                "normalizedName": "鳞状上皮细胞",
+                "value": "0.7",
+                "valueText": "0.7",
+                "valueNumber": 0.7,
+                "valueType": "number",
+                "reference": {
+                  "type": "empty",
+                  "text": ""
+                },
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "[objectObject]"
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": "0.4"
+              },
+              {
+                "id": "lab_item_1782442777530_6fb85b171b8a38",
+                "name": "非鳞状上皮细胞",
+                "normalizedName": "非鳞状上皮细胞",
+                "value": "0.4",
+                "valueText": "0.4",
+                "valueNumber": 0.4,
+                "valueType": "number",
+                "reference": {
+                  "type": "empty",
+                  "text": ""
+                },
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "[objectObject]"
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": ""
+              },
+              {
+                "id": "lab_item_1782442777530_574104227b0748",
+                "name": "管型",
+                "normalizedName": "管型",
+                "value": "0.0",
+                "valueText": "0.0",
+                "valueNumber": 0,
+                "valueType": "number",
+                "reference": "0.0~1.3",
+                "referenceRange": {
+                  "type": "range",
+                  "text": "0.0~1.3",
+                  "low": 0,
+                  "high": 1.3
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": "/μL"
+              },
+              {
+                "id": "lab_item_1782442777530_be9fa1eed629d8",
+                "name": "透明管型",
+                "normalizedName": "透明管型",
+                "value": "0.0",
+                "valueText": "0.0",
+                "valueNumber": 0,
+                "valueType": "number",
+                "reference": "0.0~1.3",
+                "referenceRange": {
+                  "type": "range",
+                  "text": "0.0~1.3",
+                  "low": 0,
+                  "high": 1.3
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": "(0.0)"
+              },
+              {
+                "id": "lab_item_1782442777530_db40a717c381c8",
+                "name": "病理管型",
+                "normalizedName": "病理管型",
+                "value": "0",
+                "valueText": "0",
+                "valueNumber": 0,
+                "valueType": "number",
+                "reference": {
+                  "type": "empty",
+                  "text": ""
+                },
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "[objectObject]"
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": ""
+              },
+              {
+                "id": "lab_item_1782442777530_70afbf67e42eb",
+                "name": "结晶",
+                "normalizedName": "结晶",
+                "value": "0.0",
+                "valueText": "0.0",
+                "valueNumber": 0,
+                "valueType": "number",
+                "reference": "0.0~6.0",
+                "referenceRange": {
+                  "type": "range",
+                  "text": "0.0~6.0",
+                  "low": 0,
+                  "high": 6
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": ""
+              },
+              {
+                "id": "lab_item_1782442777530_b561953fdc88c8",
+                "name": "细菌",
+                "normalizedName": "细菌",
+                "value": "2.3",
+                "valueText": "2.3",
+                "valueNumber": 2.3,
+                "valueType": "number",
+                "reference": "0.0~11.4",
+                "referenceRange": {
+                  "type": "range",
+                  "text": "0.0~11.4",
+                  "low": 0,
+                  "high": 11.4
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": "/μL (0.0)"
+              },
+              {
+                "id": "lab_item_1782442777530_a5b454ba04c548",
+                "name": "酵母菌",
+                "normalizedName": "酵母菌",
+                "value": "0",
+                "valueText": "0",
+                "valueNumber": 0,
+                "valueType": "number",
+                "reference": {
+                  "type": "empty",
+                  "text": ""
+                },
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "[objectObject]"
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": ""
+              },
+              {
+                "id": "lab_item_1782442777530_1795ac288cbb58",
+                "name": "粘液丝",
+                "normalizedName": "粘液丝",
+                "value": "0.1",
+                "valueText": "0.1",
+                "valueNumber": 0.1,
+                "valueType": "number",
+                "reference": {
+                  "type": "empty",
+                  "text": ""
+                },
+                "referenceRange": {
+                  "type": "qualitative",
+                  "text": "[objectObject]"
+                },
+                "flag": "normal",
+                "unit": "/μL",
+                "note": ""
+              }
+            ]
+          }
+        },
+        {
+          "id": "daily_report_1782443219254_d71384b46d1f9",
+          "reportType": "exam",
+          "title": "上腹部CT平扫+MPR重建",
+          "reportDate": "2025-07-18",
+          "department": "肾",
+          "reportDoctor": "张璐娴",
+          "reviewDoctor": "叶锋",
+          "rawOcrText": "÷4G56\n云影像\n<\n上腹部CT平扫+MPR重建\n厦门大学附属中山医院\n2025-07-18\n8基本信息\n申请单号：2025071805690060\n姓名：\n罗宏智\n申请医生：\n报告医生：\n张璐娴\n审核医生：叶锋\n检查所见\n肝脏轮廓光滑，肝叶比例正常，肝内可见小类\n圆形低密度影，直径约4mm。肝门区未见异常\n密度影。胆囊形态、大小正常，内未见异常密\n度影，壁薄，边缘清楚，肝内外胆管未见扩\n张。脾脏不大，内未见异常密度影，脾门下区\n见类圆形等密度结节，界清，径约11mm。胰\n腺形态、大小、密度及位置正常，胆总管未见\n明显异常，胰管未见扩张，边缘规则、清楚。\n腹膜后未见肿大的淋巴结，腹腔未见明确积液\n影。所见胃腔充盈稍欠佳，胃、十二指肠管壁\n未见明显增厚。靶区降结肠积气较多，胃及升\n结肠内容物较多。\n①检查结论/诊断\n肝内小囊肿可能，副脾，必要时增强或进一步\n检查。靶区降结肠积气较多，胃及升结肠内容\n物较多。",
+          "findingText": "肝脏轮廓光滑，肝叶比例正常，肝内可见小类\n圆形低密度影，直径约4mm。肝门区未见异常\n密度影。胆囊形态、大小正常，内未见异常密\n度影，壁薄，边缘清楚，肝内外胆管未见扩\n张。脾脏不大，内未见异常密度影，脾门下区\n见类圆形等密度结节，界清，径约11mm。胰\n腺形态、大小、密度及位置正常，胆总管未见\n明显异常，胰管未见扩张，边缘规则、清楚。\n腹膜后未见肿大的淋巴结，腹腔未见明确积液\n影。所见胃腔充盈稍欠佳，胃、十二指肠管壁\n未见明显增厚。靶区降结肠积气较多，胃及升\n结肠内容物较多。\n①",
+          "conclusionText": "肝内小囊肿可能，副脾，必要时增强或进一步\n检查。靶区降结肠积气较多，胃及升结肠内容\n物较多。",
+          "status": "confirmed",
+          "confirmedAt": "2026/6/26 11:11:53",
+          "files": [
+            {
+              "id": "report_file_1782443224703_4ea0341e451908",
+              "name": "paste-1782443220943.png",
+              "type": "image/jpeg",
+              "size": 544613,
+              "uploadedAt": "2026/6/26 11:07:04"
+            },
+            {
+              "id": "report_file_1782443511707_5bf42245d8e248",
+              "name": "paste-1782443507823.png",
+              "type": "image/jpeg",
+              "size": 544613,
+              "uploadedAt": "2026/6/26 11:11:51"
+            }
+          ],
+          "createdAt": "2026/6/26 11:06:59",
+          "updatedAt": "2026/6/26 11:06:59",
+          "schemaVersion": 2,
+          "meta": {
+            "title": "上腹部CT平扫+MPR重建",
+            "reportDate": "2025-07-18",
+            "department": "肾",
+            "sampleType": "",
+            "reportDoctor": "张璐娴",
+            "reviewDoctor": "叶锋",
+            "status": "confirmed",
+            "confirmedAt": "2026/6/26 11:11:53"
+          },
+          "source": {
+            "kind": "ocr-image",
+            "rawOcrText": "÷4G56\n云影像\n<\n上腹部CT平扫+MPR重建\n厦门大学附属中山医院\n2025-07-18\n8基本信息\n申请单号：2025071805690060\n姓名：\n罗宏智\n申请医生：\n报告医生：\n张璐娴\n审核医生：叶锋\n检查所见\n肝脏轮廓光滑，肝叶比例正常，肝内可见小类\n圆形低密度影，直径约4mm。肝门区未见异常\n密度影。胆囊形态、大小正常，内未见异常密\n度影，壁薄，边缘清楚，肝内外胆管未见扩\n张。脾脏不大，内未见异常密度影，脾门下区\n见类圆形等密度结节，界清，径约11mm。胰\n腺形态、大小、密度及位置正常，胆总管未见\n明显异常，胰管未见扩张，边缘规则、清楚。\n腹膜后未见肿大的淋巴结，腹腔未见明确积液\n影。所见胃腔充盈稍欠佳，胃、十二指肠管壁\n未见明显增厚。靶区降结肠积气较多，胃及升\n结肠内容物较多。\n①检查结论/诊断\n肝内小囊肿可能，副脾，必要时增强或进一步\n检查。靶区降结肠积气较多，胃及升结肠内容\n物较多。",
+            "files": [
+              {
+                "id": "report_file_1782443224703_4ea0341e451908",
+                "name": "paste-1782443220943.png",
+                "type": "image/jpeg",
+                "size": 544613,
+                "uploadedAt": "2026/6/26 11:07:04"
+              },
+              {
+                "id": "report_file_1782443511707_5bf42245d8e248",
+                "name": "paste-1782443507823.png",
+                "type": "image/jpeg",
+                "size": 544613,
+                "uploadedAt": "2026/6/26 11:11:51"
+              }
+            ]
+          },
+          "structured": {
+            "type": "exam",
+            "title": "上腹部CT平扫+MPR重建",
+            "reportDate": "2025-07-18",
+            "sections": [
+              {
+                "key": "finding",
+                "title": "检查所见",
+                "text": "肝脏轮廓光滑，肝叶比例正常，肝内可见小类圆形低密度影，直径约4mm。肝门区未见异常密度影。胆囊形态、大小正常，内未见异常密度影，壁薄，边缘清楚，肝内外胆管未见扩张。脾脏不大，内未见异常密度影，脾门下区见类圆形等密度结节，界清，径约11mm。胰腺形态、大小、密度及位置正常，胆总管未见明显异常，胰管未见扩张，边缘规则、清楚。腹膜后未见肿大的淋巴结，腹腔未见明确积液影。所见胃腔充盈稍欠佳，胃、十二指肠管壁未见明显增厚。靶区降结肠积气较多，胃及升结肠内容物较多。"
+              },
+              {
+                "key": "conclusion",
+                "title": "检查结论/诊断",
+                "text": "肝内小囊肿可能，副脾，必要时增强或进一步检查。靶区降结肠积气较多，胃及升结肠内容物较多。"
+              }
+            ],
+            "doctors": {
+              "reportDoctor": "张璐娴",
+              "reviewDoctor": "叶锋"
+            }
+          }
+        }
+      ],
+      "source": "excel-import",
+      "createdAt": "2026/6/26 09:31:39",
+      "updatedAt": "2026/6/26 11:11:53"
+    },
+    {
+      "id": "daily_month_1782437499368_40686282d00af",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "肾",
+      "month": "2025-11",
+      "content": "11月21日 复查 凌\n1.生化常规、肌酐、egfr等指标转好\n2.甘油三酯高先控制主食，如果没有改善就吃药，非诺贝特\n3.尿蛋白变化不大，比原来稍微好一点，蛋白尿尽量控制，实在不能恢复阴性也没办法，主要是饮食和药物\n4.达格列净要继续吃（上次开了个1个月），如果有尿痛、尿急及时就医\n5.多天多次测量心率大于75还是得恢复美托洛尔，\n6.继续现有的方案（原降压药+达格列净继续吃，再加一个非诺贝特胶囊降血脂）\n7.下次复查时间2~3个月（2026年1月21或2月21）\n11月15日复查 凌\n1.复查了尿常规（弱阳，无尿路感染）、尿蛋白、生化常规（这次血常规结果 相比6月 egfr从57.6到70.2（肾炎3期逆转到了2期） 糖从6.23到5，肌酐从116到98，尿酸从482到410，基本全部回归正常参考值，但是甘油三酯从3.23到了3.77）\n2.之前达格列净由于复查不及时，停了3个月，影响了治疗；尿路感染好了就考虑加上去\n3.最近两次99/62 98/68，血压低于110/70，心率不高于（80）考虑暂停美托洛尔\n4.等其他结果出来再复查，尿常规结果是好的，下次复查主要看报告\n5.豆制品（豆浆、豆奶、包括牛奶 影响很大）控制总量摄入",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">11月21日 复查 凌</span><span style=\"font-size:12pt;color:#000000\"><br>1.生化常规、肌酐、egfr等指标转好<br>2.甘油三酯高先控制主食，如果没有改善就吃药，非诺贝特<br>3.尿蛋白变化不大，比原来稍微好一点，蛋白尿尽量控制，实在不能恢复阴性也没办法，主要是饮食和药物<br>4.达格列净要继续吃（上次开了个1个月），如果有尿痛、尿急及时就医<br>5.多天多次测量心率大于75还是得恢复美托洛尔，<br>6.继续现有的方案（原降压药+达格列净继续吃，再加一个非诺贝特胶囊降血脂）<br>7.下次复查时间</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">2~3个月</span><span style=\"font-size:12pt;color:#000000\">（2026年1月21或2月21）<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">11月15日</span><span style=\"font-size:12pt;color:#000000\">复查 凌<br>1.复查了</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿常规</span><span style=\"font-size:12pt;color:#000000\">（弱阳，无尿路感染）、尿蛋白、</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">生化常规</span><span style=\"font-size:12pt;color:#000000\">（这次血常规结果 相比6月 egfr从57.6到70.2（肾炎3期逆转到了2期） 糖从6.23到5，肌酐从116到98，尿酸从482到410，基本全部回归正常参考值，但是甘油三酯从3.23到了3.77）<br>2.之前达格列净由于复查不及时，停了3个月，影响了治疗；尿路感染好了就考虑加上去<br>3.最近两次99/62 98/68，血压低于110/70，心率不高于（80）考虑暂停美托洛尔<br>4.等其他结果出来再复查，尿常规结果是好的，下次复查主要看报告<br>5.豆制品（豆浆、豆奶、包括牛奶 影响很大）控制总量摄入</span>",
+      "notes": "1.加了达格列净，服药后多喝水多小便，这样才不容易尿路感染\n2.暂停美托洛尔（半片）观察血压能否稳定110/70左右，心率不高于75\n3.控制蛋白质摄入总量，限制高蛋白食物（奶制品、豆制品、虾及带壳海鲜）摄入\n\n服用达格列净 日常自查与预防建议\n1.每日观察尿液颜色、透明度，排尿时留意是否有尿痛、尿急等不适。\n2.多喝水，每日饮水量保持在 1500-2000ml，通过尿液冲刷尿道，减少细菌滋生。\n3.注意个人卫生，每日清洗外阴，避免细菌逆行感染；避免久坐、憋尿，憋尿时间不超过 2 小时。\n4.饮食清淡，减少辛辣、油腻食物摄入，避免加重尿路刺激。",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\">1.加了达格列净，服药后多喝水多小便，这样才不容易尿路感染<br>2.暂停美托洛尔（半片）观察血压能否稳定110/70左右，心率不高于75<br>3.控制蛋白质摄入总量，限制高蛋白食物（奶制品、豆制品、虾及带壳海鲜）摄入<br><br>服用</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">达格列净</span><span style=\"font-size:12pt;color:#000000\"> 日常自查与预防建议<br>1.每日观察尿液颜色、透明度，排尿时留意是否有</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿痛、尿急</span><span style=\"font-size:12pt;color:#000000\">等不适。<br>2.多喝水，</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">每日饮水量保持在 1500-2000ml</span><span style=\"font-size:12pt;color:#000000\">，通过尿液冲刷尿道，减少细菌滋生。<br>3.注意个人卫生，每日清洗外阴，避免细菌逆行感染；</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">避免久坐、憋尿</span><span style=\"font-size:12pt;color:#000000\">，憋尿时间不超过 2 小时。<br>4.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">饮食清淡，减少辛辣、油腻食物摄入</span><span style=\"font-size:12pt;color:#000000\">，避免加重尿路刺激。<br></span>",
+      "remark": "",
+      "remarkHtml": "",
+      "reports": [],
+      "source": "excel-import",
+      "createdAt": "2026/6/26 09:31:39",
+      "updatedAt": "2026/6/26 09:31:39"
+    },
+    {
+      "id": "daily_month_1782437499369_b787efafac9298",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "肾",
+      "month": "2025-08",
+      "content": "8月9日复查 凌\n1.复查尿常规 尿路感染细菌消失，但是为巩固还是开了1周头孢地尼\n2.尿蛋白需要继续控制（如达格列净），但是目前考虑炎症刚好，先不恢复达格列净避免再感染\n3.尿蛋白1+转弱阳，有好转，但是目标是要控制在阴性。建议1个月左右后复查（9月9日）\n4.询问如何长期控制，主任提醒（1）如果用药有效就继续用药（2）继续控制饮食和生活习惯，定期复查，要一段时间复查再根据实际情况来定（因为这个要长期观察）\n5.提示如果有低血压不适症状，可考虑停美托洛尔观察\n6.单独询问，保守治疗后续肾功能下降的可能性，主任说还好，如果能稳定控制蛋白尿治疗效果好，可长期稳定\n8月2日复查 凌\n1.停达格列净（可能会引起尿路感染）\n2.糖化血红蛋白5.9(4~6)，空腹葡糖糖5.23(5.9~6.1)，确认无糖尿病\n3.长期控制蛋白尿在低水平、血压控制在理想水平、糖控制在低水平\n4.复查发现尿路感染，开头孢地尼一周后复查看是否对症（复查尿常规不用空腹），提示前列腺增生易发尿流感染\n5.做肾穿在于查病因对症治疗，是否必须取决于复查蛋白尿是否能稳定控制在低水平，如果多次控制不理想建议做\n6.禁用肾毒性药物如布洛芬（如出现感冒等避免自行用药）",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">8月9日复查 凌</span><span style=\"font-size:12pt;color:#000000\"><br>1.复查尿常规 尿路感染细菌消失，但是为</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">巩固</span><span style=\"font-size:12pt;color:#000000\">还是开了1周头孢地尼<br>2.尿蛋白需要</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">继续控制</span><span style=\"font-size:12pt;color:#000000\">（如达格列净），但是目前考虑炎症刚好，先不恢复达格列净避免再感染<br>3.尿蛋白1+转弱阳，有好转，但是目标是要控制在</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">阴性</span><span style=\"font-size:12pt;color:#000000\">。建议</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">1个月左</span><span style=\"font-size:12pt;color:#000000\">右后复查（9月9日）<br>4.询问如何长期控制，主任提醒</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">（1）如果用药有效就继续用药（2）继续控制饮食和生活习惯，定期复查</span><span style=\"font-size:12pt;color:#000000\">，要一段时间复查再根据实际情况来定（因为这个要长期观察）<br>5.提示如果有低血压不适症状，可考虑停美托洛尔观察<br>6.单独询问，保守治疗后续肾功能下降的可能性，主任说还好，如果能</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">稳定控制</span><span style=\"font-size:12pt;color:#000000\">蛋白尿治疗效果好，可长期稳定<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">8月2日复查 凌</span><span style=\"font-size:12pt;color:#000000\"><br>1.停达格列净（可能会引起尿路感染）<br>2.糖化血红蛋白5.9(4~6)，空腹葡糖糖5.23(5.9~6.1)，确认无糖尿病<br>3.长期控制蛋白尿在低水平、血压控制在理想水平、糖控制在低水平<br>4.复查发现尿路感染，开头孢地尼一周后复查看是否对症（复查尿常规不用空腹），提示前列腺增生易发尿流感染<br>5.做肾穿在于查病因对症治疗，是否必须取决于复查蛋白尿是否能稳定控制在低水平，如果多次控制不理想建议做<br>6.禁用肾毒性药物如布洛芬（如出现感冒等避免自行用药）</span>",
+      "notes": "1.避免感冒(注意保暖，保证睡眠)、尿路感染(多喝水、多排尿)\n等影响肾功能的诱因\n\n2.日常遵循低盐、低糖、低油、低脂肪饮食\n少吃:酱油、味精、面食、面包、荔枝、龙眼、葡萄、哈密瓜、西瓜、芒果等高糖水果(可适量吃低糖水果:如苹果、草莓，樱桃、梨、柑橘)\n不吃:饼干、香肠、方便面、蛋糕、蜂蜜、糖果\n\n3.遵循低蛋白饮食\n适量吃优质蛋白:鱼、瘦肉、蛋、牛奶\n严格限制:豆制品如豆腐、豆浆、大豆、戒掉含糖饮料和食品(可\n乐、果汁、甜点)\n\n4.平时多喝白开水(最简单有效的“排毒”和预防尿路感染的方法)注意尿量(不憋尿)，不吃辛辣油炸刺激食品\n\n5.定期监测血压，目标控制在 120/80mmHg 以下,(不低于 105/65)",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\">1.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">避免感冒</span><span style=\"font-size:12pt;color:#000000\">(注意保暖，保证睡眠)、</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿路感染</span><span style=\"font-size:12pt;color:#000000\">(多喝水、多排尿)<br>等影响肾功能的诱因<br><br>2.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">日常遵循低盐、低糖、低油、低脂肪</span><span style=\"font-size:12pt;color:#000000\">饮食<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">少吃:</span><span style=\"font-size:12pt;color:#000000\">酱油、味精、面食、面包、荔枝、龙眼、葡萄、哈密瓜、西瓜、芒果等高糖水果(可适量吃低糖水果:如苹果、草莓，樱桃、梨、柑橘)<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">不吃:</span><span style=\"font-size:12pt;color:#000000\">饼干、香肠、方便面、蛋糕、蜂蜜、糖果<br><br>3.遵循</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">低蛋白饮食</span><span style=\"font-size:12pt;color:#000000\"><br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">适量吃</span><span style=\"font-size:12pt;color:#000000\">优质蛋白:鱼、瘦肉、蛋、牛奶<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">严格限制</span><span style=\"font-size:12pt;color:#000000\">:</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">豆制品</span><span style=\"font-size:12pt;color:#000000\">如豆腐、豆浆、大豆、戒掉</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">含糖饮料</span><span style=\"font-size:12pt;color:#000000\">和食品(可<br>乐、果汁、甜点)<br><br>4.平时</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">多喝白开水</span><span style=\"font-size:12pt;color:#000000\">(最简单有效的“排毒”和预防尿路感染的方法)注意尿量(</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">不憋尿</span><span style=\"font-size:12pt;color:#000000\">)，不吃辛辣油炸刺激食品<br><br>5.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">定期监测血压</span><span style=\"font-size:12pt;color:#000000\">，目标控制在 120/80mmHg 以下,(不低于 105/65)</span>",
+      "remark": "延后2个月11月左右复查",
+      "remarkHtml": "延后2个月11月左右复查",
+      "reports": [],
+      "source": "excel-import",
+      "createdAt": "2026/6/26 09:31:39",
+      "updatedAt": "2026/6/26 09:31:39"
+    },
+    {
+      "id": "daily_month_1782437499370_67e77b2290a318",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "肾",
+      "month": "2025-07",
+      "content": "7月4日 肾内科凌\n初诊 肾小球炎 开达格列净片，建议一个月后复查（8月）\n6月30日 肾内科凌\n（针对复查除尿蛋白1+和肌酐116）开了进一步的蛋白尿检查，需要根据检查情况评估",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">7月4日 肾内科凌</span><span style=\"font-size:12pt;color:#000000\"><br>初诊 肾小球炎 开达格列净片，建议一个月后复查（8月）<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">6月30日 肾内科凌</span><span style=\"font-size:12pt;color:#000000\"><br>（针对复查除尿蛋白1+和肌酐116）开了进一步的蛋白尿检查，需要根据检查情况评估<br></span>",
+      "notes": "同时用药：都是早上吃\n降压：奥美沙坦酯片20mg（1片）饭前、琥珀酸美托洛尔47.5mg（半片）、\n良性前列腺：非那雄胺片5mg（1片）、盐酸坦索罗辛胶囊0.2mg（1粒）\n\n达格列净10mg 1片",
+      "notesHtml": "同时用药：都是早上吃<br>降压：奥美沙坦酯片20mg（1片）饭前、琥珀酸美托洛尔47.5mg（半片）、<br>良性前列腺：非那雄胺片5mg（1片）、盐酸坦索罗辛胶囊0.2mg（1粒）<br><br>达格列净10mg 1片",
+      "remark": "",
+      "remarkHtml": "",
+      "reports": [],
+      "source": "excel-import",
+      "createdAt": "2026/6/26 09:31:39",
+      "updatedAt": "2026/6/26 09:31:39"
+    },
+    {
+      "id": "daily_month_1782437499371_32dc4afb060f9",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "泌尿",
+      "month": "2025-08",
+      "content": "8月2日复查 张\n1.提示前列腺比较大，以目前情况需要做前列腺增生微创手术的概率比较大，膀胱受损建议尽早微创手术（保护膀胱、恢复排尿）\n2.手术主要影响性功能、慢性肾炎对手术影响较小\n3.建议严格控制尿酸（尿酸控制好，肌酐会有改善），低嘌呤饮食（特别强调不喝汤各种汤因为嘌呤最高、不吃贝壳类），鱼可以适量吃，豆制品少吃\n4.停了坦索罗辛，换了多沙唑嗪，提示有症状就要吃，半年~1年复查（2026年8月）",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">8月2日复查 张</span><span style=\"font-size:12pt;color:#000000\"><br>1.提示前列腺比较大，以目前情况需要做前列腺增生微创手术的概率比较大，膀胱受损建议尽早微创手术（保护膀胱、恢复排尿）<br>2.手术主要影响性功能、慢性肾炎对手术影响较小<br>3.建议严格控制尿酸（</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿酸控制好，肌酐会有改善</span><span style=\"font-size:12pt;color:#000000\">），低嘌呤饮食（特别强调不喝汤各种汤因为嘌呤最高、不吃贝壳类），鱼可以适量吃，豆制品少吃<br>4.停了坦索罗辛，换了多沙唑嗪，提示有症状就要吃，半年~1年复查（2026年8月）</span>",
+      "notes": "主任建议日常注意：\n1.严格控制尿酸（尿酸控制好，肌酐会有改善），低嘌呤饮食（特别强调严格限制不喝汤各种汤因为嘌呤最高、不吃贝壳类动物内脏螃蟹），鱼可以适量吃，豆制品少吃\n啤酒（酒精会抑制尿酸排泄）；\n2.避免久坐（每坐45-60分钟，就起身活动5-10分钟。可以接杯水、上个厕所、在室内走动一下。目的是减轻对前列腺的压迫，促进盆腔血液循环。）每周适当有氧运动（30分钟~60分钟 快走、散步等）",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\">主任建议日常注意：<br>1.严格控制</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿酸</span><span style=\"font-size:12pt;color:#000000\">（尿酸控制好，肌酐会有改善），</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">低嘌呤</span><span style=\"font-size:12pt;color:#000000\">饮食（特别强调严格限制不喝汤各种</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">汤</span><span style=\"font-size:12pt;color:#000000\">因为嘌呤最高、不吃</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">贝壳</span><span style=\"font-size:12pt;color:#000000\">类动物内脏螃蟹），鱼可以适量吃，豆制品少吃<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">啤酒</span><span style=\"font-size:12pt;color:#000000\">（酒精会抑制尿酸排泄）；<br>2.避免</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">久坐</span><span style=\"font-size:12pt;color:#000000\">（每坐45-60分钟，就起身活动5-10分钟。可以接杯水、上个厕所、在室内走动一下。目的是减轻对前列腺的压迫，促进盆腔血液循环。）每周适当有氧</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">运动</span><span style=\"font-size:12pt;color:#000000\">（30分钟~60分钟 快走、散步等）<br></span>",
+      "remark": "",
+      "remarkHtml": "",
+      "reports": [],
+      "source": "excel-import",
+      "createdAt": "2026/6/26 09:31:39",
+      "updatedAt": "2026/6/26 09:31:39"
+    },
+    {
+      "id": "daily_month_1782437499371_916356ab1d28b8",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "泌尿",
+      "month": "2025-07",
+      "content": "7月5日 泌尿外科 \n 做前列腺增强磁共振，结果：前列腺增生（PI-RADS 2分）。慢性膀胱炎可能。",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">7月5日 泌尿外科 </span><span style=\"font-size:12pt;color:#000000\"><br> 做前列腺增强磁共振，结果：前列腺增生（PI-RADS 2分）。慢性膀胱炎可能。</span>",
+      "notes": "",
+      "notesHtml": "",
+      "remark": "",
+      "remarkHtml": "",
+      "reports": [],
+      "source": "excel-import",
+      "createdAt": "2026/6/26 09:31:39",
+      "updatedAt": "2026/6/26 09:31:39"
+    },
+    {
+      "id": "daily_month_1782437499371_1a75c48860d388",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "泌尿",
+      "month": "2025-06",
+      "content": "6月30日 泌尿科苏主任\n提示前列腺总抗原正常，开了前列腺磁共振，尿常规复查（复查除尿蛋白其他恢复正常）\n6月22日 泌尿科沈主任 \n尿路感染 开了消炎药",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">6月30日 泌尿科苏主任</span><span style=\"font-size:12pt;color:#000000\"><br>提示前列腺总抗原正常，开了前列腺磁共振，尿常规复查（复查除尿蛋白其他恢复正常）<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">6月22日 泌尿科沈主任 </span><span style=\"font-size:12pt;color:#000000\"><br>尿路感染 开了消炎药</span>",
+      "notes": "",
+      "notesHtml": "",
+      "remark": "",
+      "remarkHtml": "",
+      "reports": [],
+      "source": "excel-import",
+      "createdAt": "2026/6/26 09:31:39",
+      "updatedAt": "2026/6/26 09:31:39"
+    },
+    {
+      "id": "daily_month_1782437499372_7fca41aa6f7d68",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "内分泌",
+      "month": "2025-06",
+      "content": "6月22日 阙主任\n关注血脂、血糖、尿酸高，建议家里少盐少油少糖、不吃煎炸东西，不吃内脏、戒烟酒，炖汤及海鲜少吃，平时不吃太饱、注意控制体重。建议调整饮食后3个月复查（9月22日左右），先饮食调整不行就得用药",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">6月22日 阙主任</span><span style=\"font-size:12pt;color:#000000\"><br>关注血脂、血糖、尿酸高，建议家里</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">少盐少油少糖、不吃煎炸东西，不吃内脏、戒烟酒，炖汤及海鲜少吃</span><span style=\"font-size:12pt;color:#000000\">，</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">平时不吃太饱、注意控制体重。</span><span style=\"font-size:12pt;color:#000000\">建议调整饮食后3个月复查（9月22日左右），先饮食调整不行就得用药</span>",
+      "notes": "主任建议日常注意：\n1.建议家里少盐少油少糖、不吃煎炸东西，不吃内脏、戒烟酒，炖汤及海鲜少吃\n2.平时不吃太饱、注意控制体重。",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\">主任建议日常注意：<br>1.建议家里少盐少油少糖、不吃煎炸东西，不吃内脏、戒烟酒，炖汤及海鲜少吃<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">2.平时不吃太饱、注意控制体重。</span>",
+      "remark": "",
+      "remarkHtml": "",
+      "reports": [],
+      "source": "excel-import",
+      "createdAt": "2026/6/26 09:31:39",
+      "updatedAt": "2026/6/26 09:31:39"
+    },
+    {
+      "id": "daily_month_1782437499373_641ca60210101",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "其他",
+      "month": "2025-08",
+      "content": "当前用药",
+      "contentHtml": "当前用药",
+      "notes": "",
+      "notesHtml": "",
+      "remark": "",
+      "remarkHtml": "",
+      "reports": [],
+      "source": "excel-import",
+      "createdAt": "2026/6/26 09:31:39",
+      "updatedAt": "2026/6/26 09:31:39"
+    }
+  ],
   "dailyRecords": []
 }

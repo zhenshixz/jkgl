@@ -1212,6 +1212,141 @@
         color: var(--action);
         font-weight: 700;
       }
+      .daily-report-counts {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.4;
+      }
+      .daily-report-dialog .el-dialog__body {
+        padding-top: 12px;
+      }
+      .report-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .report-workspace {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        gap: 14px;
+        min-height: 520px;
+      }
+      .report-list {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #f8fafc;
+        padding: 8px;
+        overflow: auto;
+      }
+      .report-list-item {
+        width: 100%;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        background: transparent;
+        padding: 10px;
+        margin-bottom: 6px;
+        text-align: left;
+        cursor: pointer;
+        color: var(--text);
+      }
+      .report-list-item strong,
+      .report-list-item span {
+        display: block;
+      }
+      .report-list-item strong {
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+      .report-list-item span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .report-list-item.active {
+        border-color: var(--brand);
+        background: #fff;
+        box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+      }
+      .report-empty {
+        padding: 24px 8px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .report-detail {
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        background: #fff;
+      }
+      .report-header-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .report-section-title {
+        margin: 12px 0 8px;
+        color: var(--text);
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .report-paste-box {
+        border: 1px dashed var(--brand);
+        border-radius: 8px;
+        background: #f0fdfa;
+        color: #0f766e;
+        padding: 12px;
+        margin-bottom: 10px;
+        line-height: 1.6;
+        font-size: 13px;
+        outline: none;
+        cursor: text;
+      }
+      .report-paste-box:focus {
+        box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.16);
+      }
+      .report-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        margin: 10px 0 12px;
+      }
+      .report-view-card {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #fff;
+        padding: 14px;
+      }
+      .report-view-meta {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin: 10px 0 14px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .report-view-meta span {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .report-text-view {
+        white-space: pre-wrap;
+        line-height: 1.8;
+        color: var(--text);
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+        min-height: 72px;
+        word-break: break-word;
+      }
       .daily-layout .main,
       .daily-layout {
         height: auto !important;
@@ -1246,7 +1381,7 @@
           <button :class="{ active: view === 'plans' }" @click="view = 'plans'">体检规划</button>
           <button :class="{ active: view === 'tracking' }" @click="view = 'tracking'">体检分析</button>
           
-          <div class="nav-group-title">日常就诊</div>
+          <div class="nav-group-title">日常管理</div>
           <button :class="{ active: view === 'daily' }" @click="view = 'daily'; onDailyMemberChange()">日常检查</button>
           
           <div class="nav-group-title">基础信息</div>
@@ -1593,8 +1728,8 @@
                               <strong style="font-size: 16px; color: #065f46;">{{ plan.name }}</strong>
                               <span style="font-size: 13px; color: #047857;">({{ plan.items.filter(i => i.status !== 'exclude').length }} 项)</span>
                             </div>
-                            <el-button type="success" plain size="default" :loading="plan._ocrRunning" @click.stop="openTrackingOcr(plan)">
-                              <el-icon><Camera /></el-icon><span style="margin-left: 4px;">导入结果</span>
+                            <el-button type="success" plain size="default" @click.stop="openTrackingExcel(plan)">
+                              <el-icon><Document /></el-icon><span style="margin-left: 4px;">导入结果</span>
                             </el-button>
                           </div>
                           <div style="padding: 16px;">
@@ -1616,12 +1751,11 @@
                                   <el-input v-model="row.reference" @change="persist" style="font-size: 15px;"></el-input>
                                 </template>
                               </el-table-column>
-                              <el-table-column label="异常标记" width="110" align="center">
+                              <el-table-column label="标记" width="110" align="center">
                                 <template #default="{ row }">
                                   <el-select v-model="row.abnormalStatus" @change="persist" size="default" style="font-size: 15px;">
                                     <el-option label="正常" value="normal"></el-option>
-                                    <el-option label="异常" value="abnormal"></el-option>
-                                    <el-option label="关注" value="watch"></el-option>
+                                    <el-option label="复查" value="abnormal"></el-option>
                                   </el-select>
                                 </template>
                               </el-table-column>
@@ -1739,10 +1873,11 @@
                         <el-table-column label="检查结果" width="170">
                           <template #default="{ row }">
                             <div style="display: flex; flex-direction: column; gap: 8px;">
-                              <el-button size="small" plain @click="openDailyReportDialog(row)">查看/上传报告 ({{ row.reports?.length || 0 }})</el-button>
-                              <el-tag size="small" :type="row.reports?.length ? 'success' : 'info'" effect="plain">
-                                {{ row.reports?.length ? '已预留解析' : '待上传' }}
-                              </el-tag>
+                              <el-button size="small" plain @click="openDailyReportDialog(row)">查看报告 ({{ row.reports?.length || 0 }})</el-button>
+                              <div class="daily-report-counts">
+                                <span>检验 {{ getDailyReportCount(row, 'lab') }}</span>
+                                <span>检查 {{ getDailyReportCount(row, 'exam') }}</span>
+                              </div>
                             </div>
                           </template>
                         </el-table-column>
@@ -1845,29 +1980,196 @@
         <el-button type="primary" @click="saveDailyDeptEditor">保存</el-button>
       </template>
     </el-dialog>
-    <!-- 弹窗：月度检查报告预留 -->
-    <el-dialog v-model="dailyReportDialog.visible" title="检查结果与报告" width="760px">
+    <!-- 弹窗：月度检查报告 -->
+    <el-dialog v-model="dailyReportDialog.visible" title="检查结果与报告" width="1180px" class="daily-report-dialog">
       <div v-if="dailyReportDialog.row" style="display: flex; flex-direction: column; gap: 14px;">
         <div style="display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 14px;">
           <span>{{ dailyReportDialog.row.department }} / {{ dailyReportDialog.row.month }}</span>
           <span>已关联 {{ dailyReportDialog.row.reports?.length || 0 }} 份报告</span>
         </div>
-        <div style="border: 1px dashed var(--line); border-radius: 8px; padding: 18px; background: #fafafa;">
-          <div style="font-weight: 700; margin-bottom: 8px;">报告解析功能预留</div>
-          <div style="color: var(--muted); line-height: 1.8;">
-            后续这里会支持上传图片或 PDF，并保存 OCR 原文、解析后的检查指标、异常标记和报告文件关联。当前版本先保留入口，方便从外部 Excel 导入台账后继续补充报告。
-          </div>
-        </div>
-        <el-table :data="dailyReportDialog.row.reports || []" border empty-text="暂无报告文件">
-          <el-table-column label="文件名" prop="name" min-width="180"></el-table-column>
-          <el-table-column label="类型" prop="type" width="120"></el-table-column>
-          <el-table-column label="解析状态" prop="status" width="120"></el-table-column>
-          <el-table-column label="备注" prop="remark" min-width="180"></el-table-column>
-        </el-table>
-        <div style="display: flex; gap: 10px; justify-content: flex-end;">
-          <el-button disabled>上传图片/PDF（预留）</el-button>
-          <el-button type="primary" disabled>解析报告（预留）</el-button>
-        </div>
+        <el-tabs v-model="dailyReportDialog.activeType" class="daily-report-tabs">
+          <el-tab-pane name="lab" :label="`检验报告 ${getDailyReportCount(dailyReportDialog.row, 'lab')}`">
+            <div class="report-toolbar">
+              <el-button type="primary" size="small" @click="createDailyReport('lab')">新增检验报告</el-button>
+              <span>适合尿常规、血常规、生化、肿瘤标志物等表格型报告；解析后按指标存储，后续用于对比和趋势跟踪。</span>
+            </div>
+            <div class="report-workspace">
+              <div class="report-list">
+                <button
+                  v-for="report in getDailyReportsByType('lab')"
+                  :key="report.id"
+                  type="button"
+                  class="report-list-item"
+                  :class="{ active: dailyReportDialog.currentLabReportId === report.id }"
+                  @click="setActiveDailyReport(report)"
+                >
+                  <strong>{{ report.title || '未命名检验报告' }}</strong>
+                  <span>{{ report.reportDate || '未填日期' }} · {{ report.items?.length || 0 }} 项</span>
+                </button>
+                <div v-if="getDailyReportsByType('lab').length === 0" class="report-empty">暂无检验报告</div>
+              </div>
+              <div v-if="dailyReportDialog.currentLabReport" class="report-detail">
+                <div class="report-header-grid">
+                  <el-input v-model="dailyReportDialog.currentLabReport.title" placeholder="报告名称，如：尿常规;尿沉渣定量" @change="touchDailyReport"></el-input>
+                  <el-date-picker v-model="dailyReportDialog.currentLabReport.reportDate" type="date" value-format="YYYY-MM-DD" placeholder="报告日期" style="width: 100%;" @change="touchDailyReport"></el-date-picker>
+                  <el-input v-model="dailyReportDialog.currentLabReport.department" placeholder="申请科室" @change="touchDailyReport"></el-input>
+                  <el-input v-model="dailyReportDialog.currentLabReport.sampleType" placeholder="标本类型，如：尿液/血液" @change="touchDailyReport"></el-input>
+                </div>
+                <template v-if="dailyReportDialog.labMode === 'view'">
+                  <div class="report-view-card">
+                    <div style="display: flex; justify-content: space-between; gap: 12px; align-items: center;">
+                      <div>
+                        <h3 style="margin: 0 0 4px; font-size: 18px;">{{ dailyReportDialog.currentLabReport.title || '检验报告' }}</h3>
+                        <div style="color: var(--muted); font-size: 13px;">{{ dailyReportDialog.currentLabReport.status === 'confirmed' ? '已确认' : '待确认' }} · {{ dailyReportDialog.currentLabReport.items?.length || 0 }} 项指标</div>
+                      </div>
+                      <div style="display: flex; gap: 8px;">
+                        <el-button size="small" @click="editDailyReport(dailyReportDialog.currentLabReport)">解析/编辑</el-button>
+                        <el-button v-if="dailyReportDialog.currentLabReport.status !== 'confirmed'" size="small" type="success" @click="confirmDailyReport(dailyReportDialog.currentLabReport)">确认报告</el-button>
+                      </div>
+                    </div>
+                    <div class="report-view-meta">
+                      <div>报告日期：<span>{{ dailyReportDialog.currentLabReport.reportDate || '-' }}</span></div>
+                      <div>申请科室：<span>{{ dailyReportDialog.currentLabReport.department || '-' }}</span></div>
+                      <div>标本类型：<span>{{ dailyReportDialog.currentLabReport.sampleType || '-' }}</span></div>
+                      <div>确认时间：<span>{{ dailyReportDialog.currentLabReport.confirmedAt || '-' }}</span></div>
+                    </div>
+                    <el-table :data="dailyReportDialog.currentLabReport.items || []" border size="small" empty-text="暂无指标">
+                      <el-table-column prop="name" label="检查项目" min-width="190"></el-table-column>
+                      <el-table-column prop="value" label="检验值" width="130"></el-table-column>
+                      <el-table-column prop="reference" label="参考值" width="150"></el-table-column>
+                      <el-table-column label="标志" width="90">
+                        <template #default="{ row }">
+                          <el-tag size="small" :type="row.flag === 'abnormal' ? 'danger' : row.flag === 'watch' ? 'warning' : 'success'">{{ row.flag === 'abnormal' ? '异常' : row.flag === 'watch' ? '关注' : row.flag === 'pending' ? '待确认' : '正常' }}</el-tag>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="unit" label="单位" width="110"></el-table-column>
+                      <el-table-column prop="note" label="说明" min-width="150"></el-table-column>
+                    </el-table>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="report-section-title">OCR 原文</div>
+                  <div class="report-paste-box" tabindex="0" @paste.prevent.stop="onDailyReportPaste($event, 'lab')">
+                    从微信复制检验报告截图或文字后，点击这里按 Ctrl+V。截图会自动 OCR；文字会写入原文并解析。
+                  </div>
+                  <el-input type="textarea" v-model="dailyReportDialog.currentLabReport.rawOcrText" :autosize="{ minRows: 3, maxRows: 8 }" placeholder="粘贴检验报告 OCR 原文，或后续由上传解析自动填入" @change="touchDailyReport"></el-input>
+                  <div class="report-actions">
+                    <input ref="dailyLabReportFileInput" type="file" accept="image/*,.pdf" style="display: none;" @change="onDailyReportOcrFileChange($event, 'lab')">
+                    <el-button size="small" @click="viewDailyReport(dailyReportDialog.currentLabReport)">返回查看</el-button>
+                    <el-button size="small" :loading="dailyReportDialog.ocrRunning" @click="triggerDailyReportOcr('lab')">上传截图识别</el-button>
+                    <el-button size="small" @click="parseDailyLabReport(dailyReportDialog.currentLabReport)">从原文解析</el-button>
+                    <el-button size="small" @click="addDailyLabItem(dailyReportDialog.currentLabReport)">新增指标</el-button>
+                    <el-button size="small" type="success" @click="confirmDailyReport(dailyReportDialog.currentLabReport)">确认报告</el-button>
+                    <el-button size="small" type="danger" plain @click="deleteDailyReport(dailyReportDialog.currentLabReport)">删除报告</el-button>
+                  </div>
+                  <el-table :data="dailyReportDialog.currentLabReport.items || []" border size="small" empty-text="暂无指标">
+                    <el-table-column label="检查项目" min-width="190">
+                      <template #default="{ row }"><el-input v-model="row.name" @change="touchDailyReport"></el-input></template>
+                    </el-table-column>
+                    <el-table-column label="检验值" width="130">
+                      <template #default="{ row }"><el-input v-model="row.value" @change="touchDailyReport"></el-input></template>
+                    </el-table-column>
+                    <el-table-column label="参考值" width="150">
+                      <template #default="{ row }"><el-input v-model="row.reference" @change="touchDailyReport"></el-input></template>
+                    </el-table-column>
+                    <el-table-column label="标志" width="110">
+                      <template #default="{ row }">
+                        <el-select v-model="row.flag" @change="touchDailyReport">
+                          <el-option label="正常" value="normal"></el-option>
+                          <el-option label="异常" value="abnormal"></el-option>
+                          <el-option label="关注" value="watch"></el-option>
+                          <el-option label="待确认" value="pending"></el-option>
+                        </el-select>
+                      </template>
+                    </el-table-column>
+                    <el-table-column label="单位" width="110">
+                      <template #default="{ row }"><el-input v-model="row.unit" @change="touchDailyReport"></el-input></template>
+                    </el-table-column>
+                    <el-table-column label="说明" min-width="150">
+                      <template #default="{ row }"><el-input v-model="row.note" @change="touchDailyReport"></el-input></template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="70">
+                      <template #default="{ $index }"><el-button size="small" text type="danger" @click="deleteDailyLabItem(dailyReportDialog.currentLabReport, $index)">删除</el-button></template>
+                    </el-table-column>
+                  </el-table>
+                </template>
+              </div>
+            </div>
+          </el-tab-pane>
+          <el-tab-pane name="exam" :label="`检查报告 ${getDailyReportCount(dailyReportDialog.row, 'exam')}`">
+            <div class="report-toolbar">
+              <el-button type="primary" size="small" @click="createDailyReport('exam')">新增检查报告</el-button>
+              <span>适合 CT、彩超、DR、胃肠镜等段落型报告；保留检查所见和结论，便于后续复查对照。</span>
+            </div>
+            <div class="report-workspace">
+              <div class="report-list">
+                <button
+                  v-for="report in getDailyReportsByType('exam')"
+                  :key="report.id"
+                  type="button"
+                  class="report-list-item"
+                  :class="{ active: dailyReportDialog.currentExamReportId === report.id }"
+                  @click="setActiveDailyReport(report)"
+                >
+                  <strong>{{ report.title || '未命名检查报告' }}</strong>
+                  <span>{{ report.reportDate || '未填日期' }} · {{ report.department || '未填科室' }}</span>
+                </button>
+                <div v-if="getDailyReportsByType('exam').length === 0" class="report-empty">暂无检查报告</div>
+              </div>
+              <div v-if="dailyReportDialog.currentExamReport" class="report-detail">
+                <div class="report-header-grid">
+                  <el-input v-model="dailyReportDialog.currentExamReport.title" placeholder="报告名称，如：上腹部CT平扫+MPR重建" @change="touchDailyReport"></el-input>
+                  <el-date-picker v-model="dailyReportDialog.currentExamReport.reportDate" type="date" value-format="YYYY-MM-DD" placeholder="报告日期" style="width: 100%;" @change="touchDailyReport"></el-date-picker>
+                  <el-input v-model="dailyReportDialog.currentExamReport.department" placeholder="检查科室，如：放射科/彩超室" @change="touchDailyReport"></el-input>
+                  <el-input v-model="dailyReportDialog.currentExamReport.reportDoctor" placeholder="报告医生" @change="touchDailyReport"></el-input>
+                </div>
+                <template v-if="dailyReportDialog.examMode === 'view'">
+                  <div class="report-view-card">
+                    <div style="display: flex; justify-content: space-between; gap: 12px; align-items: center;">
+                      <div>
+                        <h3 style="margin: 0 0 4px; font-size: 18px;">{{ dailyReportDialog.currentExamReport.title || '检查报告' }}</h3>
+                        <div style="color: var(--muted); font-size: 13px;">{{ dailyReportDialog.currentExamReport.status === 'confirmed' ? '已确认' : '待确认' }}</div>
+                      </div>
+                      <div style="display: flex; gap: 8px;">
+                        <el-button size="small" @click="editDailyReport(dailyReportDialog.currentExamReport)">解析/编辑</el-button>
+                        <el-button v-if="dailyReportDialog.currentExamReport.status !== 'confirmed'" size="small" type="success" @click="confirmDailyReport(dailyReportDialog.currentExamReport)">确认报告</el-button>
+                      </div>
+                    </div>
+                    <div class="report-view-meta">
+                      <div>报告日期：<span>{{ dailyReportDialog.currentExamReport.reportDate || '-' }}</span></div>
+                      <div>检查科室：<span>{{ dailyReportDialog.currentExamReport.department || '-' }}</span></div>
+                      <div>报告医生：<span>{{ dailyReportDialog.currentExamReport.reportDoctor || '-' }}</span></div>
+                      <div>确认时间：<span>{{ dailyReportDialog.currentExamReport.confirmedAt || '-' }}</span></div>
+                    </div>
+                    <div class="report-section-title">检查所见</div>
+                    <div class="report-text-view">{{ formatExamReportText(dailyReportDialog.currentExamReport.findingText) || '暂无检查所见' }}</div>
+                    <div class="report-section-title">检查结论 / 诊断</div>
+                    <div class="report-text-view">{{ formatExamReportText(dailyReportDialog.currentExamReport.conclusionText) || '暂无检查结论' }}</div>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="report-section-title">OCR 原文</div>
+                  <div class="report-paste-box" tabindex="0" @paste.prevent.stop="onDailyReportPaste($event, 'exam')">
+                    从微信复制检查报告截图或文字后，点击这里按 Ctrl+V。截图会自动 OCR；文字会写入原文并拆分检查所见和结论。
+                  </div>
+                  <el-input type="textarea" v-model="dailyReportDialog.currentExamReport.rawOcrText" :autosize="{ minRows: 3, maxRows: 8 }" placeholder="粘贴检查报告 OCR 原文，或后续由上传解析自动填入" @change="touchDailyReport"></el-input>
+                  <div class="report-actions">
+                    <input ref="dailyExamReportFileInput" type="file" accept="image/*,.pdf" style="display: none;" @change="onDailyReportOcrFileChange($event, 'exam')">
+                    <el-button size="small" @click="viewDailyReport(dailyReportDialog.currentExamReport)">返回查看</el-button>
+                    <el-button size="small" :loading="dailyReportDialog.ocrRunning" @click="triggerDailyReportOcr('exam')">上传截图识别</el-button>
+                    <el-button size="small" @click="parseDailyExamReport(dailyReportDialog.currentExamReport)">从原文解析</el-button>
+                    <el-button size="small" type="success" @click="confirmDailyReport(dailyReportDialog.currentExamReport)">确认报告</el-button>
+                    <el-button size="small" type="danger" plain @click="deleteDailyReport(dailyReportDialog.currentExamReport)">删除报告</el-button>
+                  </div>
+                  <div class="report-section-title">检查所见</div>
+                  <el-input type="textarea" v-model="dailyReportDialog.currentExamReport.findingText" :autosize="{ minRows: 6, maxRows: 14 }" placeholder="按报告原文分段记录检查所见" @change="touchDailyReport"></el-input>
+                  <div class="report-section-title">检查结论 / 诊断</div>
+                  <el-input type="textarea" v-model="dailyReportDialog.currentExamReport.conclusionText" :autosize="{ minRows: 4, maxRows: 10 }" placeholder="记录检查结论、诊断和建议" @change="touchDailyReport"></el-input>
+                </template>
+              </div>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
       </div>
     </el-dialog>
     <!-- 弹窗：新建/编辑套餐 -->
@@ -1975,6 +2277,104 @@
                 <template #default="{ $index }">
                   <el-button link type="primary" @click="insertParsedItem($index)">插入</el-button>
                   <el-button link type="danger" @click="ocr.items.splice($index, 1)">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </div>
+      </div>
+    </el-dialog>
+
+    <!-- 弹窗：导入体检结果 (Excel文件) -->
+    <el-dialog v-model="trackingExcelDialogVisible" title="导入体检结果 (Excel/CSV文件)" width="85%" top="3vh" @close="clearTrackingExcel" class="ocr-dialog-container">
+      <div class="ocr-grid">
+        <!-- 左侧面板：文件上传 -->
+        <div class="ocr-left-panel">
+          <label class="upload-box" tabindex="0">
+            <input type="file" accept=".xlsx,.xls,.csv" @change="onTrackingExcelChange">
+            <div>
+              <el-icon size="28"><UploadFilled /></el-icon>
+              <p><strong>上传体检结果 Excel / CSV 文件</strong></p>
+              <p class="muted">点击或拖拽选择文件开始导入</p>
+            </div>
+          </label>
+          <div v-if="trackingExcel.fileName" style="margin-top: 16px; padding: 12px; background: #f8fafc; border-radius: 6px; border: 1px solid var(--line);">
+            <div style="font-weight: 700; font-size: 14px; color: var(--text); display: flex; align-items: center; gap: 8px;">
+              <el-icon><Document /></el-icon>{{ trackingExcel.fileName }}
+            </div>
+            
+            <!-- 工作表选择 -->
+            <div v-if="trackingExcel.sheets.length > 1" style="margin-top: 12px;">
+              <span style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px;">选择工作表 (Sheet)：</span>
+              <el-select v-model="trackingExcel.selectedSheet" @change="onTrackingExcelSheetChange" style="width: 100%;">
+                <el-option v-for="sheet in trackingExcel.sheets" :key="sheet" :label="sheet" :value="sheet"></el-option>
+              </el-select>
+            </div>
+          </div>
+          <div style="margin-top: 20px; font-size: 13px; color: var(--muted); line-height: 1.6; padding: 12px; background: #ecfdf5; border-radius: 6px; border: 1px solid #d1fae5;">
+            <div style="font-weight: 700; color: #065f46; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+              <el-icon><InfoFilled /></el-icon> 导入说明
+            </div>
+            系统将自动识别 Excel 列名，支持格式如：<br>
+            • 列名包含<b>“项目/指标/名称”</b>识别为项目名称<br>
+            • 列名包含<b>“结果/测定值/数值”</b>识别为结果值<br>
+            • 列名包含<b>“单位”</b>识别为单位<br>
+            • 列名包含<b>“参考/正常/范围/区间”</b>识别为参考范围<br>
+            若无法匹配，默认按第 1 至 4 列依次解析为名称、结果、单位、参考范围。
+          </div>
+        </div>
+
+        <!-- 右侧面板：预览与修改表格 -->
+        <div class="ocr-right-panel">
+          <div class="ocr-table-wrapper" style="height: 100%; display: flex; flex-direction: column;">
+            <div class="table-actions" style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
+              <div>
+                <el-button @click="addTrackingExcelRow">新增一行指标</el-button>
+                <el-button type="danger" plain @click="trackingExcel.items = []" :disabled="!trackingExcel.items.length">清空列表</el-button>
+              </div>
+              <el-button type="success" size="large" @click="confirmTrackingExcel" :disabled="!trackingExcel.items.length">
+                确认并合并到当前体检计划
+              </el-button>
+            </div>
+            
+            <el-table :data="trackingExcel.items" border height="100%" style="flex: 1;">
+              <el-table-column type="index" label="序号" width="60" align="center"></el-table-column>
+              <el-table-column label="指标名称" min-width="180">
+                <template #default="{ row }">
+                  <el-input v-model="row.name"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="结果值" width="120">
+                <template #default="{ row }">
+                  <el-input v-model="row.value" @change="onTrackingExcelRowValChange(row)"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="单位" width="100">
+                <template #default="{ row }">
+                  <el-input v-model="row.unit"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="参考范围" width="140">
+                <template #default="{ row }">
+                  <el-input v-model="row.reference" @change="onTrackingExcelRowValChange(row)"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="标记" width="110">
+                <template #default="{ row }">
+                  <el-select v-model="row.status">
+                    <el-option label="正常" value="normal"></el-option>
+                    <el-option label="复查" value="abnormal"></el-option>
+                  </el-select>
+                </template>
+              </el-table-column>
+              <el-table-column label="医生建议/备注" min-width="180">
+                <template #default="{ row }">
+                  <el-input v-model="row.note"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="操作" width="80" align="center" fixed="right">
+                <template #default="{ $index }">
+                  <el-button link type="danger" @click="trackingExcel.items.splice($index, 1)">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -2198,12 +2598,11 @@
             <el-table-column label="参考范围" width="150">
               <template #default="{ row }"><el-input v-model="row.reference"></el-input></template>
             </el-table-column>
-            <el-table-column label="状态" width="110">
+            <el-table-column label="标记" width="110">
               <template #default="{ row }">
                 <el-select v-model="row.status">
                   <el-option label="正常" value="normal"></el-option>
-                  <el-option label="异常" value="abnormal"></el-option>
-                  <el-option label="关注" value="watch"></el-option>
+                  <el-option label="复查" value="abnormal"></el-option>
                 </el-select>
               </template>
             </el-table-column>
@@ -2773,6 +3172,16 @@
           trackingOcr: {
             running: false
           },
+          trackingExcelDialogVisible: false,
+          trackingExcel: {
+            file: null,
+            fileName: '',
+            sheets: [],
+            selectedSheet: '',
+            workbook: null,
+            items: [],
+            planId: ''
+          },
           activeDailyMemberId: parsed.members?.[0]?.id || '',
           activeDailyDepartment: '',
           dailyFilterYear: '',
@@ -2782,7 +3191,15 @@
           dailyRecords: parsed.dailyRecords || [],
           dailyReportDialog: {
             visible: false,
-            row: null
+            row: null,
+            activeType: 'lab',
+            currentLabReportId: '',
+            currentExamReportId: '',
+            currentLabReport: null,
+            currentExamReport: null,
+            labMode: 'view',
+            examMode: 'view',
+            ocrRunning: false
           },
           dailyDeptEditor: {
             visible: false,
@@ -3297,6 +3714,12 @@
           const normalizedMonth = normalizeDailyMonth(month);
           const normalizedDept = (department || '未分类').trim();
           if (!memberId || !normalizedMonth) return null;
+          const plainContent = String(content || '').trim();
+          const plainNotes = String(notes || '').trim();
+          const plainRemark = String(remark || '').trim();
+          const safeContentHtml = sanitizeRichHtml(contentHtml || plainTextToHtml(plainContent));
+          const safeNotesHtml = sanitizeRichHtml(notesHtml || plainTextToHtml(plainNotes));
+          const safeRemarkHtml = sanitizeRichHtml(remarkHtml || plainTextToHtml(plainRemark));
           const existing = this.dailyMonthRecords.find(row =>
             row.memberId === memberId &&
             row.department === normalizedDept &&
@@ -3304,13 +3727,21 @@
           );
           if (existing) {
             existing.month = normalizedMonth;
-            existing.content = String(content || '').trim();
-            existing.contentHtml = sanitizeRichHtml(contentHtml || plainTextToHtml(existing.content));
-            existing.notes = String(notes || '').trim();
-            existing.notesHtml = sanitizeRichHtml(notesHtml || plainTextToHtml(existing.notes));
-            if (remark !== undefined) {
-              existing.remark = String(remark || '').trim();
-              existing.remarkHtml = sanitizeRichHtml(remarkHtml || plainTextToHtml(existing.remark));
+            if (plainContent || safeContentHtml) {
+              existing.content = plainContent;
+              existing.contentHtml = safeContentHtml || plainTextToHtml(existing.content);
+            } else if (!existing.contentHtml && existing.content) {
+              existing.contentHtml = plainTextToHtml(existing.content);
+            }
+            if (plainNotes || safeNotesHtml) {
+              existing.notes = plainNotes;
+              existing.notesHtml = safeNotesHtml || plainTextToHtml(existing.notes);
+            } else if (!existing.notesHtml && existing.notes) {
+              existing.notesHtml = plainTextToHtml(existing.notes);
+            }
+            if (remark !== undefined && (plainRemark || safeRemarkHtml)) {
+              existing.remark = plainRemark;
+              existing.remarkHtml = safeRemarkHtml || plainTextToHtml(existing.remark);
             } else if (!existing.remarkHtml && existing.remark) {
               existing.remarkHtml = plainTextToHtml(existing.remark);
             }
@@ -3319,20 +3750,17 @@
             existing.updatedAt = nowText();
             return existing;
           }
-          const plainContent = String(content || '').trim();
-          const plainNotes = String(notes || '').trim();
-          const plainRemark = String(remark || '').trim();
           const row = {
             id: uid('daily_month'),
             memberId,
             department: normalizedDept,
             month: normalizedMonth,
             content: plainContent,
-            contentHtml: sanitizeRichHtml(contentHtml || plainTextToHtml(plainContent)),
+            contentHtml: safeContentHtml || plainTextToHtml(plainContent),
             notes: plainNotes,
-            notesHtml: sanitizeRichHtml(notesHtml || plainTextToHtml(plainNotes)),
+            notesHtml: safeNotesHtml || plainTextToHtml(plainNotes),
             remark: plainRemark,
-            remarkHtml: sanitizeRichHtml(remarkHtml || plainTextToHtml(plainRemark)),
+            remarkHtml: safeRemarkHtml || plainTextToHtml(plainRemark),
             reports: [],
             source,
             createdAt: nowText(),
@@ -3414,23 +3842,774 @@
             ElementPlus.ElMessage.success('已删除');
           }).catch(() => {});
         },
+        getDailyReportType(report, fallbackType = 'lab') {
+          const rawType = String(report?.reportType || report?.category || report?.type || fallbackType || 'lab').trim();
+          if (['exam', '检查报告', '检查', '影像报告'].includes(rawType)) return 'exam';
+          return 'lab';
+        },
+        normalizeMetricName(name) {
+          return String(name || '')
+            .replace(/\s+/g, '')
+            .replace(/[（(].*?[）)]/g, '')
+            .toLowerCase();
+        },
+        parseMetricNumber(value) {
+          const match = String(value || '').match(/[<>≤≥]?\s*(-?\d+(?:\.\d+)?)/);
+          return match ? Number(match[1]) : null;
+        },
+        parseReferenceRange(reference) {
+          const text = String(reference || '').replace(/\s+/g, '').replace(/[（(]/g, '').replace(/[）)]/g, '');
+          if (!text) return { type: 'empty', text: '' };
+          const range = text.match(/^([<>≤≥]?-?\d+(?:\.\d+)?)[~～\-至]([<>≤≥]?-?\d+(?:\.\d+)?)$/);
+          if (range) {
+            return {
+              type: 'range',
+              text,
+              low: Number(String(range[1]).replace(/[<>≤≥]/g, '')),
+              high: Number(String(range[2]).replace(/[<>≤≥]/g, ''))
+            };
+          }
+          const limit = text.match(/^([<>≤≥])(-?\d+(?:\.\d+)?)$/);
+          if (limit) {
+            return { type: 'limit', text, operator: limit[1], value: Number(limit[2]) };
+          }
+          return { type: 'qualitative', text };
+        },
+        normalizeLabItemForStorage(item) {
+          const referenceRange = this.parseReferenceRange(item.reference || '');
+          const valueNumber = this.parseMetricNumber(item.value || '');
+          return {
+            id: item.id || uid('lab_item'),
+            name: item.name || item.project || item.itemName || '',
+            normalizedName: this.normalizeMetricName(item.name || item.project || item.itemName || ''),
+            value: item.value || item.result || '',
+            valueText: String(item.value || item.result || ''),
+            valueNumber,
+            valueType: valueNumber === null ? 'text' : 'number',
+            reference: item.reference || item.referenceRange || '',
+            referenceRange,
+            flag: item.flag || item.status || 'pending',
+            unit: item.unit || '',
+            note: item.note || item.remark || ''
+          };
+        },
+        enrichDailyReportForStorage(report, fallbackType = 'lab') {
+          const reportType = this.getDailyReportType(report, fallbackType);
+          const base = {
+            ...report,
+            schemaVersion: 2,
+            reportType,
+            meta: {
+              title: report.title || '',
+              reportDate: report.reportDate || '',
+              department: report.department || '',
+              sampleType: report.sampleType || '',
+              reportDoctor: report.reportDoctor || '',
+              reviewDoctor: report.reviewDoctor || '',
+              status: report.status || 'draft',
+              confirmedAt: report.confirmedAt || ''
+            },
+            source: {
+              kind: (report.files || []).length > 0 ? 'ocr-image' : (report.rawOcrText ? 'ocr-text' : 'manual'),
+              rawOcrText: report.rawOcrText || '',
+              files: report.files || []
+            }
+          };
+          if (reportType === 'exam') {
+            base.structured = {
+              type: 'exam',
+              title: report.title || '',
+              reportDate: report.reportDate || '',
+              sections: [
+                { key: 'finding', title: '检查所见', text: this.formatExamReportText(report.findingText || '') },
+                { key: 'conclusion', title: '检查结论/诊断', text: this.formatExamReportText(report.conclusionText || '') }
+              ],
+              doctors: {
+                reportDoctor: report.reportDoctor || '',
+                reviewDoctor: report.reviewDoctor || ''
+              }
+            };
+            return base;
+          }
+          const metrics = Array.isArray(report.items)
+            ? report.items.map(item => this.normalizeLabItemForStorage(item))
+            : [];
+          base.items = metrics;
+          base.structured = {
+            type: 'lab',
+            title: report.title || '',
+            reportDate: report.reportDate || '',
+            sampleType: report.sampleType || '',
+            metrics
+          };
+          return base;
+        },
+        normalizeDailyReport(report, fallbackType = 'lab') {
+          const reportType = this.getDailyReportType(report, fallbackType);
+          if (reportType === 'exam') {
+            return this.enrichDailyReportForStorage({
+              id: report.id || uid('daily_report'),
+              reportType: 'exam',
+              title: report.title || report.name || '',
+              reportDate: report.reportDate || report.date || '',
+              department: report.department || '',
+              reportDoctor: report.reportDoctor || '',
+              reviewDoctor: report.reviewDoctor || '',
+              rawOcrText: report.rawOcrText || '',
+              findingText: report.findingText || report.finding || '',
+              conclusionText: report.conclusionText || report.conclusion || '',
+              status: report.status || 'draft',
+              confirmedAt: report.confirmedAt || '',
+              files: report.files || [],
+              createdAt: report.createdAt || nowText(),
+              updatedAt: report.updatedAt || nowText()
+            }, 'exam');
+          }
+          return this.enrichDailyReportForStorage({
+            id: report.id || uid('daily_report'),
+            reportType: 'lab',
+            title: report.title || report.name || '',
+            reportDate: report.reportDate || report.date || '',
+            department: report.department || '',
+            sampleType: report.sampleType || '',
+            rawOcrText: report.rawOcrText || '',
+            items: Array.isArray(report.items) ? report.items.map(item => this.normalizeLabItemForStorage(item)) : [],
+            status: report.status || 'draft',
+            confirmedAt: report.confirmedAt || '',
+            files: report.files || [],
+            createdAt: report.createdAt || nowText(),
+            updatedAt: report.updatedAt || nowText()
+          }, 'lab');
+        },
+        ensureDailyReports(row) {
+          if (!row) return [];
+          row.reports = (row.reports || []).map(report => this.normalizeDailyReport(report, this.getDailyReportType(report, 'lab')));
+          return row.reports;
+        },
+        getDailyReportCount(row, type) {
+          return (row?.reports || []).filter(report => this.getDailyReportType(report, 'lab') === type).length;
+        },
         openDailyReportDialog(row) {
-          row.reports = row.reports || [];
+          this.ensureDailyReports(row);
           this.dailyReportDialog.row = row;
+          this.dailyReportDialog.activeType = this.getDailyReportCount(row, 'lab') > 0 || this.getDailyReportCount(row, 'exam') === 0 ? 'lab' : 'exam';
+          const lab = row.reports.find(report => report.reportType === 'lab');
+          const exam = row.reports.find(report => report.reportType === 'exam');
+          this.dailyReportDialog.currentLabReportId = lab?.id || '';
+          this.dailyReportDialog.currentExamReportId = exam?.id || '';
+          this.dailyReportDialog.currentLabReport = lab || null;
+          this.dailyReportDialog.currentExamReport = exam || null;
+          this.dailyReportDialog.labMode = 'view';
+          this.dailyReportDialog.examMode = 'view';
           this.dailyReportDialog.visible = true;
+        },
+        getDailyReportsByType(type) {
+          const row = this.dailyReportDialog.row;
+          if (!row) return [];
+          return row.reports.filter(report => report.reportType === type);
+        },
+        setActiveDailyReport(report) {
+          if (!report) return;
+          if (report.reportType === 'exam') {
+            this.dailyReportDialog.currentExamReportId = report.id;
+            this.dailyReportDialog.currentExamReport = report;
+            this.dailyReportDialog.examMode = 'view';
+          } else {
+            this.dailyReportDialog.currentLabReportId = report.id;
+            this.dailyReportDialog.currentLabReport = report;
+            this.dailyReportDialog.labMode = 'view';
+          }
+        },
+        getActiveDailyReport(type) {
+          const id = type === 'exam' ? this.dailyReportDialog.currentExamReportId : this.dailyReportDialog.currentLabReportId;
+          const current = type === 'exam' ? this.dailyReportDialog.currentExamReport : this.dailyReportDialog.currentLabReport;
+          return current?.id === id ? current : this.getDailyReportsByType(type).find(report => report.id === id) || null;
+        },
+        createDailyReport(type) {
+          const row = this.dailyReportDialog.row;
+          if (!row) return null;
+          this.ensureDailyReports(row);
+          const report = this.normalizeDailyReport({
+            reportType: type,
+            title: type === 'lab' ? '新检验报告' : '新检查报告',
+            reportDate: row.month ? `${row.month}-01` : '',
+            department: row.department || '',
+            status: 'draft'
+          }, type);
+          row.reports.push(report);
+          this.setActiveDailyReport(report);
+          this.dailyReportDialog.activeType = type;
+          if (type === 'exam') {
+            this.dailyReportDialog.examMode = 'parse';
+          } else {
+            this.dailyReportDialog.labMode = 'parse';
+          }
+          this.touchDailyReport();
+          return report;
+        },
+        deleteDailyReport(report) {
+          const row = this.dailyReportDialog.row;
+          if (!row || !report) return;
+          ElementPlus.ElMessageBox.confirm('确定删除这份报告吗？', '提示', { type: 'warning' }).then(() => {
+            row.reports = (row.reports || []).filter(item => item.id !== report.id);
+            const next = row.reports.find(item => item.reportType === report.reportType);
+            if (next) {
+              this.setActiveDailyReport(next);
+            } else if (report.reportType === 'lab') {
+              this.dailyReportDialog.currentLabReportId = '';
+              this.dailyReportDialog.currentLabReport = null;
+            } else if (report.reportType === 'exam') {
+              this.dailyReportDialog.currentExamReportId = '';
+              this.dailyReportDialog.currentExamReport = null;
+            }
+            this.touchDailyReport();
+          }).catch(() => {});
+        },
+        addDailyLabItem(report) {
+          if (!report) return;
+          if (!Array.isArray(report.items)) report.items = [];
+          report.items.push({
+            id: uid('lab_item'),
+            name: '',
+            value: '',
+            reference: '',
+            flag: 'pending',
+            unit: '',
+            note: ''
+          });
+          this.touchDailyReport();
+        },
+        deleteDailyLabItem(report, index) {
+          if (!report || !Array.isArray(report.items)) return;
+          report.items.splice(index, 1);
+          this.touchDailyReport();
+        },
+        confirmDailyReport(report) {
+          if (!report) return;
+          if (report.reportType === 'lab' && (!report.items || report.items.length === 0)) {
+            ElementPlus.ElMessage.warning('请先解析或手动新增指标，再确认报告。');
+            return;
+          }
+          report.status = 'confirmed';
+          report.confirmedAt = nowText();
+          if (report.reportType === 'exam') {
+            this.dailyReportDialog.examMode = 'view';
+          } else {
+            this.dailyReportDialog.labMode = 'view';
+          }
+          this.touchDailyReport();
+          ElementPlus.ElMessage.success('报告已确认。');
+        },
+        editDailyReport(report) {
+          if (!report) return;
+          if (report.reportType === 'exam') {
+            this.dailyReportDialog.examMode = 'parse';
+          } else {
+            this.dailyReportDialog.labMode = 'parse';
+          }
+        },
+        viewDailyReport(report) {
+          if (!report) return;
+          if (report.reportType === 'exam') {
+            this.dailyReportDialog.examMode = 'view';
+          } else {
+            this.dailyReportDialog.labMode = 'view';
+          }
+        },
+        triggerDailyReportOcr(type) {
+          const inputRef = type === 'exam' ? 'dailyExamReportFileInput' : 'dailyLabReportFileInput';
+          const input = this.$refs[inputRef];
+          const el = Array.isArray(input) ? input[0] : input;
+          el?.click();
+        },
+        async onDailyReportOcrFileChange(event, type) {
+          const file = event.target.files?.[0];
+          event.target.value = '';
+          if (!file) return;
+          const report = this.getOrCreateDailyReport(type);
+          await this.runDailyReportOcr(report, file, type);
+        },
+        getOrCreateDailyReport(type) {
+          let report = type === 'exam' ? this.dailyReportDialog.currentExamReport : this.dailyReportDialog.currentLabReport;
+          if (!report && this.dailyReportDialog.row) {
+            report = this.createDailyReport(type);
+          }
+          return report;
+        },
+        async onDailyReportPaste(event, type) {
+          const report = this.getOrCreateDailyReport(type);
+          if (!report) return;
+          const items = Array.from(event.clipboardData?.items || []);
+          const imageItem = items.find(item => item.type?.startsWith('image/'));
+          if (imageItem) {
+            const file = imageItem.getAsFile();
+            if (!file) return;
+            await this.runDailyReportOcr(report, new File([file], `wechat-paste-${Date.now()}.png`, { type: file.type || 'image/png' }), type);
+            return;
+          }
+          const text = event.clipboardData?.getData('text/plain')?.trim();
+          if (!text) {
+            ElementPlus.ElMessage.warning('没有读取到截图或文字，请重新复制后再粘贴。');
+            return;
+          }
+          report.rawOcrText = report.rawOcrText ? `${report.rawOcrText}\n${text}` : text;
+          if (type === 'exam') {
+            this.parseDailyExamReport(report);
+          } else {
+            this.parseDailyLabReport(report);
+          }
+          this.touchDailyReport();
+          ElementPlus.ElMessage.success('已粘贴文字并解析，请核对。');
+        },
+        async runDailyReportOcr(report, file, type) {
+          if (!report || !file) return;
+          const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+          if (isPdf) {
+            ElementPlus.ElMessage.warning('当前日常报告请先上传截图图片；PDF 需要后续接入页面转图后再解析。');
+            return;
+          }
+          this.dailyReportDialog.ocrRunning = true;
+          try {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('mode', 'detail');
+            formData.append('quality', 'accurate');
+            const response = await fetch(OCR_API_URL, { method: 'POST', body: formData });
+            if (!response.ok) throw new Error(await response.text());
+            const data = await response.json();
+            report.rawOcrText = data.rawText || '';
+            report.files = report.files || [];
+            report.files.push({
+              id: uid('report_file'),
+              name: file.name,
+              type: file.type || 'image',
+              size: file.size || 0,
+              uploadedAt: nowText()
+            });
+            if (type === 'exam') {
+              this.parseDailyExamReport(report);
+            } else {
+              this.parseDailyLabReport(report);
+            }
+            report.status = 'parsed';
+            this.touchDailyReport();
+            ElementPlus.ElMessage.success('截图 OCR 已写入并解析，请核对。');
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error('本地 OCR 调用失败，请确认 backend 服务已启动。');
+          } finally {
+            this.dailyReportDialog.ocrRunning = false;
+          }
+        },
+        touchDailyReport() {
+          const row = this.dailyReportDialog.row;
+          if (!row) return;
+          row.updatedAt = nowText();
+          (row.reports || []).forEach(report => {
+            report.updatedAt = report.updatedAt || nowText();
+          });
+          this.persist();
+        },
+        inferLabFlag(value, reference, line = '') {
+          const text = `${value} ${reference} ${line}`;
+          if (/[↑↓]|偏高|偏低|阳性|\+/.test(text) && !/阴性/.test(String(value))) return 'abnormal';
+          return 'normal';
+        },
+        parseDailyLabReport(report) {
+          if (!report) return;
+          const raw = String(report.rawOcrText || '').trim();
+          if (!raw) {
+            ElementPlus.ElMessage.warning('请先粘贴检验报告 OCR 原文。');
+            return;
+          }
+          const lines = raw.split(/\r?\n/).map(line => line.replace(/\s+/g, ' ').trim()).filter(Boolean);
+          const metadataPattern = /^(患者姓名|病历号|床号|申请科室|申请医生|报告时间|检查项目|检验值|参考值|标志|单位|说明|条码号|类型|标本|报告医生|审核医生|打印时间|机构)/;
+          const labItemKeywords = [
+            '尿颜色', '尿透明度', '尿葡萄糖', '尿胆红素', '尿酮体', '尿比重', '尿pH', '尿蛋白', '尿胆原',
+            '尿亚硝酸盐', '尿隐血', '尿白细胞酯酶', '红细胞', '白细胞', '上皮细胞', '鳞状上皮细胞',
+            '非鳞状上皮细胞', '管型', '透明管型', '病理管型', '结晶', '细菌', '酵母菌', '粘液丝',
+            '甲胎蛋白', 'AFP', 'CA724', 'CA199', 'CA153', 'CA125', 'PIVKA', '碳呼气', '游离T3',
+            '游离T4', '血型', '白蛋白', '肌酐', '尿素', '尿酸', '血红蛋白'
+          ];
+          const valueAfterLabel = (labelPattern) => {
+            for (let i = 0; i < lines.length; i += 1) {
+              const line = lines[i];
+              const match = line.match(labelPattern);
+              if (!match) continue;
+              const inlineValue = (match[1] || '').replace(/^[:：]/, '').trim();
+              if (inlineValue) return inlineValue;
+              const next = lines[i + 1] || '';
+              if (next && !/[:：]$/.test(next) && !/^(患者姓名|病历号|床号|申请科室|申请医生|报告时间|检查项目|检验值|参考值|标志|单位|说明|条码号|类型|标本)/.test(next)) {
+                return next.trim();
+              }
+            }
+            return '';
+          };
+          const date = raw.match(/\b(20\d{2}[-/.年]\d{1,2}[-/.月]\d{1,2})/);
+          if (!report.reportDate && date) report.reportDate = normalizeDailyDate(date[1].replace(/年|月/g, '-').replace(/日/g, ''));
+          const parsedTitle = lines.find(line => {
+            if (/[:：]$/.test(line)) return false;
+            if (/^(条码号|类型|患者姓名|病历号|床号|标本|申请|报告时间|检查项目|检验值|参考值|标志|单位|说明|门诊检验)/.test(line)) return false;
+            if (/\b20\d{2}[-/.年]\d{1,2}/.test(line)) return false;
+            if (/^[A-Za-z0-9-]+$/.test(line)) return false;
+            return line.length <= 40;
+          });
+          if (!report.title || /^新检验报告|新增检验报告|未命名检验报告$/.test(report.title)) {
+            report.title = parsedTitle || '检验报告';
+          }
+          if (!report.department) report.department = valueAfterLabel(/^申请科室[:：]?(.*)$/);
+          if (!report.sampleType) report.sampleType = valueAfterLabel(/^标本类型[:：]?(.*)$/);
+          const barcode = valueAfterLabel(/^条码号[:：]?(.*)$/);
+          const sampleStatus = valueAfterLabel(/^标本状态[:：]?(.*)$/);
+          if (barcode || sampleStatus) {
+            report.note = [report.note, barcode ? `条码号：${barcode}` : '', sampleStatus ? `标本状态：${sampleStatus}` : ''].filter(Boolean).join('；');
+          }
+          const stripWrapper = value => String(value || '').replace(/^[（(]\s*/, '').replace(/\s*[）)]$/, '').trim();
+          const isEmptyReference = value => !stripWrapper(value);
+          const isReferenceToken = value => {
+            const text = stripWrapper(value);
+            if (!text) return true;
+            return /^(阴性|阳性|正常|未检出|清亮|黄色|合格)$/.test(text)
+              || /^[<>≤≥]?\s*\d+(?:\.\d+)?\s*(?:[-~～至]\s*[<>≤≥]?\s*\d+(?:\.\d+)?)?$/.test(text);
+          };
+          const isValueToken = value => /^(?:[<>≤≥]?\d+(?:\.\d+)?|阴性|阳性|弱阳性|清亮|黄色|正常|未检出|未检|合格|1\+|2\+|3\+|4\+)$/.test(stripWrapper(value));
+          const isUnitToken = value => /^(?:\/?[a-zA-Zμµ%]+(?:\/[a-zA-Zμµ%]+)?|mmol\/L|ng\/mL|mAU\/ml|U\/mL|U\/L|pmol\/L|umol\/L)$/.test(value);
+          const isFlagToken = value => /^(?:↑|↓|偏高|偏低|异常|阳性|阴性|正常|-)$/.test(value);
+          const isLabItemName = value => {
+            const text = String(value || '').replace(/^[\d.、-]+/, '').trim();
+            if (!text || metadataPattern.test(text) || /[:：]$/.test(text)) return false;
+            if (/\b20\d{2}[-/.年]\d{1,2}/.test(text)) return false;
+            if (isValueToken(text) || isReferenceToken(text) || isUnitToken(text) || isFlagToken(text)) return false;
+            if (text.length > 36) return false;
+            return labItemKeywords.some(keyword => text.includes(keyword)) || /^[\u4e00-\u9fa5A-Za-z0-9（）()\-+ ]{2,36}$/.test(text);
+          };
+          const headerIndex = lines.findIndex(line => /检查项目/.test(line) && /(检验值|结果|参考值|标志|单位|说明)/.test(line));
+          const parseLabLine = (line) => {
+            if (!line || metadataPattern.test(line) || /[:：]$/.test(line)) return null;
+            if (/\b20\d{2}[-/.年]\d{1,2}[-/.月]\d{1,2}\b/.test(line)) return null;
+            const withReference = line.match(/^(.+?)\s+([^\s()（）]+)\s*[（(]\s*([^）)]*)\s*[）)]\s*([↑↓]?)\s*(\/?[a-zA-Zμµ%]+(?:\/[a-zA-Zμµ%]+)?|mmol\/L|ng\/mL|mAU\/ml|U\/mL|U\/L|pmol\/L|umol\/L)?\s*(.*)$/);
+            const loose = line.match(/^(.+?)\s+([<>]?\d+(?:\.\d+)?|阴性|阳性|弱阳性|清亮|黄色|正常|未检出|未检|合格|1\+|2\+|3\+|4\+)\s*([↑↓]?)\s*(\/?[a-zA-Zμµ%]+(?:\/[a-zA-Zμµ%]+)?|mmol\/L|ng\/mL|mAU\/ml|U\/mL|U\/L|pmol\/L|umol\/L)?\s*(.*)$/);
+            const match = withReference || loose;
+            if (!match) return null;
+            const name = match[1].replace(/^[\d.、-]+/, '').trim();
+            if (!isLabItemName(name)) return null;
+            const value = `${match[2] || ''}${match[4] && /[↑↓]/.test(match[4]) ? match[4] : ''}`.trim();
+            const reference = withReference ? (match[3] || '').trim() : '';
+            const unit = withReference ? (match[5] || '').trim() : (match[4] || '').trim();
+            const note = withReference ? (match[6] || '').trim() : (match[5] || '').trim();
+            return {
+              id: uid('lab_item'),
+              name,
+              value,
+              reference,
+              flag: this.inferLabFlag(value, reference, line),
+              unit,
+              note
+            };
+          };
+          const findFallbackTableStart = () => {
+            for (let i = 0; i < lines.length; i += 1) {
+              const line = lines[i];
+              if (parseLabLine(line)) return i;
+              if (isLabItemName(line) && (isValueToken(lines[i + 1] || '') || (isReferenceToken(lines[i + 1] || '') && isValueToken(lines[i + 2] || '')))) return i;
+            }
+            return -1;
+          };
+          const tableStart = headerIndex >= 0 ? headerIndex + 1 : findFallbackTableStart();
+          if (tableStart < 0) {
+            ElementPlus.ElMessage.warning('未定位到检验指标区。OCR 原文已保留，请检查是否只识别到了报告头。');
+            return;
+          }
+          const tableLines = lines.slice(tableStart);
+          const items = [];
+          const qualitativeUrineItems = ['尿颜色', '尿透明度', '尿葡萄糖', '尿胆红素', '尿酮体', '尿蛋白定性', '尿胆原', '尿亚硝酸盐', '尿隐血', '尿白细胞酯酶'];
+          const normalizeReferenceText = (value) => {
+            const text = stripWrapper(value);
+            return text.replace(/\s+/g, '');
+          };
+          const normalizeItemName = (value) => String(value || '').replace(/^[\d.、-]+/, '').trim();
+          const parseTokenSegment = (name, rawTokens) => {
+            const tokens = rawTokens
+              .map(token => String(token || '').trim())
+              .filter(token => token && !metadataPattern.test(token) && !/^检验值|参考值|标志|单位|说明$/.test(token));
+            let value = '';
+            let reference = '';
+            let unit = '';
+            let flag = '';
+            const noteTokens = [];
+            for (let index = 0; index < tokens.length; index += 1) {
+              const token = tokens[index];
+              if (!unit && isUnitToken(token)) {
+                unit = token;
+                continue;
+              }
+              const wrappedReference = /^[（(]/.test(token) || /[）)]$/.test(token);
+              if (!reference && (isEmptyReference(token) || wrappedReference)) {
+                let refText = normalizeReferenceText(token);
+                if (/[~～-]$/.test(refText) && tokens[index + 1] && /\d+\)?$/.test(tokens[index + 1])) {
+                  refText = `${refText}${normalizeReferenceText(tokens[index + 1])}`;
+                  index += 1;
+                }
+                reference = refText;
+                continue;
+              }
+              if (!value && isValueToken(token)) {
+                value = stripWrapper(token);
+                continue;
+              }
+              if (!flag && isFlagToken(token) && !isValueToken(token)) {
+                flag = token;
+                continue;
+              }
+              if (!isLabItemName(token)) noteTokens.push(token);
+            }
+            if (!value && qualitativeUrineItems.includes(name)) {
+              value = name === '尿颜色' ? '' : name === '尿透明度' ? '' : '阴性';
+              if (!reference && !['尿颜色', '尿透明度'].includes(name)) reference = '阴性';
+            }
+            return { value, reference, unit, flag, note: noteTokens.join(' ') };
+          };
+          const getSegmentEnd = (startIndex) => {
+            for (let cursor = startIndex + 1; cursor < tableLines.length; cursor += 1) {
+              if (isLabItemName(tableLines[cursor])) return cursor;
+            }
+            return tableLines.length;
+          };
+          for (let i = 0; i < tableLines.length; i += 1) {
+            const line = tableLines[i];
+            const item = parseLabLine(line);
+            if (item) {
+              items.push(item);
+              continue;
+            }
+            if (!isLabItemName(line)) continue;
+            const name = normalizeItemName(line);
+            let segmentEnd = getSegmentEnd(i);
+            let segment = tableLines.slice(i + 1, segmentEnd);
+            const parsedSegment = parseTokenSegment(name, segment);
+            let { value, reference, unit, flag, note } = parsedSegment;
+            if (!value && !reference && !unit && i > 0) {
+              const previousTokens = tableLines.slice(Math.max(0, i - 3), i).filter(token => !isLabItemName(token));
+              const previousParsed = parseTokenSegment(name, previousTokens);
+              value = previousParsed.value;
+              reference = previousParsed.reference;
+              unit = previousParsed.unit;
+              flag = previousParsed.flag;
+              note = previousParsed.note;
+            }
+            if (!value && !reference && !unit && !qualitativeUrineItems.includes(name)) {
+              continue;
+            }
+            items.push({
+              id: uid('lab_item'),
+              name,
+              value,
+              reference,
+              flag: flag && flag !== '-' ? (flag === '正常' || flag === '阴性' ? 'normal' : 'abnormal') : this.inferLabFlag(value, reference, `${line} ${flag}`),
+              unit,
+              note
+            });
+            i = Math.max(i, segmentEnd - 1);
+          }
+          const seenNames = new Set(items.map(item => item.name));
+          qualitativeUrineItems.forEach(name => {
+            if (seenNames.has(name)) return;
+            if (!lines.includes(name)) return;
+            items.push({
+              id: uid('lab_item'),
+              name,
+              value: name === '尿颜色' || name === '尿透明度' ? '' : '阴性',
+              reference: name === '尿颜色' || name === '尿透明度' ? '' : '阴性',
+              flag: 'normal',
+              unit: '',
+              note: 'OCR列序错位，按尿常规定性项补入'
+            });
+          });
+          if (/尿常规|尿沉渣/.test(raw)) {
+            const upsertItem = (patch) => {
+              const existing = items.find(item => item.name === patch.name);
+              if (existing) {
+                Object.assign(existing, Object.fromEntries(Object.entries(patch).filter(([, value]) => value !== undefined)));
+                return;
+              }
+              items.push({
+                id: uid('lab_item'),
+                name: patch.name,
+                value: patch.value || '',
+                reference: patch.reference || '',
+                flag: patch.flag || this.inferLabFlag(patch.value || '', patch.reference || ''),
+                unit: patch.unit || '',
+                note: patch.note || ''
+              });
+            };
+            const urineQualitativeDefaults = {
+              尿颜色: { value: lines.includes('黄色') ? '黄色' : '', reference: '' },
+              尿透明度: { value: lines.includes('清亮') ? '清亮' : '', reference: '' },
+              尿葡萄糖: { value: '阴性', reference: '阴性' },
+              尿胆红素: { value: '阴性', reference: '阴性' },
+              尿酮体: { value: '阴性', reference: '阴性' },
+              尿蛋白定性: { value: '阴性', reference: '阴性' },
+              尿胆原: { value: '阴性', reference: '阴性' },
+              尿亚硝酸盐: { value: '阴性', reference: '阴性' },
+              尿隐血: { value: '阴性', reference: '阴性' },
+              尿白细胞酯酶: { value: '阴性', reference: '阴性' }
+            };
+            Object.entries(urineQualitativeDefaults).forEach(([name, patch]) => {
+              if (!lines.includes(name)) return;
+              upsertItem({ name, ...patch, flag: 'normal', unit: '', note: '按尿常规报告结构校正' });
+            });
+            const knownUrineItems = [
+              '尿颜色', '尿透明度', '尿葡萄糖', '尿胆红素', '尿酮体', '尿比重', '尿pH', '尿蛋白定性', '尿胆原',
+              '尿亚硝酸盐', '尿隐血', '尿白细胞酯酶', '红细胞', '白细胞', '上皮细胞', '鳞状上皮细胞',
+              '非鳞状上皮细胞', '管型', '透明管型', '病理管型', '结晶', '细菌', '酵母菌', '粘液丝'
+            ];
+            const valueAround = (name, fallback = {}) => {
+              const index = lines.indexOf(name);
+              if (index < 0) return fallback;
+              const nextNameIndex = lines.findIndex((line, lineIndex) => lineIndex > index && knownUrineItems.includes(line));
+              const end = nextNameIndex > index ? nextNameIndex : Math.min(lines.length, index + 8);
+              const segment = lines.slice(index + 1, end);
+              const previous = lines.slice(Math.max(0, index - 4), index);
+              const parsed = parseTokenSegment(name, segment);
+              if (parsed.value || parsed.reference || parsed.unit) return parsed;
+              const immediatePrevious = lines[index - 1] || '';
+              if (isValueToken(immediatePrevious)) {
+                const previousUnit = [...previous].reverse().find(token => isUnitToken(token)) || '';
+                return {
+                  value: stripWrapper(immediatePrevious),
+                  reference: '',
+                  unit: previousUnit,
+                  flag: '',
+                  note: ''
+                };
+              }
+              return parseTokenSegment(name, previous);
+            };
+            [
+              ['红细胞', '/μL'],
+              ['白细胞', '/μL'],
+              ['上皮细胞', '/μL'],
+              ['鳞状上皮细胞', '/μL'],
+              ['非鳞状上皮细胞', '/μL'],
+              ['管型', '/μL'],
+              ['透明管型', '/μL'],
+              ['病理管型', '/μL'],
+              ['结晶', '/μL'],
+              ['细菌', '/μL'],
+              ['酵母菌', '/μL'],
+              ['粘液丝', '/μL']
+            ].forEach(([name, defaultUnit]) => {
+              if (!lines.includes(name)) return;
+              const parsed = valueAround(name);
+              upsertItem({
+                name,
+                value: parsed.value,
+                reference: parsed.reference,
+                unit: parsed.unit || defaultUnit,
+                flag: this.inferLabFlag(parsed.value, parsed.reference),
+                note: parsed.note || ''
+              });
+            });
+          }
+          if (items.length === 0) {
+            ElementPlus.ElMessage.warning('已找到指标区，但未解析出指标，请核对 OCR 是否把项目和值分散得过细。');
+            return;
+          }
+          report.items = items;
+          report.status = 'parsed';
+          this.touchDailyReport();
+          ElementPlus.ElMessage.success(`已解析 ${items.length} 个检验指标`);
+        },
+        extractReportSection(text, startPattern, endPattern) {
+          const start = text.search(startPattern);
+          if (start < 0) return '';
+          const source = text.slice(start).replace(startPattern, '').trim();
+          const end = source.search(endPattern);
+          return (end >= 0 ? source.slice(0, end) : source).trim();
+        },
+        formatExamReportText(text) {
+          const lines = String(text || '')
+            .split(/\r?\n/)
+            .map(line => line.trim())
+            .filter(line => line && !/^[①②③④⑤⑥⑦⑧⑨⑩<>]+$/.test(line));
+          if (lines.length === 0) return '';
+          const paragraphs = [];
+          let current = '';
+          lines.forEach(line => {
+            const startsNewParagraph = /^(\d+[.、]|[一二三四五六七八九十]+[、.])/.test(line);
+            if (startsNewParagraph && current) {
+              paragraphs.push(current);
+              current = line;
+              return;
+            }
+            current += line;
+          });
+          if (current) paragraphs.push(current);
+          return paragraphs.join('\n\n');
+        },
+        parseDailyExamReport(report) {
+          if (!report) return;
+          const raw = String(report.rawOcrText || '').trim();
+          if (!raw) {
+            ElementPlus.ElMessage.warning('请先粘贴检查报告 OCR 原文。');
+            return;
+          }
+          const lines = raw.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+          const valueAfterLabel = (labelPattern) => {
+            for (let i = 0; i < lines.length; i += 1) {
+              const match = lines[i].match(labelPattern);
+              if (!match) continue;
+              const inlineValue = (match[1] || '').replace(/^[:：]/, '').trim();
+              if (inlineValue) return inlineValue;
+              const next = lines[i + 1] || '';
+              if (next && !/[:：]$/.test(next) && !/^(申请|报告|审核|检查所见|检查结论|诊断|基本信息|姓名)/.test(next)) {
+                return next.trim();
+              }
+            }
+            return '';
+          };
+          const date = raw.match(/\b(20\d{2}[-/.年]\d{1,2}[-/.月]\d{1,2})/);
+          if (date) report.reportDate = normalizeDailyDate(date[1].replace(/年|月/g, '-').replace(/日/g, ''));
+          const parsedTitle = lines.find(line => {
+            if (/^(云影像|基本信息|姓名|申请|报告|审核|检查所见|检查结论|诊断|医院|厦门大学|<|[①②③④⑤⑥⑦⑧⑨⑩])/.test(line)) return false;
+            if (/^\d{1,2}:\d{2}|^[÷+<>\dA-Za-z]+$/.test(line)) return false;
+            if (/\b20\d{2}[-/.年]\d{1,2}/.test(line)) return false;
+            return /(CT|MR|MRI|DR|X线|彩超|B超|超声|胃镜|肠镜|平扫|增强|重建|造影|检查)/i.test(line);
+          });
+          if (!report.title || /^新检查报告|新增检查报告|未命名检查报告$/.test(report.title)) {
+            report.title = parsedTitle || '检查报告';
+          }
+          if (!report.reportDoctor) report.reportDoctor = valueAfterLabel(/^报告医生[:：]?(.*)$/);
+          if (!report.reviewDoctor) report.reviewDoctor = valueAfterLabel(/^审核医生[:：]?(.*)$/);
+          const finding = this.extractReportSection(raw, /检查所见[:：]?/, /(检查结论|诊断|检查结论\/诊断)[:：]?/);
+          const conclusion = this.extractReportSection(raw, /(检查结论\/诊断|检查结论|诊断)[:：]?/, /$a/);
+          if (finding) report.findingText = finding;
+          if (conclusion) report.conclusionText = conclusion;
+          report.status = 'parsed';
+          this.touchDailyReport();
+          ElementPlus.ElMessage.success('已解析检查所见和结论，请核对。');
         },
         openDailyDeptEditor() {
           const memberId = this.activeDailyMemberId || this.members[0]?.id;
           if (!memberId) return;
           const member = this.members.find(m => m.id === memberId);
-          this.getDailyDepartments(memberId);
-          const allDepts = [...new Set([
-            ...(member.dailyDepartments || []),
-            ...this.dailyMonthRecords.filter(row => row.memberId === memberId).map(row => row.department).filter(Boolean),
-            ...this.dailyRecords.filter(row => row.memberId === memberId).map(row => row.department).filter(Boolean)
-          ])];
+          const actualDepts = [...new Set(
+            this.dailyMonthRecords
+              .filter(row => row.memberId === memberId)
+              .map(row => (row.department || '').trim())
+              .filter(Boolean)
+          )];
+          const orderedDepts = actualDepts.sort((a, b) => {
+            const order = member?.dailyDepartments || [];
+            const indexA = order.indexOf(a);
+            const indexB = order.indexOf(b);
+            if (indexA === -1 && indexB === -1) return a.localeCompare(b, 'zh-Hans-CN');
+            if (indexA === -1) return 1;
+            if (indexB === -1) return -1;
+            return indexA - indexB;
+          });
           this.dailyDeptEditor.memberId = memberId;
-          this.dailyDeptEditor.departments = allDepts.map(d => ({ original: d, current: d }));
+          this.dailyDeptEditor.departments = orderedDepts.map(d => ({ original: d, current: d }));
           this.dailyDeptEditor.visible = true;
         },
         moveDailyDept(index, direction) {
@@ -3605,6 +4784,7 @@
               const workbook = XLSX.read(data, { type: 'array', cellHTML: false, cellStyles: true });
               
               let importedCount = 0;
+              let firstImportedTarget = null;
               const currentMemberId = this.activeDailyMemberId || this.members[0]?.id;
               if (!currentMemberId) {
                 ElementPlus.ElMessage.warning('请先添加并选择家人后再导入。');
@@ -3639,7 +4819,7 @@
 
                   const month = normalizeDailyMonth(currentMonthStr);
                   if (!month) continue;
-                  this.upsertDailyMonthRecord({
+                  const importedRow = this.upsertDailyMonthRecord({
                     memberId: currentMemberId,
                     department: sheetName,
                     month,
@@ -3651,13 +4831,23 @@
                     remarkHtml: cellToRichHtml(remarkCellObject),
                     source: 'excel-import'
                   });
-                  importedCount++;
+                  if (importedRow) {
+                    if (!firstImportedTarget) {
+                      firstImportedTarget = { department: importedRow.department, month: importedRow.month };
+                    }
+                    importedCount++;
+                  }
                 }
               });
               
               if (importedCount > 0) {
+                 if (firstImportedTarget) {
+                   this.dailyFilterYear = '';
+                   this.dailyFilterMonth = '';
+                   this.activeDailyDepartment = firstImportedTarget.department;
+                 }
                  this.persist();
-                 this.onDailyMemberChange();
+                 if (!this.activeDailyDepartment) this.onDailyMemberChange();
                  ElementPlus.ElMessage.success(`成功导入 ${importedCount} 条月度台账记录`);
               } else {
                  ElementPlus.ElMessage.warning('未能识别到任何记录，请检查Excel格式。');
@@ -3726,59 +4916,216 @@
         getMemberEnabledPlans(memberId) {
           return this.plans.filter(p => p.memberId === memberId && this.isPlanEnabled(p)).sort((a, b) => b.examMonth.localeCompare(a.examMonth));
         },
-        openTrackingOcr(plan) {
-          this.clearOcr();
-          this.ocr.mode = 'tracking';
-          this.ocr.trackingPlanId = plan.id;
-          this.itemOcrDialogVisible = true;
+        openTrackingExcel(plan) {
+          this.clearTrackingExcel();
+          this.trackingExcel.planId = plan.id;
+          this.trackingExcelDialogVisible = true;
         },
-        confirmTrackingOcr() {
-          const plan = this.plans.find(p => p.id === this.ocr.trackingPlanId);
+        clearTrackingExcel() {
+          this.trackingExcel = {
+            file: null,
+            fileName: '',
+            sheets: [],
+            selectedSheet: '',
+            workbook: null,
+            items: [],
+            planId: this.trackingExcel.planId
+          };
+        },
+        async onTrackingExcelChange(event) {
+          const file = event.target.files?.[0];
+          if (!file) return;
+          this.trackingExcel.file = file;
+          this.trackingExcel.fileName = file.name;
+          try {
+            await loadScriptOnce('xlsx-script', 'vendor/xlsx.full.min.js');
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error('Excel导入库加载失败，请确认 vendor/xlsx.full.min.js 存在。');
+            event.target.value = '';
+            return;
+          }
+          
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            try {
+              const data = new Uint8Array(e.target.result);
+              const workbook = XLSX.read(data, { type: 'array' });
+              this.trackingExcel.workbook = workbook;
+              this.trackingExcel.sheets = workbook.SheetNames;
+              if (workbook.SheetNames.length > 0) {
+                this.trackingExcel.selectedSheet = workbook.SheetNames[0];
+                this.parseSelectedExcelSheet();
+              }
+            } catch (err) {
+              console.error(err);
+              ElementPlus.ElMessage.error('读取 Excel 失败: ' + err.message);
+            }
+          };
+          reader.readAsArrayBuffer(file);
+          event.target.value = '';
+        },
+        onTrackingExcelSheetChange() {
+          this.parseSelectedExcelSheet();
+        },
+        parseSelectedExcelSheet() {
+          const wb = this.trackingExcel.workbook;
+          const sheetName = this.trackingExcel.selectedSheet;
+          if (!wb || !sheetName) return;
+          
+          const ws = wb.Sheets[sheetName];
+          const sheetRows = XLSX.utils.sheet_to_json(ws, { header: 1 });
+          
+          let headerIndex = -1;
+          const colMap = { name: -1, value: -1, unit: -1, reference: -1 };
+          
+          for (let r = 0; r < Math.min(sheetRows.length, 10); r++) {
+            const row = sheetRows[r];
+            if (!row || !Array.isArray(row)) continue;
+            
+            let foundName = -1;
+            let foundValue = -1;
+            let foundUnit = -1;
+            let foundRef = -1;
+            
+            for (let c = 0; c < row.length; c++) {
+              const val = String(row[c] || '').trim();
+              if (!val) continue;
+              
+              if (/项目|指标|名称|检测项/i.test(val)) {
+                foundName = c;
+              } else if (/结果|测定值|数值|检测值|测定结果/i.test(val)) {
+                foundValue = c;
+              } else if (/单位/i.test(val)) {
+                foundUnit = c;
+              } else if (/参考|范围|区间|正常值/i.test(val)) {
+                foundRef = c;
+              }
+            }
+            
+            if (foundName !== -1 && foundValue !== -1) {
+              headerIndex = r;
+              colMap.name = foundName;
+              colMap.value = foundValue;
+              colMap.unit = foundUnit;
+              colMap.reference = foundRef;
+              break;
+            }
+          }
+          
+          if (headerIndex === -1) {
+            colMap.name = 0;
+            colMap.value = 1;
+            colMap.unit = 2;
+            colMap.reference = 3;
+            headerIndex = -1;
+          }
+          
+          const parsed = [];
+          for (let r = headerIndex + 1; r < sheetRows.length; r++) {
+            const row = sheetRows[r];
+            if (!row || row.length === 0) continue;
+            
+            const name = String(row[colMap.name] || '').trim();
+            if (!name || name === 'undefined' || /姓名|年龄|性别|科室|医院|日期|诊断/.test(name)) continue;
+            
+            const value = String(row[colMap.value] === undefined ? '' : row[colMap.value]).trim();
+            const unit = colMap.unit !== -1 ? String(row[colMap.unit] || '').trim() : '';
+            const reference = colMap.reference !== -1 ? String(row[colMap.reference] || '').trim() : '';
+            
+            const autoStatus = this.autoEvaluateAbnormal(value, reference);
+            
+            parsed.push({
+              id: uid('excel_metric'),
+              name: name,
+              value: value,
+              unit: unit,
+              reference: reference,
+              status: autoStatus !== '-' ? autoStatus : 'normal',
+              note: ''
+            });
+          }
+          
+          this.trackingExcel.items = parsed;
+          if (parsed.length > 0) {
+            ElementPlus.ElMessage.success(`成功解析工作表 "${sheetName}"，获取到 ${parsed.length} 个指标。`);
+          } else {
+            ElementPlus.ElMessage.warning(`未能在工作表 "${sheetName}" 中解析出有效指标，请检查内容。`);
+          }
+        },
+        onTrackingExcelRowValChange(row) {
+          const autoStatus = this.autoEvaluateAbnormal(row.value, row.reference);
+          if (autoStatus !== '-') {
+            row.status = autoStatus;
+          }
+        },
+        addTrackingExcelRow() {
+          this.trackingExcel.items.push({
+            id: uid('excel_metric'),
+            name: '',
+            value: '',
+            unit: '',
+            reference: '',
+            status: 'normal',
+            note: ''
+          });
+        },
+        confirmTrackingExcel() {
+          const plan = this.plans.find(p => p.id === this.trackingExcel.planId);
           if (!plan) return;
           
           let matchCount = 0;
           let newCount = 0;
           const newItems = [];
           
-          this.ocr.items.forEach(ocrItem => {
-            if (!ocrItem.name) return;
-            const existing = plan.items.find(i => i.status !== 'exclude' && (i.name.includes(ocrItem.name) || ocrItem.name.includes(i.name)));
-            const autoStatus = this.autoEvaluateAbnormal(ocrItem.result, ocrItem.reference);
+          this.trackingExcel.items.forEach(excelItem => {
+            if (!excelItem.name.trim()) return;
+            const key = normalizeItemKey(excelItem.name);
+            const existing = plan.items.find(i => i.status !== 'exclude' && normalizeItemKey(i.name) === key);
             
             if (existing) {
-              existing.result = existing.result ? `${existing.result} \n ${ocrItem.name}: ${ocrItem.result}` : ocrItem.result;
-              if (ocrItem.reference) existing.reference = ocrItem.reference;
-              if (autoStatus === 'abnormal') existing.abnormalStatus = 'abnormal';
-              else if (autoStatus === 'normal' && !existing.abnormalStatus) existing.abnormalStatus = 'normal';
+              existing.result = excelItem.value + (excelItem.unit ? ' ' + excelItem.unit : '');
+              if (excelItem.reference) existing.reference = excelItem.reference;
+              existing.abnormalStatus = excelItem.status;
+              if (excelItem.note && excelItem.note.trim()) {
+                existing.resultRemark = existing.resultRemark 
+                  ? `${existing.resultRemark} \n ${excelItem.note}` 
+                  : excelItem.note;
+              }
               matchCount++;
             } else {
               newItems.push({
-                id: generateId(),
-                name: ocrItem.name,
-                category: 'OCR自动解析',
+                id: uid('plan_item'),
+                name: excelItem.name,
+                category: 'Excel导入',
                 price: 0,
                 status: 'add',
-                result: ocrItem.result || '-',
-                reference: ocrItem.reference || '',
-                abnormalStatus: autoStatus !== '-' ? autoStatus : 'normal',
+                result: excelItem.value + (excelItem.unit ? ' ' + excelItem.unit : ''),
+                reference: excelItem.reference,
+                abnormalStatus: excelItem.status,
                 suggestion: '',
-                resultRemark: ''
+                resultRemark: excelItem.note || ''
               });
               newCount++;
             }
           });
           
-          if (newItems.length > 0) plan.items.push(...newItems);
-          this.persist();
+          if (newItems.length > 0) {
+            plan.items.push(...newItems);
+          }
           
-          this.itemOcrDialogVisible = false;
-          ElementPlus.ElMessage.success(`合并成功！匹配已有项目 ${matchCount} 个，新增指标项 ${newCount} 个。`);
+          this.persist();
+          this.trackingExcelDialogVisible = false;
+          ElementPlus.ElMessage.success(`导入成功！更新已有指标 ${matchCount} 个，新增指标 ${newCount} 个。`);
         },
         autoEvaluateAbnormal(value, reference) {
-          if (!value || !reference) return '-';
-          const v = parseFloat(value.replace(/[^\d.-]/g, ''));
+          if (!value) return '-';
+          if (/[↑↓HL*高低异常]/.test(String(value))) return 'abnormal';
+          
+          const v = parseFloat(String(value).replace(/[^\d.-]/g, ''));
           if (isNaN(v)) return '-';
           
+          if (!reference) return '-';
           if (reference.includes('-') || reference.includes('~') || reference.includes('至')) {
             const parts = reference.split(/[-~至]/);
             if (parts.length >= 2) {
@@ -3791,23 +5138,34 @@
           } else if (reference.includes('<') || reference.includes('≤')) {
             const max = parseFloat(reference.replace(/[^\d.-]/g, ''));
             if (!isNaN(max)) return v > max ? 'abnormal' : 'normal';
-          } else if (reference.includes('>') || reference.includes('≥')) {
+          } else if (reference.includes('>')) {
+            const min = parseFloat(reference.replace(/[^\d.-]/g, ''));
+            if (!isNaN(min)) return v < min ? 'abnormal' : 'normal';
+          } else if (reference.includes('≥')) {
             const min = parseFloat(reference.replace(/[^\d.-]/g, ''));
             if (!isNaN(min)) return v < min ? 'abnormal' : 'normal';
           }
           return '-';
         },
 
-
-        persist() {
-          const payload = {
+        buildPersistPayload() {
+          const dailyMonthRecords = (this.dailyMonthRecords || []).map(row => ({
+            ...row,
+            reports: (row.reports || []).map(report => this.enrichDailyReportForStorage(report, this.getDailyReportType(report, 'lab')))
+          }));
+          return {
+            schemaVersion: 2,
             packages: this.packages,
             members: this.members,
             plans: this.plans,
             trackingRecords: this.trackingRecords,
-            dailyMonthRecords: this.dailyMonthRecords,
+            dailyMonthRecords,
             dailyRecords: this.dailyRecords
           };
+        },
+
+        persist() {
+          const payload = this.buildPersistPayload();
           localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
           const apiDataUrl = window.location.protocol === 'file:' ? 'http://localhost:8765/api/data' : '/api/data';
           fetchWithTimeout(apiDataUrl, {
@@ -3841,6 +5199,12 @@
           event.preventDefault();
           const file = imageItem.getAsFile();
           if (!file) return;
+          if (this.dailyReportDialog.visible) {
+            const type = this.dailyReportDialog.activeType || 'lab';
+            const report = this.getOrCreateDailyReport(type);
+            this.runDailyReportOcr(report, new File([file], `paste-${Date.now()}.png`, { type: file.type || 'image/png' }), type);
+            return;
+          }
           this.useImageFile(new File([file], `paste-${Date.now()}.png`, { type: file.type || 'image/png' }));
           ElementPlus.ElMessage.success('已粘贴截图，可以开始解析。');
         },
