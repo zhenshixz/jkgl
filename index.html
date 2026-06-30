@@ -1191,81 +1191,15 @@
       </div>
     </el-dialog>
 
-    <el-dialog v-model="trackingEditor.visible" title="体检记录" width="1180px" top="4vh" destroy-on-close>
-      <div style="display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 18px; min-height: 620px;">
-        <el-form label-width="86px">
-          <el-form-item label="家人">
-            <el-select v-model="trackingEditor.form.memberId" placeholder="选择家人" style="width: 100%;">
-              <el-option v-for="member in members" :key="member.id" :label="member.name" :value="member.id"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="体检日期">
-            <el-date-picker v-model="trackingEditor.form.examDate" type="date" value-format="YYYY-MM-DD" style="width: 100%;"></el-date-picker>
-          </el-form-item>
-          <el-form-item label="关联计划">
-            <el-select v-model="trackingEditor.form.planId" clearable filterable placeholder="可选" style="width: 100%;">
-              <el-option v-for="plan in plans" :key="plan.id" :label="plan.name" :value="plan.id"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="机构/来源">
-            <el-input v-model="trackingEditor.form.hospital" placeholder="如医院、体检中心"></el-input>
-          </el-form-item>
-          <el-form-item label="摘要">
-            <el-input v-model="trackingEditor.form.conclusion" type="textarea" :rows="5" placeholder="记录本次体检结论、医生建议或后续关注点"></el-input>
-          </el-form-item>
-          <el-form-item label="报告截图">
-            <input ref="reportOcrInput" type="file" accept="image/*,.pdf" style="display: none;" @change="onReportOcrFileChange">
-            <el-button :loading="trackingOcr.running" @click="triggerReportOcr">智能导入</el-button>
-          </el-form-item>
-          <el-form-item label="OCR原文">
-            <el-input v-model="trackingEditor.form.rawText" type="textarea" :rows="7" placeholder="可粘贴或由截图 OCR 自动填入"></el-input>
-          </el-form-item>
-          <el-button plain style="width: 100%;" @click="parseTrackingRawText" :disabled="!trackingEditor.form.rawText.trim()">从原文解析指标</el-button>
-        </el-form>
-
-        <div style="min-width: 0; display: flex; flex-direction: column;">
-          <div class="table-actions">
-            <el-button @click="addTrackingMetric">新增指标</el-button>
-            <el-button type="danger" plain :disabled="!trackingEditor.selectedMetrics.length" @click="deleteSelectedTrackingMetrics">删除已选指标</el-button>
-          </div>
-          <el-table :data="trackingEditor.form.metrics" border height="100%" @selection-change="trackingEditor.selectedMetrics = $event">
-            <el-table-column type="selection" width="48"></el-table-column>
-            <el-table-column label="指标名称" min-width="180">
-              <template #default="{ row }"><el-input v-model="row.name"></el-input></template>
-            </el-table-column>
-            <el-table-column label="结果" width="120">
-              <template #default="{ row }"><el-input v-model="row.value"></el-input></template>
-            </el-table-column>
-            <el-table-column label="单位" width="110">
-              <template #default="{ row }"><el-input v-model="row.unit"></el-input></template>
-            </el-table-column>
-            <el-table-column label="参考范围" width="150">
-              <template #default="{ row }"><el-input v-model="row.reference"></el-input></template>
-            </el-table-column>
-            <el-table-column label="标记" width="110">
-              <template #default="{ row }">
-                <el-select v-model="row.status">
-                  <el-option label="正常" value="normal"></el-option>
-                  <el-option label="复查" value="abnormal"></el-option>
-                </el-select>
-              </template>
-            </el-table-column>
-            <el-table-column label="备注" min-width="180">
-              <template #default="{ row }"><el-input v-model="row.note"></el-input></template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </div>
-      <template #footer>
-        <el-button @click="trackingEditor.visible = false">取消</el-button>
-        <el-button type="primary" @click="saveTrackingRecord">保存</el-button>
-      </template>
-    </el-dialog>
   </div>
 
   <script src="vendor/vue.global.prod.js"></script>
   <script src="vendor/element-plus.index.full.min.js"></script>
   <script src="vendor/element-plus-icons-vue.iife.min.js"></script>
-  <script src="js/main.js?v=202606301130"></script>
+  <script src="js/core/runtime.js?v=202606301430"></script>
+  <script src="js/services/data-service.js?v=202606301430"></script>
+  <script src="js/parsers/package-parser.js?v=202606301430"></script>
+  <script src="js/parsers/daily-report-parser.js?v=202606301430"></script>
+  <script src="js/main.js?v=202606301430"></script>
 </body>
 </html>

@@ -17,6 +17,8 @@
 - 勾选不同时间的体检结果做指标对比
 - 支持导入体检报告截图进行 OCR 识别并尝试解析指标；PDF 解析仍需要后续增加后端转换能力
 - 业务数据保存到本地后端 `backend/data.json`，浏览器 localStorage 作为兜底缓存
+- 连续编辑采用 500ms 防抖并按顺序写入后端，避免深层监听重复提交整份数据
+- 后端在线时以后端数据为准；后端不可用时才使用浏览器缓存
 - 保存数据前自动保留上一版 `backend/data.backup.json`
 - 套餐列表支持单个套餐导出，或勾选多个套餐批量导出为 `.xlsx` 明细表
 
@@ -51,6 +53,24 @@ http://localhost:8765/api/ocr
 Vue、Element Plus、SheetJS 已放在项目 `vendor/` 目录下，页面不依赖 CDN。
 
 当前 OCR 使用本地 PaddleOCR。首次运行会下载/初始化 OCR 模型，耗时会比较久；后续会快很多。
+
+## 代码结构
+
+- `index.html`：Vue 页面模板和各业务弹窗
+- `assets/style.css`：全局样式与各模块布局
+- `js/main.js`：Vue 状态、计算属性和业务流程编排
+- `js/core/runtime.js`：日期、富文本、Excel 单元格等公共工具
+- `js/services/data-service.js`：后端读取、本地缓存和防抖串行保存
+- `js/parsers/package-parser.js`：套餐截图/表格内容解析
+- `js/parsers/daily-report-parser.js`：日常检验报告和检查报告解析
+- `backend/app.py`：静态页面、数据接口和 PaddleOCR 服务
+- `backend/data.json`：当前业务数据
+
+修改解析或保存逻辑后，可运行轻量回归测试：
+
+```powershell
+node --test tests/js-modules.test.js
+```
 
 ## 第一版边界
 
