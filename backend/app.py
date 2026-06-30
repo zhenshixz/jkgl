@@ -31,6 +31,8 @@ os.environ.setdefault("PADDLE_PDX_ENABLE_MKLDNN_BYDEFAULT", "False")
 
 app = FastAPI(title="JKGL Local OCR", version="1.0.0")
 app.mount("/vendor", StaticFiles(directory=Path(__file__).resolve().parent.parent / "vendor"), name="vendor")
+app.mount("/assets", StaticFiles(directory=Path(__file__).resolve().parent.parent / "assets"), name="assets")
+app.mount("/js", StaticFiles(directory=Path(__file__).resolve().parent.parent / "js"), name="js")
 
 app.add_middleware(
     CORSMiddleware,
