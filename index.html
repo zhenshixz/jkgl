@@ -578,7 +578,7 @@
               <p class="panel-subtitle">从历次检验报告中提取指标，按日期和科室对比变化趋势。</p>
             </div>
             <div>
-              <el-button type="primary" @click="openIndicatorImport(indicatorActiveTab)">
+              <el-button type="primary" @click="openIndicatorImport('lab')">
                 <el-icon style="margin-right:4px;"><Plus /></el-icon> 录入指标 / 报告
               </el-button>
             </div>
@@ -634,57 +634,46 @@
 
 
                       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                        <el-tabs v-model="indicatorActiveTab" style="margin-bottom:0;">
-                          <el-tab-pane label="检验数据对比 (数值)" name="lab"></el-tab-pane>
-                          <el-tab-pane label="检查结论追踪 (影像)" name="exam"></el-tab-pane>
-                        </el-tabs>
-                        <el-button type="primary" size="small" @click="openIndicatorImport(indicatorActiveTab)">录入报告</el-button>
-                      </div>
-                      
-                      <div v-if="indicatorActiveTab === 'lab'">
-                        <el-table class="daily-ledger-table" :data="indicatorTableData" border style="width: 100%;" empty-text="暂无检验数据，请点击右上角录入报告">
-                          <el-table-column label="指标名称" prop="name" width="180" fixed></el-table-column>
-                          <el-table-column label="单位" prop="unit" width="90"></el-table-column>
-                          <el-table-column v-for="col in indicatorTableColumns" :key="col.id" :label="col.date" min-width="120" align="center">
-                            <template #header>
-                              <el-button link type="primary" @click="openIndicatorReport(col.report)">{{ col.date }}</el-button>
-                              <div style="font-size:11px; color:var(--muted); font-weight:normal;" class="ellipsis" :title="col.title">{{ col.title }}</div>
-                            </template>
-                            <template #default="{ row }">
-                              <div v-if="row.values[col.id]" :class="['indicator-cell', `flag-${row.values[col.id].flag}`]">
-                                <strong :style="{ color: row.values[col.id].flag === 'abnormal' ? 'var(--red)' : 'inherit' }">{{ row.values[col.id].value }}</strong>
-                                <el-tooltip :content="'参考值: ' + row.values[col.id].reference" placement="top" v-if="row.values[col.id].reference">
-                                  <el-icon v-if="row.values[col.id].flag === 'abnormal'" color="var(--red)" style="margin-left:4px;"><Warning /></el-icon>
-                                </el-tooltip>
-                              </div>
-                              <span v-else class="muted">-</span>
-                            </template>
-                          </el-table-column>
-                        </el-table>
+                        <div>
+                          <strong style="font-size:15px;">报告列表</strong>
+                          <span class="muted" style="margin-left:8px;">{{ indicatorReportList.length }} 份</span>
+                        </div>
+                        <el-button type="primary" size="small" @click="openIndicatorImport('lab')">录入报告</el-button>
                       </div>
 
-                      <div v-if="indicatorActiveTab === 'exam'">
-                        <el-timeline v-if="indicatorExamReports.length > 0" style="padding-top:20px;">
-                          <el-timeline-item v-for="report in indicatorExamReports" :key="report.id" :timestamp="report.reportDate" placement="top" type="primary">
-                            <el-card shadow="hover">
-                              <h4 style="margin-top:0; margin-bottom:10px; color:var(--primary);">{{ report.reportName }}</h4>
-                              <div style="font-size:13px; margin-bottom:8px;">
-                                <strong style="color:#555;">检查所见：</strong>
-                                <p style="margin:4px 0; color:#666; line-height:1.5; white-space:pre-wrap;">{{ report.findingText || '无' }}</p>
-                              </div>
-                              <div style="font-size:13px;">
-                                <strong style="color:var(--text);">检查结论 / 诊断：</strong>
-                                <p style="margin:4px 0; font-weight:500; line-height:1.5; white-space:pre-wrap;">{{ report.conclusionText || '无' }}</p>
-                              </div>
-                              <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:10px;">
-                                <el-button size="small" @click="openIndicatorReport(report)">查看完整报告</el-button>
-                                <el-button size="small" type="danger" plain @click="deleteIndicatorReport(report)">删除</el-button>
-                              </div>
-                            </el-card>
-                          </el-timeline-item>
-                        </el-timeline>
-                        <el-empty v-else description="暂无检查结论数据"></el-empty>
-                      </div>
+                      <el-table
+                        class="daily-ledger-table"
+                        :data="indicatorReportList"
+                        border
+                        style="width:100%;"
+                        empty-text="该科室暂无报告"
+                      >
+                        <el-table-column prop="reportDate" label="报告日期" width="130"></el-table-column>
+                        <el-table-column prop="title" label="报告名称" min-width="260"></el-table-column>
+                        <el-table-column label="报告类型" width="110" align="center">
+                          <template #default="{ row }">
+                            <el-tag size="small" effect="plain">{{ getIndicatorReportTypeLabel(row) }}</el-tag>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="sampleType" label="标本类型" width="120">
+                          <template #default="{ row }">{{ row.sampleType || '-' }}</template>
+                        </el-table-column>
+                        <el-table-column label="项目数" width="90" align="center">
+                          <template #default="{ row }">{{ getIndicatorReportItemCount(row) }}</template>
+                        </el-table-column>
+                        <el-table-column label="异常" width="80" align="center">
+                          <template #default="{ row }">
+                            <el-tag v-if="getIndicatorAbnormalCount(row) > 0" size="small" type="danger">{{ getIndicatorAbnormalCount(row) }}</el-tag>
+                            <span v-else>-</span>
+                          </template>
+                        </el-table-column>
+                        <el-table-column label="操作" width="180" fixed="right">
+                          <template #default="{ row }">
+                            <el-button size="small" type="primary" plain @click="openIndicatorReport(row)">查看报告</el-button>
+                            <el-button size="small" type="danger" text @click="deleteIndicatorReport(row)">删除</el-button>
+                          </template>
+                        </el-table-column>
+                      </el-table>
 
 
 
@@ -804,21 +793,16 @@
               <el-table-column label="参考值" width="160">
                 <template #default="{ row }"><el-input v-model="row.reference"></el-input></template>
               </el-table-column>
-              <el-table-column label="标志" width="110">
+              <el-table-column label="异常" width="80" align="center">
                 <template #default="{ row }">
-                  <el-select v-model="row.flag">
-                    <el-option label="正常" value="normal"></el-option>
-                    <el-option label="异常" value="abnormal"></el-option>
-                    <el-option label="关注" value="watch"></el-option>
-                    <el-option label="待确认" value="pending"></el-option>
-                  </el-select>
+                  <el-checkbox
+                    :model-value="row.flag === 'abnormal'"
+                    @change="row.flag = $event ? 'abnormal' : 'normal'"
+                  ></el-checkbox>
                 </template>
               </el-table-column>
               <el-table-column label="单位" width="110">
                 <template #default="{ row }"><el-input v-model="row.unit"></el-input></template>
-              </el-table-column>
-              <el-table-column label="说明" min-width="150">
-                <template #default="{ row }"><el-input v-model="row.note"></el-input></template>
               </el-table-column>
               <el-table-column label="操作" width="70">
                 <template #default="{ $index }">
@@ -965,13 +949,12 @@
                       <el-table-column prop="name" label="检查项目" min-width="190"></el-table-column>
                       <el-table-column prop="value" label="检验值" width="130"></el-table-column>
                       <el-table-column prop="reference" label="参考值" width="150"></el-table-column>
-                      <el-table-column label="标志" width="90">
+                      <el-table-column label="异常" width="72" align="center">
                         <template #default="{ row }">
-                          <el-tag size="small" :type="row.flag === 'abnormal' ? 'danger' : row.flag === 'watch' ? 'warning' : 'success'">{{ row.flag === 'abnormal' ? '异常' : row.flag === 'watch' ? '关注' : row.flag === 'pending' ? '待确认' : '正常' }}</el-tag>
+                          <el-tag v-if="row.flag === 'abnormal'" size="small" type="danger">异常</el-tag>
                         </template>
                       </el-table-column>
                       <el-table-column prop="unit" label="单位" width="110"></el-table-column>
-                      <el-table-column prop="note" label="说明" min-width="150"></el-table-column>
                     </el-table>
                   </div>
                 </template>
@@ -1000,21 +983,16 @@
                     <el-table-column label="参考值" width="150">
                       <template #default="{ row }"><el-input v-model="row.reference" @change="touchDailyReport"></el-input></template>
                     </el-table-column>
-                    <el-table-column label="标志" width="110">
+                    <el-table-column label="异常" width="80" align="center">
                       <template #default="{ row }">
-                        <el-select v-model="row.flag" @change="touchDailyReport">
-                          <el-option label="正常" value="normal"></el-option>
-                          <el-option label="异常" value="abnormal"></el-option>
-                          <el-option label="关注" value="watch"></el-option>
-                          <el-option label="待确认" value="pending"></el-option>
-                        </el-select>
+                        <el-checkbox
+                          :model-value="row.flag === 'abnormal'"
+                          @change="row.flag = $event ? 'abnormal' : 'normal'; touchDailyReport()"
+                        ></el-checkbox>
                       </template>
                     </el-table-column>
                     <el-table-column label="单位" width="110">
                       <template #default="{ row }"><el-input v-model="row.unit" @change="touchDailyReport"></el-input></template>
-                    </el-table-column>
-                    <el-table-column label="说明" min-width="150">
-                      <template #default="{ row }"><el-input v-model="row.note" @change="touchDailyReport"></el-input></template>
                     </el-table-column>
                     <el-table-column label="操作" width="70">
                       <template #default="{ $index }"><el-button size="small" text type="danger" @click="deleteDailyLabItem(dailyReportDialog.currentLabReport, $index)">删除</el-button></template>
@@ -1048,7 +1026,7 @@
                 <div class="report-header-grid">
                   <el-input v-model="dailyReportDialog.currentExamReport.title" placeholder="报告名称，如：上腹部CT平扫+MPR重建" @change="touchDailyReport"></el-input>
                   <el-date-picker v-model="dailyReportDialog.currentExamReport.reportDate" type="date" value-format="YYYY-MM-DD" placeholder="报告日期" style="width: 100%;" @change="touchDailyReport"></el-date-picker>
-                  <el-input v-model="dailyReportDialog.currentExamReport.department" placeholder="检查科室，如：放射科/彩超室" @change="touchDailyReport"></el-input>
+                  <el-input v-model="dailyReportDialog.currentExamReport.department" placeholder="检查科室，如：放射科" @change="touchDailyReport"></el-input>
                   <el-input v-model="dailyReportDialog.currentExamReport.reportDoctor" placeholder="报告医生" @change="touchDailyReport"></el-input>
                 </div>
                 <template v-if="dailyReportDialog.examMode === 'view'">
@@ -1482,9 +1460,9 @@
   <script src="vendor/element-plus-icons-vue.iife.min.js"></script>
   <script src="js/core/runtime.js?v=202607010930"></script>
   <script src="js/services/data-service.js?v=202606301802"></script>
-  <script src="js/services/report-input-service.js?v=202606301802"></script>
+  <script src="js/services/report-input-service.js?v=202607011410"></script>
   <script src="js/parsers/package-parser.js?v=202606301802"></script>
-  <script src="js/parsers/daily-report-parser.js?v=202606301802"></script>
-  <script src="js/main.js?v=202607011120"></script>
+  <script src="js/parsers/daily-report-parser.js?v=202607011735"></script>
+  <script src="js/main.js?v=202607011950"></script>
 </body>
 </html>

@@ -13,6 +13,20 @@
         inferLabFlag(value, reference, line = '') {
           const text = `${value} ${reference} ${line}`;
           if (/[↑↓]|偏高|偏低|阳性|\+/.test(text) && !/阴性/.test(String(value))) return 'abnormal';
+          const numericValue = Number(String(value || '').replace(/[^0-9.+-]/g, ''));
+          const referenceText = String(reference || '').replace(/[（()）\s]/g, '');
+          if (Number.isFinite(numericValue)) {
+            const range = referenceText.match(/(-?\d+(?:\.\d+)?)\s*[-~～至]\s*(-?\d+(?:\.\d+)?)/);
+            if (range && (numericValue < Number(range[1]) || numericValue > Number(range[2]))) return 'abnormal';
+            const limit = referenceText.match(/^([<>≤≥])\s*(-?\d+(?:\.\d+)?)$/);
+            if (limit) {
+              const boundary = Number(limit[2]);
+              if ((limit[1] === '<' && numericValue >= boundary)
+                || (limit[1] === '≤' && numericValue > boundary)
+                || (limit[1] === '>' && numericValue <= boundary)
+                || (limit[1] === '≥' && numericValue < boundary)) return 'abnormal';
+            }
+          }
           return 'normal';
         },
         parseDailyLabReport(report) {
@@ -286,9 +300,157 @@
                 note: patch.note || ''
               });
             };
+            const knownUrineItems = [
+              '尿颜色', '尿透明度', '尿葡萄糖', '尿胆红素', '尿酮体', '尿比重', '尿pH', '尿蛋白定性', '尿胆原',
+              '尿亚硝酸盐', '尿隐血', '尿白细胞酯酶', '红细胞', '白细胞', '上皮细胞', '鳞状上皮细胞',
+              '非鳞状上皮细胞', '管型', '透明管型', '病理管型', '结晶', '细菌', '酵母菌', '粘液丝'
+            ];
+            const urineItemAliases = {
+              尿颜色: ['尿颜色'],
+              尿透明度: ['尿透明度'],
+              尿葡萄糖: ['尿葡萄糖'],
+              尿胆红素: ['尿胆红素'],
+              尿酮体: ['尿酮体'],
+              尿比重: ['尿比重'],
+              尿pH: ['尿pH', '尿PH', '尿ph'],
+              尿蛋白定性: ['尿蛋白定性', '尿蛋白'],
+              尿胆原: ['尿胆原'],
+              尿亚硝酸盐: ['尿亚硝酸盐'],
+              尿隐血: ['尿隐血'],
+              尿白细胞酯酶: ['尿白细胞酯酶'],
+              红细胞: ['红细胞'],
+              白细胞: ['白细胞'],
+              上皮细胞: ['上皮细胞'],
+              鳞状上皮细胞: ['鳞状上皮细胞'],
+              非鳞状上皮细胞: ['非鳞状上皮细胞'],
+              管型: ['管型'],
+              透明管型: ['透明管型'],
+              病理管型: ['病理管型'],
+              结晶: ['结晶'],
+              细菌: ['细菌'],
+              酵母菌: ['酵母菌'],
+              粘液丝: ['粘液丝']
+            };
+            const compactUrineText = value => String(value || '').replace(/\s+/g, '').trim();
+            const spatialUrineRows = (() => {
+              const positioned = (Array.isArray(report.ocrLines) ? report.ocrLines : [])
+                .map(line => {
+                  const box = Array.isArray(line?.box) ? line.box.map(Number) : [];
+                  if (box.length < 4 || box.some(value => !Number.isFinite(value))) return null;
+                  return {
+                    text: String(line.text || '').trim(),
+                    compact: compactUrineText(line.text),
+                    x1: box[0],
+                    y1: box[1],
+                    x2: box[2],
+                    y2: box[3],
+                    cx: (box[0] + box[2]) / 2,
+                    cy: (box[1] + box[3]) / 2
+                  };
+                })
+                .filter(line => line && line.text);
+              if (positioned.length === 0) return new Map();
+
+              const findHeader = labels => positioned.find(line => labels.includes(line.compact));
+              const headers = {
+                name: findHeader(['检查项目', '检验项目', '项目名称']),
+                value: findHeader(['检验值', '检查值', '结果']),
+                reference: findHeader(['参考值', '参考范围']),
+                flag: findHeader(['标志', '提示']),
+                unit: findHeader(['单位'])
+              };
+              if (!headers.name || !headers.value || !headers.reference) return new Map();
+              const tableTop = Math.max(headers.name.y2, headers.value.y2, headers.reference.y2);
+              const columns = Object.entries(headers)
+                .filter(([, header]) => header)
+                .map(([key, header]) => ({ key, cx: header.cx }));
+              const nearestColumn = line => columns.reduce((best, column) => {
+                const distance = Math.abs(line.cx - column.cx);
+                return !best || distance < best.distance ? { key: column.key, distance } : best;
+              }, null)?.key;
+              const positionedItems = knownUrineItems
+                .map(name => {
+                  const aliases = urineItemAliases[name].map(compactUrineText);
+                  const line = positioned.find(candidate => candidate.y1 > tableTop && aliases.includes(candidate.compact));
+                  return line ? { name, line } : null;
+                })
+                .filter(Boolean)
+                .sort((a, b) => a.line.cy - b.line.cy);
+              const result = new Map();
+              positionedItems.forEach((entry, index) => {
+                const { name, line: nameLine } = entry;
+                const previousLine = positionedItems[index - 1]?.line;
+                const nextLine = positionedItems[index + 1]?.line;
+                const rowTop = previousLine ? (previousLine.cy + nameLine.cy) / 2 : tableTop;
+                const rowBottom = nextLine
+                  ? (nameLine.cy + nextLine.cy) / 2
+                  : nameLine.cy + Math.max(nameLine.y2 - nameLine.y1, 20);
+                const rowLines = positioned.filter(line => {
+                  if (line === nameLine || line.y1 <= tableTop) return false;
+                  return line.cy >= rowTop && line.cy < rowBottom;
+                });
+                const fields = {};
+                rowLines.forEach(line => {
+                  const column = nearestColumn(line);
+                  if (!column || column === 'name') return;
+                  if (!fields[column] || Math.abs(line.cx - headers[column].cx) < Math.abs(fields[column].cx - headers[column].cx)) {
+                    fields[column] = line;
+                  }
+                });
+                result.set(name, {
+                  value: fields.value?.text || '',
+                  reference: fields.reference?.text || '',
+                  flagText: fields.flag?.text || '',
+                  unit: fields.unit?.text || ''
+                });
+              });
+
+              const orderedValueColumn = positioned
+                .filter(line => line.y1 > tableTop && nearestColumn(line) === 'value' && isValueToken(line.text))
+                .sort((a, b) => a.cy - b.cy);
+              if (orderedValueColumn.length === positionedItems.length) {
+                positionedItems.forEach((entry, index) => {
+                  const current = result.get(entry.name) || { value: '', reference: '', flagText: '', unit: '' };
+                  current.value = stripWrapper(orderedValueColumn[index].text);
+                  result.set(entry.name, current);
+                });
+              }
+              return result;
+            })();
+            const matchUrineItemAtLine = (line) => {
+              const compact = compactUrineText(line);
+              for (const name of [...knownUrineItems].sort((a, b) => b.length - a.length)) {
+                const alias = urineItemAliases[name].find(candidate => compact.startsWith(compactUrineText(candidate)));
+                if (alias) return { name, alias, compact };
+              }
+              return null;
+            };
+            const findUrineItem = (name) => {
+              const aliases = urineItemAliases[name] || [name];
+              for (let index = 0; index < lines.length; index += 1) {
+                const compact = compactUrineText(lines[index]);
+                const alias = aliases.find(candidate => compact.startsWith(compactUrineText(candidate)));
+                if (!alias) continue;
+                return {
+                  index,
+                  remainder: compact.slice(compactUrineText(alias).length)
+                };
+              }
+              return null;
+            };
+            const urineTokensAround = (name) => {
+              const located = findUrineItem(name);
+              if (!located) return null;
+              const tokens = located.remainder ? [located.remainder] : [];
+              for (let cursor = located.index + 1; cursor < Math.min(lines.length, located.index + 10); cursor += 1) {
+                if (matchUrineItemAtLine(lines[cursor])) break;
+                tokens.push(lines[cursor]);
+              }
+              return tokens;
+            };
             const urineQualitativeDefaults = {
-              尿颜色: { value: lines.includes('黄色') ? '黄色' : '' },
-              尿透明度: { value: lines.includes('清亮') ? '清亮' : '' },
+              尿颜色: { value: '' },
+              尿透明度: { value: '' },
               尿葡萄糖: { value: '阴性' },
               尿胆红素: { value: '阴性' },
               尿酮体: { value: '阴性' },
@@ -299,26 +461,32 @@
               尿白细胞酯酶: { value: '阴性' }
             };
             Object.entries(urineQualitativeDefaults).forEach(([name, patch]) => {
-              if (!lines.includes(name)) return;
-              upsertItem({ name, ...patch, flag: 'normal', unit: '', note: '按尿常规报告结构校正' });
+              const tokens = urineTokensAround(name);
+              if (!tokens) return;
+              const parsed = parseTokenSegment(name, tokens);
+              const tokenText = tokens.join(' ');
+              let value = parsed.value || patch.value;
+              if (name === '尿颜色' && !value) value = tokenText.match(/淡黄色|深黄色|黄色|无色/)?.[0] || '';
+              if (name === '尿透明度' && !value) value = tokenText.match(/清亮|微浑|浑浊/)?.[0] || '';
+              upsertItem({
+                name,
+                value,
+                reference: parsed.reference,
+                flag: this.inferLabFlag(value, parsed.reference, parsed.flag),
+                unit: parsed.unit,
+                note: parsed.note || ''
+              });
             });
-            const knownUrineItems = [
-              '尿颜色', '尿透明度', '尿葡萄糖', '尿胆红素', '尿酮体', '尿比重', '尿pH', '尿蛋白定性', '尿胆原',
-              '尿亚硝酸盐', '尿隐血', '尿白细胞酯酶', '红细胞', '白细胞', '上皮细胞', '鳞状上皮细胞',
-              '非鳞状上皮细胞', '管型', '透明管型', '病理管型', '结晶', '细菌', '酵母菌', '粘液丝'
-            ];
             const valueAround = (name, fallback = {}) => {
-              const index = lines.indexOf(name);
-              if (index < 0) return fallback;
-              const nextNameIndex = lines.findIndex((line, lineIndex) => lineIndex > index && knownUrineItems.includes(line));
-              const end = nextNameIndex > index ? nextNameIndex : Math.min(lines.length, index + 8);
-              const segment = lines.slice(index + 1, end);
-              const previous = lines.slice(Math.max(0, index - 4), index);
+              const located = findUrineItem(name);
+              if (!located) return fallback;
+              const segment = urineTokensAround(name) || [];
+              const previous = lines.slice(Math.max(0, located.index - 4), located.index);
               const parsed = parseTokenSegment(name, segment);
 
               // Rescue logic for severe OCR displacement (Value is placed BEFORE the name, and '0' is placed AFTER)
               if (['鳞状上皮细胞', '非鳞状上皮细胞', '白细胞', '红细胞', '上皮细胞'].includes(name)) {
-                const prev = lines[index - 1] || '';
+                const prev = lines[located.index - 1] || '';
                 if ((!parsed.value || parsed.value === '0') && isValueToken(prev) && prev !== '0' && prev !== '0.0') {
                   if (parsed.value === '0') {
                     parsed.reference = '0'; // Push the '0' to reference, it will be restored to '()' by fallback
@@ -328,7 +496,7 @@
               }
 
               if (parsed.value || parsed.reference || parsed.unit) return parsed;
-              const immediatePrevious = lines[index - 1] || '';
+              const immediatePrevious = lines[located.index - 1] || '';
               if (isValueToken(immediatePrevious)) {
                 const previousUnit = [...previous].reverse().find(token => isUnitToken(token)) || '';
                 return {
@@ -366,6 +534,58 @@
                 note: parsed.note || ''
               });
             });
+
+            spatialUrineRows.forEach((parsed, name) => {
+              upsertItem({
+                name,
+                value: parsed.value,
+                reference: parsed.reference,
+                unit: parsed.unit,
+                flag: this.inferLabFlag(parsed.value, parsed.reference, parsed.flagText),
+                note: ''
+              });
+            });
+
+            const globalUrineText = lines.join(' ');
+            const colorValue = globalUrineText.match(/(?:淡黄色|深黄色|黄色|无色)/)?.[0] || '';
+            const clarityValue = globalUrineText.match(/(?:清亮|微浑|浑浊)/)?.[0] || '';
+            const specificGravityValues = [...globalUrineText.matchAll(/(?<!\d)(1\.\d{3})(?!\d)/g)]
+              .map(match => match[1])
+              .filter(value => !['1.003', '1.030'].includes(value));
+            if (colorValue) upsertItem({ name: '尿颜色', value: colorValue, flag: 'normal', note: '' });
+            if (clarityValue) upsertItem({ name: '尿透明度', value: clarityValue, flag: 'normal', note: '' });
+            if (specificGravityValues[0]) {
+              upsertItem({
+                name: '尿比重',
+                value: specificGravityValues[0],
+                reference: '(1.003~1.030)',
+                flag: this.inferLabFlag(specificGravityValues[0], '(1.003~1.030)'),
+                note: ''
+              });
+            }
+
+            const canonicalNameFor = (value) => {
+              const compact = compactUrineText(value);
+              for (const name of knownUrineItems) {
+                if ((urineItemAliases[name] || [name]).some(alias => compact === compactUrineText(alias))) return name;
+              }
+              return '';
+            };
+            const canonicalItems = [];
+            knownUrineItems.forEach(name => {
+              const matches = items.filter(item => canonicalNameFor(item.name) === name);
+              if (matches.length === 0) return;
+              const primary = matches.find(item => item.name === name) || matches[0];
+              primary.name = name;
+              matches.forEach(item => {
+                if (item === primary) return;
+                ['value', 'reference', 'unit', 'note'].forEach(key => {
+                  if (!primary[key] && item[key]) primary[key] = item[key];
+                });
+              });
+              canonicalItems.push(primary);
+            });
+            items.splice(0, items.length, ...canonicalItems);
           }
           
           const standardReferences = {
@@ -418,6 +638,7 @@
                 item.reference = '(阴性)'; // force these to be (阴性)
               }
             }
+            item.flag = this.inferLabFlag(item.value, item.reference);
           });
 
           if (items.length === 0) {

@@ -13,7 +13,10 @@
     const response = await fetch(OCR_API_URL, { method: 'POST', body: formData });
     if (!response.ok) throw new Error(await response.text());
     const data = await response.json();
-    return String(data.rawText || '').trim();
+    return {
+      rawText: String(data.rawText || '').trim(),
+      ocrLines: Array.isArray(data.lines) ? data.lines : []
+    };
   };
 
   const pageText = async (page) => {
@@ -62,7 +65,8 @@
       let text = await pageText(page);
       if (text.replace(/\s+/g, '').length < 20) {
         extraction = 'pdf-ocr';
-        text = await callOcr(await renderPageFile(page, pageNumber, file.name.replace(/\.pdf$/i, '')));
+        const ocrResult = await callOcr(await renderPageFile(page, pageNumber, file.name.replace(/\.pdf$/i, '')));
+        text = ocrResult.rawText;
       }
       if (text) chunks.push(text);
     }
@@ -74,7 +78,8 @@
     const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
     if (isPdf) return extractPdfText(file, onProgress);
     onProgress('正在识别报告图片...');
-    return { rawText: await callOcr(file), extraction: 'image-ocr', pageCount: 1 };
+    const ocrResult = await callOcr(file);
+    return { ...ocrResult, extraction: 'image-ocr', pageCount: 1 };
   };
 
   const uploadReportFile = async (file) => {

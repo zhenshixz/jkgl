@@ -183,7 +183,6 @@ const {
             extraction: '',
             report: null
           },
-          indicatorActiveTab: 'lab',
           indicatorMigrationPending: false,
         };
       },
@@ -336,50 +335,13 @@ const {
             return true;
           });
         },
-        indicatorLabReports() {
-          return this.filteredIndicatorReports
-            .filter((report) => report.reportType === 'lab')
-            .sort((a, b) => String(a.reportDate).localeCompare(String(b.reportDate)));
-        },
-        indicatorTableColumns() {
-          return this.indicatorLabReports.map((report) => ({
-            id: report.id,
-            date: report.reportDate,
-            title: report.title,
-            report
-          }));
-        },
-        indicatorTableData() {
-          const rowsMap = new Map();
-          this.indicatorLabReports.forEach((report) => {
-            (report.items || report.structured?.metrics || []).forEach((item) => {
-              const normalized = this.normalizeLabItemForStorage(item);
-              if (!normalized.name) return;
-              const key = `${normalized.normalizedName || normalized.name}_${normalized.unit || ''}`;
-              if (!rowsMap.has(key)) {
-                rowsMap.set(key, {
-                  key,
-                  name: normalized.name,
-                  unit: normalized.unit || '',
-                  values: {}
-                });
-              }
-              rowsMap.get(key).values[report.id] = {
-                value: normalized.valueText,
-                valueNumber: normalized.valueNumber,
-                reference: normalized.reference,
-                referenceRange: normalized.referenceRange,
-                flag: normalized.flag,
-                reportId: report.id
-              };
+        indicatorReportList() {
+          return [...this.filteredIndicatorReports]
+            .sort((a, b) => {
+              const dateCompare = String(b.reportDate || '').localeCompare(String(a.reportDate || ''));
+              if (dateCompare !== 0) return dateCompare;
+              return String(a.title || '').localeCompare(String(b.title || ''), 'zh-CN');
             });
-          });
-          return Array.from(rowsMap.values()).sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
-        },
-        indicatorExamReports() {
-          return this.filteredIndicatorReports
-            .filter((report) => report.reportType === 'exam')
-            .sort((a, b) => String(b.reportDate).localeCompare(String(a.reportDate)));
         },
         indicatorVisibleMonths() {
           const year = this.indicatorFilterYear || '';
@@ -625,9 +587,10 @@ const {
           this.dailyMonthRecords = Array.isArray(data.dailyMonthRecords) ? data.dailyMonthRecords : [];
           this.dailyRecords = Array.isArray(data.dailyRecords) ? data.dailyRecords : [];
           this.ensureDailyMonthRecords();
+          const migratedReportDepartments = this.migrateIndicatorReportDepartments();
           const legacyIndicatorRecords = Array.isArray(data.indicatorRecords) ? data.indicatorRecords : [];
           this.migrateLegacyIndicatorRecords(legacyIndicatorRecords);
-          this.indicatorMigrationPending = legacyIndicatorRecords.length > 0;
+          this.indicatorMigrationPending = legacyIndicatorRecords.length > 0 || migratedReportDepartments > 0;
 
           if (!this.members.some((member) => member.id === this.activeDailyMemberId)) {
             this.activeDailyMemberId = this.members[0]?.id || '';
@@ -786,6 +749,18 @@ const {
             .map((report) => report.department)
             .filter(Boolean))]
             .sort((a, b) => a.localeCompare(b, 'zh-CN'));
+        },
+        getIndicatorReportTypeLabel(report) {
+          return this.getDailyReportType(report, 'lab') === 'exam' ? '检查报告' : '检验报告';
+        },
+        getIndicatorReportItemCount(report) {
+          if (this.getDailyReportType(report, 'lab') === 'exam') return '-';
+          return (report?.items || report?.structured?.metrics || []).length;
+        },
+        getIndicatorAbnormalCount(report) {
+          if (this.getDailyReportType(report, 'lab') === 'exam') return '-';
+          return (report?.items || report?.structured?.metrics || [])
+            .filter(item => this.normalizeLabItemForStorage(item).flag === 'abnormal').length;
         },
         isDailyRowExpanded(id) {
           return this.dailyExpandedRowIds.includes(id);
@@ -1322,6 +1297,7 @@ const {
             if (!response.ok) throw new Error(await response.text());
             const data = await response.json();
             report.rawOcrText = this.redactPrivacy(data.rawText || '');
+            report.ocrLines = Array.isArray(data.lines) ? data.lines : [];
             report.files = report.files || [];
             report.files.push({
               id: uid('report_file'),
@@ -2869,16 +2845,58 @@ const {
         inferIndicatorReportType(rawText, fallbackType = 'lab') {
           return /检查所见|影像所见|检查结论|诊断意见|超声描述/.test(rawText) ? 'exam' : fallbackType;
         },
-        inferIndicatorDepartment(report, reportType) {
-          if (report.department) return report.department;
-          if (reportType === 'lab') return '检验科';
-          const title = String(report.title || '');
-          if (/彩超|B超|超声/i.test(title)) return '彩超室';
-          if (/胃镜|肠镜|内镜/i.test(title)) return '消化内科';
-          if (/CT|MR|MRI|DR|X线|造影/i.test(title)) return '放射科';
-          return '检查科';
+        extractIndicatorDepartment(rawText) {
+          const lines = String(rawText || '')
+            .split(/\r?\n/)
+            .map(line => line.replace(/\s+/g, '').trim())
+            .filter(Boolean);
+          const labelIndex = lines.findIndex(line => /^申请科室[:：]?/.test(line));
+          if (labelIndex < 0) return '';
+          const inline = lines[labelIndex].replace(/^申请科室[:：]?/, '');
+          const candidates = [inline, lines[labelIndex + 1], lines[labelIndex - 1], lines[labelIndex + 2], lines[labelIndex - 2]];
+          return candidates.find(value => {
+            if (!value || /^(申请医生|报告时间|标本状态|标本类型|患者姓名|床号)[:：]?$/.test(value)) return false;
+            return /(?:科|室|中心|门诊)$/.test(value) && value.length <= 16;
+          }) || '';
         },
-        parseIndicatorDraft(rawText, requestedType = 'lab') {
+        inferIndicatorDepartment(report, reportType) {
+          const rawText = String(report.rawOcrText || report.source?.rawOcrText || '');
+          const title = String(report.title || report.reportName || '');
+          if (reportType === 'exam' && /CT|MR|MRI|DR|X线|造影|影像|彩超|B超|超声/i.test(`${title}\n${rawText}`)) {
+            return '放射科';
+          }
+          const recognized = this.extractIndicatorDepartment(rawText);
+          if (recognized) return recognized;
+          const current = String(report.department || report.meta?.department || '').trim();
+          if (current && !['检验科', '检查科', '未分类'].includes(current)) return current;
+          return reportType === 'lab' ? '检验科' : '放射科';
+        },
+        migrateIndicatorReportDepartments() {
+          let migrated = 0;
+          (this.dailyMonthRecords || []).forEach(row => {
+            const reportDepartments = [];
+            (row.reports || []).forEach(report => {
+              const reportType = this.getDailyReportType(report, 'lab');
+              const department = this.inferIndicatorDepartment(report, reportType);
+              if (!department) return;
+              reportDepartments.push(department);
+              if (report.department !== department) {
+                report.department = department;
+                if (report.meta) report.meta.department = department;
+                report.updatedAt = nowText();
+                migrated += 1;
+              }
+            });
+            const uniqueDepartments = [...new Set(reportDepartments)];
+            if (['indicator-import', 'legacy-indicator'].includes(row.source) && uniqueDepartments.length === 1 && row.department !== uniqueDepartments[0]) {
+              row.department = uniqueDepartments[0];
+              row.updatedAt = nowText();
+              migrated += 1;
+            }
+          });
+          return migrated;
+        },
+        parseIndicatorDraft(rawText, requestedType = 'lab', ocrLines = []) {
           const cleanText = this.redactPrivacy(rawText);
           if (!cleanText.trim()) throw new Error('未能识别到报告文字。');
           const reportType = this.inferIndicatorReportType(cleanText, requestedType);
@@ -2890,6 +2908,7 @@ const {
             department: '',
             status: 'parsed',
             rawOcrText: cleanText,
+            ocrLines: Array.isArray(ocrLines) ? ocrLines : [],
             files: []
           }, reportType);
           if (reportType === 'exam') this.parseDailyExamReport(report);
@@ -2913,7 +2932,7 @@ const {
               this.indicatorImportDialog.progress = progress;
             });
             this.indicatorImportDialog.extraction = result.extraction;
-            this.parseIndicatorDraft(result.rawText, this.indicatorImportDialog.reportType);
+            this.parseIndicatorDraft(result.rawText, this.indicatorImportDialog.reportType, result.ocrLines);
             ElementPlus.ElMessage.success('解析完成，请逐项核对后确认。');
           } catch (error) {
             console.error(error);
@@ -2954,7 +2973,7 @@ const {
             ElementPlus.ElMessage.warning('暂无 OCR 原文。');
             return;
           }
-          this.parseIndicatorDraft(report.rawOcrText, this.indicatorImportDialog.reportType);
+          this.parseIndicatorDraft(report.rawOcrText, this.indicatorImportDialog.reportType, report.ocrLines);
         },
         async confirmIndicatorImport() {
           const dialog = this.indicatorImportDialog;
@@ -3026,7 +3045,6 @@ const {
             this.activeIndicatorDepartment = report.department;
             this.indicatorFilterYear = report.reportDate.slice(0, 4);
             this.indicatorFilterMonth = month;
-            this.indicatorActiveTab = report.reportType;
             this.persist();
             this.closeIndicatorImport();
             ElementPlus.ElMessage.success('报告已确认并进入指标跟踪。');
