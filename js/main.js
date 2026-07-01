@@ -4,6 +4,7 @@ const {
       dataRepository,
       createSaveQueue
     } = window.JKGLData;
+    const { extractReportText, uploadReportFile } = window.JKGLReportInput;
     const {
       nowText,
       uid,
@@ -14,6 +15,7 @@ const {
       normalizeDailyMonth,
       normalizeDailyDate,
       htmlToPlainText,
+      plainTextToHtml,
       sanitizeRichHtml,
       cellToPlainText,
       cellToRichHtml,
@@ -164,7 +166,25 @@ const {
           dailyEditor: {
             visible: false,
             form: { id: '', memberId: '', department: '', visitDate: '', doctor: '', content: '', notes: '' }
-          }
+          },
+          activeIndicatorMemberId: parsed.members?.[0]?.id || '',
+          activeIndicatorDepartment: '',
+          indicatorFilterYear: '',
+          indicatorFilterMonth: '',
+          indicatorImportDialog: {
+            visible: false,
+            loading: false,
+            stage: 'input',
+            progress: '',
+            memberId: parsed.members?.[0]?.id || '',
+            reportType: 'lab',
+            file: null,
+            fileName: '',
+            extraction: '',
+            report: null
+          },
+          indicatorActiveTab: 'lab',
+          indicatorMigrationPending: false,
         };
       },
       computed: {
@@ -271,6 +291,102 @@ const {
             .filter(month => !year || month.startsWith(`${year}-`))
             .sort((a, b) => b.localeCompare(a))
             .map(month => ({
+              value: month,
+              label: year ? `${Number(month.slice(5, 7))}月` : `${month.slice(0, 4)}年${Number(month.slice(5, 7))}月`
+            }));
+        },
+        confirmedIndicatorReports() {
+          const reports = [];
+          (this.dailyMonthRecords || []).forEach((row) => {
+            (row.reports || []).forEach((sourceReport) => {
+              const report = this.enrichDailyReportForStorage(sourceReport, this.getDailyReportType(sourceReport, 'lab'));
+              if (report.status !== 'confirmed' && report.meta?.status !== 'confirmed') return;
+              reports.push({
+                ...report,
+                memberId: row.memberId,
+                department: report.department || row.department || '未分类',
+                reportDate: report.reportDate || row.month || '',
+                _rowId: row.id
+              });
+            });
+          });
+          return reports;
+        },
+        indicatorMonthsWithData() {
+          const months = new Set();
+          this.confirmedIndicatorReports.forEach((report) => {
+            const month = normalizeDailyMonth(report.reportDate);
+            if (month) months.add(month);
+          });
+          return months;
+        },
+        indicatorAvailableYears() {
+          return Array.from(this.indicatorMonthsWithData)
+            .map((month) => month.slice(0, 4))
+            .filter((year, index, values) => year && values.indexOf(year) === index)
+            .sort((a, b) => b.localeCompare(a));
+        },
+        filteredIndicatorReports() {
+          return this.confirmedIndicatorReports.filter((report) => {
+            if (report.memberId !== this.activeIndicatorMemberId) return false;
+            if (this.activeIndicatorDepartment && report.department !== this.activeIndicatorDepartment) return false;
+            const month = normalizeDailyMonth(report.reportDate);
+            if (this.indicatorFilterMonth) return month === this.indicatorFilterMonth;
+            if (this.indicatorFilterYear) return month.startsWith(`${this.indicatorFilterYear}-`);
+            return true;
+          });
+        },
+        indicatorLabReports() {
+          return this.filteredIndicatorReports
+            .filter((report) => report.reportType === 'lab')
+            .sort((a, b) => String(a.reportDate).localeCompare(String(b.reportDate)));
+        },
+        indicatorTableColumns() {
+          return this.indicatorLabReports.map((report) => ({
+            id: report.id,
+            date: report.reportDate,
+            title: report.title,
+            report
+          }));
+        },
+        indicatorTableData() {
+          const rowsMap = new Map();
+          this.indicatorLabReports.forEach((report) => {
+            (report.items || report.structured?.metrics || []).forEach((item) => {
+              const normalized = this.normalizeLabItemForStorage(item);
+              if (!normalized.name) return;
+              const key = `${normalized.normalizedName || normalized.name}_${normalized.unit || ''}`;
+              if (!rowsMap.has(key)) {
+                rowsMap.set(key, {
+                  key,
+                  name: normalized.name,
+                  unit: normalized.unit || '',
+                  values: {}
+                });
+              }
+              rowsMap.get(key).values[report.id] = {
+                value: normalized.valueText,
+                valueNumber: normalized.valueNumber,
+                reference: normalized.reference,
+                referenceRange: normalized.referenceRange,
+                flag: normalized.flag,
+                reportId: report.id
+              };
+            });
+          });
+          return Array.from(rowsMap.values()).sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+        },
+        indicatorExamReports() {
+          return this.filteredIndicatorReports
+            .filter((report) => report.reportType === 'exam')
+            .sort((a, b) => String(b.reportDate).localeCompare(String(a.reportDate)));
+        },
+        indicatorVisibleMonths() {
+          const year = this.indicatorFilterYear || '';
+          return Array.from(this.indicatorMonthsWithData)
+            .filter((month) => !year || month.startsWith(`${year}-`))
+            .sort((a, b) => b.localeCompare(a))
+            .map((month) => ({
               value: month,
               label: year ? `${Number(month.slice(5, 7))}月` : `${month.slice(0, 4)}年${Number(month.slice(5, 7))}月`
             }));
@@ -488,6 +604,10 @@ const {
           }
           this.beforeUnloadHandler = () => dataSaveQueue.flushForUnload();
           window.addEventListener('beforeunload', this.beforeUnloadHandler);
+          if (this.indicatorMigrationPending) {
+            this.indicatorMigrationPending = false;
+            this.persist();
+          }
         }
       },
       beforeUnmount() {
@@ -505,6 +625,9 @@ const {
           this.dailyMonthRecords = Array.isArray(data.dailyMonthRecords) ? data.dailyMonthRecords : [];
           this.dailyRecords = Array.isArray(data.dailyRecords) ? data.dailyRecords : [];
           this.ensureDailyMonthRecords();
+          const legacyIndicatorRecords = Array.isArray(data.indicatorRecords) ? data.indicatorRecords : [];
+          this.migrateLegacyIndicatorRecords(legacyIndicatorRecords);
+          this.indicatorMigrationPending = legacyIndicatorRecords.length > 0;
 
           if (!this.members.some((member) => member.id === this.activeDailyMemberId)) {
             this.activeDailyMemberId = this.members[0]?.id || '';
@@ -521,6 +644,65 @@ const {
           } else {
             this.activeTimelineKey = '';
           }
+        },
+        migrateLegacyIndicatorRecords(records) {
+          let migrated = 0;
+          (records || []).forEach((record) => {
+            const reportType = record.type === 'exam' ? 'exam' : 'lab';
+            const metrics = Array.isArray(record.metrics) ? record.metrics.filter((item) => String(item.name || '').trim()) : [];
+            if (reportType === 'lab' && metrics.length === 0) return;
+            if (reportType === 'exam' && !record.findings && !record.diagnosis) return;
+            const reportDate = normalizeDailyDate(record.reportDate) || new Date().toISOString().slice(0, 10);
+            const month = normalizeDailyMonth(reportDate);
+            const department = record.department || (reportType === 'lab' ? '检验科' : '放射科');
+            let row = this.dailyMonthRecords.find((item) =>
+              item.memberId === record.memberId &&
+              item.department === department &&
+              normalizeDailyMonth(item.month) === month
+            );
+            if (!row) {
+              row = {
+                id: uid('daily_month'),
+                memberId: record.memberId,
+                department,
+                month,
+                content: '',
+                contentHtml: '',
+                notes: '',
+                notesHtml: '',
+                remark: '',
+                remarkHtml: '',
+                reports: [],
+                source: 'legacy-indicator',
+                createdAt: nowText(),
+                updatedAt: nowText()
+              };
+              this.dailyMonthRecords.push(row);
+            }
+            row.reports = row.reports || [];
+            const signature = `${reportType}|${reportDate}|${record.reportName || ''}`;
+            const duplicate = row.reports.some((report) =>
+              `${this.getDailyReportType(report)}|${report.reportDate || ''}|${report.title || ''}` === signature
+            );
+            if (duplicate) return;
+            const report = this.normalizeDailyReport({
+              id: record.id || uid('daily_report'),
+              reportType,
+              title: record.reportName || (reportType === 'lab' ? '检验报告' : '检查报告'),
+              reportDate,
+              department,
+              status: 'confirmed',
+              confirmedAt: record.confirmedAt || nowText(),
+              rawOcrText: record.rawOcrText || '',
+              files: record.files || [],
+              items: reportType === 'lab' ? metrics : [],
+              findingText: record.findings || '',
+              conclusionText: record.diagnosis || ''
+            }, reportType);
+            row.reports.push(report);
+            migrated += 1;
+          });
+          return migrated;
         },
         getDailyDepartments(memberId) {
           const member = this.members.find(m => m.id === memberId);
@@ -580,6 +762,30 @@ const {
           this.dailyFilterMonth = month || '';
           if (month) this.dailyFilterYear = month.slice(0, 4);
           this.onDailyMemberChange();
+        },
+        onIndicatorMemberChange() {
+          const depts = this.getIndicatorDepartments(this.activeIndicatorMemberId);
+          if (!depts.includes(this.activeIndicatorDepartment)) {
+              this.activeIndicatorDepartment = depts[0] || '';
+          }
+        },
+        onIndicatorYearChange() {
+          if (this.indicatorFilterMonth && this.indicatorFilterYear && !this.indicatorFilterMonth.startsWith(`${this.indicatorFilterYear}-`)) {
+            this.indicatorFilterMonth = '';
+          }
+          this.onIndicatorMemberChange();
+        },
+        setIndicatorMonthFilter(month) {
+          this.indicatorFilterMonth = month || '';
+          if (month) this.indicatorFilterYear = month.slice(0, 4);
+          this.onIndicatorMemberChange();
+        },
+        getIndicatorDepartments(memberId) {
+          return [...new Set(this.confirmedIndicatorReports
+            .filter((report) => report.memberId === memberId)
+            .map((report) => report.department)
+            .filter(Boolean))]
+            .sort((a, b) => a.localeCompare(b, 'zh-CN'));
         },
         isDailyRowExpanded(id) {
           return this.dailyExpandedRowIds.includes(id);
@@ -1344,6 +1550,7 @@ const {
               const workbook = XLSX.read(data, { type: 'array', cellHTML: false, cellStyles: true });
               
               let importedCount = 0;
+              let skippedUndatedCount = 0;
               let firstImportedTarget = null;
               const currentMemberId = this.activeDailyMemberId || this.members[0]?.id;
               if (!currentMemberId) {
@@ -1353,32 +1560,89 @@ const {
               }
               
               workbook.SheetNames.forEach(sheetName => {
+                if (cleanName(sheetName).toLowerCase() === 'ca') return;
                 const worksheet = workbook.Sheets[sheetName];
-                const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-                const header = (json[0] || []).map(cell => String(cell || '').trim());
-                const monthHeader = header[0];
-                const contentHeader = header[1];
-                if (monthHeader !== '月份' || contentHeader !== '内容') return;
-                
-                let currentMonthStr = "";
-                for (let i = 1; i < json.length; i++) {
-                  const row = json[i];
-                  if (!row || row.length === 0) continue;
-                  const contentCellObject = worksheet[XLSX.utils.encode_cell({ r: i, c: 1 })];
-                  const notesCellObject = worksheet[XLSX.utils.encode_cell({ r: i, c: 2 })];
-                  const remarkCellObject = worksheet[XLSX.utils.encode_cell({ r: i, c: 3 })];
-                  
-                  if (row[0] !== undefined && row[0] !== null && String(row[0]).trim() !== '') {
-                     currentMonthStr = row[0];
+                if (!worksheet?.['!ref']) return;
+
+                const range = XLSX.utils.decode_range(worksheet['!ref']);
+                const getCell = (row, column) => worksheet[XLSX.utils.encode_cell({ r: row, c: column })];
+                const getCellText = (row, column) => cellToPlainText(getCell(row, column));
+                const getHeaderText = (row, column) => cleanName(getCellText(row, column));
+                const isMedicationSheet = cleanName(sheetName) === '用药';
+                let headerRow = -1;
+                let columns = null;
+
+                for (let row = range.s.r; row <= Math.min(range.e.r, range.s.r + 10); row++) {
+                  const headerMap = new Map();
+                  for (let column = range.s.c; column <= range.e.c; column++) {
+                    const label = getHeaderText(row, column);
+                    if (label) headerMap.set(label, column);
                   }
+                  const monthColumn = headerMap.get('月份');
+                  const contentColumn = headerMap.get('内容');
+                  if (monthColumn === undefined || (contentColumn === undefined && !isMedicationSheet)) continue;
+
+                  const yearColumn = headerMap.get('年') ?? headerMap.get('年份');
+                  const notesColumn = headerMap.get('日常注意事项');
+                  let remarkColumn = headerMap.get('备注');
+                  if (remarkColumn === undefined && notesColumn !== undefined && notesColumn < range.e.c) {
+                    remarkColumn = notesColumn + 1;
+                  }
+                  headerRow = row;
+                  columns = {
+                    year: yearColumn,
+                    month: monthColumn,
+                    content: contentColumn ?? monthColumn + 1,
+                    notes: notesColumn ?? (isMedicationSheet ? monthColumn + 2 : undefined),
+                    remark: remarkColumn
+                  };
+                  break;
+                }
+                if (headerRow < 0 || !columns) return;
+
+                let currentYear = '';
+                let previousMonth = '';
+                let previousRowHadData = false;
+                for (let row = headerRow + 1; row <= range.e.r; row++) {
+                  const contentCellObject = getCell(row, columns.content);
+                  const notesCellObject = columns.notes === undefined ? null : getCell(row, columns.notes);
+                  const remarkCellObject = columns.remark === undefined ? null : getCell(row, columns.remark);
+                  const contentCell = cellToPlainText(contentCellObject);
                   const currentNotes = cellToPlainText(notesCellObject);
                   const currentRemark = cellToPlainText(remarkCellObject);
-                  
-                  const contentCell = cellToPlainText(contentCellObject);
-                  if (!contentCell && !currentNotes && !currentRemark) continue;
+                  const hasRecordData = Boolean(contentCell || currentNotes || currentRemark);
+                  const rawYear = columns.year === undefined ? '' : getCellText(row, columns.year);
+                  const rawMonth = getCellText(row, columns.month);
 
-                  const month = normalizeDailyMonth(currentMonthStr);
-                  if (!month) continue;
+                  if (!hasRecordData && !rawYear && !rawMonth) {
+                    previousMonth = '';
+                    previousRowHadData = false;
+                    continue;
+                  }
+                  if (rawYear) currentYear = rawYear;
+                  if (!hasRecordData) {
+                    previousRowHadData = false;
+                    continue;
+                  }
+
+                  let month = normalizeDailyMonth(rawMonth);
+                  if (!month && rawMonth) {
+                    const yearMatch = String(rawYear || currentYear).match(/(?:19|20)\d{2}/);
+                    const monthMatch = String(rawMonth).match(/(\d{1,2})/);
+                    const monthNumber = Number(monthMatch?.[1]);
+                    if (yearMatch && monthNumber >= 1 && monthNumber <= 12) {
+                      month = `${yearMatch[0]}-${String(monthNumber).padStart(2, '0')}`;
+                    }
+                  }
+                  if (!month && !rawMonth && previousRowHadData) month = previousMonth;
+                  if (!month) {
+                    skippedUndatedCount++;
+                    previousRowHadData = false;
+                    continue;
+                  }
+
+                  previousMonth = month;
+                  previousRowHadData = true;
                   const importedRow = this.upsertDailyMonthRecord({
                     memberId: currentMemberId,
                     department: sheetName,
@@ -1408,7 +1672,10 @@ const {
                  }
                  this.persist();
                  if (!this.activeDailyDepartment) this.onDailyMemberChange();
-                 ElementPlus.ElMessage.success(`成功导入 ${importedCount} 条月度台账记录`);
+                  const skippedMessage = skippedUndatedCount > 0
+                    ? `；另有 ${skippedUndatedCount} 行缺少年月，已跳过`
+                    : '';
+                  ElementPlus.ElMessage.success(`成功导入 ${importedCount} 条月度台账记录${skippedMessage}`);
               } else {
                  ElementPlus.ElMessage.warning('未能识别到任何记录，请检查Excel格式。');
               }
@@ -1752,22 +2019,27 @@ const {
           event.preventDefault();
           const file = imageItem.getAsFile();
           if (!file) return;
+          const pastedFile = new File([file], `paste-${Date.now()}.png`, { type: file.type || 'image/png' });
+          if (this.indicatorImportDialog.visible) {
+            this.handleIndicatorInputFile(pastedFile);
+            return;
+          }
           if (this.dailyReportDialog.visible) {
             const type = this.dailyReportDialog.activeType || 'lab';
             const report = this.getOrCreateDailyReport(type);
-            this.runDailyReportOcr(report, new File([file], `paste-${Date.now()}.png`, { type: file.type || 'image/png' }), type);
+            this.runDailyReportOcr(report, pastedFile, type);
             return;
           }
-          this.useImageFile(new File([file], `paste-${Date.now()}.png`, { type: file.type || 'image/png' }));
+          this.useImageFile(pastedFile);
           ElementPlus.ElMessage.success('已粘贴截图，可以开始解析。');
         },
         async processPdfFile(file) {
           this.ocr.progress = '正在本地提取 PDF 文本...';
           try {
-            await loadScriptOnce('pdfjs-script', 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js');
+            await loadScriptOnce('pdfjs-script', 'vendor/pdf.min.js');
             const arrayBuffer = await file.arrayBuffer();
             const pdfjsLib = window['pdfjs-dist/build/pdf'];
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'vendor/pdf.worker.min.js';
             const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
             let fullText = '';
             for (let i = 1; i <= pdf.numPages; i++) {
@@ -2574,7 +2846,219 @@ const {
           this.activeMemberId = member.id;
           this.compareIds = [pkgA.id, pkgC.id];
           ElementPlus.ElMessage.success('示例数据已添加。');
-        }
+        },
+        openIndicatorImport(reportType = 'lab') {
+          this.indicatorImportDialog = {
+            visible: true,
+            loading: false,
+            stage: 'input',
+            progress: '',
+            memberId: this.activeIndicatorMemberId || this.members[0]?.id || '',
+            reportType,
+            file: null,
+            fileName: '',
+            extraction: '',
+            report: null
+          };
+        },
+        closeIndicatorImport() {
+          this.indicatorImportDialog.visible = false;
+          this.indicatorImportDialog.loading = false;
+          this.indicatorImportDialog.progress = '';
+        },
+        inferIndicatorReportType(rawText, fallbackType = 'lab') {
+          return /检查所见|影像所见|检查结论|诊断意见|超声描述/.test(rawText) ? 'exam' : fallbackType;
+        },
+        inferIndicatorDepartment(report, reportType) {
+          if (report.department) return report.department;
+          if (reportType === 'lab') return '检验科';
+          const title = String(report.title || '');
+          if (/彩超|B超|超声/i.test(title)) return '彩超室';
+          if (/胃镜|肠镜|内镜/i.test(title)) return '消化内科';
+          if (/CT|MR|MRI|DR|X线|造影/i.test(title)) return '放射科';
+          return '检查科';
+        },
+        parseIndicatorDraft(rawText, requestedType = 'lab') {
+          const cleanText = this.redactPrivacy(rawText);
+          if (!cleanText.trim()) throw new Error('未能识别到报告文字。');
+          const reportType = this.inferIndicatorReportType(cleanText, requestedType);
+          const report = this.normalizeDailyReport({
+            id: uid('daily_report'),
+            reportType,
+            title: reportType === 'lab' ? '检验报告' : '检查报告',
+            reportDate: '',
+            department: '',
+            status: 'parsed',
+            rawOcrText: cleanText,
+            files: []
+          }, reportType);
+          if (reportType === 'exam') this.parseDailyExamReport(report);
+          else this.parseDailyLabReport(report);
+          report.department = this.inferIndicatorDepartment(report, reportType);
+          report.reportDate = normalizeDailyDate(report.reportDate) || new Date().toISOString().slice(0, 10);
+          report.status = 'parsed';
+          this.indicatorImportDialog.reportType = reportType;
+          this.indicatorImportDialog.report = report;
+          this.indicatorImportDialog.stage = 'review';
+          return report;
+        },
+        async handleIndicatorInputFile(file) {
+          if (!file) return;
+          this.indicatorImportDialog.loading = true;
+          this.indicatorImportDialog.progress = '正在读取报告...';
+          this.indicatorImportDialog.file = file;
+          this.indicatorImportDialog.fileName = file.name;
+          try {
+            const result = await extractReportText(file, (progress) => {
+              this.indicatorImportDialog.progress = progress;
+            });
+            this.indicatorImportDialog.extraction = result.extraction;
+            this.parseIndicatorDraft(result.rawText, this.indicatorImportDialog.reportType);
+            ElementPlus.ElMessage.success('解析完成，请逐项核对后确认。');
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error(error.message || '报告读取失败。');
+          } finally {
+            this.indicatorImportDialog.loading = false;
+            this.indicatorImportDialog.progress = '';
+          }
+        },
+        onIndicatorUploadChange(file) {
+          if (file?.raw) this.handleIndicatorInputFile(file.raw);
+        },
+        async onIndicatorPaste(event) {
+          const items = Array.from(event.clipboardData?.items || []);
+          const imageItem = items.find((item) => item.type?.startsWith('image/'));
+          if (imageItem) {
+            const file = imageItem.getAsFile();
+            if (file) {
+              await this.handleIndicatorInputFile(new File([file], `wechat-paste-${Date.now()}.png`, { type: file.type || 'image/png' }));
+            }
+            return;
+          }
+          const text = event.clipboardData?.getData('text/plain')?.trim();
+          if (!text) {
+            ElementPlus.ElMessage.warning('没有读取到图片或文字。');
+            return;
+          }
+          try {
+            this.parseIndicatorDraft(text, this.indicatorImportDialog.reportType);
+            ElementPlus.ElMessage.success('文字已解析，请核对后确认。');
+          } catch (error) {
+            ElementPlus.ElMessage.error(error.message || '文字解析失败。');
+          }
+        },
+        reparseIndicatorDraft() {
+          const report = this.indicatorImportDialog.report;
+          if (!report?.rawOcrText) {
+            ElementPlus.ElMessage.warning('暂无 OCR 原文。');
+            return;
+          }
+          this.parseIndicatorDraft(report.rawOcrText, this.indicatorImportDialog.reportType);
+        },
+        async confirmIndicatorImport() {
+          const dialog = this.indicatorImportDialog;
+          const report = dialog.report;
+          const memberId = dialog.memberId;
+          if (!memberId) {
+            ElementPlus.ElMessage.warning('请选择家人。');
+            return;
+          }
+          if (!report?.title?.trim() || !report.reportDate || !report.department?.trim()) {
+            ElementPlus.ElMessage.warning('请补全报告名称、日期和科室。');
+            return;
+          }
+          if (report.reportType === 'lab') {
+            report.items = (report.items || [])
+              .map((item) => this.normalizeLabItemForStorage(item))
+              .filter((item) => item.name);
+            if (!report.items.length) {
+              ElementPlus.ElMessage.warning('请至少确认一项有效指标。');
+              return;
+            }
+          } else if (!report.findingText?.trim() && !report.conclusionText?.trim()) {
+            ElementPlus.ElMessage.warning('请至少保留检查所见或检查结论。');
+            return;
+          }
+          const month = normalizeDailyMonth(report.reportDate);
+          let row = this.dailyMonthRecords.find((item) =>
+            item.memberId === memberId &&
+            item.department === report.department &&
+            normalizeDailyMonth(item.month) === month
+          );
+          if (!row) {
+            row = this.upsertDailyMonthRecord({
+              memberId,
+              department: report.department,
+              month,
+              content: '',
+              notes: '',
+              source: 'indicator-import'
+            });
+          }
+          row.reports = row.reports || [];
+          const duplicateIndex = row.reports.findIndex((item) =>
+            this.getDailyReportType(item) === report.reportType &&
+            item.reportDate === report.reportDate &&
+            item.title === report.title
+          );
+          if (duplicateIndex >= 0) {
+            try {
+              await ElementPlus.ElMessageBox.confirm('同一天已有同名报告，是否用本次核对结果替换？', '重复报告', { type: 'warning' });
+            } catch {
+              return;
+            }
+          }
+          dialog.loading = true;
+          dialog.progress = '正在保存已确认报告...';
+          try {
+            if (dialog.file) {
+              const uploaded = await uploadReportFile(dialog.file);
+              report.files = [{ ...uploaded, extraction: dialog.extraction, uploadedAt: nowText() }];
+            }
+            report.status = 'confirmed';
+            report.confirmedAt = nowText();
+            const storedReport = this.enrichDailyReportForStorage(report, report.reportType);
+            if (duplicateIndex >= 0) row.reports.splice(duplicateIndex, 1, storedReport);
+            else row.reports.push(storedReport);
+            row.updatedAt = nowText();
+            this.activeIndicatorMemberId = memberId;
+            this.activeIndicatorDepartment = report.department;
+            this.indicatorFilterYear = report.reportDate.slice(0, 4);
+            this.indicatorFilterMonth = month;
+            this.indicatorActiveTab = report.reportType;
+            this.persist();
+            this.closeIndicatorImport();
+            ElementPlus.ElMessage.success('报告已确认并进入指标跟踪。');
+          } catch (error) {
+            console.error(error);
+            ElementPlus.ElMessage.error(error.message || '保存报告失败。');
+          } finally {
+            dialog.loading = false;
+            dialog.progress = '';
+          }
+        },
+        openIndicatorReport(report) {
+          const row = this.dailyMonthRecords.find((item) => item.id === report?._rowId);
+          if (!row) return;
+          this.openDailyReportDialog(row);
+          this.dailyReportDialog.activeType = report.reportType;
+          const storedReport = row.reports.find((item) => item.id === report.id);
+          if (storedReport) this.setActiveDailyReport(storedReport);
+        },
+        deleteIndicatorReport(report) {
+          const row = this.dailyMonthRecords.find((item) => item.id === report?._rowId);
+          if (!row) return;
+          ElementPlus.ElMessageBox.confirm(`确定删除“${report.title || '未命名报告'}”吗？`, '删除报告', { type: 'warning' })
+            .then(() => {
+              row.reports = (row.reports || []).filter((item) => item.id !== report.id);
+              row.updatedAt = nowText();
+              this.persist();
+              this.onIndicatorMemberChange();
+              ElementPlus.ElMessage.success('报告已删除。');
+            })
+            .catch(() => {});
+        },
       }
     });
 

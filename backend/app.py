@@ -30,9 +30,12 @@ os.environ.setdefault("FLAGS_enable_pir_api", "0")
 os.environ.setdefault("PADDLE_PDX_ENABLE_MKLDNN_BYDEFAULT", "False")
 
 app = FastAPI(title="JKGL Local OCR", version="1.0.0")
+REPORT_UPLOAD_DIR = Path(__file__).resolve().parent / "uploads" / "reports"
+REPORT_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 app.mount("/vendor", StaticFiles(directory=Path(__file__).resolve().parent.parent / "vendor"), name="vendor")
 app.mount("/assets", StaticFiles(directory=Path(__file__).resolve().parent.parent / "assets"), name="assets")
 app.mount("/js", StaticFiles(directory=Path(__file__).resolve().parent.parent / "js"), name="js")
+app.mount("/uploads", StaticFiles(directory=Path(__file__).resolve().parent / "uploads"), name="uploads")
 
 app.add_middleware(
     CORSMiddleware,
@@ -712,6 +715,33 @@ def index() -> HTMLResponse:
 @app.get("/favicon.ico", include_in_schema=False)
 def favicon() -> Response:
     return Response(status_code=204)
+
+
+@app.post("/api/report-files")
+async def upload_report_file(file: UploadFile = File(...)) -> dict[str, Any]:
+    original_name = Path(file.filename or "report").name
+    suffix = Path(original_name).suffix.lower()
+    allowed_suffixes = {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".pdf"}
+    if suffix not in allowed_suffixes:
+        raise HTTPException(status_code=400, detail="仅支持图片或 PDF 报告。")
+
+    content = await file.read()
+    if not content:
+        raise HTTPException(status_code=400, detail="上传文件为空。")
+    if len(content) > 30 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="报告文件不能超过 30MB。")
+
+    stored_name = f"{uuid.uuid4().hex}{suffix}"
+    target = REPORT_UPLOAD_DIR / stored_name
+    target.write_bytes(content)
+    return {
+        "id": uuid.uuid4().hex,
+        "name": original_name,
+        "storedName": stored_name,
+        "type": file.content_type or ("application/pdf" if suffix == ".pdf" else "image"),
+        "size": len(content),
+        "url": f"/uploads/reports/{stored_name}",
+    }
 
 
 @app.post("/api/ocr")

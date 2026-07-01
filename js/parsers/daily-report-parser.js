@@ -138,10 +138,9 @@
             }
             return -1;
           };
-          const tableStart = headerIndex >= 0 ? headerIndex + 1 : findFallbackTableStart();
+          let tableStart = headerIndex >= 0 ? headerIndex + 1 : findFallbackTableStart();
           if (tableStart < 0) {
-            ElementPlus.ElMessage.warning('未定位到检验指标区。OCR 原文已保留，请检查是否只识别到了报告头。');
-            return;
+            tableStart = 0; // Default to scanning the entire document if header not found
           }
           const tableLines = lines.slice(tableStart);
           const items = [];

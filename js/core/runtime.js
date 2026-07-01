@@ -255,6 +255,7 @@
     normalizeDailyMonth,
     normalizeDailyDate,
     htmlToPlainText,
+    plainTextToHtml,
     sanitizeRichHtml,
     cellToPlainText,
     cellToRichHtml,

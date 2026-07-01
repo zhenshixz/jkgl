@@ -27,6 +27,7 @@
           
           <div class="nav-group-title">日常管理</div>
           <button :class="{ active: view === 'daily' }" @click="view = 'daily'; onDailyMemberChange()">日常检查</button>
+          <button :class="{ active: view === 'indicator' }" @click="view = 'indicator'; onIndicatorMemberChange()">指标跟踪</button>
           
           <div class="nav-group-title">基础信息</div>
           <button :class="{ active: view === 'members' }" @click="view = 'members'">家人信息</button>
@@ -568,11 +569,294 @@
             </div>
           </div>
         </section>
+
+        <!-- 指标跟踪视图 -->
+        <section v-show="view === 'indicator'" class="panel indicator-view-panel" style="display: flex; flex-direction: column; min-height: 100%; margin-top: 0; border: none; box-shadow: none; background: transparent; overflow: visible;">
+          <div class="panel-header" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <h3 class="panel-title">指标跟踪</h3>
+              <p class="panel-subtitle">从历次检验报告中提取指标，按日期和科室对比变化趋势。</p>
+            </div>
+            <div>
+              <el-button type="primary" @click="openIndicatorImport(indicatorActiveTab)">
+                <el-icon style="margin-right:4px;"><Plus /></el-icon> 录入指标 / 报告
+              </el-button>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px;">
+            <div class="daily-filter-bar">
+              <el-select v-model="indicatorFilterYear" placeholder="全部年份" clearable style="width: 120px;" @change="onIndicatorYearChange">
+                <el-option v-for="year in indicatorAvailableYears" :key="year" :label="`${year}年`" :value="year"></el-option>
+              </el-select>
+              <button
+                class="daily-month-chip"
+                :class="{ active: !indicatorFilterMonth }"
+                type="button"
+                @click="setIndicatorMonthFilter('')"
+              >全部月份</button>
+              <button
+                v-for="month in indicatorVisibleMonths"
+                :key="month.value"
+                class="daily-month-chip"
+                :class="{ active: indicatorFilterMonth === month.value }"
+                type="button"
+                @click="setIndicatorMonthFilter(month.value)"
+              >{{ month.label }}</button>
+            </div>
+          </div>
+          
+          <div class="panel-body" style="flex: 1; padding: 0; overflow: visible; min-height: 0; display: flex; flex-direction: column; background: transparent;">
+            <div v-if="members.length === 0" class="empty" style="background: #fff; padding: 40px; text-align: center; border-radius: 8px;">请先在"基础信息-家人管理"中添加家人。</div>
+            <div v-else style="display: flex; flex-direction: column;">
+              <el-tabs v-model="activeIndicatorMemberId" class="member-plan-tabs" style="display: flex; flex-direction: column;" @tab-change="onIndicatorMemberChange">
+                <el-tab-pane v-for="member in members" :key="member.id" :name="member.id">
+                  <template #label>
+                    <span style="font-size: 15px; font-weight: 600; padding: 0 8px;">{{ member.name }}</span>
+                  </template>
+                  
+                  <div v-if="getIndicatorDepartments(member.id).length === 0" class="muted" style="text-align: center; padding: 40px 20px; font-size: 14px; background: #fff; border-radius: 10px; border: 1px dashed var(--line);">
+                    该家人暂无指标数据记录。
+                  </div>
+                  <div v-else>
+                    <div style="display: flex; align-items: flex-end; justify-content: space-between; padding-right: 12px;">
+                      <el-tabs v-model="activeIndicatorDepartment" class="tracking-time-tabs" style="flex: 1; min-width: 0;">
+                        <el-tab-pane v-for="dept in getIndicatorDepartments(member.id)" :key="dept" :name="dept" :label="dept"></el-tab-pane>
+                      </el-tabs>
+                    </div>
+                    
+                    <div v-if="activeIndicatorDepartment">
+
+
+
+
+
+
+
+
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <el-tabs v-model="indicatorActiveTab" style="margin-bottom:0;">
+                          <el-tab-pane label="检验数据对比 (数值)" name="lab"></el-tab-pane>
+                          <el-tab-pane label="检查结论追踪 (影像)" name="exam"></el-tab-pane>
+                        </el-tabs>
+                        <el-button type="primary" size="small" @click="openIndicatorImport(indicatorActiveTab)">录入报告</el-button>
+                      </div>
+                      
+                      <div v-if="indicatorActiveTab === 'lab'">
+                        <el-table class="daily-ledger-table" :data="indicatorTableData" border style="width: 100%;" empty-text="暂无检验数据，请点击右上角录入报告">
+                          <el-table-column label="指标名称" prop="name" width="180" fixed></el-table-column>
+                          <el-table-column label="单位" prop="unit" width="90"></el-table-column>
+                          <el-table-column v-for="col in indicatorTableColumns" :key="col.id" :label="col.date" min-width="120" align="center">
+                            <template #header>
+                              <el-button link type="primary" @click="openIndicatorReport(col.report)">{{ col.date }}</el-button>
+                              <div style="font-size:11px; color:var(--muted); font-weight:normal;" class="ellipsis" :title="col.title">{{ col.title }}</div>
+                            </template>
+                            <template #default="{ row }">
+                              <div v-if="row.values[col.id]" :class="['indicator-cell', `flag-${row.values[col.id].flag}`]">
+                                <strong :style="{ color: row.values[col.id].flag === 'abnormal' ? 'var(--red)' : 'inherit' }">{{ row.values[col.id].value }}</strong>
+                                <el-tooltip :content="'参考值: ' + row.values[col.id].reference" placement="top" v-if="row.values[col.id].reference">
+                                  <el-icon v-if="row.values[col.id].flag === 'abnormal'" color="var(--red)" style="margin-left:4px;"><Warning /></el-icon>
+                                </el-tooltip>
+                              </div>
+                              <span v-else class="muted">-</span>
+                            </template>
+                          </el-table-column>
+                        </el-table>
+                      </div>
+
+                      <div v-if="indicatorActiveTab === 'exam'">
+                        <el-timeline v-if="indicatorExamReports.length > 0" style="padding-top:20px;">
+                          <el-timeline-item v-for="report in indicatorExamReports" :key="report.id" :timestamp="report.reportDate" placement="top" type="primary">
+                            <el-card shadow="hover">
+                              <h4 style="margin-top:0; margin-bottom:10px; color:var(--primary);">{{ report.reportName }}</h4>
+                              <div style="font-size:13px; margin-bottom:8px;">
+                                <strong style="color:#555;">检查所见：</strong>
+                                <p style="margin:4px 0; color:#666; line-height:1.5; white-space:pre-wrap;">{{ report.findingText || '无' }}</p>
+                              </div>
+                              <div style="font-size:13px;">
+                                <strong style="color:var(--text);">检查结论 / 诊断：</strong>
+                                <p style="margin:4px 0; font-weight:500; line-height:1.5; white-space:pre-wrap;">{{ report.conclusionText || '无' }}</p>
+                              </div>
+                              <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:10px;">
+                                <el-button size="small" @click="openIndicatorReport(report)">查看完整报告</el-button>
+                                <el-button size="small" type="danger" plain @click="deleteIndicatorReport(report)">删除</el-button>
+                              </div>
+                            </el-card>
+                          </el-timeline-item>
+                        </el-timeline>
+                        <el-empty v-else description="暂无检查结论数据"></el-empty>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+                </el-tab-pane>
+              </el-tabs>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
 
 
     <!-- 弹窗：新建/编辑日常检查记录 -->
+    <!-- 弹窗：指标跟踪 - 智能录入报告 -->
+    <el-dialog
+      v-model="indicatorImportDialog.visible"
+      title="录入指标 / 报告"
+      width="1080px"
+      top="4vh"
+      class="indicator-import-dialog"
+      :close-on-click-modal="false"
+    >
+      <div v-loading="indicatorImportDialog.loading" :element-loading-text="indicatorImportDialog.progress || '正在处理报告...'">
+        <template v-if="indicatorImportDialog.stage === 'input'">
+          <el-form label-width="82px" style="max-width: 720px;">
+            <el-form-item label="所属家人">
+              <el-select v-model="indicatorImportDialog.memberId" placeholder="请选择家人" style="width: 240px;">
+                <el-option v-for="member in members" :key="member.id" :label="member.name" :value="member.id"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="报告类型">
+              <el-radio-group v-model="indicatorImportDialog.reportType">
+                <el-radio-button label="lab">检验报告</el-radio-button>
+                <el-radio-button label="exam">检查报告</el-radio-button>
+              </el-radio-group>
+            </el-form-item>
+          </el-form>
+          <div class="report-paste-box indicator-paste-box" tabindex="0" @paste.prevent.stop="onIndicatorPaste">
+            <strong>从微信复制报告截图后，点击这里按 Ctrl+V</strong>
+            <span>也支持直接粘贴报告文字；解析完成后会进入核对页面，不会自动保存。</span>
+          </div>
+          <el-upload
+            drag
+            action="#"
+            accept="image/*,.pdf"
+            :auto-upload="false"
+            :show-file-list="false"
+            @change="onIndicatorUploadChange"
+          >
+            <el-icon class="el-icon--upload"><UploadFilled /></el-icon>
+            <div class="el-upload__text">拖拽或点击上传图片 / PDF</div>
+            <template #tip>
+              <div class="el-upload__tip">文字型 PDF 直接提取；扫描型 PDF 会逐页 OCR。</div>
+            </template>
+          </el-upload>
+        </template>
+
+        <template v-else-if="indicatorImportDialog.report">
+          <el-alert
+            title="当前仅为解析草稿，请核对无误后点击“确认并保存报告”"
+            type="warning"
+            :closable="false"
+            show-icon
+            style="margin-bottom: 14px;"
+          ></el-alert>
+          <div class="report-header-grid" style="margin-bottom: 14px;">
+            <el-select v-model="indicatorImportDialog.memberId" placeholder="所属家人">
+              <el-option v-for="member in members" :key="member.id" :label="member.name" :value="member.id"></el-option>
+            </el-select>
+            <el-select v-model="indicatorImportDialog.reportType" @change="reparseIndicatorDraft">
+              <el-option label="检验报告" value="lab"></el-option>
+              <el-option label="检查报告" value="exam"></el-option>
+            </el-select>
+            <el-input v-model="indicatorImportDialog.report.title" placeholder="报告名称"></el-input>
+            <el-date-picker v-model="indicatorImportDialog.report.reportDate" type="date" value-format="YYYY-MM-DD" placeholder="报告日期" style="width: 100%;"></el-date-picker>
+            <el-input v-model="indicatorImportDialog.report.department" placeholder="科室"></el-input>
+            <el-input
+              v-if="indicatorImportDialog.reportType === 'lab'"
+              v-model="indicatorImportDialog.report.sampleType"
+              placeholder="标本类型，如尿液/血液"
+            ></el-input>
+            <el-input
+              v-else
+              v-model="indicatorImportDialog.report.reportDoctor"
+              placeholder="报告医生"
+            ></el-input>
+          </div>
+
+          <div class="report-section-title">
+            OCR 原文
+            <span v-if="indicatorImportDialog.fileName" class="muted" style="font-weight: normal; margin-left: 8px;">
+              {{ indicatorImportDialog.fileName }}
+            </span>
+          </div>
+          <el-input
+            v-model="indicatorImportDialog.report.rawOcrText"
+            type="textarea"
+            :autosize="{ minRows: 3, maxRows: 7 }"
+            placeholder="OCR 原文"
+          ></el-input>
+          <div class="report-actions" style="margin: 10px 0 14px;">
+            <el-button size="small" @click="indicatorImportDialog.stage = 'input'">重新选择文件</el-button>
+            <el-button size="small" @click="reparseIndicatorDraft">按当前类型重新解析</el-button>
+          </div>
+
+          <template v-if="indicatorImportDialog.reportType === 'lab'">
+            <div class="report-section-title">指标核对（{{ indicatorImportDialog.report.items?.length || 0 }} 项）</div>
+            <el-table :data="indicatorImportDialog.report.items || []" border height="360" empty-text="未解析到指标，可手动新增">
+              <el-table-column label="检查项目" min-width="190">
+                <template #default="{ row }"><el-input v-model="row.name"></el-input></template>
+              </el-table-column>
+              <el-table-column label="检验值" width="130">
+                <template #default="{ row }"><el-input v-model="row.value"></el-input></template>
+              </el-table-column>
+              <el-table-column label="参考值" width="160">
+                <template #default="{ row }"><el-input v-model="row.reference"></el-input></template>
+              </el-table-column>
+              <el-table-column label="标志" width="110">
+                <template #default="{ row }">
+                  <el-select v-model="row.flag">
+                    <el-option label="正常" value="normal"></el-option>
+                    <el-option label="异常" value="abnormal"></el-option>
+                    <el-option label="关注" value="watch"></el-option>
+                    <el-option label="待确认" value="pending"></el-option>
+                  </el-select>
+                </template>
+              </el-table-column>
+              <el-table-column label="单位" width="110">
+                <template #default="{ row }"><el-input v-model="row.unit"></el-input></template>
+              </el-table-column>
+              <el-table-column label="说明" min-width="150">
+                <template #default="{ row }"><el-input v-model="row.note"></el-input></template>
+              </el-table-column>
+              <el-table-column label="操作" width="70">
+                <template #default="{ $index }">
+                  <el-button text type="danger" @click="deleteDailyLabItem(indicatorImportDialog.report, $index)">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-button size="small" style="margin-top: 10px;" @click="addDailyLabItem(indicatorImportDialog.report)">新增指标</el-button>
+          </template>
+
+          <template v-else>
+            <div class="report-section-title">检查所见</div>
+            <el-input
+              v-model="indicatorImportDialog.report.findingText"
+              type="textarea"
+              :autosize="{ minRows: 6, maxRows: 12 }"
+              placeholder="请核对检查所见"
+            ></el-input>
+            <div class="report-section-title">检查结论 / 诊断</div>
+            <el-input
+              v-model="indicatorImportDialog.report.conclusionText"
+              type="textarea"
+              :autosize="{ minRows: 4, maxRows: 10 }"
+              placeholder="请核对检查结论"
+            ></el-input>
+          </template>
+        </template>
+      </div>
+      <template #footer>
+        <el-button @click="closeIndicatorImport">取消</el-button>
+        <el-button
+          v-if="indicatorImportDialog.stage === 'review'"
+          type="primary"
+          :loading="indicatorImportDialog.loading"
+          @click="confirmIndicatorImport"
+        >确认并保存报告</el-button>
+      </template>
+    </el-dialog>
     <el-dialog v-model="dailyEditor.visible" :title="dailyEditor.form.id ? '编辑就诊记录' : '新增就诊记录'" width="680px" @opened="initWangEditor" @closed="destroyWangEditor" destroy-on-close>
       <el-form label-width="90px">
         <div style="display: flex; gap: 16px;">
@@ -1196,10 +1480,11 @@
   <script src="vendor/vue.global.prod.js"></script>
   <script src="vendor/element-plus.index.full.min.js"></script>
   <script src="vendor/element-plus-icons-vue.iife.min.js"></script>
-  <script src="js/core/runtime.js?v=202606301430"></script>
-  <script src="js/services/data-service.js?v=202606301430"></script>
-  <script src="js/parsers/package-parser.js?v=202606301430"></script>
-  <script src="js/parsers/daily-report-parser.js?v=202606301430"></script>
-  <script src="js/main.js?v=202606301430"></script>
+  <script src="js/core/runtime.js?v=202607010930"></script>
+  <script src="js/services/data-service.js?v=202606301802"></script>
+  <script src="js/services/report-input-service.js?v=202606301802"></script>
+  <script src="js/parsers/package-parser.js?v=202606301802"></script>
+  <script src="js/parsers/daily-report-parser.js?v=202606301802"></script>
+  <script src="js/main.js?v=202607011120"></script>
 </body>
 </html>
