@@ -782,7 +782,23 @@
           </div>
 
           <template v-if="indicatorImportDialog.reportType === 'lab'">
-            <div class="report-section-title">指标核对（{{ indicatorImportDialog.report.items?.length || 0 }} 项）</div>
+            <el-alert
+              v-if="indicatorImportDialog.report.parseMode === 'text-fallback'"
+              title="未能按表格列定位解析，当前结果可能错行；请勿直接保存。"
+              type="error"
+              :closable="false"
+              show-icon
+              style="margin-bottom: 12px;"
+            ></el-alert>
+            <div class="report-section-title" style="display: flex; align-items: center; gap: 8px;">
+              <span>指标核对（{{ indicatorImportDialog.report.items?.length || 0 }} 项）</span>
+              <el-tag
+                v-if="indicatorImportDialog.report.parseMode === 'spatial-table'"
+                type="success"
+                size="small"
+                effect="plain"
+              >按表格列解析</el-tag>
+            </div>
             <el-table :data="indicatorImportDialog.report.items || []" border height="360" empty-text="未解析到指标，可手动新增">
               <el-table-column label="检查项目" min-width="190">
                 <template #default="{ row }"><el-input v-model="row.name"></el-input></template>
@@ -1462,7 +1478,7 @@
   <script src="js/services/data-service.js?v=202606301802"></script>
   <script src="js/services/report-input-service.js?v=202607011410"></script>
   <script src="js/parsers/package-parser.js?v=202606301802"></script>
-  <script src="js/parsers/daily-report-parser.js?v=202607011735"></script>
-  <script src="js/main.js?v=202607011950"></script>
+  <script src="js/parsers/daily-report-parser.js?v=202607020350"></script>
+  <script src="js/main.js?v=202607020330"></script>
 </body>
 </html>

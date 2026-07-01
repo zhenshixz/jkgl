@@ -30,6 +30,18 @@ os.environ.setdefault("FLAGS_enable_pir_api", "0")
 os.environ.setdefault("PADDLE_PDX_ENABLE_MKLDNN_BYDEFAULT", "False")
 
 app = FastAPI(title="JKGL Local OCR", version="1.0.0")
+
+
+@app.middleware("http")
+async def disable_frontend_asset_cache(request: Any, call_next: Any) -> Response:
+    response = await call_next(request)
+    if request.url.path == "/" or request.url.path.startswith(("/js/", "/assets/")):
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
+
+
 REPORT_UPLOAD_DIR = Path(__file__).resolve().parent / "uploads" / "reports"
 REPORT_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 app.mount("/vendor", StaticFiles(directory=Path(__file__).resolve().parent.parent / "vendor"), name="vendor")
@@ -49,7 +61,7 @@ app.add_middleware(
 PACKAGE_RE = re.compile(r"([A-H]\s*)?套餐|CT\s*平扫|胃肠镜|彩超|肺部\s*CT", re.I)
 NOISE_RE = re.compile(
     r"健康体检|套餐信息|检查项目详情|返回|立即预约|修改|微信|5G|^\d{1,2}:\d{2}|"
-    r"项目名称|检查意义|项目说明|检查内容|单项价格|说明/备注|备注/说明|检查项目|项目分类|科室分类|检查科室|科室栏|单价",
+    r"检查意义|项目说明|检查内容|单项价格|说明/备注|备注/说明|项目分类|科室分类|检查科室|科室栏|单价",
     re.I
 )
 AUDIENCE_RE = re.compile(r"适用男性|适用女性|不限性别|男性|女性")

@@ -16,6 +16,18 @@
           const numericValue = Number(String(value || '').replace(/[^0-9.+-]/g, ''));
           const referenceText = String(reference || '').replace(/[（()）\s]/g, '');
           if (Number.isFinite(numericValue)) {
+            const suitableLimit = referenceText.match(/合适水平[:：]?([<>≤≥])(-?\d+(?:\.\d+)?)/);
+            if (suitableLimit) {
+              const operator = suitableLimit[1];
+              const boundary = Number(suitableLimit[2]);
+              const isSuitable = (operator === '<' && numericValue < boundary)
+                || (operator === '≤' && numericValue <= boundary)
+                || (operator === '>' && numericValue > boundary)
+                || (operator === '≥' && numericValue >= boundary);
+              return isSuitable ? 'normal' : 'abnormal';
+            }
+            const lowRiskLimit = referenceText.match(/降低[:：]?<(-?\d+(?:\.\d+)?)/);
+            if (lowRiskLimit) return numericValue < Number(lowRiskLimit[1]) ? 'abnormal' : 'normal';
             const range = referenceText.match(/(-?\d+(?:\.\d+)?)\s*[-~～至]\s*(-?\d+(?:\.\d+)?)/);
             if (range && (numericValue < Number(range[1]) || numericValue > Number(range[2]))) return 'abnormal';
             const limit = referenceText.match(/^([<>≤≥])\s*(-?\d+(?:\.\d+)?)$/);
@@ -62,31 +74,18 @@
           };
           const date = raw.match(/\b(20\d{2}[-/.年]\d{1,2}[-/.月]\d{1,2})/);
           if (!report.reportDate && date) report.reportDate = normalizeDailyDate(date[1].replace(/年|月/g, '-').replace(/日/g, ''));
-          const titleLines = [];
-          for (let i = 0; i < lines.length; i += 1) {
-            const line = lines[i];
-            if (line.length > 2 && line.length <= 40 &&
-                !/[:：]$/.test(line) &&
-                !/^(条码号|类型|患者姓名|病历号|床号|标本|申请|报告时间|检查项目|检验值|参考值|标志|单位|说明|门诊检验|科室)/.test(line) &&
-                !/\b20\d{2}[-/.年]\d{1,2}/.test(line) &&
-                !/^[A-Za-z0-9-<>]+$/.test(line) &&
-                !/^令?\d+$/.test(line) &&
-                !/报告详情|仅供参考|实际报告单为准/.test(line)) {
-              if (titleLines.length === 0) {
-                titleLines.push(line);
-              } else if (titleLines.length < 3 && i === lines.indexOf(titleLines[titleLines.length - 1]) + 1) {
-                if (/测定|检测|常规|报告|血|尿|酶|蛋白|功能|生化/.test(line) || /^[（(](急诊|门诊|住院)[）)]/.test(line)) {
-                  titleLines.push(line);
-                } else {
-                  break;
-                }
-              } else {
-                break;
-              }
-            } else if (titleLines.length > 0) {
-              break;
-            }
-          }
+          const titleStart = Math.max(0, lines.findIndex(line => /报告详情/.test(line)) + 1);
+          const titleEnd = lines.findIndex((line, index) => index >= titleStart && /^(条码号|类型|患者姓名|病历号|床号|标本|申请|报告时间)/.test(line));
+          const titleCandidates = lines
+            .slice(titleStart, titleEnd > titleStart ? titleEnd : Math.min(lines.length, titleStart + 8))
+            .filter(line => line.length > 1 && line.length <= 40)
+            .filter(line => !/^[<>·.\d\s]+$/.test(line))
+            .filter(line => !/报告详情|仅供参考|实际报告单为准/.test(line));
+          let titleLines = titleCandidates.filter(line =>
+            /测定|检测|常规|报告|血|尿|酶|蛋白|功能|生化/.test(line)
+              || /^[（(](急诊|门诊|住院)[）)]/.test(line)
+          );
+          if (titleLines.length === 0 && titleCandidates.length > 0) titleLines = [titleCandidates[0]];
           const parsedTitle = titleLines.join('+').replace(/;+$/, '');
           if (parsedTitle) {
             report.title = parsedTitle;
@@ -119,6 +118,149 @@
             if (/^(检验项目|检查项目|项目名称|检验值|结果|参考值|标志|单位|说明)$/.test(text)) return false;
             if (text.length > 15) return false;
             return labItemKeywords.some(keyword => text.includes(keyword)) || /^[\u4e00-\u9fa5A-Za-z0-9（）()\-+ ]{2,15}$/.test(text);
+          };
+          const parseSpatialLabTable = () => {
+            const positioned = (Array.isArray(report.ocrLines) ? report.ocrLines : [])
+              .map(line => {
+                const box = Array.isArray(line?.box) ? line.box.map(Number) : [];
+                if (box.length < 4 || box.some(value => !Number.isFinite(value))) return null;
+                return {
+                  text: String(line.text || '').trim(),
+                  compact: String(line.text || '').replace(/\s+/g, '').trim(),
+                  x1: box[0],
+                  y1: box[1],
+                  x2: box[2],
+                  y2: box[3],
+                  cx: (box[0] + box[2]) / 2,
+                  cy: (box[1] + box[3]) / 2
+                };
+              })
+              .filter(line => line && line.text);
+            if (positioned.length === 0) return [];
+
+            const findHeader = (labels, pattern) => positioned.find(line =>
+              labels.includes(line.compact) || pattern.test(line.compact)
+            );
+            const headers = {
+              name: findHeader(['检查项目', '检验项目', '项目名称'], /^(?:检[查验].{0,2}(?:项目|项日)|项目名称)$/),
+              value: findHeader(['检验值', '检查值', '结果'], /^(?:检[验查].{0,2}(?:值|直)|结果)$/),
+              reference: findHeader(['参考值', '参考范围'], /^参考.{0,2}(?:值|范围)$/),
+              flag: findHeader(['标志', '提示'], /^(?:标.{0,1}[志识]|提示)$/),
+              unit: findHeader(['单位'], /^单.{0,1}位$/),
+              note: findHeader(['说明', '备注'], /^(?:说.{0,1}明|备注)$/)
+            };
+            if (!headers.name || !headers.value || !headers.reference) return [];
+            const headerOrder = [headers.name.cx, headers.value.cx, headers.reference.cx];
+            if (!(headerOrder[0] < headerOrder[1] && headerOrder[1] < headerOrder[2])) return [];
+            const tableTop = Math.max(headers.name.y2, headers.value.y2, headers.reference.y2);
+            const columns = Object.entries(headers)
+              .filter(([, header]) => header)
+              .map(([key, header]) => ({ key, cx: header.cx }))
+              .sort((a, b) => a.cx - b.cx);
+            const nearestColumn = line => columns.reduce((best, column) => {
+              const distance = Math.abs(line.cx - column.cx);
+              return !best || distance < best.distance ? { key: column.key, distance } : best;
+            }, null)?.key;
+            const normalizeValue = value => stripWrapper(String(value || '')
+              .replace(/[↑↓]/g, '')
+              .replace(/黃色/g, '黄色')
+              .trim());
+            const extractAnchorValue = value => {
+              const rawNormalized = String(value || '')
+                .replace(/[↑↓]/g, '')
+                .replace(/黃色/g, '黄色')
+                .replace(/\s+/g, '')
+                .trim();
+              const combined = rawNormalized.match(/^([<>≤≥]?[-+]?\d+(?:\.\d+)?)([（(].*[）)]?)$/);
+              if (combined) return combined[1];
+              const normalized = normalizeValue(rawNormalized).replace(/\s+/g, '');
+              if (isValueToken(normalized)) return normalized;
+              const numeric = normalized.match(/[<>≤≥]?[-+]?\d+(?:\.\d+)?/);
+              if (numeric && normalized.length <= numeric[0].length + 2) return numeric[0];
+              return '';
+            };
+            const extractInlineReference = value => {
+              const normalized = String(value || '')
+                .replace(/[↑↓]/g, '')
+                .replace(/\s+/g, '')
+                .trim();
+              return normalized.match(/^[<>≤≥]?[-+]?\d+(?:\.\d+)?([（(].*[）)]?)$/)?.[1] || '';
+            };
+            const valueColumnLeft = (headers.name.x2 + headers.value.x1) / 2;
+            const referenceColumnLeft = (headers.value.x2 + headers.reference.x1) / 2;
+            const bodyLines = positioned.filter(line => line.y1 > tableTop);
+            const rawValueAnchors = bodyLines
+              .map(line => {
+                const startsInValueColumn = line.x1 >= valueColumnLeft && line.x1 < referenceColumnLeft;
+                const isValueCandidate = nearestColumn(line) === 'value' || startsInValueColumn;
+                return {
+                  ...line,
+                  anchorValue: isValueCandidate ? extractAnchorValue(line.text) : '',
+                  inlineReference: isValueCandidate ? extractInlineReference(line.text) : ''
+                };
+              })
+              .filter(line => line.anchorValue)
+              .sort((a, b) => a.cy - b.cy);
+            const valueAnchors = [];
+            rawValueAnchors.forEach(anchor => {
+              const previous = valueAnchors[valueAnchors.length - 1];
+              const sameVisualRow = previous
+                && Math.abs(previous.cy - anchor.cy) <= Math.max(previous.y2 - previous.y1, anchor.y2 - anchor.y1) * 0.55;
+              if (!sameVisualRow) {
+                valueAnchors.push(anchor);
+                return;
+              }
+              if (Math.abs(anchor.cx - headers.value.cx) < Math.abs(previous.cx - headers.value.cx)) {
+                valueAnchors[valueAnchors.length - 1] = anchor;
+              }
+            });
+            if (valueAnchors.length < 2) return [];
+
+            const rows = [];
+            valueAnchors.forEach((anchor, index) => {
+              const next = valueAnchors[index + 1];
+              const anchorHeight = Math.max(anchor.y2 - anchor.y1, 12);
+              const rowTop = Math.max(tableTop, anchor.y1 - anchorHeight * 0.6);
+              const rowBottom = next
+                ? next.y1 - Math.max(1, anchorHeight * 0.15)
+                : anchor.y2 + anchorHeight * 1.3;
+              const fields = { name: [], reference: [], flag: [], unit: [], note: [] };
+              bodyLines.forEach(line => {
+                const isAnchorLine = line.text === anchor.text
+                  && line.x1 === anchor.x1
+                  && line.y1 === anchor.y1
+                  && line.x2 === anchor.x2
+                  && line.y2 === anchor.y2;
+                if (isAnchorLine || line.cy < rowTop || line.cy >= rowBottom) return;
+                const column = nearestColumn(line);
+                if (fields[column]) fields[column].push(line);
+              });
+              Object.values(fields).forEach(parts => parts.sort((a, b) => a.cy - b.cy || a.x1 - b.x1));
+              const name = fields.name.map(line => line.text).join('')
+                .replace(/\s+/g, '')
+                .replace(/^[vVyY]-?谷/, 'γ-谷')
+                .trim();
+              if (!name || metadataPattern.test(name)) return;
+              const value = anchor.anchorValue;
+              const reference = [anchor.inlineReference, ...fields.reference.map(line => line.text)]
+                .filter(Boolean)
+                .join('')
+                .replace(/\s+/g, '')
+                .trim();
+              const flagText = fields.flag.map(line => line.text).join('');
+              const unit = fields.unit.map(line => line.text).join('').replace(/\s+/g, '').trim();
+              const note = fields.note.map(line => line.text).join('').trim();
+              rows.push({
+                id: uid('lab_item'),
+                name,
+                value,
+                reference,
+                flag: this.inferLabFlag(value, reference, `${anchor.text} ${flagText}`),
+                unit,
+                note
+              });
+            });
+            return rows;
           };
           const headerIndex = lines.findIndex(line => /检验项目|检查项目|项目名称/.test(line));
           const parseLabLine = (line) => {
@@ -279,6 +421,15 @@
               note: 'OCR列序错位，按尿常规定性项补入'
             });
           });
+          const spatialItems = parseSpatialLabTable();
+          if (spatialItems.length > 0) {
+            items.splice(0, items.length, ...spatialItems);
+            report.parseMode = 'spatial-table';
+          } else {
+            report.parseMode = Array.isArray(report.ocrLines) && report.ocrLines.length > 0
+              ? 'text-fallback'
+              : 'plain-text';
+          }
           if (/尿常规|尿沉渣/.test(raw)) {
             const upsertItem = (patch) => {
               const existing = items.find(item => item.name === patch.name);
@@ -659,9 +810,9 @@
         },
         formatExamReportText(text) {
           const lines = String(text || '')
-            .split(/\r?\n/)
-            .map(line => line.trim())
-            .filter(line => line && !/^[①②③④⑤⑥⑦⑧⑨⑩<>]+$/.test(line));
+              .split(/\r?\n/)
+              .map(line => line.trim())
+              .filter(line => line && !/^[①②③④⑤⑥⑦⑧⑨⑩<>]+$/.test(line));
           if (lines.length === 0) return '';
           const paragraphs = [];
           let current = '';
@@ -721,6 +872,7 @@
               .map(line => line.trim())
               .filter(line => {
                 if (!line) return false;
+                if (/^[①②③④⑤⑥⑦⑧⑨⑩<>]+$/.test(line)) return false;
                 if (/^(6|园|报告原件|查看影像|报告分享|分享报告|查看原件|二维码|小程序|分享|关注|影像)$/.test(line)) return false;
                 return true;
               })
@@ -729,8 +881,8 @@
 
           const finding = this.extractReportSection(raw, /检查所见[:：]?/, /(检查结论|诊断|检查结论\/诊断)[:：]?/);
           const conclusion = this.extractReportSection(raw, /(检查结论\/诊断|检查结论|诊断)[:：]?/, /$a/);
-          if (finding) report.findingText = cleanExamText(finding);
-          if (conclusion) report.conclusionText = cleanExamText(conclusion);
+          if (finding) report.findingText = this.formatExamReportText(cleanExamText(finding));
+          if (conclusion) report.conclusionText = this.formatExamReportText(cleanExamText(conclusion));
           report.status = 'parsed';
           this.touchDailyReport();
           ElementPlus.ElMessage.success('已解析检查所见和结论，请核对。');

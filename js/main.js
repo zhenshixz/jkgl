@@ -269,7 +269,23 @@ const {
           const months = new Set();
           this.dailyMonthRecords.forEach((record) => {
             const month = normalizeDailyMonth(record.month);
-            if (month) months.add(month);
+            if (month) {
+              const hasText = String(record.content || '').trim() || 
+                              String(record.notes || '').trim() || 
+                              String(record.remark || '').trim();
+              if (hasText) {
+                months.add(month);
+              } else {
+                const hasDailyRecordsInMonth = this.dailyRecords.some(r => 
+                  r.memberId === record.memberId && 
+                  r.department === record.department && 
+                  normalizeDailyMonth(r.visitDate) === month
+                );
+                if (hasDailyRecordsInMonth) {
+                  months.add(month);
+                }
+              }
+            }
           });
           this.dailyRecords.forEach((record) => {
             const month = normalizeDailyMonth(record.visitDate);
@@ -672,7 +688,23 @@ const {
           if (!member) return [];
 
           const activeDepts = [...new Set(this.dailyMonthRecords
-            .filter(r => r.memberId === memberId && this.isDailyMonthRowInFilter(r))
+            .filter(r => {
+              if (r.memberId !== memberId) return false;
+              if (!this.isDailyMonthRowInFilter(r)) return false;
+              
+              const hasText = String(r.content || '').trim() || 
+                              String(r.notes || '').trim() || 
+                              String(r.remark || '').trim();
+              if (hasText) return true;
+              
+              const monthStr = normalizeDailyMonth(r.month);
+              const hasDailyRecordsInMonth = this.dailyRecords.some(dr => 
+                dr.memberId === memberId && 
+                dr.department === r.department && 
+                normalizeDailyMonth(dr.visitDate) === monthStr
+              );
+              return hasDailyRecordsInMonth;
+            })
             .map(r => r.department)
             .filter(Boolean))];
           const allDepts = [...new Set([
@@ -712,7 +744,26 @@ const {
         },
         getDailyMonthRows(memberId, dept) {
           return this.dailyMonthRecords
-            .filter(row => row.memberId === memberId && row.department === dept && this.isDailyMonthRowInFilter(row))
+            .filter(row => {
+              if (row.memberId !== memberId || row.department !== dept) return false;
+              if (!this.isDailyMonthRowInFilter(row)) return false;
+              
+              const hasText = String(row.content || '').trim() || 
+                              String(row.notes || '').trim() || 
+                              String(row.remark || '').trim();
+              if (!hasText) {
+                const monthStr = normalizeDailyMonth(row.month);
+                const hasDailyRecordsInMonth = this.dailyRecords.some(r => 
+                  r.memberId === memberId && 
+                  r.department === dept && 
+                  normalizeDailyMonth(r.visitDate) === monthStr
+                );
+                if (!hasDailyRecordsInMonth) {
+                  return false;
+                }
+              }
+              return true;
+            })
             .sort((a, b) => String(b.month || '').localeCompare(String(a.month || '')));
         },
         onDailyYearChange() {
@@ -1034,13 +1085,17 @@ const {
             }
           };
           if (reportType === 'exam') {
+            const findingText = this.formatExamReportText(report.findingText || '');
+            const conclusionText = this.formatExamReportText(report.conclusionText || '');
+            base.findingText = findingText;
+            base.conclusionText = conclusionText;
             base.structured = {
               type: 'exam',
               title: report.title || '',
               reportDate: report.reportDate || '',
               sections: [
-                { key: 'finding', title: '检查所见', text: this.formatExamReportText(report.findingText || '') },
-                { key: 'conclusion', title: '检查结论/诊断', text: this.formatExamReportText(report.conclusionText || '') }
+                { key: 'finding', title: '检查所见', text: findingText },
+                { key: 'conclusion', title: '检查结论/诊断', text: conclusionText }
               ],
               doctors: {
                 reportDoctor: report.reportDoctor || '',
@@ -1074,6 +1129,8 @@ const {
               reportDoctor: report.reportDoctor || '',
               reviewDoctor: report.reviewDoctor || '',
               rawOcrText: report.rawOcrText || '',
+              ocrLines: Array.isArray(report.ocrLines) ? report.ocrLines : [],
+              parseMode: report.parseMode || '',
               findingText: report.findingText || report.finding || '',
               conclusionText: report.conclusionText || report.conclusion || '',
               status: report.status || 'draft',
@@ -1091,6 +1148,8 @@ const {
             department: report.department || '',
             sampleType: report.sampleType || '',
             rawOcrText: report.rawOcrText || '',
+            ocrLines: Array.isArray(report.ocrLines) ? report.ocrLines : [],
+            parseMode: report.parseMode || '',
             items: Array.isArray(report.items) ? report.items.map(item => this.normalizeLabItemForStorage(item)) : [],
             status: report.status || 'draft',
             confirmedAt: report.confirmedAt || '',
@@ -1328,6 +1387,7 @@ const {
           (row.reports || []).forEach(report => {
             report.updatedAt = report.updatedAt || nowText();
           });
+          this.dailyMonthRecords = [...this.dailyMonthRecords];
           this.persist();
         },
         ...window.JKGLDailyReportParser,
@@ -1500,12 +1560,28 @@ const {
           });
         },
         clearDailyTestData() {
-          ElementPlus.ElMessageBox.confirm('这会清空当前所有家庭成员的日常就诊记录（主要用于测试导入功能）。确认清空？', '清空测试数据', { type: 'warning' }).then(() => {
+          ElementPlus.ElMessageBox.confirm('这会清空当前所有家庭成员的日常就诊记录（主要用于测试导入功能，保留已确认的体检报告）。确认清空？', '清空测试数据', { type: 'warning' }).then(() => {
             this.dailyRecords = [];
-            this.dailyMonthRecords = [];
+            this.dailyMonthRecords = this.dailyMonthRecords
+              .map(row => {
+                if (row.reports && row.reports.length > 0) {
+                  return {
+                    ...row,
+                    content: '',
+                    contentHtml: '',
+                    notes: '',
+                    notesHtml: '',
+                    remark: '',
+                    remarkHtml: '',
+                    updatedAt: nowText()
+                  };
+                }
+                return null;
+              })
+              .filter(Boolean);
             this.persist();
             this.onDailyMemberChange();
-            ElementPlus.ElMessage.success('就诊记录数据已清空');
+            ElementPlus.ElMessage.success('就诊记录数据已清空，指标跟踪数据已保留');
           }).catch(() => {});
         },
         async importDailyFromExcel(e) {
@@ -3045,6 +3121,8 @@ const {
             this.activeIndicatorDepartment = report.department;
             this.indicatorFilterYear = report.reportDate.slice(0, 4);
             this.indicatorFilterMonth = month;
+            this.dailyMonthRecords = [...this.dailyMonthRecords];
+            this.onIndicatorMemberChange();
             this.persist();
             this.closeIndicatorImport();
             ElementPlus.ElMessage.success('报告已确认并进入指标跟踪。');
@@ -3088,3 +3166,7 @@ const {
     });
     app.mount('#app');
     document.getElementById('app')?.removeAttribute('v-cloak');
+    if (new URLSearchParams(window.location.search).has('v')) {
+      const cleanUrl = `${window.location.pathname}${window.location.hash || ''}`;
+      window.history.replaceState(null, '', cleanUrl);
+    }
