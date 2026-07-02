@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "packages": [
     {
       "id": "pkg_1781752810676_83e4ea155e747",
@@ -2497,3660 +2497,2414 @@
       "_trackingExpanded": true
     }
   ],
+  "reports": [
+    {
+      "id": "daily_report_1782876114986_8899449cdfb3c8",
+      "reportType": "lab",
+      "title": "(急诊）血淀粉酶测定(速率法);+(急诊）脂肪酶测定",
+      "reportDate": "2025-07-18",
+      "department": "急诊内科",
+      "sampleType": "",
+      "rawOcrText": "令151\n<\n报告详情\n本报告仅供参考，以实际报告单为准！\n(急诊）血淀粉酶测定(速率法);\n(急诊）脂肪酶测定\n条码号 ***\n类型：\n门诊检验\n罗宏智\n患者姓名 ***：\nP12056597- 床号：\n0\n血浆\n标本状态：合格\n标本类型：\n申请科室：\n急诊内科\n申请医生：\n2025-07-18 21:50:45\n报告时间：\n标志\n检验值\n单位\n说明\n参考值\nU/L\n淀粉酶\n(35.0~\n49.8\n135.0)\nU/L\n19.3 (0.0~67.0)\n脂肪酶\n查看原件",
+      "ocrLines": [],
+      "parseMode": "",
+      "items": [
+        {
+          "id": "lab_item_1782876114990_8f2537a1a76198",
+          "name": "淀粉酶",
+          "normalizedName": "淀粉酶",
+          "value": "49.8",
+          "valueText": "49.8",
+          "valueNumber": 49.8,
+          "valueType": "number",
+          "reference": "(35.0~135.0)",
+          "referenceRange": {
+            "type": "range",
+            "text": "35.0~135.0",
+            "low": 35,
+            "high": 135
+          },
+          "flag": "normal",
+          "unit": "U/L",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782876114990_51dae1acd61c5",
+          "name": "脂肪酶",
+          "normalizedName": "脂肪酶",
+          "value": "19.3",
+          "valueText": "19.3",
+          "valueNumber": 19.3,
+          "valueType": "number",
+          "reference": "(0.0~67.0)",
+          "referenceRange": {
+            "type": "range",
+            "text": "0.0~67.0",
+            "low": 0,
+            "high": 67
+          },
+          "flag": "normal",
+          "unit": "U/L",
+          "note": ""
+        }
+      ],
+      "status": "confirmed",
+      "confirmedAt": "2026/7/1 11:21:58",
+      "files": [
+        {
+          "id": "e9f95e2ca512463ca8d68e782ce3baf5",
+          "name": "paste-1782876112131.png",
+          "storedName": "cb6a6b8a7d3b4e6cb8a4bd58325c1343.png",
+          "type": "image/jpeg",
+          "size": 314164,
+          "url": "/uploads/reports/cb6a6b8a7d3b4e6cb8a4bd58325c1343.png",
+          "extraction": "image-ocr",
+          "uploadedAt": "2026/7/1 11:21:58"
+        }
+      ],
+      "createdAt": "2026/7/1 11:21:54",
+      "updatedAt": "2026/7/1 11:21:54",
+      "schemaVersion": 2,
+      "meta": {
+        "title": "(急诊）血淀粉酶测定(速率法);+(急诊）脂肪酶测定",
+        "reportDate": "2025-07-18",
+        "department": "急诊内科",
+        "sampleType": "",
+        "reportDoctor": "",
+        "reviewDoctor": "",
+        "status": "confirmed",
+        "confirmedAt": "2026/7/1 11:21:58"
+      },
+      "source": {
+        "kind": "ocr-image",
+        "rawOcrText": "令151\n<\n报告详情\n本报告仅供参考，以实际报告单为准！\n(急诊）血淀粉酶测定(速率法);\n(急诊）脂肪酶测定\n条码号 ***\n类型：\n门诊检验\n罗宏智\n患者姓名 ***：\nP12056597- 床号：\n0\n血浆\n标本状态：合格\n标本类型：\n申请科室：\n急诊内科\n申请医生：\n2025-07-18 21:50:45\n报告时间：\n标志\n检验值\n单位\n说明\n参考值\nU/L\n淀粉酶\n(35.0~\n49.8\n135.0)\nU/L\n19.3 (0.0~67.0)\n脂肪酶\n查看原件",
+        "files": [
+          {
+            "id": "e9f95e2ca512463ca8d68e782ce3baf5",
+            "name": "paste-1782876112131.png",
+            "storedName": "cb6a6b8a7d3b4e6cb8a4bd58325c1343.png",
+            "type": "image/jpeg",
+            "size": 314164,
+            "url": "/uploads/reports/cb6a6b8a7d3b4e6cb8a4bd58325c1343.png",
+            "extraction": "image-ocr",
+            "uploadedAt": "2026/7/1 11:21:58"
+          }
+        ]
+      },
+      "structured": {
+        "type": "lab",
+        "title": "(急诊）血淀粉酶测定(速率法);+(急诊）脂肪酶测定",
+        "reportDate": "2025-07-18",
+        "sampleType": "",
+        "metrics": [
+          {
+            "id": "lab_item_1782876114990_8f2537a1a76198",
+            "name": "淀粉酶",
+            "normalizedName": "淀粉酶",
+            "value": "49.8",
+            "valueText": "49.8",
+            "valueNumber": 49.8,
+            "valueType": "number",
+            "reference": "(35.0~135.0)",
+            "referenceRange": {
+              "type": "range",
+              "text": "35.0~135.0",
+              "low": 35,
+              "high": 135
+            },
+            "flag": "normal",
+            "unit": "U/L",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782876114990_51dae1acd61c5",
+            "name": "脂肪酶",
+            "normalizedName": "脂肪酶",
+            "value": "19.3",
+            "valueText": "19.3",
+            "valueNumber": 19.3,
+            "valueType": "number",
+            "reference": "(0.0~67.0)",
+            "referenceRange": {
+              "type": "range",
+              "text": "0.0~67.0",
+              "low": 0,
+              "high": 67
+            },
+            "flag": "normal",
+            "unit": "U/L",
+            "note": ""
+          }
+        ]
+      },
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "origin": "indicator",
+      "linkedDailyRecordIds": []
+    },
+    {
+      "id": "daily_report_1782876505047_807fd7ff7ccb4",
+      "reportType": "exam",
+      "title": "上腹部CT平扫+MPR重建",
+      "reportDate": "2025-07-18",
+      "department": "放射科",
+      "reportDoctor": "",
+      "reviewDoctor": "叶锋",
+      "rawOcrText": "÷4656\n云影像\n人\n上腹部CT平扫+MPR重建\n厦门大学附属中山医院\n2025-07-18\n8基本信息\n申请单号：2025071805690060\n姓名 ***\n申请医生：\n张璐娴\n报告医生：\n审核医生：叶锋\n检查所见\n肝脏轮廓光滑，肝叶比例正常，肝内可见小类\n圆形低密度影，直径约4mm。肝门区未见异常\n密度影。胆囊形态、大小正常，内未见异常密\n度影，壁薄，边缘清楚，肝内外胆管未见扩\n张。脾脏不大，内未见异常密度影，脾门下区\n见类圆形等密度结节，界清，径约11mm。胰\n腺形态、大小、密度及位置正常，胆总管未见\n明显异常，胰管未见扩张，边缘规则、清楚。\n腹膜后未见肿大的淋巴结，腹腔未见明确积液\n影。所见胃腔充盈稍欠佳，胃、十二指肠管壁\n未见明显增厚。靶区降结肠积气较多，胃及升\n结肠内容物较多。\n①检查结论/诊断\n肝内小囊肿可能，副脾，必要时增强或进一步\n检查。靶区降结肠积气较多，胃及升结肠内容\n物较多。",
+      "ocrLines": [],
+      "parseMode": "",
+      "findingText": "肝脏轮廓光滑，肝叶比例正常，肝内可见小类圆形低密度影，直径约4mm。肝门区未见异常密度影。胆囊形态、大小正常，内未见异常密度影，壁薄，边缘清楚，肝内外胆管未见扩张。脾脏不大，内未见异常密度影，脾门下区见类圆形等密度结节，界清，径约11mm。胰腺形态、大小、密度及位置正常，胆总管未见明显异常，胰管未见扩张，边缘规则、清楚。腹膜后未见肿大的淋巴结，腹腔未见明确积液影。所见胃腔充盈稍欠佳，胃、十二指肠管壁未见明显增厚。靶区降结肠积气较多，胃及升结肠内容物较多。",
+      "conclusionText": "肝内小囊肿可能，副脾，必要时增强或进一步检查。靶区降结肠积气较多，胃及升结肠内容物较多。",
+      "status": "confirmed",
+      "confirmedAt": "2026/7/1 11:28:26",
+      "files": [
+        {
+          "id": "ab1fd108e45d48cd9cc87f30ec3ff5a9",
+          "name": "paste-1782876501498.png",
+          "storedName": "0d36a61cd5d34390bd52ce3cc5bc7b80.png",
+          "type": "image/jpeg",
+          "size": 493897,
+          "url": "/uploads/reports/0d36a61cd5d34390bd52ce3cc5bc7b80.png",
+          "extraction": "image-ocr",
+          "uploadedAt": "2026/7/1 11:28:26"
+        }
+      ],
+      "createdAt": "2026/7/1 11:28:25",
+      "updatedAt": "2026/7/1 11:28:25",
+      "schemaVersion": 2,
+      "meta": {
+        "title": "上腹部CT平扫+MPR重建",
+        "reportDate": "2025-07-18",
+        "department": "放射科",
+        "sampleType": "",
+        "reportDoctor": "",
+        "reviewDoctor": "叶锋",
+        "status": "confirmed",
+        "confirmedAt": "2026/7/1 11:28:26"
+      },
+      "source": {
+        "kind": "ocr-image",
+        "rawOcrText": "÷4656\n云影像\n人\n上腹部CT平扫+MPR重建\n厦门大学附属中山医院\n2025-07-18\n8基本信息\n申请单号：2025071805690060\n姓名 ***\n申请医生：\n张璐娴\n报告医生：\n审核医生：叶锋\n检查所见\n肝脏轮廓光滑，肝叶比例正常，肝内可见小类\n圆形低密度影，直径约4mm。肝门区未见异常\n密度影。胆囊形态、大小正常，内未见异常密\n度影，壁薄，边缘清楚，肝内外胆管未见扩\n张。脾脏不大，内未见异常密度影，脾门下区\n见类圆形等密度结节，界清，径约11mm。胰\n腺形态、大小、密度及位置正常，胆总管未见\n明显异常，胰管未见扩张，边缘规则、清楚。\n腹膜后未见肿大的淋巴结，腹腔未见明确积液\n影。所见胃腔充盈稍欠佳，胃、十二指肠管壁\n未见明显增厚。靶区降结肠积气较多，胃及升\n结肠内容物较多。\n①检查结论/诊断\n肝内小囊肿可能，副脾，必要时增强或进一步\n检查。靶区降结肠积气较多，胃及升结肠内容\n物较多。",
+        "files": [
+          {
+            "id": "ab1fd108e45d48cd9cc87f30ec3ff5a9",
+            "name": "paste-1782876501498.png",
+            "storedName": "0d36a61cd5d34390bd52ce3cc5bc7b80.png",
+            "type": "image/jpeg",
+            "size": 493897,
+            "url": "/uploads/reports/0d36a61cd5d34390bd52ce3cc5bc7b80.png",
+            "extraction": "image-ocr",
+            "uploadedAt": "2026/7/1 11:28:26"
+          }
+        ]
+      },
+      "structured": {
+        "type": "exam",
+        "title": "上腹部CT平扫+MPR重建",
+        "reportDate": "2025-07-18",
+        "sections": [
+          {
+            "key": "finding",
+            "title": "检查所见",
+            "text": "肝脏轮廓光滑，肝叶比例正常，肝内可见小类圆形低密度影，直径约4mm。肝门区未见异常密度影。胆囊形态、大小正常，内未见异常密度影，壁薄，边缘清楚，肝内外胆管未见扩张。脾脏不大，内未见异常密度影，脾门下区见类圆形等密度结节，界清，径约11mm。胰腺形态、大小、密度及位置正常，胆总管未见明显异常，胰管未见扩张，边缘规则、清楚。腹膜后未见肿大的淋巴结，腹腔未见明确积液影。所见胃腔充盈稍欠佳，胃、十二指肠管壁未见明显增厚。靶区降结肠积气较多，胃及升结肠内容物较多。"
+          },
+          {
+            "key": "conclusion",
+            "title": "检查结论/诊断",
+            "text": "肝内小囊肿可能，副脾，必要时增强或进一步检查。靶区降结肠积气较多，胃及升结肠内容物较多。"
+          }
+        ],
+        "doctors": {
+          "reportDoctor": "",
+          "reviewDoctor": "叶锋"
+        }
+      },
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "origin": "indicator",
+      "linkedDailyRecordIds": []
+    },
+    {
+      "id": "daily_report_1782976367401_f46b2611aa3078",
+      "reportType": "lab",
+      "title": "尿常规;尿沉渣定量(流式法)",
+      "reportDate": "2025-08-16",
+      "department": "泌尿外科",
+      "sampleType": "",
+      "rawOcrText": "尿常规;尿沉渣定量(流式法)\n条码号 ***\n类型:\n罗宏智\n门诊检验\n患者姓名 ***：\nP12056597-床号：\n0\n尿液\n合格\n标本类型：\n标本状态：\n泌尿外科\n申请科室:\n申请医生：\n报告时间：\n2025-08-16 10:29:35\n参考值\n标志\n单位\n说明\n检验值\n检查项目\n尿颜色\n黃色\n清亮\n尿透明度\n()\n尿葡萄糖\n阴性\n(阴性)\n(阴性)\n尿胆红素\n阴性\n尿酮体\n阴性\n(阴性)\n1.013\n尿比重\n(1.003~\n1.030)\n尿pH\n(5.0~8.0)\n6.0\n阴性\n(阴性)\n尿蛋白定性\n(阴性)\n尿胆原\n阴性\n阴性\n(阴性)\n尿亚硝酸盐\n尿隐血\n阴性\n(阴性)\n(阴性)\n阴性\n尿白细胞酯酶\n红细胞\n/μL\n(0.0~15.0)\n1.9\n白细胞\n/μL\n(0.0~18.0)\n1.9\n/μL\n上皮细胞\n(0.0~5.7)\n1.1\n/μL\n鳞状上皮细胞\n0.7\n()\n/μL\n非鳞状上皮细胞\n0.4\n()\n管型\n/μL\n(0.0~1.3)\n0.0\n/μL\n透明管型\n(0.0~1.3)\n0.0\n(0.0)\n/μL\n病理管型\n0\n/μL\n结晶\n(0.0~6.0)\n0.0\n/μL\n细菌\n(0.0~11.4)\n2.3\n/μL\n(0.0)\n酵母菌\n0\n粘液丝\n/μL\n0.1",
+      "ocrLines": [
+        {
+          "text": "尿常规;尿沉渣定量(流式法)",
+          "confidence": 0.9821058511734009,
+          "box": [
+            192,
+            45,
+            886,
+            115
+          ]
+        },
+        {
+          "text": "条码号2414082406",
+          "confidence": 0.9999842047691345,
+          "box": [
+            360,
+            122,
+            719,
+            169
+          ]
+        },
+        {
+          "text": "类型:",
+          "confidence": 0.8888070583343506,
+          "box": [
+            532,
+            222,
+            636,
+            276
+          ]
+        },
+        {
+          "text": "罗宏智",
+          "confidence": 0.9999327659606934,
+          "box": [
+            298,
+            224,
+            425,
+            275
+          ]
+        },
+        {
+          "text": "门诊检验",
+          "confidence": 0.9997126460075378,
+          "box": [
+            751,
+            224,
+            915,
+            274
+          ]
+        },
+        {
+          "text": "患者姓名：",
+          "confidence": 0.9247564077377319,
+          "box": [
+            86,
+            226,
+            271,
+            273
+          ]
+        },
+        {
+          "text": "病历号：",
+          "confidence": 0.9440461993217468,
+          "box": [
+            83,
+            292,
+            224,
+            343
+          ]
+        },
+        {
+          "text": "P12056597-床号：",
+          "confidence": 0.9746783375740051,
+          "box": [
+            301,
+            293,
+            631,
+            340
+          ]
+        },
+        {
+          "text": "0",
+          "confidence": 0.9282784461975098,
+          "box": [
+            301,
+            344,
+            335,
+            384
+          ]
+        },
+        {
+          "text": "尿液",
+          "confidence": 0.9999995827674866,
+          "box": [
+            301,
+            404,
+            388,
+            455
+          ]
+        },
+        {
+          "text": "合格",
+          "confidence": 0.999626636505127,
+          "box": [
+            743,
+            405,
+            838,
+            453
+          ]
+        },
+        {
+          "text": "标本类型：",
+          "confidence": 0.9151310920715332,
+          "box": [
+            86,
+            406,
+            263,
+            452
+          ]
+        },
+        {
+          "text": "标本状态：",
+          "confidence": 0.9509176015853882,
+          "box": [
+            536,
+            406,
+            718,
+            452
+          ]
+        },
+        {
+          "text": "泌尿外科",
+          "confidence": 0.9989927411079407,
+          "box": [
+            298,
+            472,
+            465,
+            521
+          ]
+        },
+        {
+          "text": "申请科室:",
+          "confidence": 0.898795485496521,
+          "box": [
+            89,
+            473,
+            267,
+            519
+          ]
+        },
+        {
+          "text": "申请医生：",
+          "confidence": 0.94562828540802,
+          "box": [
+            539,
+            473,
+            709,
+            519
+          ]
+        },
+        {
+          "text": "报告时间：",
+          "confidence": 0.9442771077156067,
+          "box": [
+            86,
+            540,
+            265,
+            585
+          ]
+        },
+        {
+          "text": "2025-08-16 10:29:35",
+          "confidence": 0.9867698550224304,
+          "box": [
+            296,
+            541,
+            676,
+            585
+          ]
+        },
+        {
+          "text": "参考值",
+          "confidence": 0.9986864924430847,
+          "box": [
+            527,
+            703,
+            656,
+            758
+          ]
+        },
+        {
+          "text": "标志",
+          "confidence": 0.9999844431877136,
+          "box": [
+            713,
+            703,
+            804,
+            758
+          ]
+        },
+        {
+          "text": "单位",
+          "confidence": 0.9999990463256836,
+          "box": [
+            825,
+            703,
+            915,
+            757
+          ]
+        },
+        {
+          "text": "说明",
+          "confidence": 0.9999992251396179,
+          "box": [
+            935,
+            703,
+            1024,
+            757
+          ]
+        },
+        {
+          "text": "检验值",
+          "confidence": 0.999997615814209,
+          "box": [
+            336,
+            704,
+            462,
+            756
+          ]
+        },
+        {
+          "text": "检查项目",
+          "confidence": 0.9966385960578918,
+          "box": [
+            96,
+            705,
+            259,
+            755
+          ]
+        },
+        {
+          "text": "尿颜色",
+          "confidence": 0.9991911053657532,
+          "box": [
+            118,
+            825,
+            245,
+            880
+          ]
+        },
+        {
+          "text": "黃色",
+          "confidence": 0.7659807801246643,
+          "box": [
+            357,
+            825,
+            451,
+            878
+          ]
+        },
+        {
+          "text": "清亮",
+          "confidence": 0.9999533891677856,
+          "box": [
+            356,
+            905,
+            454,
+            959
+          ]
+        },
+        {
+          "text": "尿透明度",
+          "confidence": 0.9999985694885254,
+          "box": [
+            101,
+            907,
+            262,
+            956
+          ]
+        },
+        {
+          "text": "()",
+          "confidence": 0.7650115489959717,
+          "box": [
+            452,
+            907,
+            515,
+            953
+          ]
+        },
+        {
+          "text": "尿葡萄糖",
+          "confidence": 0.9997409582138062,
+          "box": [
+            101,
+            985,
+            263,
+            1035
+          ]
+        },
+        {
+          "text": "阴性",
+          "confidence": 0.9999970197677612,
+          "box": [
+            360,
+            985,
+            449,
+            1036
+          ]
+        },
+        {
+          "text": "(阴性)",
+          "confidence": 0.9859718680381775,
+          "box": [
+            475,
+            985,
+            586,
+            1032
+          ]
+        },
+        {
+          "text": "(阴性)",
+          "confidence": 0.9738783836364746,
+          "box": [
+            470,
+            1061,
+            587,
+            1112
+          ]
+        },
+        {
+          "text": "尿胆红素",
+          "confidence": 0.9997899532318115,
+          "box": [
+            101,
+            1064,
+            264,
+            1113
+          ]
+        },
+        {
+          "text": "阴性",
+          "confidence": 0.9999972581863403,
+          "box": [
+            361,
+            1064,
+            451,
+            1114
+          ]
+        },
+        {
+          "text": "尿酮体",
+          "confidence": 0.9998135566711426,
+          "box": [
+            118,
+            1141,
+            245,
+            1195
+          ]
+        },
+        {
+          "text": "阴性",
+          "confidence": 0.9999963641166687,
+          "box": [
+            360,
+            1142,
+            449,
+            1193
+          ]
+        },
+        {
+          "text": "(阴性)",
+          "confidence": 0.9745482206344604,
+          "box": [
+            476,
+            1142,
+            587,
+            1190
+          ]
+        },
+        {
+          "text": "1.013",
+          "confidence": 0.9998248815536499,
+          "box": [
+            351,
+            1220,
+            453,
+            1272
+          ]
+        },
+        {
+          "text": "尿比重",
+          "confidence": 0.9999178051948547,
+          "box": [
+            119,
+            1222,
+            245,
+            1274
+          ]
+        },
+        {
+          "text": "(1.003~",
+          "confidence": 0.9963043928146362,
+          "box": [
+            522,
+            1222,
+            659,
+            1268
+          ]
+        },
+        {
+          "text": "1.030)",
+          "confidence": 0.9989936947822571,
+          "box": [
+            537,
+            1261,
+            650,
+            1312
+          ]
+        },
+        {
+          "text": "尿pH",
+          "confidence": 0.9978665709495544,
+          "box": [
+            131,
+            1337,
+            235,
+            1394
+          ]
+        },
+        {
+          "text": "(5.0~8.0)",
+          "confidence": 0.9923158288002014,
+          "box": [
+            473,
+            1337,
+            655,
+            1386
+          ]
+        },
+        {
+          "text": "6.0",
+          "confidence": 0.9999685883522034,
+          "box": [
+            371,
+            1341,
+            438,
+            1386
+          ]
+        },
+        {
+          "text": "阴性",
+          "confidence": 0.999997079372406,
+          "box": [
+            361,
+            1418,
+            451,
+            1468
+          ]
+        },
+        {
+          "text": "(阴性)",
+          "confidence": 0.9706692695617676,
+          "box": [
+            472,
+            1418,
+            587,
+            1465
+          ]
+        },
+        {
+          "text": "尿蛋白定性",
+          "confidence": 0.9993473291397095,
+          "box": [
+            83,
+            1420,
+            281,
+            1465
+          ]
+        },
+        {
+          "text": "(阴性)",
+          "confidence": 0.9763476848602295,
+          "box": [
+            474,
+            1494,
+            586,
+            1545
+          ]
+        },
+        {
+          "text": "尿胆原",
+          "confidence": 0.9999980330467224,
+          "box": [
+            118,
+            1495,
+            247,
+            1549
+          ]
+        },
+        {
+          "text": "阴性",
+          "confidence": 0.9999936819076538,
+          "box": [
+            360,
+            1495,
+            449,
+            1548
+          ]
+        },
+        {
+          "text": "阴性",
+          "confidence": 0.9999945759773254,
+          "box": [
+            360,
+            1574,
+            453,
+            1627
+          ]
+        },
+        {
+          "text": "(阴性)",
+          "confidence": 0.9488497972488403,
+          "box": [
+            454,
+            1575,
+            587,
+            1622
+          ]
+        },
+        {
+          "text": "尿亚硝酸盐",
+          "confidence": 0.9995776414871216,
+          "box": [
+            81,
+            1577,
+            280,
+            1623
+          ]
+        },
+        {
+          "text": "尿隐血",
+          "confidence": 0.9999405741691589,
+          "box": [
+            118,
+            1653,
+            244,
+            1708
+          ]
+        },
+        {
+          "text": "阴性",
+          "confidence": 0.9999973177909851,
+          "box": [
+            361,
+            1655,
+            451,
+            1705
+          ]
+        },
+        {
+          "text": "(阴性)",
+          "confidence": 0.9726018905639648,
+          "box": [
+            472,
+            1655,
+            586,
+            1702
+          ]
+        },
+        {
+          "text": "(阴性)",
+          "confidence": 0.9806039333343506,
+          "box": [
+            474,
+            1733,
+            587,
+            1780
+          ]
+        },
+        {
+          "text": "阴性",
+          "confidence": 0.9999966621398926,
+          "box": [
+            361,
+            1734,
+            449,
+            1784
+          ]
+        },
+        {
+          "text": "尿白细胞酯酶",
+          "confidence": 0.9982092976570129,
+          "box": [
+            58,
+            1736,
+            301,
+            1781
+          ]
+        },
+        {
+          "text": "红细胞",
+          "confidence": 0.9992268681526184,
+          "box": [
+            116,
+            1810,
+            244,
+            1864
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.9086742401123047,
+          "box": [
+            835,
+            1810,
+            904,
+            1865
+          ]
+        },
+        {
+          "text": "(0.0~15.0)",
+          "confidence": 0.9928348660469055,
+          "box": [
+            478,
+            1813,
+            668,
+            1858
+          ]
+        },
+        {
+          "text": "1.9",
+          "confidence": 0.9999125599861145,
+          "box": [
+            376,
+            1816,
+            434,
+            1858
+          ]
+        },
+        {
+          "text": "白细胞",
+          "confidence": 0.9995565414428711,
+          "box": [
+            118,
+            1888,
+            246,
+            1945
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.9206676483154297,
+          "box": [
+            835,
+            1889,
+            903,
+            1944
+          ]
+        },
+        {
+          "text": "(0.0~18.0)",
+          "confidence": 0.9969373941421509,
+          "box": [
+            477,
+            1890,
+            668,
+            1939
+          ]
+        },
+        {
+          "text": "1.9",
+          "confidence": 0.9998447299003601,
+          "box": [
+            377,
+            1895,
+            433,
+            1937
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.6719439029693604,
+          "box": [
+            832,
+            1963,
+            903,
+            2025
+          ]
+        },
+        {
+          "text": "上皮细胞",
+          "confidence": 0.9999169111251831,
+          "box": [
+            104,
+            1970,
+            263,
+            2020
+          ]
+        },
+        {
+          "text": "(0.0~5.7)",
+          "confidence": 0.9948630928993225,
+          "box": [
+            479,
+            1970,
+            651,
+            2016
+          ]
+        },
+        {
+          "text": "1.1",
+          "confidence": 0.9999406933784485,
+          "box": [
+            380,
+            1973,
+            432,
+            2017
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.8892786502838135,
+          "box": [
+            835,
+            2046,
+            903,
+            2102
+          ]
+        },
+        {
+          "text": "鳞状上皮细胞",
+          "confidence": 0.9942273497581482,
+          "box": [
+            59,
+            2049,
+            301,
+            2098
+          ]
+        },
+        {
+          "text": "0.7",
+          "confidence": 0.9998556971549988,
+          "box": [
+            370,
+            2050,
+            437,
+            2099
+          ]
+        },
+        {
+          "text": "()",
+          "confidence": 0.830662727355957,
+          "box": [
+            480,
+            2052,
+            513,
+            2096
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.6799265742301941,
+          "box": [
+            835,
+            2125,
+            902,
+            2182
+          ]
+        },
+        {
+          "text": "非鳞状上皮细胞",
+          "confidence": 0.9991920590400696,
+          "box": [
+            46,
+            2131,
+            321,
+            2176
+          ]
+        },
+        {
+          "text": "0.4",
+          "confidence": 0.9998189806938171,
+          "box": [
+            369,
+            2132,
+            439,
+            2176
+          ]
+        },
+        {
+          "text": "()",
+          "confidence": 0.8487261533737183,
+          "box": [
+            478,
+            2133,
+            512,
+            2174
+          ]
+        },
+        {
+          "text": "管型",
+          "confidence": 0.9995497465133667,
+          "box": [
+            136,
+            2204,
+            228,
+            2262
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.8747492432594299,
+          "box": [
+            835,
+            2204,
+            902,
+            2260
+          ]
+        },
+        {
+          "text": "(0.0~1.3)",
+          "confidence": 0.9975722432136536,
+          "box": [
+            478,
+            2208,
+            647,
+            2254
+          ]
+        },
+        {
+          "text": "0.0",
+          "confidence": 0.9995238184928894,
+          "box": [
+            372,
+            2210,
+            438,
+            2255
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.7121455073356628,
+          "box": [
+            835,
+            2283,
+            903,
+            2339
+          ]
+        },
+        {
+          "text": "透明管型",
+          "confidence": 0.9999510049819946,
+          "box": [
+            99,
+            2287,
+            262,
+            2336
+          ]
+        },
+        {
+          "text": "(0.0~1.3)",
+          "confidence": 0.9966220855712891,
+          "box": [
+            478,
+            2287,
+            647,
+            2332
+          ]
+        },
+        {
+          "text": "0.0",
+          "confidence": 0.9995822906494141,
+          "box": [
+            372,
+            2289,
+            438,
+            2333
+          ]
+        },
+        {
+          "text": "(0.0)",
+          "confidence": 0.9938309788703918,
+          "box": [
+            478,
+            2362,
+            571,
+            2415
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.7142524719238281,
+          "box": [
+            835,
+            2362,
+            903,
+            2418
+          ]
+        },
+        {
+          "text": "病理管型",
+          "confidence": 0.9999763369560242,
+          "box": [
+            100,
+            2367,
+            261,
+            2413
+          ]
+        },
+        {
+          "text": "0",
+          "confidence": 0.8558089733123779,
+          "box": [
+            388,
+            2372,
+            419,
+            2409
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.7027313113212585,
+          "box": [
+            835,
+            2440,
+            902,
+            2497
+          ]
+        },
+        {
+          "text": "结晶",
+          "confidence": 0.9961762428283691,
+          "box": [
+            135,
+            2442,
+            225,
+            2496
+          ]
+        },
+        {
+          "text": "(0.0~6.0)",
+          "confidence": 0.9879851937294006,
+          "box": [
+            477,
+            2444,
+            655,
+            2490
+          ]
+        },
+        {
+          "text": "0.0",
+          "confidence": 0.9996247887611389,
+          "box": [
+            372,
+            2446,
+            437,
+            2491
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.8622896075248718,
+          "box": [
+            835,
+            2519,
+            903,
+            2576
+          ]
+        },
+        {
+          "text": "细菌",
+          "confidence": 0.9996989369392395,
+          "box": [
+            135,
+            2520,
+            226,
+            2576
+          ]
+        },
+        {
+          "text": "(0.0~11.4)",
+          "confidence": 0.9969042539596558,
+          "box": [
+            478,
+            2523,
+            663,
+            2569
+          ]
+        },
+        {
+          "text": "2.3",
+          "confidence": 0.9999728202819824,
+          "box": [
+            372,
+            2525,
+            437,
+            2571
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.7418349385261536,
+          "box": [
+            835,
+            2599,
+            903,
+            2655
+          ]
+        },
+        {
+          "text": "(0.0)",
+          "confidence": 0.9944679141044617,
+          "box": [
+            478,
+            2601,
+            569,
+            2651
+          ]
+        },
+        {
+          "text": "酵母菌",
+          "confidence": 0.9981390833854675,
+          "box": [
+            118,
+            2602,
+            243,
+            2654
+          ]
+        },
+        {
+          "text": "0",
+          "confidence": 0.8553387522697449,
+          "box": [
+            388,
+            2609,
+            419,
+            2646
+          ]
+        },
+        {
+          "text": "粘液丝",
+          "confidence": 0.9999894499778748,
+          "box": [
+            116,
+            2679,
+            246,
+            2734
+          ]
+        },
+        {
+          "text": "/μL",
+          "confidence": 0.7767844200134277,
+          "box": [
+            836,
+            2679,
+            902,
+            2734
+          ]
+        },
+        {
+          "text": "0.1",
+          "confidence": 0.9995821118354797,
+          "box": [
+            376,
+            2684,
+            431,
+            2731
+          ]
+        }
+      ],
+      "parseMode": "spatial-table",
+      "items": [
+        {
+          "id": "lab_item_1782976367407_ef35622f8ff988",
+          "name": "尿颜色",
+          "normalizedName": "尿颜色",
+          "value": "黃色",
+          "valueText": "黃色",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "()",
+          "referenceRange": {
+            "type": "empty",
+            "text": ""
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367407_1218bc0799dae",
+          "name": "尿透明度",
+          "normalizedName": "尿透明度",
+          "value": "清亮",
+          "valueText": "清亮",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "()",
+          "referenceRange": {
+            "type": "empty",
+            "text": ""
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367407_1eaa99f88d64b8",
+          "name": "尿葡萄糖",
+          "normalizedName": "尿葡萄糖",
+          "value": "阴性",
+          "valueText": "阴性",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "(阴性)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "阴性"
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_7d4f35207a63c",
+          "name": "尿胆红素",
+          "normalizedName": "尿胆红素",
+          "value": "阴性",
+          "valueText": "阴性",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "(阴性)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "阴性"
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_03fd34ac0e15e",
+          "name": "尿酮体",
+          "normalizedName": "尿酮体",
+          "value": "阴性",
+          "valueText": "阴性",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "(阴性)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "阴性"
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_5e87323051102",
+          "name": "尿比重",
+          "normalizedName": "尿比重",
+          "value": "1.013",
+          "valueText": "1.013",
+          "valueNumber": 1.013,
+          "valueType": "number",
+          "reference": "(1.003~1.030)",
+          "referenceRange": {
+            "type": "range",
+            "text": "1.003~1.030",
+            "low": 1.003,
+            "high": 1.03
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_29a641ddc226",
+          "name": "尿pH",
+          "normalizedName": "尿ph",
+          "value": "6.0",
+          "valueText": "6.0",
+          "valueNumber": 6,
+          "valueType": "number",
+          "reference": "(5.0~8.0)",
+          "referenceRange": {
+            "type": "range",
+            "text": "5.0~8.0",
+            "low": 5,
+            "high": 8
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_0bdda87d84b2c8",
+          "name": "尿蛋白定性",
+          "normalizedName": "尿蛋白定性",
+          "value": "阴性",
+          "valueText": "阴性",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "(阴性)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "阴性"
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_8023dd43af5138",
+          "name": "尿胆原",
+          "normalizedName": "尿胆原",
+          "value": "阴性",
+          "valueText": "阴性",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "(阴性)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "阴性"
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_ea1ff313bbe0b8",
+          "name": "尿亚硝酸盐",
+          "normalizedName": "尿亚硝酸盐",
+          "value": "阴性",
+          "valueText": "阴性",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "(阴性)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "阴性"
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_ac7e6484faf23",
+          "name": "尿隐血",
+          "normalizedName": "尿隐血",
+          "value": "阴性",
+          "valueText": "阴性",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "(阴性)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "阴性"
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_220619c0af712",
+          "name": "尿白细胞酯酶",
+          "normalizedName": "尿白细胞酯酶",
+          "value": "阴性",
+          "valueText": "阴性",
+          "valueNumber": null,
+          "valueType": "text",
+          "reference": "(阴性)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "阴性"
+          },
+          "flag": "normal",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_7e90f5ee0cefe",
+          "name": "红细胞",
+          "normalizedName": "红细胞",
+          "value": "1.9",
+          "valueText": "1.9",
+          "valueNumber": 1.9,
+          "valueType": "number",
+          "reference": "(0.0~15.0)",
+          "referenceRange": {
+            "type": "range",
+            "text": "0.0~15.0",
+            "low": 0,
+            "high": 15
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_fc41b6be8e30a8",
+          "name": "白细胞",
+          "normalizedName": "白细胞",
+          "value": "1.9",
+          "valueText": "1.9",
+          "valueNumber": 1.9,
+          "valueType": "number",
+          "reference": "(0.0~18.0)",
+          "referenceRange": {
+            "type": "range",
+            "text": "0.0~18.0",
+            "low": 0,
+            "high": 18
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": "/μL"
+        },
+        {
+          "id": "lab_item_1782976367408_55db442ea37ca8",
+          "name": "上皮细胞",
+          "normalizedName": "上皮细胞",
+          "value": "1.1",
+          "valueText": "1.1",
+          "valueNumber": 1.1,
+          "valueType": "number",
+          "reference": "(0.0~5.7)",
+          "referenceRange": {
+            "type": "range",
+            "text": "0.0~5.7",
+            "low": 0,
+            "high": 5.7
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_a7ba344c3debf8",
+          "name": "鳞状上皮细胞",
+          "normalizedName": "鳞状上皮细胞",
+          "value": "0.7",
+          "valueText": "0.7",
+          "valueNumber": 0.7,
+          "valueType": "number",
+          "reference": "()",
+          "referenceRange": {
+            "type": "empty",
+            "text": ""
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_6ed3ac4629aa1",
+          "name": "非鳞状上皮细胞",
+          "normalizedName": "非鳞状上皮细胞",
+          "value": "0.4",
+          "valueText": "0.4",
+          "valueNumber": 0.4,
+          "valueType": "number",
+          "reference": "()",
+          "referenceRange": {
+            "type": "empty",
+            "text": ""
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_1dab4ed72c2718",
+          "name": "管型",
+          "normalizedName": "管型",
+          "value": "0.0",
+          "valueText": "0.0",
+          "valueNumber": 0,
+          "valueType": "number",
+          "reference": "(0.0~1.3)",
+          "referenceRange": {
+            "type": "range",
+            "text": "0.0~1.3",
+            "low": 0,
+            "high": 1.3
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": "/μL"
+        },
+        {
+          "id": "lab_item_1782976367408_73efa67e304a88",
+          "name": "透明管型",
+          "normalizedName": "透明管型",
+          "value": "0.0",
+          "valueText": "0.0",
+          "valueNumber": 0,
+          "valueType": "number",
+          "reference": "(0.0~1.3)",
+          "referenceRange": {
+            "type": "range",
+            "text": "0.0~1.3",
+            "low": 0,
+            "high": 1.3
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_a53e01a1cc6298",
+          "name": "病理管型",
+          "normalizedName": "病理管型",
+          "value": "0",
+          "valueText": "0",
+          "valueNumber": 0,
+          "valueType": "number",
+          "reference": "(0.0)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "0.0"
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_141873c7743ff8",
+          "name": "结晶",
+          "normalizedName": "结晶",
+          "value": "0.0",
+          "valueText": "0.0",
+          "valueNumber": 0,
+          "valueType": "number",
+          "reference": "(0.0~6.0)",
+          "referenceRange": {
+            "type": "range",
+            "text": "0.0~6.0",
+            "low": 0,
+            "high": 6
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_31fbce8a39d88",
+          "name": "细菌",
+          "normalizedName": "细菌",
+          "value": "2.3",
+          "valueText": "2.3",
+          "valueNumber": 2.3,
+          "valueType": "number",
+          "reference": "(0.0~11.4)",
+          "referenceRange": {
+            "type": "range",
+            "text": "0.0~11.4",
+            "low": 0,
+            "high": 11.4
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_a382c10cbe8e7",
+          "name": "酵母菌",
+          "normalizedName": "酵母菌",
+          "value": "0",
+          "valueText": "0",
+          "valueNumber": 0,
+          "valueType": "number",
+          "reference": "(0.0)",
+          "referenceRange": {
+            "type": "qualitative",
+            "text": "0.0"
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        },
+        {
+          "id": "lab_item_1782976367408_bdd6b7795ef78",
+          "name": "粘液丝",
+          "normalizedName": "粘液丝",
+          "value": "0.1",
+          "valueText": "0.1",
+          "valueNumber": 0.1,
+          "valueType": "number",
+          "reference": "()",
+          "referenceRange": {
+            "type": "empty",
+            "text": ""
+          },
+          "flag": "normal",
+          "unit": "/μL",
+          "note": ""
+        }
+      ],
+      "status": "confirmed",
+      "confirmedAt": "2026/7/2 15:12:52",
+      "files": [
+        {
+          "id": "c67e50c1acc04320805e7f373cf3486b",
+          "name": "paste-1782976361398.png",
+          "storedName": "a078a463646740fa94fd2ff1d15407a9.png",
+          "type": "image/jpeg",
+          "size": 352075,
+          "url": "/uploads/reports/a078a463646740fa94fd2ff1d15407a9.png",
+          "extraction": "image-ocr",
+          "uploadedAt": "2026/7/2 15:12:52"
+        }
+      ],
+      "createdAt": "2026/7/2 15:12:47",
+      "updatedAt": "2026/7/2 15:12:47",
+      "schemaVersion": 2,
+      "meta": {
+        "title": "尿常规;尿沉渣定量(流式法)",
+        "reportDate": "2025-08-16",
+        "department": "泌尿外科",
+        "sampleType": "",
+        "reportDoctor": "",
+        "reviewDoctor": "",
+        "status": "confirmed",
+        "confirmedAt": "2026/7/2 15:12:52"
+      },
+      "source": {
+        "kind": "ocr-image",
+        "rawOcrText": "尿常规;尿沉渣定量(流式法)\n条码号 ***\n类型:\n罗宏智\n门诊检验\n患者姓名 ***：\nP12056597-床号：\n0\n尿液\n合格\n标本类型：\n标本状态：\n泌尿外科\n申请科室:\n申请医生：\n报告时间：\n2025-08-16 10:29:35\n参考值\n标志\n单位\n说明\n检验值\n检查项目\n尿颜色\n黃色\n清亮\n尿透明度\n()\n尿葡萄糖\n阴性\n(阴性)\n(阴性)\n尿胆红素\n阴性\n尿酮体\n阴性\n(阴性)\n1.013\n尿比重\n(1.003~\n1.030)\n尿pH\n(5.0~8.0)\n6.0\n阴性\n(阴性)\n尿蛋白定性\n(阴性)\n尿胆原\n阴性\n阴性\n(阴性)\n尿亚硝酸盐\n尿隐血\n阴性\n(阴性)\n(阴性)\n阴性\n尿白细胞酯酶\n红细胞\n/μL\n(0.0~15.0)\n1.9\n白细胞\n/μL\n(0.0~18.0)\n1.9\n/μL\n上皮细胞\n(0.0~5.7)\n1.1\n/μL\n鳞状上皮细胞\n0.7\n()\n/μL\n非鳞状上皮细胞\n0.4\n()\n管型\n/μL\n(0.0~1.3)\n0.0\n/μL\n透明管型\n(0.0~1.3)\n0.0\n(0.0)\n/μL\n病理管型\n0\n/μL\n结晶\n(0.0~6.0)\n0.0\n/μL\n细菌\n(0.0~11.4)\n2.3\n/μL\n(0.0)\n酵母菌\n0\n粘液丝\n/μL\n0.1",
+        "files": [
+          {
+            "id": "c67e50c1acc04320805e7f373cf3486b",
+            "name": "paste-1782976361398.png",
+            "storedName": "a078a463646740fa94fd2ff1d15407a9.png",
+            "type": "image/jpeg",
+            "size": 352075,
+            "url": "/uploads/reports/a078a463646740fa94fd2ff1d15407a9.png",
+            "extraction": "image-ocr",
+            "uploadedAt": "2026/7/2 15:12:52"
+          }
+        ]
+      },
+      "structured": {
+        "type": "lab",
+        "title": "尿常规;尿沉渣定量(流式法)",
+        "reportDate": "2025-08-16",
+        "sampleType": "",
+        "metrics": [
+          {
+            "id": "lab_item_1782976367407_ef35622f8ff988",
+            "name": "尿颜色",
+            "normalizedName": "尿颜色",
+            "value": "黃色",
+            "valueText": "黃色",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "()",
+            "referenceRange": {
+              "type": "empty",
+              "text": ""
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367407_1218bc0799dae",
+            "name": "尿透明度",
+            "normalizedName": "尿透明度",
+            "value": "清亮",
+            "valueText": "清亮",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "()",
+            "referenceRange": {
+              "type": "empty",
+              "text": ""
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367407_1eaa99f88d64b8",
+            "name": "尿葡萄糖",
+            "normalizedName": "尿葡萄糖",
+            "value": "阴性",
+            "valueText": "阴性",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "(阴性)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "阴性"
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_7d4f35207a63c",
+            "name": "尿胆红素",
+            "normalizedName": "尿胆红素",
+            "value": "阴性",
+            "valueText": "阴性",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "(阴性)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "阴性"
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_03fd34ac0e15e",
+            "name": "尿酮体",
+            "normalizedName": "尿酮体",
+            "value": "阴性",
+            "valueText": "阴性",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "(阴性)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "阴性"
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_5e87323051102",
+            "name": "尿比重",
+            "normalizedName": "尿比重",
+            "value": "1.013",
+            "valueText": "1.013",
+            "valueNumber": 1.013,
+            "valueType": "number",
+            "reference": "(1.003~1.030)",
+            "referenceRange": {
+              "type": "range",
+              "text": "1.003~1.030",
+              "low": 1.003,
+              "high": 1.03
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_29a641ddc226",
+            "name": "尿pH",
+            "normalizedName": "尿ph",
+            "value": "6.0",
+            "valueText": "6.0",
+            "valueNumber": 6,
+            "valueType": "number",
+            "reference": "(5.0~8.0)",
+            "referenceRange": {
+              "type": "range",
+              "text": "5.0~8.0",
+              "low": 5,
+              "high": 8
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_0bdda87d84b2c8",
+            "name": "尿蛋白定性",
+            "normalizedName": "尿蛋白定性",
+            "value": "阴性",
+            "valueText": "阴性",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "(阴性)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "阴性"
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_8023dd43af5138",
+            "name": "尿胆原",
+            "normalizedName": "尿胆原",
+            "value": "阴性",
+            "valueText": "阴性",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "(阴性)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "阴性"
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_ea1ff313bbe0b8",
+            "name": "尿亚硝酸盐",
+            "normalizedName": "尿亚硝酸盐",
+            "value": "阴性",
+            "valueText": "阴性",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "(阴性)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "阴性"
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_ac7e6484faf23",
+            "name": "尿隐血",
+            "normalizedName": "尿隐血",
+            "value": "阴性",
+            "valueText": "阴性",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "(阴性)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "阴性"
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_220619c0af712",
+            "name": "尿白细胞酯酶",
+            "normalizedName": "尿白细胞酯酶",
+            "value": "阴性",
+            "valueText": "阴性",
+            "valueNumber": null,
+            "valueType": "text",
+            "reference": "(阴性)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "阴性"
+            },
+            "flag": "normal",
+            "unit": "",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_7e90f5ee0cefe",
+            "name": "红细胞",
+            "normalizedName": "红细胞",
+            "value": "1.9",
+            "valueText": "1.9",
+            "valueNumber": 1.9,
+            "valueType": "number",
+            "reference": "(0.0~15.0)",
+            "referenceRange": {
+              "type": "range",
+              "text": "0.0~15.0",
+              "low": 0,
+              "high": 15
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_fc41b6be8e30a8",
+            "name": "白细胞",
+            "normalizedName": "白细胞",
+            "value": "1.9",
+            "valueText": "1.9",
+            "valueNumber": 1.9,
+            "valueType": "number",
+            "reference": "(0.0~18.0)",
+            "referenceRange": {
+              "type": "range",
+              "text": "0.0~18.0",
+              "low": 0,
+              "high": 18
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": "/μL"
+          },
+          {
+            "id": "lab_item_1782976367408_55db442ea37ca8",
+            "name": "上皮细胞",
+            "normalizedName": "上皮细胞",
+            "value": "1.1",
+            "valueText": "1.1",
+            "valueNumber": 1.1,
+            "valueType": "number",
+            "reference": "(0.0~5.7)",
+            "referenceRange": {
+              "type": "range",
+              "text": "0.0~5.7",
+              "low": 0,
+              "high": 5.7
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_a7ba344c3debf8",
+            "name": "鳞状上皮细胞",
+            "normalizedName": "鳞状上皮细胞",
+            "value": "0.7",
+            "valueText": "0.7",
+            "valueNumber": 0.7,
+            "valueType": "number",
+            "reference": "()",
+            "referenceRange": {
+              "type": "empty",
+              "text": ""
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_6ed3ac4629aa1",
+            "name": "非鳞状上皮细胞",
+            "normalizedName": "非鳞状上皮细胞",
+            "value": "0.4",
+            "valueText": "0.4",
+            "valueNumber": 0.4,
+            "valueType": "number",
+            "reference": "()",
+            "referenceRange": {
+              "type": "empty",
+              "text": ""
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_1dab4ed72c2718",
+            "name": "管型",
+            "normalizedName": "管型",
+            "value": "0.0",
+            "valueText": "0.0",
+            "valueNumber": 0,
+            "valueType": "number",
+            "reference": "(0.0~1.3)",
+            "referenceRange": {
+              "type": "range",
+              "text": "0.0~1.3",
+              "low": 0,
+              "high": 1.3
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": "/μL"
+          },
+          {
+            "id": "lab_item_1782976367408_73efa67e304a88",
+            "name": "透明管型",
+            "normalizedName": "透明管型",
+            "value": "0.0",
+            "valueText": "0.0",
+            "valueNumber": 0,
+            "valueType": "number",
+            "reference": "(0.0~1.3)",
+            "referenceRange": {
+              "type": "range",
+              "text": "0.0~1.3",
+              "low": 0,
+              "high": 1.3
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_a53e01a1cc6298",
+            "name": "病理管型",
+            "normalizedName": "病理管型",
+            "value": "0",
+            "valueText": "0",
+            "valueNumber": 0,
+            "valueType": "number",
+            "reference": "(0.0)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "0.0"
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_141873c7743ff8",
+            "name": "结晶",
+            "normalizedName": "结晶",
+            "value": "0.0",
+            "valueText": "0.0",
+            "valueNumber": 0,
+            "valueType": "number",
+            "reference": "(0.0~6.0)",
+            "referenceRange": {
+              "type": "range",
+              "text": "0.0~6.0",
+              "low": 0,
+              "high": 6
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_31fbce8a39d88",
+            "name": "细菌",
+            "normalizedName": "细菌",
+            "value": "2.3",
+            "valueText": "2.3",
+            "valueNumber": 2.3,
+            "valueType": "number",
+            "reference": "(0.0~11.4)",
+            "referenceRange": {
+              "type": "range",
+              "text": "0.0~11.4",
+              "low": 0,
+              "high": 11.4
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_a382c10cbe8e7",
+            "name": "酵母菌",
+            "normalizedName": "酵母菌",
+            "value": "0",
+            "valueText": "0",
+            "valueNumber": 0,
+            "valueType": "number",
+            "reference": "(0.0)",
+            "referenceRange": {
+              "type": "qualitative",
+              "text": "0.0"
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          },
+          {
+            "id": "lab_item_1782976367408_bdd6b7795ef78",
+            "name": "粘液丝",
+            "normalizedName": "粘液丝",
+            "value": "0.1",
+            "valueText": "0.1",
+            "valueNumber": 0.1,
+            "valueType": "number",
+            "reference": "()",
+            "referenceRange": {
+              "type": "empty",
+              "text": ""
+            },
+            "flag": "normal",
+            "unit": "/μL",
+            "note": ""
+          }
+        ]
+      },
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "origin": "indicator",
+      "linkedDailyRecordIds": []
+    }
+  ],
   "dailyMonthRecords": [
     {
-      "id": "daily_month_1782876118650_b282ae608a2768",
+      "id": "daily_month_1782976390072_eb1ad9a68d2b88",
       "memberId": "member_1782119959973_56aa3eb94b15c",
-      "department": "急诊内科",
-      "month": "2025-07",
-      "content": "",
-      "contentHtml": "",
-      "notes": "",
-      "notesHtml": "",
-      "remark": "",
-      "remarkHtml": "",
-      "reports": [
-        {
-          "id": "daily_report_1782876114986_8899449cdfb3c8",
-          "reportType": "lab",
-          "title": "(急诊）血淀粉酶测定(速率法);+(急诊）脂肪酶测定",
-          "reportDate": "2025-07-18",
-          "department": "急诊内科",
-          "sampleType": "",
-          "rawOcrText": "令151\n<\n报告详情\n本报告仅供参考，以实际报告单为准！\n(急诊）血淀粉酶测定(速率法);\n(急诊）脂肪酶测定\n条码号 ***\n类型：\n门诊检验\n罗宏智\n患者姓名 ***：\nP12056597- 床号：\n0\n血浆\n标本状态：合格\n标本类型：\n申请科室：\n急诊内科\n申请医生：\n2025-07-18 21:50:45\n报告时间：\n标志\n检验值\n单位\n说明\n参考值\nU/L\n淀粉酶\n(35.0~\n49.8\n135.0)\nU/L\n19.3 (0.0~67.0)\n脂肪酶\n查看原件",
-          "items": [
-            {
-              "id": "lab_item_1782876114990_8f2537a1a76198",
-              "name": "淀粉酶",
-              "normalizedName": "淀粉酶",
-              "value": "49.8",
-              "valueText": "49.8",
-              "valueNumber": 49.8,
-              "valueType": "number",
-              "reference": "(35.0~135.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "35.0~135.0",
-                "low": 35,
-                "high": 135
-              },
-              "flag": "normal",
-              "unit": "U/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782876114990_51dae1acd61c5",
-              "name": "脂肪酶",
-              "normalizedName": "脂肪酶",
-              "value": "19.3",
-              "valueText": "19.3",
-              "valueNumber": 19.3,
-              "valueType": "number",
-              "reference": "(0.0~67.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "0.0~67.0",
-                "low": 0,
-                "high": 67
-              },
-              "flag": "normal",
-              "unit": "U/L",
-              "note": ""
-            }
-          ],
-          "status": "confirmed",
-          "confirmedAt": "2026/7/1 11:21:58",
-          "files": [
-            {
-              "id": "e9f95e2ca512463ca8d68e782ce3baf5",
-              "name": "paste-1782876112131.png",
-              "storedName": "cb6a6b8a7d3b4e6cb8a4bd58325c1343.png",
-              "type": "image/jpeg",
-              "size": 314164,
-              "url": "/uploads/reports/cb6a6b8a7d3b4e6cb8a4bd58325c1343.png",
-              "extraction": "image-ocr",
-              "uploadedAt": "2026/7/1 11:21:58"
-            }
-          ],
-          "createdAt": "2026/7/1 11:21:54",
-          "updatedAt": "2026/7/1 11:21:54",
-          "schemaVersion": 2,
-          "meta": {
-            "title": "(急诊）血淀粉酶测定(速率法);+(急诊）脂肪酶测定",
-            "reportDate": "2025-07-18",
-            "department": "急诊内科",
-            "sampleType": "",
-            "reportDoctor": "",
-            "reviewDoctor": "",
-            "status": "confirmed",
-            "confirmedAt": "2026/7/1 11:21:58"
-          },
-          "source": {
-            "kind": "ocr-image",
-            "rawOcrText": "令151\n<\n报告详情\n本报告仅供参考，以实际报告单为准！\n(急诊）血淀粉酶测定(速率法);\n(急诊）脂肪酶测定\n条码号 ***\n类型：\n门诊检验\n罗宏智\n患者姓名 ***：\nP12056597- 床号：\n0\n血浆\n标本状态：合格\n标本类型：\n申请科室：\n急诊内科\n申请医生：\n2025-07-18 21:50:45\n报告时间：\n标志\n检验值\n单位\n说明\n参考值\nU/L\n淀粉酶\n(35.0~\n49.8\n135.0)\nU/L\n19.3 (0.0~67.0)\n脂肪酶\n查看原件",
-            "files": [
-              {
-                "id": "e9f95e2ca512463ca8d68e782ce3baf5",
-                "name": "paste-1782876112131.png",
-                "storedName": "cb6a6b8a7d3b4e6cb8a4bd58325c1343.png",
-                "type": "image/jpeg",
-                "size": 314164,
-                "url": "/uploads/reports/cb6a6b8a7d3b4e6cb8a4bd58325c1343.png",
-                "extraction": "image-ocr",
-                "uploadedAt": "2026/7/1 11:21:58"
-              }
-            ]
-          },
-          "structured": {
-            "type": "lab",
-            "title": "(急诊）血淀粉酶测定(速率法);+(急诊）脂肪酶测定",
-            "reportDate": "2025-07-18",
-            "sampleType": "",
-            "metrics": [
-              {
-                "id": "lab_item_1782876114990_8f2537a1a76198",
-                "name": "淀粉酶",
-                "normalizedName": "淀粉酶",
-                "value": "49.8",
-                "valueText": "49.8",
-                "valueNumber": 49.8,
-                "valueType": "number",
-                "reference": "(35.0~135.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "35.0~135.0",
-                  "low": 35,
-                  "high": 135
-                },
-                "flag": "normal",
-                "unit": "U/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782876114990_51dae1acd61c5",
-                "name": "脂肪酶",
-                "normalizedName": "脂肪酶",
-                "value": "19.3",
-                "valueText": "19.3",
-                "valueNumber": 19.3,
-                "valueType": "number",
-                "reference": "(0.0~67.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "0.0~67.0",
-                  "low": 0,
-                  "high": 67
-                },
-                "flag": "normal",
-                "unit": "U/L",
-                "note": ""
-              }
-            ]
-          }
-        }
-      ],
-      "source": "indicator-import",
-      "createdAt": "2026/7/1 11:21:58",
-      "updatedAt": "2026/7/1 11:35:10"
-    },
-    {
-      "id": "daily_month_1782876506234_056b94f907b6a",
-      "memberId": "member_1782119959973_56aa3eb94b15c",
-      "department": "放射科",
-      "month": "2025-07",
-      "content": "",
-      "contentHtml": "",
-      "notes": "",
-      "notesHtml": "",
-      "remark": "",
-      "remarkHtml": "",
-      "reports": [
-        {
-          "id": "daily_report_1782876505047_807fd7ff7ccb4",
-          "reportType": "exam",
-          "title": "上腹部CT平扫+MPR重建",
-          "reportDate": "2025-07-18",
-          "department": "放射科",
-          "reportDoctor": "",
-          "reviewDoctor": "叶锋",
-          "rawOcrText": "÷4656\n云影像\n人\n上腹部CT平扫+MPR重建\n厦门大学附属中山医院\n2025-07-18\n8基本信息\n申请单号：2025071805690060\n姓名 ***\n申请医生：\n张璐娴\n报告医生：\n审核医生：叶锋\n检查所见\n肝脏轮廓光滑，肝叶比例正常，肝内可见小类\n圆形低密度影，直径约4mm。肝门区未见异常\n密度影。胆囊形态、大小正常，内未见异常密\n度影，壁薄，边缘清楚，肝内外胆管未见扩\n张。脾脏不大，内未见异常密度影，脾门下区\n见类圆形等密度结节，界清，径约11mm。胰\n腺形态、大小、密度及位置正常，胆总管未见\n明显异常，胰管未见扩张，边缘规则、清楚。\n腹膜后未见肿大的淋巴结，腹腔未见明确积液\n影。所见胃腔充盈稍欠佳，胃、十二指肠管壁\n未见明显增厚。靶区降结肠积气较多，胃及升\n结肠内容物较多。\n①检查结论/诊断\n肝内小囊肿可能，副脾，必要时增强或进一步\n检查。靶区降结肠积气较多，胃及升结肠内容\n物较多。",
-          "ocrLines": [],
-          "parseMode": "",
-          "findingText": "肝脏轮廓光滑，肝叶比例正常，肝内可见小类圆形低密度影，直径约4mm。肝门区未见异常密度影。胆囊形态、大小正常，内未见异常密度影，壁薄，边缘清楚，肝内外胆管未见扩张。脾脏不大，内未见异常密度影，脾门下区见类圆形等密度结节，界清，径约11mm。胰腺形态、大小、密度及位置正常，胆总管未见明显异常，胰管未见扩张，边缘规则、清楚。腹膜后未见肿大的淋巴结，腹腔未见明确积液影。所见胃腔充盈稍欠佳，胃、十二指肠管壁未见明显增厚。靶区降结肠积气较多，胃及升结肠内容物较多。",
-          "conclusionText": "肝内小囊肿可能，副脾，必要时增强或进一步检查。靶区降结肠积气较多，胃及升结肠内容物较多。",
-          "status": "confirmed",
-          "confirmedAt": "2026/7/1 11:28:26",
-          "files": [
-            {
-              "id": "ab1fd108e45d48cd9cc87f30ec3ff5a9",
-              "name": "paste-1782876501498.png",
-              "storedName": "0d36a61cd5d34390bd52ce3cc5bc7b80.png",
-              "type": "image/jpeg",
-              "size": 493897,
-              "url": "/uploads/reports/0d36a61cd5d34390bd52ce3cc5bc7b80.png",
-              "extraction": "image-ocr",
-              "uploadedAt": "2026/7/1 11:28:26"
-            }
-          ],
-          "createdAt": "2026/7/1 11:28:25",
-          "updatedAt": "2026/7/1 11:28:25",
-          "schemaVersion": 2,
-          "meta": {
-            "title": "上腹部CT平扫+MPR重建",
-            "reportDate": "2025-07-18",
-            "department": "放射科",
-            "sampleType": "",
-            "reportDoctor": "",
-            "reviewDoctor": "叶锋",
-            "status": "confirmed",
-            "confirmedAt": "2026/7/1 11:28:26"
-          },
-          "source": {
-            "kind": "ocr-image",
-            "rawOcrText": "÷4656\n云影像\n人\n上腹部CT平扫+MPR重建\n厦门大学附属中山医院\n2025-07-18\n8基本信息\n申请单号：2025071805690060\n姓名 ***\n申请医生：\n张璐娴\n报告医生：\n审核医生：叶锋\n检查所见\n肝脏轮廓光滑，肝叶比例正常，肝内可见小类\n圆形低密度影，直径约4mm。肝门区未见异常\n密度影。胆囊形态、大小正常，内未见异常密\n度影，壁薄，边缘清楚，肝内外胆管未见扩\n张。脾脏不大，内未见异常密度影，脾门下区\n见类圆形等密度结节，界清，径约11mm。胰\n腺形态、大小、密度及位置正常，胆总管未见\n明显异常，胰管未见扩张，边缘规则、清楚。\n腹膜后未见肿大的淋巴结，腹腔未见明确积液\n影。所见胃腔充盈稍欠佳，胃、十二指肠管壁\n未见明显增厚。靶区降结肠积气较多，胃及升\n结肠内容物较多。\n①检查结论/诊断\n肝内小囊肿可能，副脾，必要时增强或进一步\n检查。靶区降结肠积气较多，胃及升结肠内容\n物较多。",
-            "files": [
-              {
-                "id": "ab1fd108e45d48cd9cc87f30ec3ff5a9",
-                "name": "paste-1782876501498.png",
-                "storedName": "0d36a61cd5d34390bd52ce3cc5bc7b80.png",
-                "type": "image/jpeg",
-                "size": 493897,
-                "url": "/uploads/reports/0d36a61cd5d34390bd52ce3cc5bc7b80.png",
-                "extraction": "image-ocr",
-                "uploadedAt": "2026/7/1 11:28:26"
-              }
-            ]
-          },
-          "structured": {
-            "type": "exam",
-            "title": "上腹部CT平扫+MPR重建",
-            "reportDate": "2025-07-18",
-            "sections": [
-              {
-                "key": "finding",
-                "title": "检查所见",
-                "text": "肝脏轮廓光滑，肝叶比例正常，肝内可见小类圆形低密度影，直径约4mm。肝门区未见异常密度影。胆囊形态、大小正常，内未见异常密度影，壁薄，边缘清楚，肝内外胆管未见扩张。脾脏不大，内未见异常密度影，脾门下区见类圆形等密度结节，界清，径约11mm。胰腺形态、大小、密度及位置正常，胆总管未见明显异常，胰管未见扩张，边缘规则、清楚。腹膜后未见肿大的淋巴结，腹腔未见明确积液影。所见胃腔充盈稍欠佳，胃、十二指肠管壁未见明显增厚。靶区降结肠积气较多，胃及升结肠内容物较多。"
-              },
-              {
-                "key": "conclusion",
-                "title": "检查结论/诊断",
-                "text": "肝内小囊肿可能，副脾，必要时增强或进一步检查。靶区降结肠积气较多，胃及升结肠内容物较多。"
-              }
-            ],
-            "doctors": {
-              "reportDoctor": "",
-              "reviewDoctor": "叶锋"
-            }
-          }
-        }
-      ],
-      "source": "indicator-import",
-      "createdAt": "2026/7/1 11:28:26",
-      "updatedAt": "2026/7/1 15:53:31"
-    },
-    {
-      "id": "daily_month_1782896148548_57c3c1a8f8eef8",
-      "memberId": "member_1782119959973_56aa3eb94b15c",
-      "department": "肾内科",
+      "department": "肾",
       "month": "2026-06",
-      "content": "",
-      "contentHtml": "",
+      "content": "2026/6/27 复查\n1.甘油三酯 主要就是吃、动\n2.低压偶尔略高 不会有太大影响 （备注：老爸有说最近低于100症状比较少）\n3.不用过度控盐，达格列净多喝水就不会对血压又太大影响，作用主要是排尿，多喝水盐要适当有，没盐会低血压 （备注：但是早上其实血压相对正常）\n4.考虑停坦索罗辛但是我补充说会影响排尿后作罢\n5.奥美沙坦加不上去，达格列净是不同的药，没加就少了一部分肾保护的作用，但是血压低加不上去，用其他药来治疗\n\n2026/6/29 复查看报告\n1.肾功能相对稳定\n2.尿路感染建议一定找泌尿外科（具体是否尿培养看科室建议）\n3.尿蛋白要坚持控制，通过药物饮食控制\n4.acr除了看比值还得看白蛋白、总蛋白（整体趋势是下降），和血压偏低关系不大\n5.甘油三酯如果停药后指标没有反弹可以饮食干预（低密度蛋白要干预但是如果饮食有效先饮食干预）\n6.加药要看血压，目前来看太低加不上去（血压不能只量白天或晚上）100左右还是太低,血压建议110以上才考虑加药\n7.目前来看达格列净不是必加项（尿蛋白少了）\n8.目前饮食可以接受\n9.复查建议2个月(8月29日），药物调整看尿路感染治疗情况（尿路感染治愈了再考虑加药）",
+      "contentHtml": "<span style=\"font-size:12pt;color:#000000\">2026/6/27 复查<br>1.甘油三酯 主要就是吃、动<br>2.低压偶尔略高 不会有太大影响 （备注：老爸有说最近低于100症状比较少）<br>3.不用过度控盐，达格列净</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">多喝水</span><span style=\"font-size:12pt;color:#000000\">就不会对血压又太大影响，作用主要是排尿，多喝水</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">盐要适当有</span><span style=\"font-size:12pt;color:#000000\">，没盐会低血压 （备注：但是早上其实血压相对正常）<br>4.考虑停坦索罗辛但是我补充说会影响排尿后作罢<br>5.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">奥美沙坦</span><span style=\"font-size:12pt;color:#000000\">加不上去，达格列净是不同的药，没加就少了一部分肾保护的作用，但是血压低加不上去，用</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">其他药</span><span style=\"font-size:12pt;color:#000000\">来治疗<br><br>2026/6/29 复查看报告<br>1.肾功能相对稳定<br>2.尿路感染建议一定找</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">泌尿外科</span><span style=\"font-size:12pt;color:#000000\">（具体是否尿培养看科室建议）<br>3.尿蛋白要</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">坚持控制</span><span style=\"font-size:12pt;color:#000000\">，通过</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">药物饮食控制</span><span style=\"font-size:12pt;color:#000000\"><br>4.acr除了看比值还得看白蛋白、总蛋白（整体趋势是下降），和血压偏低关系不大<br>5.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">甘油三酯</span><span style=\"font-size:12pt;color:#000000\">如果停药后指标没有反弹可以饮食干预（低密度蛋白要干预但是如果饮食有效先饮食干预）<br>6.加药要看血压，目前来看太低加不上去（</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">血压不能只量白天或晚上</span><span style=\"font-size:12pt;color:#000000\">）100左右还是太低,血压建议</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">110以上才考虑加药</span><span style=\"font-size:12pt;color:#000000\"><br>7.目前来看</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">达格列净</span><span style=\"font-size:12pt;color:#000000\">不是必加项（尿蛋白少了）<br>8.目前饮食可以接受<br>9.复查建议</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">2个月(8月29日）</span><span style=\"font-size:12pt;color:#000000\">，药物调整看尿路感染治疗情况（尿路感染治愈了再考虑加药）</span>",
+      "notes": "【6月复查小结】\n1.肾功能较3月稳定，继续通过饮食药物控制，早睡多休息，避免感冒\n2.尿路感染吃完消炎药看情况复查，护肾药血压稳定、感染治愈后再看\n3.血压要早晚测量有参考意义（建议血压110~120/65~80）",
+      "notesHtml": "<br>【6月复查小结】<br>1.肾功能较3月稳定，继续通过饮食药物控制，早睡多休息，避免感冒<br>2.尿路感染吃完消炎药看情况复查，护肾药血压稳定、感染治愈后再看<br>3.血压要早晚测量有参考意义（建议血压110~120/65~80）<br>",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390073_7b886394876f5",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "肾",
+      "month": "2026-03",
+      "content": "3月29日 复查 凌\n1.甘油三酯高就是吃出来，如果先天高可能代谢体质、如果胃口好多吃主食（面条、米饭等）也会高\n2.肌酐高还是要控制饮食，控制饮食（主食、油脂、高蛋白少吃）\n3.各方面略微好一点（正常波动范围，医学主要看大趋势），炎症程度，egfr正常60左右 应该在80左右，现在65-70 尿蛋白不多好好保护一下\n4.如果蛋白尿和肌酐有进展，还是考虑SC明确病因，目前相对稳定\n5.达格列净在于稳定蛋白尿（吃完可以自己买），稳定控制,感冒有可能引起肌酐升高，egfr下降\n6.非诺贝特现在血脂太高（4.52）还是得吃，要吃到指标能控制正常，目前几种药暂时看指标没有太大影响，要定期复查，建议非诺贝特吃完药复查（1个月），肝肾功能在生化常规里\n7.查尿是看蛋白尿有没有减轻，抽血生化是看对肾功能肌酐等有没有稳定，其他指标有没有受影响\n8.适量运动要保持，运动提高代谢，肉类吃的多肌酐也会往上冒\n8.建议2个月再来复查（5月29日）   (去年轻度脂肪肝复查问下是否要查彩超）\n3月28日复查 凌\n1.开单复查尿常规、血常规、生化常规、尿蛋白定量、尿免疫蛋白等\n2.尿常规（尿蛋白还是弱阳）无感染、血常规正常,达格列净要补回去",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">3月29日 复查 凌</span><span style=\"font-size:12pt;color:#000000\"><br>1.甘油三酯高就是</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">吃出来</span><span style=\"font-size:12pt;color:#000000\">，如果先天高可能代谢体质、如果胃口好多吃主食（面条、米饭等）也会高<br>2.肌酐高还是要控制饮食，</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">控制饮食（主食、油脂、高蛋白少吃）</span><span style=\"font-size:12pt;color:#000000\"><br>3.各方面略微好一点（正常波动范围，医学主要看大趋势），炎症程度，egfr正常60左右 应该在80左右，现在65-70 </span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿蛋白不多好好保护一下</span><span style=\"font-size:12pt;color:#000000\"><br>4.如果蛋白尿和肌酐有进展，还是考虑SC明确病因，目前相对稳定<br>5.达格列净在于</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">稳定蛋白尿（吃完可以自己买）</span><span style=\"font-size:12pt;color:#000000\">，稳定控制,</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">感冒</span><span style=\"font-size:12pt;color:#000000\">有可能引起肌酐升高，egfr下降<br>6.非诺贝特现在血脂太高（4.52）还是得吃，</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">要吃到指标能控制正常，</span><span style=\"font-size:12pt;color:#000000\">目前几种药暂时看指标没有太大影响，要定期复查，建议非诺贝特吃完药复查（1个月），肝肾功能在生化常规里<br>7.查尿是看蛋白尿有没有减轻，抽血生化是看对肾功能肌酐等有没有稳定，其他指标有没有受影响<br>8.适量运动要保持，运动提高代谢，肉类吃的多肌酐也会往上冒<br>8.建议</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">2个月再来复查（5月29日） </span><span style=\"font-size:12pt;color:#000000\">  (去年轻度脂肪肝复查问下是否要查彩超）<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">3月28日</span><span style=\"font-size:12pt;color:#000000\">复查 凌<br>1.开单复查尿常规、血常规、生化常规、尿蛋白定量、尿免疫蛋白等<br>2.尿常规（尿蛋白还是弱阳）无感染、血常规正常,达格列净要补回去</span>",
+      "notes": "日常特别注意：\n1.主任强调管住嘴，控制饮食，才能保护肾（甘油三酯、肌酐高都和饮食有关）\n2.主食（面条、米饭等）和肉类（肉汤）减量、不吃零食、甜食、加工食品，戒烟酒\n3.低蛋白饮食要继续（少吃豆制品、豆浆、冲调的豆奶等，控制尿酸不吃贝壳类、海蛎等）\n4.适度运动走路，改善代谢，预防感冒\n\n\n【服用非诺贝特期间】\n严格禁酒，避免肝损伤\n【服用达格列净期间】\n特别比平时多喝水，多排尿，避免尿路感染，避免久坐、不憋尿",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\"><br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">日常特别注意</span><span style=\"font-size:12pt;color:#000000\">：<br>1.主任强调管住嘴，控制饮食，才能保护肾（甘油三酯、肌酐高都和饮食有关）<br>2.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">主食</span><span style=\"font-size:12pt;color:#000000\">（面条、米饭等）和肉类（肉汤）减量、不吃零食、甜食、加工食品，戒烟酒<br>3.低蛋白饮食要继续（少吃豆制品、豆浆、冲调的豆奶等，控制尿酸不吃贝壳类、海蛎等）<br>4.适度运动走路，改善代谢，预防感冒<br><br><br>【服用非诺贝特期间】<br>严格禁酒，避免肝损伤<br>【服用达格列净期间】<br>特别比平时多喝水，多排尿，避免尿路感染，避免久坐、不憋尿<br><br></span>",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390074_b8d4ad4d115178",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "肾",
+      "month": "2025-11",
+      "content": "11月21日 复查 凌\n1.生化常规、肌酐、egfr等指标转好\n2.甘油三酯高先控制主食，如果没有改善就吃药，非诺贝特\n3.尿蛋白变化不大，比原来稍微好一点，蛋白尿尽量控制，实在不能恢复阴性也没办法，主要是饮食和药物\n4.达格列净要继续吃（上次开了个1个月），如果有尿痛、尿急及时就医\n5.多天多次测量心率大于75还是得恢复美托洛尔，\n6.继续现有的方案（原降压药+达格列净继续吃，再加一个非诺贝特胶囊降血脂）\n7.下次复查时间2~3个月（2026年1月21或2月21）\n11月15日复查 凌\n1.复查了尿常规（弱阳，无尿路感染）、尿蛋白、生化常规（这次血常规结果 相比6月 egfr从57.6到70.2（肾炎3期逆转到了2期） 糖从6.23到5，肌酐从116到98，尿酸从482到410，基本全部回归正常参考值，但是甘油三酯从3.23到了3.77）\n2.之前达格列净由于复查不及时，停了3个月，影响了治疗；尿路感染好了就考虑加上去\n3.最近两次99/62 98/68，血压低于110/70，心率不高于（80）考虑暂停美托洛尔\n4.等其他结果出来再复查，尿常规结果是好的，下次复查主要看报告\n5.豆制品（豆浆、豆奶、包括牛奶 影响很大）控制总量摄入",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">11月21日 复查 凌</span><span style=\"font-size:12pt;color:#000000\"><br>1.生化常规、肌酐、egfr等指标转好<br>2.甘油三酯高先控制主食，如果没有改善就吃药，非诺贝特<br>3.尿蛋白变化不大，比原来稍微好一点，蛋白尿尽量控制，实在不能恢复阴性也没办法，主要是饮食和药物<br>4.达格列净要继续吃（上次开了个1个月），如果有尿痛、尿急及时就医<br>5.多天多次测量心率大于75还是得恢复美托洛尔，<br>6.继续现有的方案（原降压药+达格列净继续吃，再加一个非诺贝特胶囊降血脂）<br>7.下次复查时间</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">2~3个月</span><span style=\"font-size:12pt;color:#000000\">（2026年1月21或2月21）<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">11月15日</span><span style=\"font-size:12pt;color:#000000\">复查 凌<br>1.复查了</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿常规</span><span style=\"font-size:12pt;color:#000000\">（弱阳，无尿路感染）、尿蛋白、</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">生化常规</span><span style=\"font-size:12pt;color:#000000\">（这次血常规结果 相比6月 egfr从57.6到70.2（肾炎3期逆转到了2期） 糖从6.23到5，肌酐从116到98，尿酸从482到410，基本全部回归正常参考值，但是甘油三酯从3.23到了3.77）<br>2.之前达格列净由于复查不及时，停了3个月，影响了治疗；尿路感染好了就考虑加上去<br>3.最近两次99/62 98/68，血压低于110/70，心率不高于（80）考虑暂停美托洛尔<br>4.等其他结果出来再复查，尿常规结果是好的，下次复查主要看报告<br>5.豆制品（豆浆、豆奶、包括牛奶 影响很大）控制总量摄入</span>",
+      "notes": "1.加了达格列净，服药后多喝水多小便，这样才不容易尿路感染\n2.暂停美托洛尔（半片）观察血压能否稳定110/70左右，心率不高于75\n3.控制蛋白质摄入总量，限制高蛋白食物（奶制品、豆制品、虾及带壳海鲜）摄入\n\n服用达格列净 日常自查与预防建议\n1.每日观察尿液颜色、透明度，排尿时留意是否有尿痛、尿急等不适。\n2.多喝水，每日饮水量保持在 1500-2000ml，通过尿液冲刷尿道，减少细菌滋生。\n3.注意个人卫生，每日清洗外阴，避免细菌逆行感染；避免久坐、憋尿，憋尿时间不超过 2 小时。\n4.饮食清淡，减少辛辣、油腻食物摄入，避免加重尿路刺激。",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\">1.加了达格列净，服药后多喝水多小便，这样才不容易尿路感染<br>2.暂停美托洛尔（半片）观察血压能否稳定110/70左右，心率不高于75<br>3.控制蛋白质摄入总量，限制高蛋白食物（奶制品、豆制品、虾及带壳海鲜）摄入<br><br>服用</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">达格列净</span><span style=\"font-size:12pt;color:#000000\"> 日常自查与预防建议<br>1.每日观察尿液颜色、透明度，排尿时留意是否有</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿痛、尿急</span><span style=\"font-size:12pt;color:#000000\">等不适。<br>2.多喝水，</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">每日饮水量保持在 1500-2000ml</span><span style=\"font-size:12pt;color:#000000\">，通过尿液冲刷尿道，减少细菌滋生。<br>3.注意个人卫生，每日清洗外阴，避免细菌逆行感染；</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">避免久坐、憋尿</span><span style=\"font-size:12pt;color:#000000\">，憋尿时间不超过 2 小时。<br>4.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">饮食清淡，减少辛辣、油腻食物摄入</span><span style=\"font-size:12pt;color:#000000\">，避免加重尿路刺激。<br></span>",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390076_1d87f7b8769ee8",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "肾",
+      "month": "2025-08",
+      "content": "8月9日复查 凌\n1.复查尿常规 尿路感染细菌消失，但是为巩固还是开了1周头孢地尼\n2.尿蛋白需要继续控制（如达格列净），但是目前考虑炎症刚好，先不恢复达格列净避免再感染\n3.尿蛋白1+转弱阳，有好转，但是目标是要控制在阴性。建议1个月左右后复查（9月9日）\n4.询问如何长期控制，主任提醒（1）如果用药有效就继续用药（2）继续控制饮食和生活习惯，定期复查，要一段时间复查再根据实际情况来定（因为这个要长期观察）\n5.提示如果有低血压不适症状，可考虑停美托洛尔观察\n6.单独询问，保守治疗后续肾功能下降的可能性，主任说还好，如果能稳定控制蛋白尿治疗效果好，可长期稳定\n8月2日复查 凌\n1.停达格列净（可能会引起尿路感染）\n2.糖化血红蛋白5.9(4~6)，空腹葡糖糖5.23(5.9~6.1)，确认无糖尿病\n3.长期控制蛋白尿在低水平、血压控制在理想水平、糖控制在低水平\n4.复查发现尿路感染，开头孢地尼一周后复查看是否对症（复查尿常规不用空腹），提示前列腺增生易发尿流感染\n5.做肾穿在于查病因对症治疗，是否必须取决于复查蛋白尿是否能稳定控制在低水平，如果多次控制不理想建议做\n6.禁用肾毒性药物如布洛芬（如出现感冒等避免自行用药）",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">8月9日复查 凌</span><span style=\"font-size:12pt;color:#000000\"><br>1.复查尿常规 尿路感染细菌消失，但是为</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">巩固</span><span style=\"font-size:12pt;color:#000000\">还是开了1周头孢地尼<br>2.尿蛋白需要</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">继续控制</span><span style=\"font-size:12pt;color:#000000\">（如达格列净），但是目前考虑炎症刚好，先不恢复达格列净避免再感染<br>3.尿蛋白1+转弱阳，有好转，但是目标是要控制在</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">阴性</span><span style=\"font-size:12pt;color:#000000\">。建议</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">1个月左</span><span style=\"font-size:12pt;color:#000000\">右后复查（9月9日）<br>4.询问如何长期控制，主任提醒</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">（1）如果用药有效就继续用药（2）继续控制饮食和生活习惯，定期复查</span><span style=\"font-size:12pt;color:#000000\">，要一段时间复查再根据实际情况来定（因为这个要长期观察）<br>5.提示如果有低血压不适症状，可考虑停美托洛尔观察<br>6.单独询问，保守治疗后续肾功能下降的可能性，主任说还好，如果能</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">稳定控制</span><span style=\"font-size:12pt;color:#000000\">蛋白尿治疗效果好，可长期稳定<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">8月2日复查 凌</span><span style=\"font-size:12pt;color:#000000\"><br>1.停达格列净（可能会引起尿路感染）<br>2.糖化血红蛋白5.9(4~6)，空腹葡糖糖5.23(5.9~6.1)，确认无糖尿病<br>3.长期控制蛋白尿在低水平、血压控制在理想水平、糖控制在低水平<br>4.复查发现尿路感染，开头孢地尼一周后复查看是否对症（复查尿常规不用空腹），提示前列腺增生易发尿流感染<br>5.做肾穿在于查病因对症治疗，是否必须取决于复查蛋白尿是否能稳定控制在低水平，如果多次控制不理想建议做<br>6.禁用肾毒性药物如布洛芬（如出现感冒等避免自行用药）</span>",
+      "notes": "1.避免感冒(注意保暖，保证睡眠)、尿路感染(多喝水、多排尿)\n等影响肾功能的诱因\n\n2.日常遵循低盐、低糖、低油、低脂肪饮食\n少吃:酱油、味精、面食、面包、荔枝、龙眼、葡萄、哈密瓜、西瓜、芒果等高糖水果(可适量吃低糖水果:如苹果、草莓，樱桃、梨、柑橘)\n不吃:饼干、香肠、方便面、蛋糕、蜂蜜、糖果\n\n3.遵循低蛋白饮食\n适量吃优质蛋白:鱼、瘦肉、蛋、牛奶\n严格限制:豆制品如豆腐、豆浆、大豆、戒掉含糖饮料和食品(可\n乐、果汁、甜点)\n\n4.平时多喝白开水(最简单有效的“排毒”和预防尿路感染的方法)注意尿量(不憋尿)，不吃辛辣油炸刺激食品\n\n5.定期监测血压，目标控制在 120/80mmHg 以下,(不低于 105/65)",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\">1.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">避免感冒</span><span style=\"font-size:12pt;color:#000000\">(注意保暖，保证睡眠)、</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿路感染</span><span style=\"font-size:12pt;color:#000000\">(多喝水、多排尿)<br>等影响肾功能的诱因<br><br>2.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">日常遵循低盐、低糖、低油、低脂肪</span><span style=\"font-size:12pt;color:#000000\">饮食<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">少吃:</span><span style=\"font-size:12pt;color:#000000\">酱油、味精、面食、面包、荔枝、龙眼、葡萄、哈密瓜、西瓜、芒果等高糖水果(可适量吃低糖水果:如苹果、草莓，樱桃、梨、柑橘)<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">不吃:</span><span style=\"font-size:12pt;color:#000000\">饼干、香肠、方便面、蛋糕、蜂蜜、糖果<br><br>3.遵循</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">低蛋白饮食</span><span style=\"font-size:12pt;color:#000000\"><br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">适量吃</span><span style=\"font-size:12pt;color:#000000\">优质蛋白:鱼、瘦肉、蛋、牛奶<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">严格限制</span><span style=\"font-size:12pt;color:#000000\">:</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">豆制品</span><span style=\"font-size:12pt;color:#000000\">如豆腐、豆浆、大豆、戒掉</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">含糖饮料</span><span style=\"font-size:12pt;color:#000000\">和食品(可<br>乐、果汁、甜点)<br><br>4.平时</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">多喝白开水</span><span style=\"font-size:12pt;color:#000000\">(最简单有效的“排毒”和预防尿路感染的方法)注意尿量(</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">不憋尿</span><span style=\"font-size:12pt;color:#000000\">)，不吃辛辣油炸刺激食品<br><br>5.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">定期监测血压</span><span style=\"font-size:12pt;color:#000000\">，目标控制在 120/80mmHg 以下,(不低于 105/65)</span>",
+      "remark": "延后2个月11月左右复查",
+      "remarkHtml": "延后2个月11月左右复查",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390076_e83392f6ffd99",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "肾",
+      "month": "2025-07",
+      "content": "7月4日 肾内科凌\n初诊 肾小球炎 开达格列净片，建议一个月后复查（8月）\n6月30日 肾内科凌\n（针对复查除尿蛋白1+和肌酐116）开了进一步的蛋白尿检查，需要根据检查情况评估",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">7月4日 肾内科凌</span><span style=\"font-size:12pt;color:#000000\"><br>初诊 肾小球炎 开达格列净片，建议一个月后复查（8月）<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">6月30日 肾内科凌</span><span style=\"font-size:12pt;color:#000000\"><br>（针对复查除尿蛋白1+和肌酐116）开了进一步的蛋白尿检查，需要根据检查情况评估<br></span>",
       "notes": "",
       "notesHtml": "",
       "remark": "",
       "remarkHtml": "",
-      "reports": [
-        {
-          "id": "daily_report_1782896697237_c374794a7e1548",
-          "reportType": "lab",
-          "title": "常规生化",
-          "reportDate": "2026-06-27",
-          "department": "肾内科",
-          "sampleType": "",
-          "rawOcrText": "浪家川川]\n报告详情\n<\n常规生化\n条码号 ***\n类型:\n罗秋官\n患者姓名 ***\n病历号 ***床号：\n血清\n标本类型:\n标本状态：\n合格\n申请科室：\n肾内科\n申请医生：\n报告时间：\n2026-06-27 11:48:51\n检查项目\n检验值\n参考值\n标志\n单位\n说明\n↑2.49\n(合适水平：\nmmol/L\n甘油三酯\n<1.70;边缘升\n高:1.70-2.30;\n升高:>2.30)\nmmol/L\n(合适水平：\n总胆固醇\n4.44\n<5.20;边缘升\n高:5.20-6.20;\n升高:>6.20)\nmmol/L\n(降低:<1.00)\n高密度脂蛋白\n1.02\n胆固醇\nmmol/L\n2.70\n低密度脂蛋白\n(合适水平：\n<3.40;边缘升\n胆固醇\n高:3.40-4.10;\n升高:>4.10)\ng/L\n载脂蛋白-A1\n(1.05~1.75)\n1.31\ng/L\n0.93\n载脂蛋白-B\n(0.60~1.40)\n0.71\n载脂蛋白B:A1\n()\n葡萄糖\nmmol/L\n(3.90~6.10)\n5.52\ng/L\n总蛋白\n(65.0~85.0)\n80.9\ng/L\n白蛋白\n(40.0~55.0)\n44.9\ng/L\n球蛋白\n(20.0~40.0)\n36.0\n白球比例\n1.25\n(1.20~2.40)\n总胆红素\nμmol/L\n(0.0~23.0)\n11.7\n直接胆红素\nμmol/L\n(0.0~4.0)\n2.1\nμmol/L\n间接胆红素\n(0.0~17.1)\n9.6\nU/L\n(9.0~50.0)\n丙氨酸氨基转移\n17.2\n酶\nU/L\n(15.0~40.0)\n天门冬氨酸氨基\n16.8\n转移酶\nAST/ALT\n0.98\n()\nU/L\nV-谷氨酰基转移\n(10.0~60.0)\n23.7\n酶\nU/L\n60.8\n(45.0~\n碱性磷酸酶\n125.0)\nU/L\n76.7\n(50.0~\n肌酸激酶\n310.0)\nU/L\n(0.0~19.0)\n肌酸激酶同工\n10.6\n酶-MB\nU/L\n(120.0~\n173.9\n乳酸脱氢酶\n250.0)\n尿素\nmmol/L\n6.9\n(3.6~9.5)\nμmol/L\n肌酐\n104.2(57.0~111.0)\n0.07\n()\n尿素：肌酐\neGFR\n(用于慢性肾\nmL/min/1.73\n65.4\nm²\n脏病分期)\nμmol/L\n尿酸\n410\n(208~428)\n(21.0~31.0)\nmmol/L\n碳酸氢盐\n27.3\nmmol/L\n钾\n(3.50~5.30)\n4.16\nmmol/L\n钠\n141.5\n(137.0~\n147.0)\nmmol/L\n氯\n101.5\n(99.0~\n110.0)\nmmol/L\n钙\n(2.11~2.52)\n2.37\n镁\nmmol/L\n(0.75~1.02)\n0.94\nmmol/L\n无机磷\n(0.85~1.51)\n1.25\nmmol/L\n阴离子间隙\n(8.0~16.0)\n12.7\n渗透压\nmOsm/L\n303.74\n(280.00~\n320.00)\n查看原件",
-          "ocrLines": [
-            {
-              "text": "浪家川川]",
-              "confidence": 0.3482808470726013,
-              "box": [
-                679,
-                41,
-                1002,
-                96
-              ]
-            },
-            {
-              "text": "报告详情",
-              "confidence": 0.9997619390487671,
-              "box": [
-                432,
-                153,
-                644,
-                217
-              ]
-            },
-            {
-              "text": "<",
-              "confidence": 0.7948099970817566,
-              "box": [
-                36,
-                154,
-                82,
-                213
-              ]
-            },
-            {
-              "text": "常规生化",
-              "confidence": 0.9999785423278809,
-              "box": [
-                425,
-                262,
-                656,
-                328
-              ]
-            },
-            {
-              "text": "条码号1130921107",
-              "confidence": 0.9999558329582214,
-              "box": [
-                378,
-                339,
-                702,
-                382
-              ]
-            },
-            {
-              "text": "类型:",
-              "confidence": 0.7861724495887756,
-              "box": [
-                534,
-                437,
-                632,
-                488
-              ]
-            },
-            {
-              "text": "罗秋官",
-              "confidence": 0.9992619156837463,
-              "box": [
-                301,
-                440,
-                424,
-                486
-              ]
-            },
-            {
-              "text": "患者姓名：",
-              "confidence": 0.9802455902099609,
-              "box": [
-                88,
-                441,
-                260,
-                485
-              ]
-            },
-            {
-              "text": "门诊检验",
-              "confidence": 0.9995068907737732,
-              "box": [
-                754,
-                441,
-                914,
-                486
-              ]
-            },
-            {
-              "text": "病历号：",
-              "confidence": 0.9592289328575134,
-              "box": [
-                82,
-                503,
-                222,
-                557
-              ]
-            },
-            {
-              "text": "P7515866-0床号：",
-              "confidence": 0.9828290939331055,
-              "box": [
-                300,
-                507,
-                629,
-                553
-              ]
-            },
-            {
-              "text": "血清",
-              "confidence": 0.9999936819076538,
-              "box": [
-                299,
-                571,
-                389,
-                624
-              ]
-            },
-            {
-              "text": "标本类型:",
-              "confidence": 0.9081023931503296,
-              "box": [
-                85,
-                572,
-                260,
-                621
-              ]
-            },
-            {
-              "text": "标本状态：",
-              "confidence": 0.9332979321479797,
-              "box": [
-                535,
-                574,
-                714,
-                621
-              ]
-            },
-            {
-              "text": "合格",
-              "confidence": 0.9998741149902344,
-              "box": [
-                751,
-                575,
-                835,
-                619
-              ]
-            },
-            {
-              "text": "申请科室：",
-              "confidence": 0.9320510625839233,
-              "box": [
-                86,
-                638,
-                260,
-                690
-              ]
-            },
-            {
-              "text": "肾内科",
-              "confidence": 0.8339129090309143,
-              "box": [
-                302,
-                639,
-                425,
-                689
-              ]
-            },
-            {
-              "text": "申请医生：",
-              "confidence": 0.9443052411079407,
-              "box": [
-                538,
-                640,
-                708,
-                687
-              ]
-            },
-            {
-              "text": "报告时间：",
-              "confidence": 0.9420139193534851,
-              "box": [
-                85,
-                708,
-                266,
-                755
-              ]
-            },
-            {
-              "text": "2026-06-27 11:48:51",
-              "confidence": 0.989673912525177,
-              "box": [
-                299,
-                710,
-                665,
-                753
-              ]
-            },
-            {
-              "text": "检查项目",
-              "confidence": 0.9985173940658569,
-              "box": [
-                96,
-                870,
-                257,
-                925
-              ]
-            },
-            {
-              "text": "检验值",
-              "confidence": 0.9999962449073792,
-              "box": [
-                336,
-                873,
-                462,
-                923
-              ]
-            },
-            {
-              "text": "参考值",
-              "confidence": 0.9891955256462097,
-              "box": [
-                529,
-                873,
-                654,
-                924
-              ]
-            },
-            {
-              "text": "标志",
-              "confidence": 0.9999971389770508,
-              "box": [
-                712,
-                873,
-                804,
-                925
-              ]
-            },
-            {
-              "text": "单位",
-              "confidence": 0.9999986290931702,
-              "box": [
-                826,
-                873,
-                911,
-                922
-              ]
-            },
-            {
-              "text": "说明",
-              "confidence": 0.9999984502792358,
-              "box": [
-                935,
-                874,
-                1022,
-                923
-              ]
-            },
-            {
-              "text": "↑2.49",
-              "confidence": 0.9835740327835083,
-              "box": [
-                331,
-                989,
-                459,
-                1059
-              ]
-            },
-            {
-              "text": "(合适水平：",
-              "confidence": 0.9666306376457214,
-              "box": [
-                492,
-                994,
-                673,
-                1041
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9994003176689148,
-              "box": [
-                798,
-                994,
-                930,
-                1043
-              ]
-            },
-            {
-              "text": "甘油三酯",
-              "confidence": 0.9990153312683105,
-              "box": [
-                99,
-                996,
-                261,
-                1044
-              ]
-            },
-            {
-              "text": "<1.70;边缘升",
-              "confidence": 0.9502347111701965,
-              "box": [
-                481,
-                1038,
-                688,
-                1081
-              ]
-            },
-            {
-              "text": "高:1.70-2.30;",
-              "confidence": 0.9882381558418274,
-              "box": [
-                484,
-                1083,
-                689,
-                1122
-              ]
-            },
-            {
-              "text": "升高:>2.30)",
-              "confidence": 0.9851489663124084,
-              "box": [
-                488,
-                1123,
-                682,
-                1167
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9994432330131531,
-              "box": [
-                796,
-                1196,
-                931,
-                1245
-              ]
-            },
-            {
-              "text": "(合适水平：",
-              "confidence": 0.962236225605011,
-              "box": [
-                496,
-                1197,
-                675,
-                1241
-              ]
-            },
-            {
-              "text": "总胆固醇",
-              "confidence": 0.999967634677887,
-              "box": [
-                100,
-                1198,
-                260,
-                1243
-              ]
-            },
-            {
-              "text": "4.44",
-              "confidence": 0.9999654293060303,
-              "box": [
-                350,
-                1198,
-                444,
-                1245
-              ]
-            },
-            {
-              "text": "<5.20;边缘升",
-              "confidence": 0.9975337982177734,
-              "box": [
-                478,
-                1240,
-                694,
-                1282
-              ]
-            },
-            {
-              "text": "高:5.20-6.20;",
-              "confidence": 0.9901667237281799,
-              "box": [
-                478,
-                1282,
-                695,
-                1325
-              ]
-            },
-            {
-              "text": "升高:>6.20)",
-              "confidence": 0.9781449437141418,
-              "box": [
-                486,
-                1324,
-                682,
-                1367
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9996576905250549,
-              "box": [
-                796,
-                1396,
-                931,
-                1445
-              ]
-            },
-            {
-              "text": "(降低:<1.00)",
-              "confidence": 0.985306441783905,
-              "box": [
-                462,
-                1399,
-                678,
-                1441
-              ]
-            },
-            {
-              "text": "高密度脂蛋白",
-              "confidence": 0.9991715550422668,
-              "box": [
-                61,
-                1401,
-                296,
-                1444
-              ]
-            },
-            {
-              "text": "1.02",
-              "confidence": 0.9996490478515625,
-              "box": [
-                356,
-                1401,
-                440,
-                1444
-              ]
-            },
-            {
-              "text": "胆固醇",
-              "confidence": 0.9998992085456848,
-              "box": [
-                119,
-                1446,
-                240,
-                1493
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9993979930877686,
-              "box": [
-                798,
-                1521,
-                931,
-                1570
-              ]
-            },
-            {
-              "text": "2.70",
-              "confidence": 0.9999120831489563,
-              "box": [
-                352,
-                1524,
-                436,
-                1568
-              ]
-            },
-            {
-              "text": "低密度脂蛋白",
-              "confidence": 0.9990701675415039,
-              "box": [
-                62,
-                1525,
-                296,
-                1569
-              ]
-            },
-            {
-              "text": "(合适水平：",
-              "confidence": 0.9495877623558044,
-              "box": [
-                500,
-                1525,
-                671,
-                1565
-              ]
-            },
-            {
-              "text": "<3.40;边缘升",
-              "confidence": 0.9951531291007996,
-              "box": [
-                479,
-                1565,
-                694,
-                1608
-              ]
-            },
-            {
-              "text": "胆固醇",
-              "confidence": 0.9999260306358337,
-              "box": [
-                118,
-                1570,
-                241,
-                1617
-              ]
-            },
-            {
-              "text": "高:3.40-4.10;",
-              "confidence": 0.967658519744873,
-              "box": [
-                481,
-                1608,
-                692,
-                1650
-              ]
-            },
-            {
-              "text": "升高:>4.10)",
-              "confidence": 0.9762115478515625,
-              "box": [
-                491,
-                1652,
-                681,
-                1693
-              ]
-            },
-            {
-              "text": "g/L",
-              "confidence": 0.9986488223075867,
-              "box": [
-                836,
-                1722,
-                902,
-                1776
-              ]
-            },
-            {
-              "text": "载脂蛋白-A1",
-              "confidence": 0.9989705681800842,
-              "box": [
-                74,
-                1724,
-                291,
-                1772
-              ]
-            },
-            {
-              "text": "(1.05~1.75)",
-              "confidence": 0.9968135952949524,
-              "box": [
-                475,
-                1724,
-                679,
-                1768
-              ]
-            },
-            {
-              "text": "1.31",
-              "confidence": 0.9999549984931946,
-              "box": [
-                366,
-                1727,
-                441,
-                1769
-              ]
-            },
-            {
-              "text": "g/L",
-              "confidence": 0.954382598400116,
-              "box": [
-                836,
-                1799,
-                902,
-                1855
-              ]
-            },
-            {
-              "text": "0.93",
-              "confidence": 0.9998770952224731,
-              "box": [
-                359,
-                1802,
-                450,
-                1848
-              ]
-            },
-            {
-              "text": "载脂蛋白-B",
-              "confidence": 0.9960334897041321,
-              "box": [
-                81,
-                1803,
-                285,
-                1851
-              ]
-            },
-            {
-              "text": "(0.60~1.40)",
-              "confidence": 0.991575300693512,
-              "box": [
-                475,
-                1803,
-                691,
-                1847
-              ]
-            },
-            {
-              "text": "0.71",
-              "confidence": 0.9998217225074768,
-              "box": [
-                362,
-                1882,
-                446,
-                1930
-              ]
-            },
-            {
-              "text": "载脂蛋白B:A1",
-              "confidence": 0.9959469437599182,
-              "box": [
-                66,
-                1883,
-                300,
-                1927
-              ]
-            },
-            {
-              "text": "()",
-              "confidence": 0.9539794921875,
-              "box": [
-                475,
-                1885,
-                512,
-                1927
-              ]
-            },
-            {
-              "text": "葡萄糖",
-              "confidence": 0.9993920922279358,
-              "box": [
-                116,
-                1960,
-                242,
-                2010
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9994638562202454,
-              "box": [
-                796,
-                1960,
-                931,
-                2009
-              ]
-            },
-            {
-              "text": "(3.90~6.10)",
-              "confidence": 0.9960601329803467,
-              "box": [
-                470,
-                1961,
-                680,
-                2005
-              ]
-            },
-            {
-              "text": "5.52",
-              "confidence": 0.9999958276748657,
-              "box": [
-                354,
-                1962,
-                446,
-                2009
-              ]
-            },
-            {
-              "text": "g/L",
-              "confidence": 0.999694287776947,
-              "box": [
-                836,
-                2036,
-                902,
-                2091
-              ]
-            },
-            {
-              "text": "总蛋白",
-              "confidence": 0.9996767640113831,
-              "box": [
-                119,
-                2039,
-                242,
-                2089
-              ]
-            },
-            {
-              "text": "(65.0~85.0)",
-              "confidence": 0.9984374642372131,
-              "box": [
-                475,
-                2041,
-                696,
-                2084
-              ]
-            },
-            {
-              "text": "80.9",
-              "confidence": 0.9999011754989624,
-              "box": [
-                360,
-                2042,
-                448,
-                2085
-              ]
-            },
-            {
-              "text": "g/L",
-              "confidence": 0.99949711561203,
-              "box": [
-                836,
-                2116,
-                901,
-                2170
-              ]
-            },
-            {
-              "text": "白蛋白",
-              "confidence": 0.9981676936149597,
-              "box": [
-                120,
-                2118,
-                242,
-                2169
-              ]
-            },
-            {
-              "text": "(40.0~55.0)",
-              "confidence": 0.9884212017059326,
-              "box": [
-                452,
-                2120,
-                698,
-                2163
-              ]
-            },
-            {
-              "text": "44.9",
-              "confidence": 0.9984582662582397,
-              "box": [
-                360,
-                2121,
-                450,
-                2164
-              ]
-            },
-            {
-              "text": "g/L",
-              "confidence": 0.9990095496177673,
-              "box": [
-                834,
-                2193,
-                902,
-                2252
-              ]
-            },
-            {
-              "text": "球蛋白",
-              "confidence": 0.9991390109062195,
-              "box": [
-                116,
-                2196,
-                242,
-                2247
-              ]
-            },
-            {
-              "text": "(20.0~40.0)",
-              "confidence": 0.9446544051170349,
-              "box": [
-                474,
-                2196,
-                696,
-                2243
-              ]
-            },
-            {
-              "text": "36.0",
-              "confidence": 0.9999778866767883,
-              "box": [
-                359,
-                2199,
-                449,
-                2245
-              ]
-            },
-            {
-              "text": "白球比例",
-              "confidence": 0.999408483505249,
-              "box": [
-                101,
-                2273,
-                262,
-                2328
-              ]
-            },
-            {
-              "text": "1.25",
-              "confidence": 0.9999817609786987,
-              "box": [
-                364,
-                2277,
-                446,
-                2324
-              ]
-            },
-            {
-              "text": "(1.20~2.40)",
-              "confidence": 0.9577846527099609,
-              "box": [
-                476,
-                2278,
-                689,
-                2322
-              ]
-            },
-            {
-              "text": "总胆红素",
-              "confidence": 0.9987478256225586,
-              "box": [
-                100,
-                2353,
-                265,
-                2406
-              ]
-            },
-            {
-              "text": "μmol/L",
-              "confidence": 0.9874526858329773,
-              "box": [
-                803,
-                2353,
-                929,
-                2406
-              ]
-            },
-            {
-              "text": "(0.0~23.0)",
-              "confidence": 0.9568380117416382,
-              "box": [
-                479,
-                2357,
-                671,
-                2401
-              ]
-            },
-            {
-              "text": "11.7",
-              "confidence": 0.9999341368675232,
-              "box": [
-                368,
-                2358,
-                436,
-                2403
-              ]
-            },
-            {
-              "text": "直接胆红素",
-              "confidence": 0.9997625350952148,
-              "box": [
-                80,
-                2432,
-                283,
-                2483
-              ]
-            },
-            {
-              "text": "μmol/L",
-              "confidence": 0.9880232214927673,
-              "box": [
-                803,
-                2432,
-                929,
-                2485
-              ]
-            },
-            {
-              "text": "(0.0~4.0)",
-              "confidence": 0.9900856018066406,
-              "box": [
-                479,
-                2436,
-                654,
-                2479
-              ]
-            },
-            {
-              "text": "2.1",
-              "confidence": 0.9999859929084778,
-              "box": [
-                374,
-                2438,
-                430,
-                2481
-              ]
-            },
-            {
-              "text": "μmol/L",
-              "confidence": 0.9822949767112732,
-              "box": [
-                803,
-                2509,
-                929,
-                2565
-              ]
-            },
-            {
-              "text": "间接胆红素",
-              "confidence": 0.9955836534500122,
-              "box": [
-                81,
-                2515,
-                282,
-                2562
-              ]
-            },
-            {
-              "text": "(0.0~17.1)",
-              "confidence": 0.9951140284538269,
-              "box": [
-                476,
-                2515,
-                654,
-                2558
-              ]
-            },
-            {
-              "text": "9.6",
-              "confidence": 0.9999544024467468,
-              "box": [
-                369,
-                2516,
-                435,
-                2561
-              ]
-            },
-            {
-              "text": "U/L",
-              "confidence": 0.9841482043266296,
-              "box": [
-                832,
-                2590,
-                905,
-                2641
-              ]
-            },
-            {
-              "text": "(9.0~50.0)",
-              "confidence": 0.9924336671829224,
-              "box": [
-                472,
-                2593,
-                675,
-                2637
-              ]
-            },
-            {
-              "text": "丙氨酸氨基转移",
-              "confidence": 0.999293863773346,
-              "box": [
-                46,
-                2595,
-                326,
-                2638
-              ]
-            },
-            {
-              "text": "17.2",
-              "confidence": 0.9999110102653503,
-              "box": [
-                362,
-                2596,
-                445,
-                2637
-              ]
-            },
-            {
-              "text": "酶",
-              "confidence": 0.9999350309371948,
-              "box": [
-                155,
-                2636,
-                207,
-                2689
-              ]
-            },
-            {
-              "text": "U/L",
-              "confidence": 0.8229299187660217,
-              "box": [
-                832,
-                2714,
-                904,
-                2766
-              ]
-            },
-            {
-              "text": "(15.0~40.0)",
-              "confidence": 0.9781511425971985,
-              "box": [
-                436,
-                2717,
-                690,
-                2763
-              ]
-            },
-            {
-              "text": "天门冬氨酸氨基",
-              "confidence": 0.9992181062698364,
-              "box": [
-                45,
-                2720,
-                327,
-                2764
-              ]
-            },
-            {
-              "text": "16.8",
-              "confidence": 0.999958336353302,
-              "box": [
-                359,
-                2721,
-                446,
-                2762
-              ]
-            },
-            {
-              "text": "转移酶",
-              "confidence": 0.9999902844429016,
-              "box": [
-                117,
-                2764,
-                245,
-                2814
-              ]
-            },
-            {
-              "text": "AST/ALT",
-              "confidence": 0.9231742024421692,
-              "box": [
-                101,
-                2843,
-                261,
-                2891
-              ]
-            },
-            {
-              "text": "0.98",
-              "confidence": 0.9998963475227356,
-              "box": [
-                359,
-                2843,
-                451,
-                2890
-              ]
-            },
-            {
-              "text": "()",
-              "confidence": 0.8656002283096313,
-              "box": [
-                454,
-                2844,
-                514,
-                2890
-              ]
-            },
-            {
-              "text": "U/L",
-              "confidence": 0.8519968390464783,
-              "box": [
-                832,
-                2918,
-                904,
-                2970
-              ]
-            },
-            {
-              "text": "V-谷氨酰基转移",
-              "confidence": 0.914248526096344,
-              "box": [
-                44,
-                2920,
-                325,
-                2970
-              ]
-            },
-            {
-              "text": "(10.0~60.0)",
-              "confidence": 0.9831355810165405,
-              "box": [
-                476,
-                2923,
-                690,
-                2967
-              ]
-            },
-            {
-              "text": "23.7",
-              "confidence": 0.912580132484436,
-              "box": [
-                358,
-                2925,
-                446,
-                2967
-              ]
-            },
-            {
-              "text": "酶",
-              "confidence": 0.9999598264694214,
-              "box": [
-                158,
-                2969,
-                206,
-                3017
-              ]
-            },
-            {
-              "text": "U/L",
-              "confidence": 0.9933328628540039,
-              "box": [
-                832,
-                3044,
-                905,
-                3094
-              ]
-            },
-            {
-              "text": "60.8",
-              "confidence": 0.9999420642852783,
-              "box": [
-                358,
-                3047,
-                446,
-                3094
-              ]
-            },
-            {
-              "text": "(45.0~",
-              "confidence": 0.9915556311607361,
-              "box": [
-                532,
-                3048,
-                650,
-                3089
-              ]
-            },
-            {
-              "text": "碱性磷酸酶",
-              "confidence": 0.9999788999557495,
-              "box": [
-                82,
-                3049,
-                281,
-                3093
-              ]
-            },
-            {
-              "text": "125.0)",
-              "confidence": 0.999296247959137,
-              "box": [
-                540,
-                3089,
-                646,
-                3134
-              ]
-            },
-            {
-              "text": "U/L",
-              "confidence": 0.9808074831962585,
-              "box": [
-                834,
-                3161,
-                905,
-                3212
-              ]
-            },
-            {
-              "text": "76.7",
-              "confidence": 0.9964097142219543,
-              "box": [
-                356,
-                3162,
-                445,
-                3211
-              ]
-            },
-            {
-              "text": "(50.0~",
-              "confidence": 0.9907553791999817,
-              "box": [
-                531,
-                3163,
-                651,
-                3208
-              ]
-            },
-            {
-              "text": "肌酸激酶",
-              "confidence": 0.999927282333374,
-              "box": [
-                101,
-                3164,
-                261,
-                3210
-              ]
-            },
-            {
-              "text": "310.0)",
-              "confidence": 0.9925512671470642,
-              "box": [
-                538,
-                3206,
-                648,
-                3251
-              ]
-            },
-            {
-              "text": "U/L",
-              "confidence": 0.9719124436378479,
-              "box": [
-                834,
-                3277,
-                904,
-                3328
-              ]
-            },
-            {
-              "text": "(0.0~19.0)",
-              "confidence": 0.9913570284843445,
-              "box": [
-                465,
-                3279,
-                668,
-                3326
-              ]
-            },
-            {
-              "text": "肌酸激酶同工",
-              "confidence": 0.9999000430107117,
-              "box": [
-                64,
-                3283,
-                300,
-                3327
-              ]
-            },
-            {
-              "text": "10.6",
-              "confidence": 0.9999184608459473,
-              "box": [
-                362,
-                3283,
-                445,
-                3326
-              ]
-            },
-            {
-              "text": "酶-MB",
-              "confidence": 0.9899120330810547,
-              "box": [
-                120,
-                3326,
-                244,
-                3376
-              ]
-            },
-            {
-              "text": "U/L",
-              "confidence": 0.9487833380699158,
-              "box": [
-                832,
-                3402,
-                905,
-                3454
-              ]
-            },
-            {
-              "text": "(120.0~",
-              "confidence": 0.9974180459976196,
-              "box": [
-                524,
-                3405,
-                656,
-                3449
-              ]
-            },
-            {
-              "text": "173.9",
-              "confidence": 0.9999898672103882,
-              "box": [
-                352,
-                3406,
-                452,
-                3454
-              ]
-            },
-            {
-              "text": "乳酸脱氢酶",
-              "confidence": 0.999923825263977,
-              "box": [
-                82,
-                3407,
-                280,
-                3451
-              ]
-            },
-            {
-              "text": "250.0)",
-              "confidence": 0.9991133809089661,
-              "box": [
-                535,
-                3447,
-                650,
-                3493
-              ]
-            },
-            {
-              "text": "尿素",
-              "confidence": 0.9999929070472717,
-              "box": [
-                135,
-                3521,
-                225,
-                3574
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9996582865715027,
-              "box": [
-                796,
-                3521,
-                931,
-                3570
-              ]
-            },
-            {
-              "text": "6.9",
-              "confidence": 0.999934196472168,
-              "box": [
-                366,
-                3525,
-                435,
-                3569
-              ]
-            },
-            {
-              "text": "(3.6~9.5)",
-              "confidence": 0.9968719482421875,
-              "box": [
-                462,
-                3525,
-                642,
-                3565
-              ]
-            },
-            {
-              "text": "μmol/L",
-              "confidence": 0.938335120677948,
-              "box": [
-                803,
-                3597,
-                930,
-                3652
-              ]
-            },
-            {
-              "text": "肌酐",
-              "confidence": 0.9548675417900085,
-              "box": [
-                136,
-                3600,
-                226,
-                3653
-              ]
-            },
-            {
-              "text": "104.2(57.0~111.0)",
-              "confidence": 0.9849845767021179,
-              "box": [
-                349,
-                3600,
-                690,
-                3650
-              ]
-            },
-            {
-              "text": "0.07",
-              "confidence": 0.9999377727508545,
-              "box": [
-                359,
-                3679,
-                454,
-                3730
-              ]
-            },
-            {
-              "text": "()",
-              "confidence": 0.8284485340118408,
-              "box": [
-                451,
-                3680,
-                515,
-                3728
-              ]
-            },
-            {
-              "text": "尿素：肌酐",
-              "confidence": 0.9867385029792786,
-              "box": [
-                82,
-                3682,
-                282,
-                3729
-              ]
-            },
-            {
-              "text": "eGFR",
-              "confidence": 0.999159574508667,
-              "box": [
-                112,
-                3759,
-                224,
-                3809
-              ]
-            },
-            {
-              "text": "(用于慢性肾",
-              "confidence": 0.9772911667823792,
-              "box": [
-                408,
-                3761,
-                636,
-                3803
-              ]
-            },
-            {
-              "text": "mL/min/1.73",
-              "confidence": 0.9998672604560852,
-              "box": [
-                732,
-                3761,
-                939,
-                3803
-              ]
-            },
-            {
-              "text": "65.4",
-              "confidence": 0.9999930262565613,
-              "box": [
-                325,
-                3763,
-                420,
-                3806
-              ]
-            },
-            {
-              "text": "m²",
-              "confidence": 0.9990455508232117,
-              "box": [
-                808,
-                3801,
-                863,
-                3848
-              ]
-            },
-            {
-              "text": "脏病分期)",
-              "confidence": 0.9895027875900269,
-              "box": [
-                457,
-                3803,
-                620,
-                3847
-              ]
-            },
-            {
-              "text": "μmol/L",
-              "confidence": 0.914846658706665,
-              "box": [
-                803,
-                3873,
-                929,
-                3927
-              ]
-            },
-            {
-              "text": "尿酸",
-              "confidence": 0.9999898076057434,
-              "box": [
-                136,
-                3874,
-                228,
-                3928
-              ]
-            },
-            {
-              "text": "410",
-              "confidence": 0.9999268054962158,
-              "box": [
-                366,
-                3878,
-                438,
-                3922
-              ]
-            },
-            {
-              "text": "(208~428)",
-              "confidence": 0.9886813759803772,
-              "box": [
-                462,
-                3878,
-                674,
-                3921
-              ]
-            },
-            {
-              "text": "(21.0~31.0)",
-              "confidence": 0.9957325458526611,
-              "box": [
-                466,
-                3954,
-                673,
-                4001
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9997339844703674,
-              "box": [
-                796,
-                3955,
-                930,
-                4003
-              ]
-            },
-            {
-              "text": "碳酸氢盐",
-              "confidence": 0.999826967716217,
-              "box": [
-                98,
-                3956,
-                260,
-                4005
-              ]
-            },
-            {
-              "text": "27.3",
-              "confidence": 0.9999599456787109,
-              "box": [
-                358,
-                3958,
-                440,
-                4001
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9996614456176758,
-              "box": [
-                796,
-                4033,
-                931,
-                4082
-              ]
-            },
-            {
-              "text": "钾",
-              "confidence": 0.9996391534805298,
-              "box": [
-                154,
-                4035,
-                204,
-                4087
-              ]
-            },
-            {
-              "text": "(3.50~5.30)",
-              "confidence": 0.9977100491523743,
-              "box": [
-                470,
-                4036,
-                688,
-                4079
-              ]
-            },
-            {
-              "text": "4.16",
-              "confidence": 0.999983012676239,
-              "box": [
-                357,
-                4037,
-                439,
-                4081
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9995660185813904,
-              "box": [
-                795,
-                4110,
-                932,
-                4163
-              ]
-            },
-            {
-              "text": "钠",
-              "confidence": 0.9999918937683105,
-              "box": [
-                154,
-                4111,
-                204,
-                4165
-              ]
-            },
-            {
-              "text": "141.5",
-              "confidence": 0.9998820424079895,
-              "box": [
-                344,
-                4111,
-                447,
-                4165
-              ]
-            },
-            {
-              "text": "(137.0~",
-              "confidence": 0.997111439704895,
-              "box": [
-                519,
-                4114,
-                648,
-                4157
-              ]
-            },
-            {
-              "text": "147.0)",
-              "confidence": 0.9953344464302063,
-              "box": [
-                531,
-                4155,
-                638,
-                4201
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9998254776000977,
-              "box": [
-                795,
-                4227,
-                930,
-                4279
-              ]
-            },
-            {
-              "text": "氯",
-              "confidence": 0.9916996955871582,
-              "box": [
-                154,
-                4229,
-                206,
-                4280
-              ]
-            },
-            {
-              "text": "101.5",
-              "confidence": 0.9999340176582336,
-              "box": [
-                348,
-                4229,
-                448,
-                4280
-              ]
-            },
-            {
-              "text": "(99.0~",
-              "confidence": 0.9981533885002136,
-              "box": [
-                524,
-                4230,
-                642,
-                4275
-              ]
-            },
-            {
-              "text": "110.0)",
-              "confidence": 0.9983951449394226,
-              "box": [
-                532,
-                4273,
-                636,
-                4318
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.999494731426239,
-              "box": [
-                796,
-                4345,
-                930,
-                4394
-              ]
-            },
-            {
-              "text": "钙",
-              "confidence": 0.9999997615814209,
-              "box": [
-                155,
-                4347,
-                205,
-                4399
-              ]
-            },
-            {
-              "text": "(2.11~2.52)",
-              "confidence": 0.9992733597755432,
-              "box": [
-                469,
-                4349,
-                668,
-                4392
-              ]
-            },
-            {
-              "text": "2.37",
-              "confidence": 0.999985933303833,
-              "box": [
-                355,
-                4350,
-                441,
-                4393
-              ]
-            },
-            {
-              "text": "镁",
-              "confidence": 0.9999953508377075,
-              "box": [
-                155,
-                4423,
-                205,
-                4477
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9995083212852478,
-              "box": [
-                796,
-                4424,
-                930,
-                4473
-              ]
-            },
-            {
-              "text": "(0.75~1.02)",
-              "confidence": 0.9852344989776611,
-              "box": [
-                466,
-                4428,
-                678,
-                4471
-              ]
-            },
-            {
-              "text": "0.94",
-              "confidence": 0.9998944997787476,
-              "box": [
-                354,
-                4429,
-                446,
-                4472
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.999488890171051,
-              "box": [
-                796,
-                4503,
-                930,
-                4552
-              ]
-            },
-            {
-              "text": "无机磷",
-              "confidence": 0.9996194839477539,
-              "box": [
-                116,
-                4504,
-                242,
-                4556
-              ]
-            },
-            {
-              "text": "(0.85~1.51)",
-              "confidence": 0.9981212615966797,
-              "box": [
-                469,
-                4507,
-                674,
-                4549
-              ]
-            },
-            {
-              "text": "1.25",
-              "confidence": 0.9995853900909424,
-              "box": [
-                360,
-                4508,
-                440,
-                4551
-              ]
-            },
-            {
-              "text": "mmol/L",
-              "confidence": 0.9259737133979797,
-              "box": [
-                795,
-                4583,
-                931,
-                4632
-              ]
-            },
-            {
-              "text": "阴离子间隙",
-              "confidence": 0.997005820274353,
-              "box": [
-                79,
-                4586,
-                279,
-                4633
-              ]
-            },
-            {
-              "text": "(8.0~16.0)",
-              "confidence": 0.9955593347549438,
-              "box": [
-                474,
-                4586,
-                660,
-                4630
-              ]
-            },
-            {
-              "text": "12.7",
-              "confidence": 0.999985933303833,
-              "box": [
-                361,
-                4587,
-                440,
-                4630
-              ]
-            },
-            {
-              "text": "渗透压",
-              "confidence": 0.9996058344841003,
-              "box": [
-                112,
-                4662,
-                240,
-                4712
-              ]
-            },
-            {
-              "text": "mOsm/L",
-              "confidence": 0.9989755749702454,
-              "box": [
-                784,
-                4663,
-                931,
-                4708
-              ]
-            },
-            {
-              "text": "303.74",
-              "confidence": 0.9999575614929199,
-              "box": [
-                325,
-                4666,
-                460,
-                4710
-              ]
-            },
-            {
-              "text": "(280.00~",
-              "confidence": 0.947448194026947,
-              "box": [
-                486,
-                4666,
-                652,
-                4706
-              ]
-            },
-            {
-              "text": "320.00)",
-              "confidence": 0.9994192123413086,
-              "box": [
-                502,
-                4704,
-                643,
-                4751
-              ]
-            },
-            {
-              "text": "查看原件",
-              "confidence": 0.9999374151229858,
-              "box": [
-                825,
-                4861,
-                991,
-                4914
-              ]
-            }
-          ],
-          "parseMode": "spatial-table",
-          "items": [
-            {
-              "id": "lab_item_1782896697247_aa200077a202e",
-              "name": "甘油三酯",
-              "normalizedName": "甘油三酯",
-              "value": "2.49",
-              "valueText": "2.49",
-              "valueNumber": 2.49,
-              "valueType": "number",
-              "reference": "(合适水平：<1.70;边缘升高:1.70-2.30;升高:>2.30)",
-              "referenceRange": {
-                "type": "qualitative",
-                "text": "合适水平：<1.70;边缘升高:1.70-2.30;升高:>2.30"
-              },
-              "flag": "abnormal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_3713ae457f9b48",
-              "name": "总胆固醇",
-              "normalizedName": "总胆固醇",
-              "value": "4.44",
-              "valueText": "4.44",
-              "valueNumber": 4.44,
-              "valueType": "number",
-              "reference": "(合适水平：<5.20;边缘升高:5.20-6.20;升高:>6.20)",
-              "referenceRange": {
-                "type": "qualitative",
-                "text": "合适水平：<5.20;边缘升高:5.20-6.20;升高:>6.20"
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_8174a7f6fd9688",
-              "name": "高密度脂蛋白胆固醇",
-              "normalizedName": "高密度脂蛋白胆固醇",
-              "value": "1.02",
-              "valueText": "1.02",
-              "valueNumber": 1.02,
-              "valueType": "number",
-              "reference": "(降低:<1.00)",
-              "referenceRange": {
-                "type": "qualitative",
-                "text": "降低:<1.00"
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_fc097c93695938",
-              "name": "低密度脂蛋白胆固醇",
-              "normalizedName": "低密度脂蛋白胆固醇",
-              "value": "2.70",
-              "valueText": "2.70",
-              "valueNumber": 2.7,
-              "valueType": "number",
-              "reference": "(合适水平：<3.40;边缘升高:3.40-4.10;升高:>4.10)",
-              "referenceRange": {
-                "type": "qualitative",
-                "text": "合适水平：<3.40;边缘升高:3.40-4.10;升高:>4.10"
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_5934fe52c0c658",
-              "name": "载脂蛋白-A1",
-              "normalizedName": "载脂蛋白-a1",
-              "value": "1.31",
-              "valueText": "1.31",
-              "valueNumber": 1.31,
-              "valueType": "number",
-              "reference": "(1.05~1.75)",
-              "referenceRange": {
-                "type": "range",
-                "text": "1.05~1.75",
-                "low": 1.05,
-                "high": 1.75
-              },
-              "flag": "normal",
-              "unit": "g/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_773e182be7c048",
-              "name": "载脂蛋白-B",
-              "normalizedName": "载脂蛋白-b",
-              "value": "0.93",
-              "valueText": "0.93",
-              "valueNumber": 0.93,
-              "valueType": "number",
-              "reference": "(0.60~1.40)",
-              "referenceRange": {
-                "type": "range",
-                "text": "0.60~1.40",
-                "low": 0.6,
-                "high": 1.4
-              },
-              "flag": "normal",
-              "unit": "g/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_b386ea8cfc848",
-              "name": "载脂蛋白B:A1",
-              "normalizedName": "载脂蛋白b:a1",
-              "value": "0.71",
-              "valueText": "0.71",
-              "valueNumber": 0.71,
-              "valueType": "number",
-              "reference": {
-                "type": "empty",
-                "text": ""
-              },
-              "referenceRange": {
-                "type": "qualitative",
-                "text": "[objectObject]"
-              },
-              "flag": "normal",
-              "unit": "",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_3fcca1fac4e13",
-              "name": "葡萄糖",
-              "normalizedName": "葡萄糖",
-              "value": "5.52",
-              "valueText": "5.52",
-              "valueNumber": 5.52,
-              "valueType": "number",
-              "reference": "(3.90~6.10)",
-              "referenceRange": {
-                "type": "range",
-                "text": "3.90~6.10",
-                "low": 3.9,
-                "high": 6.1
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_994017e6c93448",
-              "name": "总蛋白",
-              "normalizedName": "总蛋白",
-              "value": "80.9",
-              "valueText": "80.9",
-              "valueNumber": 80.9,
-              "valueType": "number",
-              "reference": "(65.0~85.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "65.0~85.0",
-                "low": 65,
-                "high": 85
-              },
-              "flag": "normal",
-              "unit": "g/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_217ab48ff1f378",
-              "name": "白蛋白",
-              "normalizedName": "白蛋白",
-              "value": "44.9",
-              "valueText": "44.9",
-              "valueNumber": 44.9,
-              "valueType": "number",
-              "reference": "(40.0~55.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "40.0~55.0",
-                "low": 40,
-                "high": 55
-              },
-              "flag": "normal",
-              "unit": "g/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_58fdbe61953b38",
-              "name": "球蛋白",
-              "normalizedName": "球蛋白",
-              "value": "36.0",
-              "valueText": "36.0",
-              "valueNumber": 36,
-              "valueType": "number",
-              "reference": "(20.0~40.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "20.0~40.0",
-                "low": 20,
-                "high": 40
-              },
-              "flag": "normal",
-              "unit": "g/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_6b3acc588ff4b",
-              "name": "白球比例",
-              "normalizedName": "白球比例",
-              "value": "1.25",
-              "valueText": "1.25",
-              "valueNumber": 1.25,
-              "valueType": "number",
-              "reference": "(1.20~2.40)",
-              "referenceRange": {
-                "type": "range",
-                "text": "1.20~2.40",
-                "low": 1.2,
-                "high": 2.4
-              },
-              "flag": "normal",
-              "unit": "",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_20a1fdd42b95a",
-              "name": "总胆红素",
-              "normalizedName": "总胆红素",
-              "value": "11.7",
-              "valueText": "11.7",
-              "valueNumber": 11.7,
-              "valueType": "number",
-              "reference": "(0.0~23.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "0.0~23.0",
-                "low": 0,
-                "high": 23
-              },
-              "flag": "normal",
-              "unit": "μmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_641b831e6f17d8",
-              "name": "直接胆红素",
-              "normalizedName": "直接胆红素",
-              "value": "2.1",
-              "valueText": "2.1",
-              "valueNumber": 2.1,
-              "valueType": "number",
-              "reference": "(0.0~4.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "0.0~4.0",
-                "low": 0,
-                "high": 4
-              },
-              "flag": "normal",
-              "unit": "μmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697247_2a6b89d28baa7",
-              "name": "间接胆红素",
-              "normalizedName": "间接胆红素",
-              "value": "9.6",
-              "valueText": "9.6",
-              "valueNumber": 9.6,
-              "valueType": "number",
-              "reference": "(0.0~17.1)",
-              "referenceRange": {
-                "type": "range",
-                "text": "0.0~17.1",
-                "low": 0,
-                "high": 17.1
-              },
-              "flag": "normal",
-              "unit": "μmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_98aac7a4b8cc1",
-              "name": "丙氨酸氨基转移酶",
-              "normalizedName": "丙氨酸氨基转移酶",
-              "value": "17.2",
-              "valueText": "17.2",
-              "valueNumber": 17.2,
-              "valueType": "number",
-              "reference": "(9.0~50.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "9.0~50.0",
-                "low": 9,
-                "high": 50
-              },
-              "flag": "normal",
-              "unit": "U/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_c392d337c792d8",
-              "name": "天门冬氨酸氨基转移酶",
-              "normalizedName": "天门冬氨酸氨基转移酶",
-              "value": "16.8",
-              "valueText": "16.8",
-              "valueNumber": 16.8,
-              "valueType": "number",
-              "reference": "(15.0~40.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "15.0~40.0",
-                "low": 15,
-                "high": 40
-              },
-              "flag": "normal",
-              "unit": "U/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_3a2cbfdf8b116",
-              "name": "AST/ALT",
-              "normalizedName": "ast/alt",
-              "value": "0.98",
-              "valueText": "0.98",
-              "valueNumber": 0.98,
-              "valueType": "number",
-              "reference": {
-                "type": "empty",
-                "text": ""
-              },
-              "referenceRange": {
-                "type": "qualitative",
-                "text": "[objectObject]"
-              },
-              "flag": "normal",
-              "unit": "",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_0744b6e0df1a9",
-              "name": "γ-谷氨酰基转移酶",
-              "normalizedName": "γ-谷氨酰基转移酶",
-              "value": "23.7",
-              "valueText": "23.7",
-              "valueNumber": 23.7,
-              "valueType": "number",
-              "reference": "(10.0~60.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "10.0~60.0",
-                "low": 10,
-                "high": 60
-              },
-              "flag": "normal",
-              "unit": "U/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_8d723e803d1e68",
-              "name": "碱性磷酸酶",
-              "normalizedName": "碱性磷酸酶",
-              "value": "60.8",
-              "valueText": "60.8",
-              "valueNumber": 60.8,
-              "valueType": "number",
-              "reference": "(45.0~125.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "45.0~125.0",
-                "low": 45,
-                "high": 125
-              },
-              "flag": "normal",
-              "unit": "U/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_cccee9ad45422",
-              "name": "肌酸激酶",
-              "normalizedName": "肌酸激酶",
-              "value": "76.7",
-              "valueText": "76.7",
-              "valueNumber": 76.7,
-              "valueType": "number",
-              "reference": "(50.0~310.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "50.0~310.0",
-                "low": 50,
-                "high": 310
-              },
-              "flag": "normal",
-              "unit": "U/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_a351d1775a141",
-              "name": "肌酸激酶同工酶-MB",
-              "normalizedName": "肌酸激酶同工酶-mb",
-              "value": "10.6",
-              "valueText": "10.6",
-              "valueNumber": 10.6,
-              "valueType": "number",
-              "reference": "(0.0~19.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "0.0~19.0",
-                "low": 0,
-                "high": 19
-              },
-              "flag": "normal",
-              "unit": "U/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_6f207530bd3a48",
-              "name": "乳酸脱氢酶",
-              "normalizedName": "乳酸脱氢酶",
-              "value": "173.9",
-              "valueText": "173.9",
-              "valueNumber": 173.9,
-              "valueType": "number",
-              "reference": "(120.0~250.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "120.0~250.0",
-                "low": 120,
-                "high": 250
-              },
-              "flag": "normal",
-              "unit": "U/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_22cab2ce07d6e",
-              "name": "尿素",
-              "normalizedName": "尿素",
-              "value": "6.9",
-              "valueText": "6.9",
-              "valueNumber": 6.9,
-              "valueType": "number",
-              "reference": "(3.6~9.5)",
-              "referenceRange": {
-                "type": "range",
-                "text": "3.6~9.5",
-                "low": 3.6,
-                "high": 9.5
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_c317dbded70f5",
-              "name": "肌酐",
-              "normalizedName": "肌酐",
-              "value": "104.2",
-              "valueText": "104.2",
-              "valueNumber": 104.2,
-              "valueType": "number",
-              "reference": "(57.0~111.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "57.0~111.0",
-                "low": 57,
-                "high": 111
-              },
-              "flag": "normal",
-              "unit": "μmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_eabcda6b1f1a4",
-              "name": "尿素：肌酐",
-              "normalizedName": "尿素：肌酐",
-              "value": "0.07",
-              "valueText": "0.07",
-              "valueNumber": 0.07,
-              "valueType": "number",
-              "reference": {
-                "type": "empty",
-                "text": ""
-              },
-              "referenceRange": {
-                "type": "qualitative",
-                "text": "[objectObject]"
-              },
-              "flag": "normal",
-              "unit": "",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_989f1b1a1c21",
-              "name": "eGFR",
-              "normalizedName": "egfr",
-              "value": "65.4",
-              "valueText": "65.4",
-              "valueNumber": 65.4,
-              "valueType": "number",
-              "reference": "(用于慢性肾脏病分期)",
-              "referenceRange": {
-                "type": "qualitative",
-                "text": "用于慢性肾脏病分期"
-              },
-              "flag": "normal",
-              "unit": "mL/min/1.73m²",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_24faf142a8e798",
-              "name": "尿酸",
-              "normalizedName": "尿酸",
-              "value": "410",
-              "valueText": "410",
-              "valueNumber": 410,
-              "valueType": "number",
-              "reference": "(208~428)",
-              "referenceRange": {
-                "type": "range",
-                "text": "208~428",
-                "low": 208,
-                "high": 428
-              },
-              "flag": "normal",
-              "unit": "μmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_2fdf6560eecf",
-              "name": "碳酸氢盐",
-              "normalizedName": "碳酸氢盐",
-              "value": "27.3",
-              "valueText": "27.3",
-              "valueNumber": 27.3,
-              "valueType": "number",
-              "reference": "(21.0~31.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "21.0~31.0",
-                "low": 21,
-                "high": 31
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_142a49ed8860b",
-              "name": "钾",
-              "normalizedName": "钾",
-              "value": "4.16",
-              "valueText": "4.16",
-              "valueNumber": 4.16,
-              "valueType": "number",
-              "reference": "(3.50~5.30)",
-              "referenceRange": {
-                "type": "range",
-                "text": "3.50~5.30",
-                "low": 3.5,
-                "high": 5.3
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_060425c36d7438",
-              "name": "钠",
-              "normalizedName": "钠",
-              "value": "141.5",
-              "valueText": "141.5",
-              "valueNumber": 141.5,
-              "valueType": "number",
-              "reference": "(137.0~147.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "137.0~147.0",
-                "low": 137,
-                "high": 147
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_046c41fadb433",
-              "name": "氯",
-              "normalizedName": "氯",
-              "value": "101.5",
-              "valueText": "101.5",
-              "valueNumber": 101.5,
-              "valueType": "number",
-              "reference": "(99.0~110.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "99.0~110.0",
-                "low": 99,
-                "high": 110
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_0f49cbee3c624",
-              "name": "钙",
-              "normalizedName": "钙",
-              "value": "2.37",
-              "valueText": "2.37",
-              "valueNumber": 2.37,
-              "valueType": "number",
-              "reference": "(2.11~2.52)",
-              "referenceRange": {
-                "type": "range",
-                "text": "2.11~2.52",
-                "low": 2.11,
-                "high": 2.52
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_c5fcd08e3d7818",
-              "name": "镁",
-              "normalizedName": "镁",
-              "value": "0.94",
-              "valueText": "0.94",
-              "valueNumber": 0.94,
-              "valueType": "number",
-              "reference": "(0.75~1.02)",
-              "referenceRange": {
-                "type": "range",
-                "text": "0.75~1.02",
-                "low": 0.75,
-                "high": 1.02
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_62e319e7a00f",
-              "name": "无机磷",
-              "normalizedName": "无机磷",
-              "value": "1.25",
-              "valueText": "1.25",
-              "valueNumber": 1.25,
-              "valueType": "number",
-              "reference": "(0.85~1.51)",
-              "referenceRange": {
-                "type": "range",
-                "text": "0.85~1.51",
-                "low": 0.85,
-                "high": 1.51
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_835d4ccaeeba1",
-              "name": "阴离子间隙",
-              "normalizedName": "阴离子间隙",
-              "value": "12.7",
-              "valueText": "12.7",
-              "valueNumber": 12.7,
-              "valueType": "number",
-              "reference": "(8.0~16.0)",
-              "referenceRange": {
-                "type": "range",
-                "text": "8.0~16.0",
-                "low": 8,
-                "high": 16
-              },
-              "flag": "normal",
-              "unit": "mmol/L",
-              "note": ""
-            },
-            {
-              "id": "lab_item_1782896697248_c1a780c22696f8",
-              "name": "渗透压",
-              "normalizedName": "渗透压",
-              "value": "303.74",
-              "valueText": "303.74",
-              "valueNumber": 303.74,
-              "valueType": "number",
-              "reference": "(280.00~320.00)",
-              "referenceRange": {
-                "type": "range",
-                "text": "280.00~320.00",
-                "low": 280,
-                "high": 320
-              },
-              "flag": "normal",
-              "unit": "mOsm/L",
-              "note": ""
-            }
-          ],
-          "status": "confirmed",
-          "confirmedAt": "2026/7/1 17:05:18",
-          "files": [
-            {
-              "id": "7dc01a0eac674252b84893a6d4b31293",
-              "name": "paste-1782896689431.png",
-              "storedName": "1907da966f0b409aa25c8b77f22d1047.png",
-              "type": "image/jpeg",
-              "size": 826957,
-              "url": "/uploads/reports/1907da966f0b409aa25c8b77f22d1047.png",
-              "extraction": "image-ocr",
-              "uploadedAt": "2026/7/1 17:05:18"
-            }
-          ],
-          "createdAt": "2026/7/1 17:04:57",
-          "updatedAt": "2026/7/1 17:04:57",
-          "schemaVersion": 2,
-          "meta": {
-            "title": "常规生化",
-            "reportDate": "2026-06-27",
-            "department": "肾内科",
-            "sampleType": "",
-            "reportDoctor": "",
-            "reviewDoctor": "",
-            "status": "confirmed",
-            "confirmedAt": "2026/7/1 17:05:18"
-          },
-          "source": {
-            "kind": "ocr-image",
-            "rawOcrText": "浪家川川]\n报告详情\n<\n常规生化\n条码号 ***\n类型:\n罗秋官\n患者姓名 ***\n病历号 ***床号：\n血清\n标本类型:\n标本状态：\n合格\n申请科室：\n肾内科\n申请医生：\n报告时间：\n2026-06-27 11:48:51\n检查项目\n检验值\n参考值\n标志\n单位\n说明\n↑2.49\n(合适水平：\nmmol/L\n甘油三酯\n<1.70;边缘升\n高:1.70-2.30;\n升高:>2.30)\nmmol/L\n(合适水平：\n总胆固醇\n4.44\n<5.20;边缘升\n高:5.20-6.20;\n升高:>6.20)\nmmol/L\n(降低:<1.00)\n高密度脂蛋白\n1.02\n胆固醇\nmmol/L\n2.70\n低密度脂蛋白\n(合适水平：\n<3.40;边缘升\n胆固醇\n高:3.40-4.10;\n升高:>4.10)\ng/L\n载脂蛋白-A1\n(1.05~1.75)\n1.31\ng/L\n0.93\n载脂蛋白-B\n(0.60~1.40)\n0.71\n载脂蛋白B:A1\n()\n葡萄糖\nmmol/L\n(3.90~6.10)\n5.52\ng/L\n总蛋白\n(65.0~85.0)\n80.9\ng/L\n白蛋白\n(40.0~55.0)\n44.9\ng/L\n球蛋白\n(20.0~40.0)\n36.0\n白球比例\n1.25\n(1.20~2.40)\n总胆红素\nμmol/L\n(0.0~23.0)\n11.7\n直接胆红素\nμmol/L\n(0.0~4.0)\n2.1\nμmol/L\n间接胆红素\n(0.0~17.1)\n9.6\nU/L\n(9.0~50.0)\n丙氨酸氨基转移\n17.2\n酶\nU/L\n(15.0~40.0)\n天门冬氨酸氨基\n16.8\n转移酶\nAST/ALT\n0.98\n()\nU/L\nV-谷氨酰基转移\n(10.0~60.0)\n23.7\n酶\nU/L\n60.8\n(45.0~\n碱性磷酸酶\n125.0)\nU/L\n76.7\n(50.0~\n肌酸激酶\n310.0)\nU/L\n(0.0~19.0)\n肌酸激酶同工\n10.6\n酶-MB\nU/L\n(120.0~\n173.9\n乳酸脱氢酶\n250.0)\n尿素\nmmol/L\n6.9\n(3.6~9.5)\nμmol/L\n肌酐\n104.2(57.0~111.0)\n0.07\n()\n尿素：肌酐\neGFR\n(用于慢性肾\nmL/min/1.73\n65.4\nm²\n脏病分期)\nμmol/L\n尿酸\n410\n(208~428)\n(21.0~31.0)\nmmol/L\n碳酸氢盐\n27.3\nmmol/L\n钾\n(3.50~5.30)\n4.16\nmmol/L\n钠\n141.5\n(137.0~\n147.0)\nmmol/L\n氯\n101.5\n(99.0~\n110.0)\nmmol/L\n钙\n(2.11~2.52)\n2.37\n镁\nmmol/L\n(0.75~1.02)\n0.94\nmmol/L\n无机磷\n(0.85~1.51)\n1.25\nmmol/L\n阴离子间隙\n(8.0~16.0)\n12.7\n渗透压\nmOsm/L\n303.74\n(280.00~\n320.00)\n查看原件",
-            "files": [
-              {
-                "id": "7dc01a0eac674252b84893a6d4b31293",
-                "name": "paste-1782896689431.png",
-                "storedName": "1907da966f0b409aa25c8b77f22d1047.png",
-                "type": "image/jpeg",
-                "size": 826957,
-                "url": "/uploads/reports/1907da966f0b409aa25c8b77f22d1047.png",
-                "extraction": "image-ocr",
-                "uploadedAt": "2026/7/1 17:05:18"
-              }
-            ]
-          },
-          "structured": {
-            "type": "lab",
-            "title": "常规生化",
-            "reportDate": "2026-06-27",
-            "sampleType": "",
-            "metrics": [
-              {
-                "id": "lab_item_1782896697247_aa200077a202e",
-                "name": "甘油三酯",
-                "normalizedName": "甘油三酯",
-                "value": "2.49",
-                "valueText": "2.49",
-                "valueNumber": 2.49,
-                "valueType": "number",
-                "reference": "(合适水平：<1.70;边缘升高:1.70-2.30;升高:>2.30)",
-                "referenceRange": {
-                  "type": "qualitative",
-                  "text": "合适水平：<1.70;边缘升高:1.70-2.30;升高:>2.30"
-                },
-                "flag": "abnormal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_3713ae457f9b48",
-                "name": "总胆固醇",
-                "normalizedName": "总胆固醇",
-                "value": "4.44",
-                "valueText": "4.44",
-                "valueNumber": 4.44,
-                "valueType": "number",
-                "reference": "(合适水平：<5.20;边缘升高:5.20-6.20;升高:>6.20)",
-                "referenceRange": {
-                  "type": "qualitative",
-                  "text": "合适水平：<5.20;边缘升高:5.20-6.20;升高:>6.20"
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_8174a7f6fd9688",
-                "name": "高密度脂蛋白胆固醇",
-                "normalizedName": "高密度脂蛋白胆固醇",
-                "value": "1.02",
-                "valueText": "1.02",
-                "valueNumber": 1.02,
-                "valueType": "number",
-                "reference": "(降低:<1.00)",
-                "referenceRange": {
-                  "type": "qualitative",
-                  "text": "降低:<1.00"
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_fc097c93695938",
-                "name": "低密度脂蛋白胆固醇",
-                "normalizedName": "低密度脂蛋白胆固醇",
-                "value": "2.70",
-                "valueText": "2.70",
-                "valueNumber": 2.7,
-                "valueType": "number",
-                "reference": "(合适水平：<3.40;边缘升高:3.40-4.10;升高:>4.10)",
-                "referenceRange": {
-                  "type": "qualitative",
-                  "text": "合适水平：<3.40;边缘升高:3.40-4.10;升高:>4.10"
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_5934fe52c0c658",
-                "name": "载脂蛋白-A1",
-                "normalizedName": "载脂蛋白-a1",
-                "value": "1.31",
-                "valueText": "1.31",
-                "valueNumber": 1.31,
-                "valueType": "number",
-                "reference": "(1.05~1.75)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "1.05~1.75",
-                  "low": 1.05,
-                  "high": 1.75
-                },
-                "flag": "normal",
-                "unit": "g/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_773e182be7c048",
-                "name": "载脂蛋白-B",
-                "normalizedName": "载脂蛋白-b",
-                "value": "0.93",
-                "valueText": "0.93",
-                "valueNumber": 0.93,
-                "valueType": "number",
-                "reference": "(0.60~1.40)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "0.60~1.40",
-                  "low": 0.6,
-                  "high": 1.4
-                },
-                "flag": "normal",
-                "unit": "g/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_b386ea8cfc848",
-                "name": "载脂蛋白B:A1",
-                "normalizedName": "载脂蛋白b:a1",
-                "value": "0.71",
-                "valueText": "0.71",
-                "valueNumber": 0.71,
-                "valueType": "number",
-                "reference": {
-                  "type": "empty",
-                  "text": ""
-                },
-                "referenceRange": {
-                  "type": "qualitative",
-                  "text": "[objectObject]"
-                },
-                "flag": "normal",
-                "unit": "",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_3fcca1fac4e13",
-                "name": "葡萄糖",
-                "normalizedName": "葡萄糖",
-                "value": "5.52",
-                "valueText": "5.52",
-                "valueNumber": 5.52,
-                "valueType": "number",
-                "reference": "(3.90~6.10)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "3.90~6.10",
-                  "low": 3.9,
-                  "high": 6.1
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_994017e6c93448",
-                "name": "总蛋白",
-                "normalizedName": "总蛋白",
-                "value": "80.9",
-                "valueText": "80.9",
-                "valueNumber": 80.9,
-                "valueType": "number",
-                "reference": "(65.0~85.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "65.0~85.0",
-                  "low": 65,
-                  "high": 85
-                },
-                "flag": "normal",
-                "unit": "g/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_217ab48ff1f378",
-                "name": "白蛋白",
-                "normalizedName": "白蛋白",
-                "value": "44.9",
-                "valueText": "44.9",
-                "valueNumber": 44.9,
-                "valueType": "number",
-                "reference": "(40.0~55.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "40.0~55.0",
-                  "low": 40,
-                  "high": 55
-                },
-                "flag": "normal",
-                "unit": "g/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_58fdbe61953b38",
-                "name": "球蛋白",
-                "normalizedName": "球蛋白",
-                "value": "36.0",
-                "valueText": "36.0",
-                "valueNumber": 36,
-                "valueType": "number",
-                "reference": "(20.0~40.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "20.0~40.0",
-                  "low": 20,
-                  "high": 40
-                },
-                "flag": "normal",
-                "unit": "g/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_6b3acc588ff4b",
-                "name": "白球比例",
-                "normalizedName": "白球比例",
-                "value": "1.25",
-                "valueText": "1.25",
-                "valueNumber": 1.25,
-                "valueType": "number",
-                "reference": "(1.20~2.40)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "1.20~2.40",
-                  "low": 1.2,
-                  "high": 2.4
-                },
-                "flag": "normal",
-                "unit": "",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_20a1fdd42b95a",
-                "name": "总胆红素",
-                "normalizedName": "总胆红素",
-                "value": "11.7",
-                "valueText": "11.7",
-                "valueNumber": 11.7,
-                "valueType": "number",
-                "reference": "(0.0~23.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "0.0~23.0",
-                  "low": 0,
-                  "high": 23
-                },
-                "flag": "normal",
-                "unit": "μmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_641b831e6f17d8",
-                "name": "直接胆红素",
-                "normalizedName": "直接胆红素",
-                "value": "2.1",
-                "valueText": "2.1",
-                "valueNumber": 2.1,
-                "valueType": "number",
-                "reference": "(0.0~4.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "0.0~4.0",
-                  "low": 0,
-                  "high": 4
-                },
-                "flag": "normal",
-                "unit": "μmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697247_2a6b89d28baa7",
-                "name": "间接胆红素",
-                "normalizedName": "间接胆红素",
-                "value": "9.6",
-                "valueText": "9.6",
-                "valueNumber": 9.6,
-                "valueType": "number",
-                "reference": "(0.0~17.1)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "0.0~17.1",
-                  "low": 0,
-                  "high": 17.1
-                },
-                "flag": "normal",
-                "unit": "μmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_98aac7a4b8cc1",
-                "name": "丙氨酸氨基转移酶",
-                "normalizedName": "丙氨酸氨基转移酶",
-                "value": "17.2",
-                "valueText": "17.2",
-                "valueNumber": 17.2,
-                "valueType": "number",
-                "reference": "(9.0~50.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "9.0~50.0",
-                  "low": 9,
-                  "high": 50
-                },
-                "flag": "normal",
-                "unit": "U/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_c392d337c792d8",
-                "name": "天门冬氨酸氨基转移酶",
-                "normalizedName": "天门冬氨酸氨基转移酶",
-                "value": "16.8",
-                "valueText": "16.8",
-                "valueNumber": 16.8,
-                "valueType": "number",
-                "reference": "(15.0~40.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "15.0~40.0",
-                  "low": 15,
-                  "high": 40
-                },
-                "flag": "normal",
-                "unit": "U/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_3a2cbfdf8b116",
-                "name": "AST/ALT",
-                "normalizedName": "ast/alt",
-                "value": "0.98",
-                "valueText": "0.98",
-                "valueNumber": 0.98,
-                "valueType": "number",
-                "reference": {
-                  "type": "empty",
-                  "text": ""
-                },
-                "referenceRange": {
-                  "type": "qualitative",
-                  "text": "[objectObject]"
-                },
-                "flag": "normal",
-                "unit": "",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_0744b6e0df1a9",
-                "name": "γ-谷氨酰基转移酶",
-                "normalizedName": "γ-谷氨酰基转移酶",
-                "value": "23.7",
-                "valueText": "23.7",
-                "valueNumber": 23.7,
-                "valueType": "number",
-                "reference": "(10.0~60.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "10.0~60.0",
-                  "low": 10,
-                  "high": 60
-                },
-                "flag": "normal",
-                "unit": "U/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_8d723e803d1e68",
-                "name": "碱性磷酸酶",
-                "normalizedName": "碱性磷酸酶",
-                "value": "60.8",
-                "valueText": "60.8",
-                "valueNumber": 60.8,
-                "valueType": "number",
-                "reference": "(45.0~125.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "45.0~125.0",
-                  "low": 45,
-                  "high": 125
-                },
-                "flag": "normal",
-                "unit": "U/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_cccee9ad45422",
-                "name": "肌酸激酶",
-                "normalizedName": "肌酸激酶",
-                "value": "76.7",
-                "valueText": "76.7",
-                "valueNumber": 76.7,
-                "valueType": "number",
-                "reference": "(50.0~310.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "50.0~310.0",
-                  "low": 50,
-                  "high": 310
-                },
-                "flag": "normal",
-                "unit": "U/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_a351d1775a141",
-                "name": "肌酸激酶同工酶-MB",
-                "normalizedName": "肌酸激酶同工酶-mb",
-                "value": "10.6",
-                "valueText": "10.6",
-                "valueNumber": 10.6,
-                "valueType": "number",
-                "reference": "(0.0~19.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "0.0~19.0",
-                  "low": 0,
-                  "high": 19
-                },
-                "flag": "normal",
-                "unit": "U/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_6f207530bd3a48",
-                "name": "乳酸脱氢酶",
-                "normalizedName": "乳酸脱氢酶",
-                "value": "173.9",
-                "valueText": "173.9",
-                "valueNumber": 173.9,
-                "valueType": "number",
-                "reference": "(120.0~250.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "120.0~250.0",
-                  "low": 120,
-                  "high": 250
-                },
-                "flag": "normal",
-                "unit": "U/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_22cab2ce07d6e",
-                "name": "尿素",
-                "normalizedName": "尿素",
-                "value": "6.9",
-                "valueText": "6.9",
-                "valueNumber": 6.9,
-                "valueType": "number",
-                "reference": "(3.6~9.5)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "3.6~9.5",
-                  "low": 3.6,
-                  "high": 9.5
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_c317dbded70f5",
-                "name": "肌酐",
-                "normalizedName": "肌酐",
-                "value": "104.2",
-                "valueText": "104.2",
-                "valueNumber": 104.2,
-                "valueType": "number",
-                "reference": "(57.0~111.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "57.0~111.0",
-                  "low": 57,
-                  "high": 111
-                },
-                "flag": "normal",
-                "unit": "μmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_eabcda6b1f1a4",
-                "name": "尿素：肌酐",
-                "normalizedName": "尿素：肌酐",
-                "value": "0.07",
-                "valueText": "0.07",
-                "valueNumber": 0.07,
-                "valueType": "number",
-                "reference": {
-                  "type": "empty",
-                  "text": ""
-                },
-                "referenceRange": {
-                  "type": "qualitative",
-                  "text": "[objectObject]"
-                },
-                "flag": "normal",
-                "unit": "",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_989f1b1a1c21",
-                "name": "eGFR",
-                "normalizedName": "egfr",
-                "value": "65.4",
-                "valueText": "65.4",
-                "valueNumber": 65.4,
-                "valueType": "number",
-                "reference": "(用于慢性肾脏病分期)",
-                "referenceRange": {
-                  "type": "qualitative",
-                  "text": "用于慢性肾脏病分期"
-                },
-                "flag": "normal",
-                "unit": "mL/min/1.73m²",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_24faf142a8e798",
-                "name": "尿酸",
-                "normalizedName": "尿酸",
-                "value": "410",
-                "valueText": "410",
-                "valueNumber": 410,
-                "valueType": "number",
-                "reference": "(208~428)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "208~428",
-                  "low": 208,
-                  "high": 428
-                },
-                "flag": "normal",
-                "unit": "μmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_2fdf6560eecf",
-                "name": "碳酸氢盐",
-                "normalizedName": "碳酸氢盐",
-                "value": "27.3",
-                "valueText": "27.3",
-                "valueNumber": 27.3,
-                "valueType": "number",
-                "reference": "(21.0~31.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "21.0~31.0",
-                  "low": 21,
-                  "high": 31
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_142a49ed8860b",
-                "name": "钾",
-                "normalizedName": "钾",
-                "value": "4.16",
-                "valueText": "4.16",
-                "valueNumber": 4.16,
-                "valueType": "number",
-                "reference": "(3.50~5.30)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "3.50~5.30",
-                  "low": 3.5,
-                  "high": 5.3
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_060425c36d7438",
-                "name": "钠",
-                "normalizedName": "钠",
-                "value": "141.5",
-                "valueText": "141.5",
-                "valueNumber": 141.5,
-                "valueType": "number",
-                "reference": "(137.0~147.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "137.0~147.0",
-                  "low": 137,
-                  "high": 147
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_046c41fadb433",
-                "name": "氯",
-                "normalizedName": "氯",
-                "value": "101.5",
-                "valueText": "101.5",
-                "valueNumber": 101.5,
-                "valueType": "number",
-                "reference": "(99.0~110.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "99.0~110.0",
-                  "low": 99,
-                  "high": 110
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_0f49cbee3c624",
-                "name": "钙",
-                "normalizedName": "钙",
-                "value": "2.37",
-                "valueText": "2.37",
-                "valueNumber": 2.37,
-                "valueType": "number",
-                "reference": "(2.11~2.52)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "2.11~2.52",
-                  "low": 2.11,
-                  "high": 2.52
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_c5fcd08e3d7818",
-                "name": "镁",
-                "normalizedName": "镁",
-                "value": "0.94",
-                "valueText": "0.94",
-                "valueNumber": 0.94,
-                "valueType": "number",
-                "reference": "(0.75~1.02)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "0.75~1.02",
-                  "low": 0.75,
-                  "high": 1.02
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_62e319e7a00f",
-                "name": "无机磷",
-                "normalizedName": "无机磷",
-                "value": "1.25",
-                "valueText": "1.25",
-                "valueNumber": 1.25,
-                "valueType": "number",
-                "reference": "(0.85~1.51)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "0.85~1.51",
-                  "low": 0.85,
-                  "high": 1.51
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_835d4ccaeeba1",
-                "name": "阴离子间隙",
-                "normalizedName": "阴离子间隙",
-                "value": "12.7",
-                "valueText": "12.7",
-                "valueNumber": 12.7,
-                "valueType": "number",
-                "reference": "(8.0~16.0)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "8.0~16.0",
-                  "low": 8,
-                  "high": 16
-                },
-                "flag": "normal",
-                "unit": "mmol/L",
-                "note": ""
-              },
-              {
-                "id": "lab_item_1782896697248_c1a780c22696f8",
-                "name": "渗透压",
-                "normalizedName": "渗透压",
-                "value": "303.74",
-                "valueText": "303.74",
-                "valueNumber": 303.74,
-                "valueType": "number",
-                "reference": "(280.00~320.00)",
-                "referenceRange": {
-                  "type": "range",
-                  "text": "280.00~320.00",
-                  "low": 280,
-                  "high": 320
-                },
-                "flag": "normal",
-                "unit": "mOsm/L",
-                "note": ""
-              }
-            ]
-          }
-        }
-      ],
-      "source": "indicator-import",
-      "createdAt": "2026/7/1 16:55:48",
-      "updatedAt": "2026/7/1 17:05:18"
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390077_7cefd2e4879188",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "泌尿",
+      "month": "2026-06",
+      "content": "6月29日 黄主任\n1.尿白细胞高，开点药吃\n2.排尿不好可能余尿多容易感染，但不一定会反复出现（补充：现在排尿较慢，有无力感）\n3.开短期消炎药（头孢克洛缓释片）建议1个星期复查\n4.前列腺增生的接着吃就行（非那雄胺片是缩小前列腺、坦索罗辛缓释是改善排尿）",
+      "contentHtml": "<span style=\"font-size:12pt;color:#000000\">6月29日 黄主任<br>1.尿白细胞高，开点药吃<br>2.排尿不好可能余尿多容易感染，但不一定会反复出现（补充：现在排尿较慢，有无力感）<br>3.开短期</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">消炎药</span><span style=\"font-size:12pt;color:#000000\">（头孢克洛缓释片）建议1个星期复查<br>4.前列腺增生的</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">接着吃</span><span style=\"font-size:12pt;color:#000000\">就行（非那雄胺片是缩小前列腺、坦索罗辛缓释是改善排尿）</span>",
+      "notes": "",
+      "notesHtml": "",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390078_212952dae5bd2",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "泌尿",
+      "month": "2025-08",
+      "content": "8月2日复查 张\n1.提示前列腺比较大，以目前情况需要做前列腺增生微创手术的概率比较大，膀胱受损建议尽早微创手术（保护膀胱、恢复排尿）\n2.手术主要影响性功能、慢性肾炎对手术影响较小\n3.建议严格控制尿酸（尿酸控制好，肌酐会有改善），低嘌呤饮食（特别强调不喝汤各种汤因为嘌呤最高、不吃贝壳类），鱼可以适量吃，豆制品少吃\n4.停了坦索罗辛，换了多沙唑嗪，提示有症状就要吃，半年~1年复查（2026年8月）",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">8月2日复查 张</span><span style=\"font-size:12pt;color:#000000\"><br>1.提示前列腺比较大，以目前情况需要做前列腺增生微创手术的概率比较大，膀胱受损建议尽早微创手术（保护膀胱、恢复排尿）<br>2.手术主要影响性功能、慢性肾炎对手术影响较小<br>3.建议严格控制尿酸（</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿酸控制好，肌酐会有改善</span><span style=\"font-size:12pt;color:#000000\">），低嘌呤饮食（特别强调不喝汤各种汤因为嘌呤最高、不吃贝壳类），鱼可以适量吃，豆制品少吃<br>4.停了坦索罗辛，换了多沙唑嗪，提示有症状就要吃，半年~1年复查（2026年8月）</span>",
+      "notes": "主任建议日常注意：\n1.严格控制尿酸（尿酸控制好，肌酐会有改善），低嘌呤饮食（特别强调严格限制不喝汤各种汤因为嘌呤最高、不吃贝壳类动物内脏螃蟹），鱼可以适量吃，豆制品少吃\n啤酒（酒精会抑制尿酸排泄）；\n2.避免久坐（每坐45-60分钟，就起身活动5-10分钟。可以接杯水、上个厕所、在室内走动一下。目的是减轻对前列腺的压迫，促进盆腔血液循环。）每周适当有氧运动（30分钟~60分钟 快走、散步等）",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\">主任建议日常注意：<br>1.严格控制</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">尿酸</span><span style=\"font-size:12pt;color:#000000\">（尿酸控制好，肌酐会有改善），</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">低嘌呤</span><span style=\"font-size:12pt;color:#000000\">饮食（特别强调严格限制不喝汤各种</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">汤</span><span style=\"font-size:12pt;color:#000000\">因为嘌呤最高、不吃</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">贝壳</span><span style=\"font-size:12pt;color:#000000\">类动物内脏螃蟹），鱼可以适量吃，豆制品少吃<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">啤酒</span><span style=\"font-size:12pt;color:#000000\">（酒精会抑制尿酸排泄）；<br>2.避免</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">久坐</span><span style=\"font-size:12pt;color:#000000\">（每坐45-60分钟，就起身活动5-10分钟。可以接杯水、上个厕所、在室内走动一下。目的是减轻对前列腺的压迫，促进盆腔血液循环。）每周适当有氧</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">运动</span><span style=\"font-size:12pt;color:#000000\">（30分钟~60分钟 快走、散步等）<br></span>",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390078_ea952acec96878",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "泌尿",
+      "month": "2025-07",
+      "content": "7月5日 泌尿外科 \n 做前列腺增强磁共振，结果：前列腺增生（PI-RADS 2分）。慢性膀胱炎可能。",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">7月5日 泌尿外科 </span><span style=\"font-size:12pt;color:#000000\"><br> 做前列腺增强磁共振，结果：前列腺增生（PI-RADS 2分）。慢性膀胱炎可能。</span>",
+      "notes": "",
+      "notesHtml": "",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390078_9ce27c86e78e9",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "泌尿",
+      "month": "2025-06",
+      "content": "6月30日 泌尿科苏主任\n提示前列腺总抗原正常，开了前列腺磁共振，尿常规复查（复查除尿蛋白其他恢复正常）\n6月22日 泌尿科沈主任 \n尿路感染 开了消炎药",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">6月30日 泌尿科苏主任</span><span style=\"font-size:12pt;color:#000000\"><br>提示前列腺总抗原正常，开了前列腺磁共振，尿常规复查（复查除尿蛋白其他恢复正常）<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">6月22日 泌尿科沈主任 </span><span style=\"font-size:12pt;color:#000000\"><br>尿路感染 开了消炎药</span>",
+      "notes": "",
+      "notesHtml": "",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390079_be47015812b088",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "内分泌",
+      "month": "2025-06",
+      "content": "6月22日 阙主任\n关注血脂、血糖、尿酸高，建议家里少盐少油少糖、不吃煎炸东西，不吃内脏、戒烟酒，炖汤及海鲜少吃，平时不吃太饱、注意控制体重。建议调整饮食后3个月复查（9月22日左右），先饮食调整不行就得用药",
+      "contentHtml": "<span style=\"font-weight:700;font-size:12pt;color:#000000\">6月22日 阙主任</span><span style=\"font-size:12pt;color:#000000\"><br>关注血脂、血糖、尿酸高，建议家里</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">少盐少油少糖、不吃煎炸东西，不吃内脏、戒烟酒，炖汤及海鲜少吃</span><span style=\"font-size:12pt;color:#000000\">，</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">平时不吃太饱、注意控制体重。</span><span style=\"font-size:12pt;color:#000000\">建议调整饮食后3个月复查（9月22日左右），先饮食调整不行就得用药</span>",
+      "notes": "主任建议日常注意：\n1.建议家里少盐少油少糖、不吃煎炸东西，不吃内脏、戒烟酒，炖汤及海鲜少吃\n2.平时不吃太饱、注意控制体重。",
+      "notesHtml": "<span style=\"font-size:12pt;color:#000000\">主任建议日常注意：<br>1.建议家里少盐少油少糖、不吃煎炸东西，不吃内脏、戒烟酒，炖汤及海鲜少吃<br></span><span style=\"font-weight:700;font-size:12pt;color:#000000\">2.平时不吃太饱、注意控制体重。</span>",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390080_cdbac79d4ba44",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "其他",
+      "month": "2026-06",
+      "content": "6月27日 心内科 宗主任\n1.血压不稳可能和睡眠不好有关，护肾要早睡觉，少折腾\n2.非诺贝特、达格列净不主降压（达格列净可以保留）奥美沙坦停了，美托洛尔吃着就行（美托洛尔主要更偏向降低压）\n3.到了冬天血压上来根据血压情况把奥美沙坦加回去\n4.建议120/80以下，偶尔过高要看原因，而且要看大部分时间，觉得是我本身焦虑\n5.根据现在血压情况 不动，不要减压也不要减药，有肾问题 所以心内科想不要太高\n6.有点过度焦虑，目前还在正常范围，降压药也停着及时，到夏天有一部分人就要停，有些人体位性低血压更不应该降的太低\n7.坦索罗辛偶尔会体位性低血压，另外要正确测量血压\n8.甘油三酯高 一般饮食控制就会下来，是胃肠吸收进来，肾炎不主张豆浆，蛋白质要优质肉蛋奶鱼\n9.奥美沙坦本来就是减压药，血压低本来就要停，达格列净加是为了护肾，不要过度纠结奥美沙坦",
+      "contentHtml": "<span style=\"font-size:12pt;color:#000000\">6月27日 心内科 宗主任<br>1.血压不稳可能和</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">睡眠</span><span style=\"font-size:12pt;color:#000000\">不好有关，护肾要早</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">睡觉，少折腾</span><span style=\"font-size:12pt;color:#000000\"><br>2.非诺贝特、达格列净不主降压（达格列净可以保留）奥美沙坦停了，美托洛尔吃着就行（美托洛尔主要更偏向降低压）<br>3.到了冬天血压上来根据血压情况把奥美沙坦加回去<br>4.建议120/80以下，偶尔过高要看原因，而且要看</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">大部分时间，</span><span style=\"font-size:12pt;color:#000000\">觉得是</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">我本身焦虑</span><span style=\"font-size:12pt;color:#000000\"><br>5.根据现在血压情况 不动，不要减压也不要减药，有肾问题 所以心内科想不要太高<br>6.有点过度焦虑，目前还在正常范围，降压药也停着及时，到夏天有一部分人就要停，有些人体位性低血压更不应该降的太低<br>7.坦索罗辛偶尔会体位性低血压，另外要正确测量血压<br>8.甘油三酯高 一般饮食控制就会下来，是胃肠吸收进来，肾炎</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">不主张豆浆</span><span style=\"font-size:12pt;color:#000000\">，蛋白质要</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">优质肉蛋奶鱼</span><span style=\"font-size:12pt;color:#000000\"><br>9.</span><span style=\"font-weight:700;font-size:12pt;color:#000000\">奥美沙坦本来就是减压药</span><span style=\"font-size:12pt;color:#000000\">，血压低本来就要停，达格列净加是为了护肾，不要过度纠结奥美沙坦</span>",
+      "notes": "",
+      "notesHtml": "",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
+    },
+    {
+      "id": "daily_month_1782976390080_8f7958fffb1628",
+      "memberId": "member_1782119959973_56aa3eb94b15c",
+      "department": "用药",
+      "month": "2026-04",
+      "content": "早上：\n降压：奥美沙坦酯片20mg（1片）饭前、琥珀酸美托洛尔47.5mg（半片）、\n良性前列腺：非那雄胺片5mg（1片）、盐酸坦索罗辛胶囊0.2mg（1粒）\n\n傍晚：\n4月初甘油三酯高于4 肾内科主任加服了 非诺贝特 200mg（1粒） （后续还会服达格列净护肾 10mg 1片）",
+      "contentHtml": "早上：<br>降压：奥美沙坦酯片20mg（1片）饭前、琥珀酸美托洛尔47.5mg（半片）、<br>良性前列腺：非那雄胺片5mg（1片）、盐酸坦索罗辛胶囊0.2mg（1粒）<br><br>傍晚：<br>4月初甘油三酯高于4 肾内科主任加服了 非诺贝特 200mg（1粒） （后续还会服达格列净护肾 10mg 1片）",
+      "notes": "2026 4月血压偏低（平均接近90 60），4月17日奥美沙坦减半片观察",
+      "notesHtml": "2026 4月血压偏低（平均接近90 60），4月17日奥美沙坦减半片观察",
+      "remark": "",
+      "remarkHtml": "",
+      "reportIds": [],
+      "source": "excel-import",
+      "createdAt": "2026/7/2 15:13:10",
+      "updatedAt": "2026/7/2 15:13:10"
     }
   ],
   "dailyRecords": []

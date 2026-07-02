@@ -27,6 +27,7 @@ const {
       packages: [],
       members: [],
       plans: [],
+      reports: [],
       dailyMonthRecords: [],
       dailyRecords: []
     };
@@ -56,6 +57,7 @@ const {
           packages: parsed.packages || [],
           members: parsed.members || [],
           plans: parsed.plans || [],
+          reports: parsed.reports || [],
           compareIds: [],
           selectedPackages: [],
           compareOnlyDiff: false,
@@ -183,6 +185,13 @@ const {
             extraction: '',
             report: null
           },
+          indicatorLinkDialog: {
+            visible: false,
+            reportId: '',
+            memberId: '',
+            department: '',
+            rowId: ''
+          },
           indicatorMigrationPending: false,
         };
       },
@@ -273,7 +282,7 @@ const {
               const hasText = String(record.content || '').trim() || 
                               String(record.notes || '').trim() || 
                               String(record.remark || '').trim();
-              if (hasText) {
+              if (hasText || this.getLinkedDailyReports(record).length > 0) {
                 months.add(month);
               } else {
                 const hasDailyRecordsInMonth = this.dailyRecords.some(r => 
@@ -311,21 +320,13 @@ const {
             }));
         },
         confirmedIndicatorReports() {
-          const reports = [];
-          (this.dailyMonthRecords || []).forEach((row) => {
-            (row.reports || []).forEach((sourceReport) => {
-              const report = this.enrichDailyReportForStorage(sourceReport, this.getDailyReportType(sourceReport, 'lab'));
-              if (report.status !== 'confirmed' && report.meta?.status !== 'confirmed') return;
-              reports.push({
-                ...report,
-                memberId: row.memberId,
-                department: report.department || row.department || '未分类',
-                reportDate: report.reportDate || row.month || '',
-                _rowId: row.id
-              });
-            });
-          });
-          return reports;
+          return (this.reports || [])
+            .filter((report) => report.status === 'confirmed' || report.meta?.status === 'confirmed')
+            .map((report) => ({
+              ...report,
+              department: report.department || '未分类',
+              reportDate: report.reportDate || ''
+            }));
         },
         indicatorMonthsWithData() {
           const months = new Set();
@@ -541,6 +542,7 @@ const {
         members: { deep: true, handler: 'persist' },
         plans: { deep: true, handler: 'persist' },
         dailyMonthRecords: { deep: true, handler: 'persist' },
+        reports: { deep: true, handler: 'persist' },
         dailyRecords: { deep: true, handler: 'persist' },
         dailyFilterMonth() {
           this.onDailyMemberChange();
@@ -568,6 +570,7 @@ const {
             packages: this.packages,
             members: this.members,
             plans: this.plans,
+            reports: this.reports,
             dailyMonthRecords: this.dailyMonthRecords,
             dailyRecords: this.dailyRecords
           });
@@ -600,13 +603,17 @@ const {
           this.packages = Array.isArray(data.packages) ? data.packages : [];
           this.members = Array.isArray(data.members) ? data.members : [];
           this.plans = Array.isArray(data.plans) ? data.plans : [];
+          this.reports = Array.isArray(data.reports)
+            ? data.reports.map((report) => this.normalizeReportLibraryEntry(report))
+            : [];
           this.dailyMonthRecords = Array.isArray(data.dailyMonthRecords) ? data.dailyMonthRecords : [];
           this.dailyRecords = Array.isArray(data.dailyRecords) ? data.dailyRecords : [];
+          const migratedEmbeddedReports = this.migrateEmbeddedReports();
           this.ensureDailyMonthRecords();
           const migratedReportDepartments = this.migrateIndicatorReportDepartments();
           const legacyIndicatorRecords = Array.isArray(data.indicatorRecords) ? data.indicatorRecords : [];
           this.migrateLegacyIndicatorRecords(legacyIndicatorRecords);
-          this.indicatorMigrationPending = legacyIndicatorRecords.length > 0 || migratedReportDepartments > 0;
+          this.indicatorMigrationPending = migratedEmbeddedReports > 0 || legacyIndicatorRecords.length > 0 || migratedReportDepartments > 0;
 
           if (!this.members.some((member) => member.id === this.activeDailyMemberId)) {
             this.activeDailyMemberId = this.members[0]?.id || '';
@@ -624,6 +631,101 @@ const {
             this.activeTimelineKey = '';
           }
         },
+        getIndicatorLinkDepartments() {
+          const memberId = this.indicatorLinkDialog.memberId;
+          if (!memberId) return [];
+          const report = this.getReportById(this.indicatorLinkDialog.reportId);
+          const linkedIds = new Set(report?.linkedDailyRecordIds || []);
+          return [...new Set((this.dailyMonthRecords || [])
+            .filter((row) => row.memberId === memberId && !linkedIds.has(row.id))
+            .map((row) => row.department)
+            .filter(Boolean))]
+            .sort((a, b) => a.localeCompare(b, 'zh-CN'));
+        },
+        isIndicatorLinkMemberLocked() {
+          const report = this.getReportById(this.indicatorLinkDialog.reportId);
+          return (report?.linkedDailyRecordIds || []).length > 0;
+        },
+        getIndicatorLinkableDailyRows() {
+          const report = this.getReportById(this.indicatorLinkDialog.reportId);
+          const { memberId, department } = this.indicatorLinkDialog;
+          if (!report || !memberId || !department) return [];
+          const linkedIds = new Set(report.linkedDailyRecordIds || []);
+          return (this.dailyMonthRecords || [])
+            .filter((row) => row.memberId === memberId && row.department === department && !linkedIds.has(row.id))
+            .sort((a, b) => String(b.month || '').localeCompare(String(a.month || '')))
+            .map((row) => ({
+              ...row,
+              label: `${row.month || '未填月份'}${String(row.content || '').trim() ? ` · ${String(row.content).trim().split(/\r?\n/)[0].slice(0, 24)}` : ''}`
+            }));
+        },
+        onIndicatorLinkMemberChange() {
+          const departments = this.getIndicatorLinkDepartments();
+          this.indicatorLinkDialog.department = departments[0] || '';
+          this.onIndicatorLinkDepartmentChange();
+        },
+        onIndicatorLinkDepartmentChange() {
+          this.indicatorLinkDialog.rowId = this.getIndicatorLinkableDailyRows()[0]?.id || '';
+        },
+        normalizeReportLibraryEntry(report, context = {}) {
+          const normalized = this.normalizeDailyReport(report || {}, this.getDailyReportType(report, 'lab'));
+          return {
+            ...normalized,
+            memberId: report?.memberId || context.memberId || '',
+            origin: report?.origin || context.origin || 'daily',
+            linkedDailyRecordIds: [...new Set([
+              ...(Array.isArray(report?.linkedDailyRecordIds) ? report.linkedDailyRecordIds : []),
+              ...(Array.isArray(context.linkedDailyRecordIds) ? context.linkedDailyRecordIds : [])
+            ].filter(Boolean))]
+          };
+        },
+        migrateEmbeddedReports() {
+          const reportMap = new Map();
+          (this.reports || []).forEach((report) => {
+            const normalized = this.normalizeReportLibraryEntry(report);
+            reportMap.set(normalized.id, normalized);
+          });
+
+          let migrated = 0;
+          (this.dailyMonthRecords || []).forEach((row) => {
+            row.reportIds = Array.isArray(row.reportIds) ? [...new Set(row.reportIds.filter(Boolean))] : [];
+            const isIndicatorOnly = ['indicator-import', 'legacy-indicator'].includes(row.source);
+            (Array.isArray(row.reports) ? row.reports : []).forEach((embeddedReport) => {
+              const existing = reportMap.get(embeddedReport.id);
+              const linkedDailyRecordIds = isIndicatorOnly ? [] : [row.id];
+              const normalized = this.normalizeReportLibraryEntry({
+                ...existing,
+                ...embeddedReport,
+                memberId: embeddedReport.memberId || existing?.memberId || row.memberId,
+                linkedDailyRecordIds: [
+                  ...(existing?.linkedDailyRecordIds || []),
+                  ...(embeddedReport.linkedDailyRecordIds || []),
+                  ...linkedDailyRecordIds
+                ]
+              }, {
+                memberId: row.memberId,
+                origin: isIndicatorOnly ? 'indicator' : 'daily'
+              });
+              reportMap.set(normalized.id, normalized);
+              if (!isIndicatorOnly && !row.reportIds.includes(normalized.id)) row.reportIds.push(normalized.id);
+              migrated += 1;
+            });
+            delete row.reports;
+          });
+
+          this.reports = [...reportMap.values()];
+          this.dailyMonthRecords = (this.dailyMonthRecords || []).filter((row) => {
+            if (!['indicator-import', 'legacy-indicator'].includes(row.source)) return true;
+            const hasText = ['content', 'notes', 'remark'].some((field) => String(row[field] || '').trim());
+            const hasLegacyDailyRecord = this.dailyRecords.some((record) =>
+              record.memberId === row.memberId &&
+              record.department === row.department &&
+              normalizeDailyMonth(record.visitDate) === normalizeDailyMonth(row.month)
+            );
+            return hasText || hasLegacyDailyRecord || row.reportIds.length > 0;
+          });
+          return migrated;
+        },
         migrateLegacyIndicatorRecords(records) {
           let migrated = 0;
           (records || []).forEach((record) => {
@@ -632,35 +734,10 @@ const {
             if (reportType === 'lab' && metrics.length === 0) return;
             if (reportType === 'exam' && !record.findings && !record.diagnosis) return;
             const reportDate = normalizeDailyDate(record.reportDate) || new Date().toISOString().slice(0, 10);
-            const month = normalizeDailyMonth(reportDate);
             const department = record.department || (reportType === 'lab' ? '检验科' : '放射科');
-            let row = this.dailyMonthRecords.find((item) =>
-              item.memberId === record.memberId &&
-              item.department === department &&
-              normalizeDailyMonth(item.month) === month
-            );
-            if (!row) {
-              row = {
-                id: uid('daily_month'),
-                memberId: record.memberId,
-                department,
-                month,
-                content: '',
-                contentHtml: '',
-                notes: '',
-                notesHtml: '',
-                remark: '',
-                remarkHtml: '',
-                reports: [],
-                source: 'legacy-indicator',
-                createdAt: nowText(),
-                updatedAt: nowText()
-              };
-              this.dailyMonthRecords.push(row);
-            }
-            row.reports = row.reports || [];
             const signature = `${reportType}|${reportDate}|${record.reportName || ''}`;
-            const duplicate = row.reports.some((report) =>
+            const duplicate = this.reports.some((report) =>
+              report.memberId === record.memberId &&
               `${this.getDailyReportType(report)}|${report.reportDate || ''}|${report.title || ''}` === signature
             );
             if (duplicate) return;
@@ -678,7 +755,10 @@ const {
               findingText: record.findings || '',
               conclusionText: record.diagnosis || ''
             }, reportType);
-            row.reports.push(report);
+            this.reports.push(this.normalizeReportLibraryEntry(report, {
+              memberId: record.memberId,
+              origin: 'indicator'
+            }));
             migrated += 1;
           });
           return migrated;
@@ -695,7 +775,7 @@ const {
               const hasText = String(r.content || '').trim() || 
                               String(r.notes || '').trim() || 
                               String(r.remark || '').trim();
-              if (hasText) return true;
+               if (hasText || this.getLinkedDailyReports(r).length > 0) return true;
               
               const monthStr = normalizeDailyMonth(r.month);
               const hasDailyRecordsInMonth = this.dailyRecords.some(dr => 
@@ -751,7 +831,7 @@ const {
               const hasText = String(row.content || '').trim() || 
                               String(row.notes || '').trim() || 
                               String(row.remark || '').trim();
-              if (!hasText) {
+               if (!hasText && this.getLinkedDailyReports(row).length === 0) {
                 const monthStr = normalizeDailyMonth(row.month);
                 const hasDailyRecordsInMonth = this.dailyRecords.some(r => 
                   r.memberId === memberId && 
@@ -870,7 +950,7 @@ const {
               notesHtml: plainTextToHtml(notes),
               remark: '',
               remarkHtml: '',
-              reports: [],
+              reportIds: [],
               source: 'legacy-dailyRecords',
               createdAt: nowText(),
               updatedAt: nowText()
@@ -914,7 +994,7 @@ const {
             } else if (!existing.remarkHtml && existing.remark) {
               existing.remarkHtml = plainTextToHtml(existing.remark);
             }
-            existing.reports = existing.reports || [];
+            existing.reportIds = Array.isArray(existing.reportIds) ? existing.reportIds : [];
             existing.source = source;
             existing.updatedAt = nowText();
             return existing;
@@ -930,7 +1010,7 @@ const {
             notesHtml: safeNotesHtml || plainTextToHtml(plainNotes),
             remark: plainRemark,
             remarkHtml: safeRemarkHtml || plainTextToHtml(plainRemark),
-            reports: [],
+            reportIds: [],
             source,
             createdAt: nowText(),
             updatedAt: nowText()
@@ -968,7 +1048,7 @@ const {
             notesHtml: '',
             remark: '',
             remarkHtml: '',
-            reports: [],
+            reportIds: [],
             source: 'manual',
             createdAt: nowText(),
             updatedAt: nowText()
@@ -995,7 +1075,7 @@ const {
             const htmlField = `${field}Html`;
             if (!row[htmlField] && row[field]) row[htmlField] = plainTextToHtml(row[field]);
           });
-          row.reports = row.reports || [];
+          row.reportIds = Array.isArray(row.reportIds) ? row.reportIds : [];
           row.updatedAt = nowText();
           this.persist();
         },
@@ -1005,6 +1085,9 @@ const {
         },
         deleteDailyMonthRow(id) {
           ElementPlus.ElMessageBox.confirm('确定要删除这个月份的台账记录吗？', '提示', { type: 'warning' }).then(() => {
+            this.reports.forEach((report) => {
+              report.linkedDailyRecordIds = (report.linkedDailyRecordIds || []).filter((rowId) => rowId !== id);
+            });
             this.dailyMonthRecords = this.dailyMonthRecords.filter(row => row.id !== id);
             this.persist();
             this.onDailyMemberChange();
@@ -1158,20 +1241,54 @@ const {
             updatedAt: report.updatedAt || nowText()
           }, 'lab');
         },
+        getReportById(reportId) {
+          return (this.reports || []).find((report) => report.id === reportId) || null;
+        },
+        getLinkedDailyReports(row) {
+          if (!row) return [];
+          const ids = new Set(Array.isArray(row.reportIds) ? row.reportIds : []);
+          return (this.reports || []).filter((report) =>
+            ids.has(report.id) || (report.linkedDailyRecordIds || []).includes(row.id)
+          );
+        },
+        linkReportToDailyRow(report, row) {
+          if (!report || !row) return;
+          row.reportIds = Array.isArray(row.reportIds) ? row.reportIds : [];
+          if (!row.reportIds.includes(report.id)) row.reportIds.push(report.id);
+          report.linkedDailyRecordIds = Array.isArray(report.linkedDailyRecordIds) ? report.linkedDailyRecordIds : [];
+          if (!report.linkedDailyRecordIds.includes(row.id)) report.linkedDailyRecordIds.push(row.id);
+        },
+        removeReportFromLibrary(reportId) {
+          this.reports = (this.reports || []).filter((report) => report.id !== reportId);
+          this.dailyMonthRecords.forEach((row) => {
+            row.reportIds = (row.reportIds || []).filter((id) => id !== reportId);
+          });
+        },
         ensureDailyReports(row) {
           if (!row) return [];
-          row.reports = (row.reports || []).map(report => this.normalizeDailyReport(report, this.getDailyReportType(report, 'lab')));
-          return row.reports;
+          const normalizedReports = this.getLinkedDailyReports(row).map((report) =>
+            this.normalizeReportLibraryEntry(report, {
+              memberId: report.memberId || row.memberId,
+              origin: report.origin || 'daily',
+              linkedDailyRecordIds: row.transient ? [] : [row.id]
+            })
+          );
+          normalizedReports.forEach((report) => {
+            const index = this.reports.findIndex((item) => item.id === report.id);
+            if (index >= 0) this.reports.splice(index, 1, report);
+          });
+          row.reportIds = normalizedReports.map((report) => report.id);
+          return normalizedReports;
         },
         getDailyReportCount(row, type) {
-          return (row?.reports || []).filter(report => this.getDailyReportType(report, 'lab') === type).length;
+          return this.getLinkedDailyReports(row).filter(report => this.getDailyReportType(report, 'lab') === type).length;
         },
         openDailyReportDialog(row) {
-          this.ensureDailyReports(row);
+          const reports = this.ensureDailyReports(row);
           this.dailyReportDialog.row = row;
           this.dailyReportDialog.activeType = this.getDailyReportCount(row, 'lab') > 0 || this.getDailyReportCount(row, 'exam') === 0 ? 'lab' : 'exam';
-          const lab = row.reports.find(report => report.reportType === 'lab');
-          const exam = row.reports.find(report => report.reportType === 'exam');
+          const lab = reports.find(report => report.reportType === 'lab');
+          const exam = reports.find(report => report.reportType === 'exam');
           this.dailyReportDialog.currentLabReportId = lab?.id || '';
           this.dailyReportDialog.currentExamReportId = exam?.id || '';
           this.dailyReportDialog.currentLabReport = lab || null;
@@ -1183,7 +1300,7 @@ const {
         getDailyReportsByType(type) {
           const row = this.dailyReportDialog.row;
           if (!row) return [];
-          return row.reports.filter(report => report.reportType === type);
+          return this.getLinkedDailyReports(row).filter(report => report.reportType === type);
         },
         setActiveDailyReport(report) {
           if (!report) return;
@@ -1205,16 +1322,29 @@ const {
         createDailyReport(type) {
           const row = this.dailyReportDialog.row;
           if (!row) return null;
+          if (row.transient) {
+            ElementPlus.ElMessage.warning('请从日常检查月份记录中新增并关联报告。');
+            return null;
+          }
           this.ensureDailyReports(row);
           const report = this.normalizeDailyReport({
             reportType: type,
             title: type === 'lab' ? '新检验报告' : '新检查报告',
             reportDate: row.month ? `${row.month}-01` : '',
             department: row.department || '',
-            status: 'draft'
+            status: 'draft',
+            memberId: row.memberId,
+            origin: 'daily',
+            linkedDailyRecordIds: [row.id]
           }, type);
-          row.reports.push(report);
-          this.setActiveDailyReport(report);
+          const libraryReport = this.normalizeReportLibraryEntry(report, {
+            memberId: row.memberId,
+            origin: 'daily',
+            linkedDailyRecordIds: [row.id]
+          });
+          this.reports.push(libraryReport);
+          this.linkReportToDailyRow(libraryReport, row);
+          this.setActiveDailyReport(libraryReport);
           this.dailyReportDialog.activeType = type;
           if (type === 'exam') {
             this.dailyReportDialog.examMode = 'parse';
@@ -1222,14 +1352,14 @@ const {
             this.dailyReportDialog.labMode = 'parse';
           }
           this.touchDailyReport();
-          return report;
+          return libraryReport;
         },
         deleteDailyReport(report) {
           const row = this.dailyReportDialog.row;
           if (!row || !report) return;
           ElementPlus.ElMessageBox.confirm('确定删除这份报告吗？', '提示', { type: 'warning' }).then(() => {
-            row.reports = (row.reports || []).filter(item => item.id !== report.id);
-            const next = row.reports.find(item => item.reportType === report.reportType);
+            this.removeReportFromLibrary(report.id);
+            const next = this.getLinkedDailyReports(row).find(item => item.reportType === report.reportType);
             if (next) {
               this.setActiveDailyReport(next);
             } else if (report.reportType === 'lab') {
@@ -1383,10 +1513,11 @@ const {
         touchDailyReport() {
           const row = this.dailyReportDialog.row;
           if (!row) return;
-          row.updatedAt = nowText();
-          (row.reports || []).forEach(report => {
+          if (!row.transient) row.updatedAt = nowText();
+          this.getLinkedDailyReports(row).forEach(report => {
             report.updatedAt = report.updatedAt || nowText();
           });
+          this.reports = [...this.reports];
           this.dailyMonthRecords = [...this.dailyMonthRecords];
           this.persist();
         },
@@ -1562,23 +1693,10 @@ const {
         clearDailyTestData() {
           ElementPlus.ElMessageBox.confirm('这会清空当前所有家庭成员的日常就诊记录（主要用于测试导入功能，保留已确认的体检报告）。确认清空？', '清空测试数据', { type: 'warning' }).then(() => {
             this.dailyRecords = [];
-            this.dailyMonthRecords = this.dailyMonthRecords
-              .map(row => {
-                if (row.reports && row.reports.length > 0) {
-                  return {
-                    ...row,
-                    content: '',
-                    contentHtml: '',
-                    notes: '',
-                    notesHtml: '',
-                    remark: '',
-                    remarkHtml: '',
-                    updatedAt: nowText()
-                  };
-                }
-                return null;
-              })
-              .filter(Boolean);
+            this.reports.forEach((report) => {
+              report.linkedDailyRecordIds = [];
+            });
+            this.dailyMonthRecords = [];
             this.persist();
             this.onDailyMemberChange();
             ElementPlus.ElMessage.success('就诊记录数据已清空，指标跟踪数据已保留');
@@ -2030,13 +2148,14 @@ const {
         buildPersistPayload() {
           const dailyMonthRecords = (this.dailyMonthRecords || []).map(row => ({
             ...row,
-            reports: (row.reports || []).map(report => this.enrichDailyReportForStorage(report, this.getDailyReportType(report, 'lab')))
+            reportIds: [...new Set((row.reportIds || []).filter((id) => this.getReportById(id)))]
           }));
           return {
-            schemaVersion: 2,
+            schemaVersion: 3,
             packages: this.packages,
             members: this.members,
             plans: this.plans,
+            reports: (this.reports || []).map((report) => this.normalizeReportLibraryEntry(report)),
             dailyMonthRecords,
             dailyRecords: this.dailyRecords
           };
@@ -2949,26 +3068,14 @@ const {
         },
         migrateIndicatorReportDepartments() {
           let migrated = 0;
-          (this.dailyMonthRecords || []).forEach(row => {
-            const reportDepartments = [];
-            (row.reports || []).forEach(report => {
-              const reportType = this.getDailyReportType(report, 'lab');
-              const department = this.inferIndicatorDepartment(report, reportType);
-              if (!department) return;
-              reportDepartments.push(department);
-              if (report.department !== department) {
-                report.department = department;
-                if (report.meta) report.meta.department = department;
-                report.updatedAt = nowText();
-                migrated += 1;
-              }
-            });
-            const uniqueDepartments = [...new Set(reportDepartments)];
-            if (['indicator-import', 'legacy-indicator'].includes(row.source) && uniqueDepartments.length === 1 && row.department !== uniqueDepartments[0]) {
-              row.department = uniqueDepartments[0];
-              row.updatedAt = nowText();
-              migrated += 1;
-            }
+          (this.reports || []).forEach(report => {
+            const reportType = this.getDailyReportType(report, 'lab');
+            const department = this.inferIndicatorDepartment(report, reportType);
+            if (!department || report.department === department) return;
+            report.department = department;
+            if (report.meta) report.meta.department = department;
+            report.updatedAt = nowText();
+            migrated += 1;
           });
           return migrated;
         },
@@ -3076,23 +3183,8 @@ const {
             return;
           }
           const month = normalizeDailyMonth(report.reportDate);
-          let row = this.dailyMonthRecords.find((item) =>
+          const duplicateIndex = this.reports.findIndex((item) =>
             item.memberId === memberId &&
-            item.department === report.department &&
-            normalizeDailyMonth(item.month) === month
-          );
-          if (!row) {
-            row = this.upsertDailyMonthRecord({
-              memberId,
-              department: report.department,
-              month,
-              content: '',
-              notes: '',
-              source: 'indicator-import'
-            });
-          }
-          row.reports = row.reports || [];
-          const duplicateIndex = row.reports.findIndex((item) =>
             this.getDailyReportType(item) === report.reportType &&
             item.reportDate === report.reportDate &&
             item.title === report.title
@@ -3113,15 +3205,22 @@ const {
             }
             report.status = 'confirmed';
             report.confirmedAt = nowText();
-            const storedReport = this.enrichDailyReportForStorage(report, report.reportType);
-            if (duplicateIndex >= 0) row.reports.splice(duplicateIndex, 1, storedReport);
-            else row.reports.push(storedReport);
-            row.updatedAt = nowText();
+            const previousReport = duplicateIndex >= 0 ? this.reports[duplicateIndex] : null;
+            const storedReport = this.normalizeReportLibraryEntry(
+              this.enrichDailyReportForStorage(report, report.reportType),
+              {
+                memberId,
+                origin: previousReport?.origin || 'indicator',
+                linkedDailyRecordIds: previousReport?.linkedDailyRecordIds || []
+              }
+            );
+            if (duplicateIndex >= 0) this.reports.splice(duplicateIndex, 1, storedReport);
+            else this.reports.push(storedReport);
             this.activeIndicatorMemberId = memberId;
             this.activeIndicatorDepartment = report.department;
             this.indicatorFilterYear = report.reportDate.slice(0, 4);
             this.indicatorFilterMonth = month;
-            this.dailyMonthRecords = [...this.dailyMonthRecords];
+            this.reports = [...this.reports];
             this.onIndicatorMemberChange();
             this.persist();
             this.closeIndicatorImport();
@@ -3135,20 +3234,79 @@ const {
           }
         },
         openIndicatorReport(report) {
-          const row = this.dailyMonthRecords.find((item) => item.id === report?._rowId);
-          if (!row) return;
-          this.openDailyReportDialog(row);
+          if (!report) return;
+          this.openDailyReportDialog({
+            id: `report_context_${report.id}`,
+            memberId: report.memberId,
+            department: report.department || '未分类',
+            month: normalizeDailyMonth(report.reportDate),
+            reportIds: [report.id],
+            transient: true
+          });
           this.dailyReportDialog.activeType = report.reportType;
-          const storedReport = row.reports.find((item) => item.id === report.id);
+          const storedReport = this.getReportById(report.id);
           if (storedReport) this.setActiveDailyReport(storedReport);
         },
+        openIndicatorLinkDialog(report) {
+          const storedReport = this.getReportById(report?.id);
+          if (!storedReport) return;
+          this.indicatorLinkDialog.reportId = storedReport.id;
+          this.indicatorLinkDialog.memberId = storedReport.memberId || this.activeIndicatorMemberId || '';
+          const availableRows = (this.dailyMonthRecords || [])
+            .filter((row) =>
+              row.memberId === this.indicatorLinkDialog.memberId &&
+              !(storedReport.linkedDailyRecordIds || []).includes(row.id)
+            );
+          const departments = [...new Set(availableRows
+            .map((row) => row.department)
+            .filter(Boolean))];
+          this.indicatorLinkDialog.department = departments.includes(storedReport.department)
+            ? storedReport.department
+            : (departments[0] || '');
+          this.indicatorLinkDialog.rowId = '';
+          const candidates = availableRows
+            .filter((row) => row.department === this.indicatorLinkDialog.department)
+            .sort((a, b) => {
+              const targetMonth = normalizeDailyMonth(storedReport.reportDate);
+              const scoreA = (normalizeDailyMonth(a.month) === targetMonth ? 2 : 0) + (a.department === storedReport.department ? 1 : 0);
+              const scoreB = (normalizeDailyMonth(b.month) === targetMonth ? 2 : 0) + (b.department === storedReport.department ? 1 : 0);
+              return scoreB - scoreA || String(b.month || '').localeCompare(String(a.month || ''));
+            });
+          if (!candidates.length) {
+            ElementPlus.ElMessage.info('该家人暂无可关联的日常检查记录。');
+            return;
+          }
+          this.indicatorLinkDialog.rowId = candidates[0].id;
+          this.indicatorLinkDialog.visible = true;
+        },
+        confirmIndicatorDailyLink() {
+          const report = this.getReportById(this.indicatorLinkDialog.reportId);
+          const row = this.dailyMonthRecords.find((item) => item.id === this.indicatorLinkDialog.rowId);
+          if (!report || !row) {
+            ElementPlus.ElMessage.warning('请选择要关联的日常检查记录。');
+            return;
+          }
+          const linkedRows = (report.linkedDailyRecordIds || [])
+            .map((rowId) => this.dailyMonthRecords.find((item) => item.id === rowId))
+            .filter(Boolean);
+          if (linkedRows.some((item) => item.memberId !== this.indicatorLinkDialog.memberId)) {
+            ElementPlus.ElMessage.warning('该报告已关联其他家人的日常记录，请先解除原关联。');
+            return;
+          }
+          report.memberId = this.indicatorLinkDialog.memberId;
+          this.linkReportToDailyRow(report, row);
+          row.updatedAt = nowText();
+          this.reports = [...this.reports];
+          this.dailyMonthRecords = [...this.dailyMonthRecords];
+          this.persist();
+          this.indicatorLinkDialog.visible = false;
+          ElementPlus.ElMessage.success('已关联到日常检查。');
+        },
         deleteIndicatorReport(report) {
-          const row = this.dailyMonthRecords.find((item) => item.id === report?._rowId);
-          if (!row) return;
+          if (!report) return;
           ElementPlus.ElMessageBox.confirm(`确定删除“${report.title || '未命名报告'}”吗？`, '删除报告', { type: 'warning' })
             .then(() => {
-              row.reports = (row.reports || []).filter((item) => item.id !== report.id);
-              row.updatedAt = nowText();
+              this.removeReportFromLibrary(report.id);
               this.persist();
               this.onIndicatorMemberChange();
               ElementPlus.ElMessage.success('报告已删除。');

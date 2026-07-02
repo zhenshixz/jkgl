@@ -653,6 +653,7 @@ EMPTY_DATA: dict[str, list[Any]] = {
     "packages": [],
     "members": [],
     "plans": [],
+    "reports": [],
     "dailyRecords": [],
     "dailyMonthRecords": [],
 }
@@ -663,7 +664,7 @@ def normalize_data_payload(payload: Any) -> dict[str, Any]:
         raise HTTPException(status_code=400, detail="数据格式必须是 JSON 对象。")
 
     normalized = dict(payload)
-    for key in ["packages", "members", "plans", "dailyRecords", "dailyMonthRecords"]:
+    for key in ["packages", "members", "plans", "reports", "dailyRecords", "dailyMonthRecords"]:
         value = normalized.get(key, [])
         if value is None:
             value = []

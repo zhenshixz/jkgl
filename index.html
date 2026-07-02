@@ -518,7 +518,7 @@
                         <el-table-column label="检查结果" width="170">
                           <template #default="{ row }">
                             <div style="display: flex; flex-direction: column; gap: 8px;">
-                              <el-button size="small" plain @click="openDailyReportDialog(row)">查看报告 ({{ row.reports?.length || 0 }})</el-button>
+                              <el-button size="small" plain @click="openDailyReportDialog(row)">查看报告 ({{ getLinkedDailyReports(row).length }})</el-button>
                               <div class="daily-report-counts">
                                 <span>检验 {{ getDailyReportCount(row, 'lab') }}</span>
                                 <span>检查 {{ getDailyReportCount(row, 'exam') }}</span>
@@ -667,9 +667,10 @@
                             <span v-else>-</span>
                           </template>
                         </el-table-column>
-                        <el-table-column label="操作" width="180" fixed="right">
+                        <el-table-column label="操作" width="250" fixed="right">
                           <template #default="{ row }">
                             <el-button size="small" type="primary" plain @click="openIndicatorReport(row)">查看报告</el-button>
+                            <el-button size="small" @click="openIndicatorLinkDialog(row)">关联日常</el-button>
                             <el-button size="small" type="danger" text @click="deleteIndicatorReport(row)">删除</el-button>
                           </template>
                         </el-table-column>
@@ -857,6 +858,52 @@
         >确认并保存报告</el-button>
       </template>
     </el-dialog>
+
+    <el-dialog v-model="indicatorLinkDialog.visible" title="关联到日常检查" width="520px">
+      <el-form label-width="90px">
+        <el-form-item label="所属家人">
+          <el-select
+            v-model="indicatorLinkDialog.memberId"
+            placeholder="请选择家人"
+            style="width: 100%;"
+            :disabled="isIndicatorLinkMemberLocked()"
+            @change="onIndicatorLinkMemberChange"
+          >
+            <el-option v-for="member in members" :key="member.id" :label="member.name" :value="member.id"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="科室">
+          <el-select
+            v-model="indicatorLinkDialog.department"
+            placeholder="请先选择家人"
+            style="width: 100%;"
+            :disabled="!indicatorLinkDialog.memberId"
+            @change="onIndicatorLinkDepartmentChange"
+          >
+            <el-option v-for="department in getIndicatorLinkDepartments()" :key="department" :label="department" :value="department"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="日常记录">
+          <el-select
+            v-model="indicatorLinkDialog.rowId"
+            placeholder="请先选择科室"
+            style="width: 100%;"
+            :disabled="!indicatorLinkDialog.department"
+          >
+            <el-option
+              v-for="row in getIndicatorLinkableDailyRows()"
+              :key="row.id"
+              :label="row.label"
+              :value="row.id"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="indicatorLinkDialog.visible = false">取消</el-button>
+        <el-button type="primary" @click="confirmIndicatorDailyLink">确认关联</el-button>
+      </template>
+    </el-dialog>
     <el-dialog v-model="dailyEditor.visible" :title="dailyEditor.form.id ? '编辑就诊记录' : '新增就诊记录'" width="680px" @opened="initWangEditor" @closed="destroyWangEditor" destroy-on-close>
       <el-form label-width="90px">
         <div style="display: flex; gap: 16px;">
@@ -913,12 +960,12 @@
       <div v-if="dailyReportDialog.row" style="display: flex; flex-direction: column; gap: 14px;">
         <div style="display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 14px;">
           <span>{{ dailyReportDialog.row.department }} / {{ dailyReportDialog.row.month }}</span>
-          <span>已关联 {{ dailyReportDialog.row.reports?.length || 0 }} 份报告</span>
+          <span>已关联 {{ getLinkedDailyReports(dailyReportDialog.row).length }} 份报告</span>
         </div>
         <el-tabs v-model="dailyReportDialog.activeType" class="daily-report-tabs">
           <el-tab-pane name="lab" :label="`检验报告 ${getDailyReportCount(dailyReportDialog.row, 'lab')}`">
             <div class="report-toolbar">
-              <el-button type="primary" size="small" @click="createDailyReport('lab')">新增检验报告</el-button>
+              <el-button v-if="!dailyReportDialog.row.transient" type="primary" size="small" @click="createDailyReport('lab')">新增检验报告</el-button>
               <span>适合尿常规、血常规、生化、肿瘤标志物等表格型报告；解析后按指标存储，后续用于对比和趋势跟踪。</span>
             </div>
             <div class="report-workspace">
@@ -1020,7 +1067,7 @@
           </el-tab-pane>
           <el-tab-pane name="exam" :label="`检查报告 ${getDailyReportCount(dailyReportDialog.row, 'exam')}`">
             <div class="report-toolbar">
-              <el-button type="primary" size="small" @click="createDailyReport('exam')">新增检查报告</el-button>
+              <el-button v-if="!dailyReportDialog.row.transient" type="primary" size="small" @click="createDailyReport('exam')">新增检查报告</el-button>
               <span>适合 CT、彩超、DR、胃肠镜等段落型报告；保留检查所见和结论，便于后续复查对照。</span>
             </div>
             <div class="report-workspace">
