@@ -173,6 +173,12 @@ const {
           activeIndicatorDepartment: '',
           indicatorFilterYear: '',
           indicatorFilterMonth: '',
+          indicatorSelectedReportIds: [],
+          indicatorCompareDialog: {
+            visible: false,
+            mode: 'lab',
+            metricKey: ''
+          },
           indicatorImportDialog: {
             visible: false,
             loading: false,
@@ -311,12 +317,13 @@ const {
         },
         dailyVisibleMonths() {
           const year = this.dailyFilterYear || '';
+          if (!year) return [];
           return Array.from(this.dailyMonthsWithData)
-            .filter(month => !year || month.startsWith(`${year}-`))
+            .filter(month => month.startsWith(`${year}-`))
             .sort((a, b) => b.localeCompare(a))
             .map(month => ({
               value: month,
-              label: year ? `${Number(month.slice(5, 7))}月` : `${month.slice(0, 4)}年${Number(month.slice(5, 7))}月`
+              label: `${Number(month.slice(5, 7))}月`
             }));
         },
         confirmedIndicatorReports() {
@@ -362,12 +369,13 @@ const {
         },
         indicatorVisibleMonths() {
           const year = this.indicatorFilterYear || '';
+          if (!year) return [];
           return Array.from(this.indicatorMonthsWithData)
-            .filter((month) => !year || month.startsWith(`${year}-`))
+            .filter((month) => month.startsWith(`${year}-`))
             .sort((a, b) => b.localeCompare(a))
             .map((month) => ({
               value: month,
-              label: year ? `${Number(month.slice(5, 7))}月` : `${month.slice(0, 4)}年${Number(month.slice(5, 7))}月`
+              label: `${Number(month.slice(5, 7))}月`
             }));
         },
         enabledPlans() {
@@ -858,6 +866,7 @@ const {
           this.onDailyMemberChange();
         },
         onIndicatorMemberChange() {
+          this.indicatorSelectedReportIds = [];
           const depts = this.getIndicatorDepartments(this.activeIndicatorMemberId);
           if (!depts.includes(this.activeIndicatorDepartment)) {
               this.activeIndicatorDepartment = depts[0] || '';
@@ -892,6 +901,147 @@ const {
           if (this.getDailyReportType(report, 'lab') === 'exam') return '-';
           return (report?.items || report?.structured?.metrics || [])
             .filter(item => this.normalizeLabItemForStorage(item).flag === 'abnormal').length;
+        },
+        isIndicatorReportSelectable(report) {
+          return Boolean(report);
+        },
+        handleIndicatorReportSelectionChange(reports) {
+          this.indicatorSelectedReportIds = (reports || [])
+            .map((report) => report.id);
+        },
+        getIndicatorSelectedReports() {
+          const ids = new Set(this.indicatorSelectedReportIds || []);
+          return this.confirmedIndicatorReports
+            .filter((report) => ids.has(report.id))
+            .sort((a, b) => String(a.reportDate || '').localeCompare(String(b.reportDate || '')));
+        },
+        getIndicatorComparisonRows() {
+          const rows = new Map();
+          this.getIndicatorSelectedReports().forEach((report) => {
+            (report.items || report.structured?.metrics || []).forEach((rawItem) => {
+              const item = this.normalizeLabItemForStorage(rawItem);
+              const key = item.normalizedName || this.normalizeMetricName(item.name);
+              if (!key) return;
+              if (!rows.has(key)) {
+                rows.set(key, { key, name: item.name, unit: item.unit || '', values: {} });
+              }
+              const row = rows.get(key);
+              if (!row.unit && item.unit) row.unit = item.unit;
+              if (!row.values[report.id]) row.values[report.id] = item;
+            });
+          });
+          return [...rows.values()].sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
+        },
+        getIndicatorAbnormalComparisonRows() {
+          return this.getIndicatorComparisonRows()
+            .filter((row) => Object.values(row.values).some((item) => item.flag === 'abnormal'));
+        },
+        getIndicatorCompareCell(row, reportId) {
+          return row?.values?.[reportId] || null;
+        },
+        openIndicatorCompare() {
+          if (this.getIndicatorSelectedReports().length < 2) {
+            ElementPlus.ElMessage.warning('请至少选择两份报告。');
+            return;
+          }
+          const reportTypes = [...new Set(this.getIndicatorSelectedReports().map((report) => this.getDailyReportType(report, 'lab')))];
+          if (reportTypes.length !== 1) {
+            ElementPlus.ElMessage.warning('检验报告和检查报告需要分开对比。');
+            return;
+          }
+          this.indicatorCompareDialog.mode = reportTypes[0];
+          if (reportTypes[0] === 'exam') {
+            this.indicatorCompareDialog.metricKey = '';
+            this.indicatorCompareDialog.visible = true;
+            return;
+          }
+          const rows = this.getIndicatorAbnormalComparisonRows();
+          const trendMetric = rows.find((row) => {
+            const numericCount = this.getIndicatorSelectedReports()
+              .filter((report) => {
+                const item = this.getIndicatorCompareCell(row, report.id);
+                return Number.isFinite(item?.valueNumber ?? this.parseMetricNumber(item?.value));
+              })
+              .length;
+            return numericCount >= 2;
+          });
+          this.indicatorCompareDialog.metricKey = trendMetric?.key || rows[0]?.key || '';
+          this.indicatorCompareDialog.visible = true;
+        },
+        escapeIndicatorCompareHtml(value) {
+          return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        },
+        getExamComparisonHtml(report, field) {
+          const reports = this.getIndicatorSelectedReports()
+            .filter((item) => this.getDailyReportType(item, 'exam') === 'exam');
+          const splitSegments = (value) => String(value || '')
+            .match(/[^。；;！？!?]+[。；;！？!?]?/g) || [];
+          const normalizeSegment = (value) => String(value || '').replace(/\s+/g, '').trim();
+          const reportSegmentSets = reports.map((item) => new Set(
+            splitSegments(item?.[field]).map(normalizeSegment).filter(Boolean)
+          ));
+          const segments = splitSegments(report?.[field]);
+          if (!segments.length) return '暂无内容';
+          return segments.map((segment) => {
+            const key = normalizeSegment(segment);
+            const isCommon = key && reportSegmentSets.every((set) => set.has(key));
+            const html = this.escapeIndicatorCompareHtml(segment).replace(/\r?\n/g, '<br>');
+            return isCommon ? html : `<mark class="indicator-exam-diff">${html}</mark>`;
+          }).join('');
+        },
+        getIndicatorTrendChart() {
+          const width = 900;
+          const height = 280;
+          const padding = { left: 64, right: 30, top: 28, bottom: 54 };
+          const row = this.getIndicatorAbnormalComparisonRows().find((item) => item.key === this.indicatorCompareDialog.metricKey);
+          if (!row) return { width, height, points: [], polyline: '', ticks: [] };
+          const sourcePoints = this.getIndicatorSelectedReports()
+            .map((report) => {
+              const item = this.getIndicatorCompareCell(row, report.id);
+              const value = item?.valueNumber ?? this.parseMetricNumber(item?.value);
+              return value === null ? null : {
+                reportId: report.id,
+                date: report.reportDate || '-',
+                title: report.title || '检验报告',
+                value,
+                valueText: item.valueText || item.value || String(value),
+                abnormal: item.flag === 'abnormal'
+              };
+            })
+            .filter(Boolean);
+          if (!sourcePoints.length) return { width, height, points: [], polyline: '', ticks: [] };
+          let min = Math.min(...sourcePoints.map((point) => point.value));
+          let max = Math.max(...sourcePoints.map((point) => point.value));
+          const spread = max - min || Math.max(Math.abs(max) * 0.2, 1);
+          min -= spread * 0.15;
+          max += spread * 0.15;
+          const plotWidth = width - padding.left - padding.right;
+          const plotHeight = height - padding.top - padding.bottom;
+          const points = sourcePoints.map((point, index) => ({
+            ...point,
+            x: padding.left + (sourcePoints.length === 1 ? plotWidth / 2 : (plotWidth * index) / (sourcePoints.length - 1)),
+            y: padding.top + ((max - point.value) / (max - min)) * plotHeight
+          }));
+          const ticks = Array.from({ length: 5 }, (_, index) => {
+            const ratio = index / 4;
+            return {
+              y: padding.top + ratio * plotHeight,
+              value: (max - ratio * (max - min)).toFixed(2).replace(/\.00$/, '')
+            };
+          });
+          return {
+            width,
+            height,
+            padding,
+            points,
+            ticks,
+            polyline: points.map((point) => `${point.x},${point.y}`).join(' ')
+          };
         },
         isDailyRowExpanded(id) {
           return this.dailyExpandedRowIds.includes(id);
@@ -1127,9 +1277,44 @@ const {
           }
           return { type: 'qualitative', text };
         },
+        calculateLabItemFlag(item) {
+          const value = item?.value ?? item?.result ?? '';
+          const reference = item?.reference ?? item?.referenceRange ?? '';
+          const valueNumber = this.parseMetricNumber(value);
+          const range = this.parseReferenceRange(reference);
+          if (valueNumber !== null && range.type === 'range') {
+            return valueNumber < range.low || valueNumber > range.high ? 'abnormal' : 'normal';
+          }
+          if (valueNumber !== null && range.type === 'limit') {
+            const normal = (range.operator === '<' && valueNumber < range.value)
+              || (range.operator === '≤' && valueNumber <= range.value)
+              || (range.operator === '>' && valueNumber > range.value)
+              || (range.operator === '≥' && valueNumber >= range.value);
+            return normal ? 'normal' : 'abnormal';
+          }
+          const comparableText = `${reference}`;
+          if ((valueNumber !== null && /\d/.test(comparableText)) || /阴性|阳性/.test(comparableText)) {
+            return this.inferLabFlag(value, reference);
+          }
+          return null;
+        },
+        refreshLabItemFlag(item, persistDaily = false) {
+          if (!item) return;
+          item.flagManual = false;
+          const flag = this.calculateLabItemFlag(item);
+          if (flag) item.flag = flag;
+          if (persistDaily) this.touchDailyReport();
+        },
+        setLabItemManualFlag(item, checked, persistDaily = false) {
+          if (!item) return;
+          item.flag = checked ? 'abnormal' : 'normal';
+          item.flagManual = true;
+          if (persistDaily) this.touchDailyReport();
+        },
         normalizeLabItemForStorage(item) {
           const referenceRange = this.parseReferenceRange(item.reference || '');
           const valueNumber = this.parseMetricNumber(item.value || '');
+          const calculatedFlag = this.calculateLabItemFlag(item);
           return {
             id: item.id || uid('lab_item'),
             name: item.name || item.project || item.itemName || '',
@@ -1140,7 +1325,10 @@ const {
             valueType: valueNumber === null ? 'text' : 'number',
             reference: item.reference || item.referenceRange || '',
             referenceRange,
-            flag: item.flag || item.status || 'pending',
+            flag: item.flagManual
+              ? (item.flag || item.status || 'pending')
+              : (calculatedFlag || item.flag || item.status || 'pending'),
+            flagManual: Boolean(item.flagManual),
             unit: item.unit || '',
             note: item.note || item.remark || ''
           };
@@ -1396,6 +1584,9 @@ const {
           if (report.reportType === 'lab' && (!report.items || report.items.length === 0)) {
             ElementPlus.ElMessage.warning('请先解析或手动新增指标，再确认报告。');
             return;
+          }
+          if (report.reportType === 'lab') {
+            report.items = report.items.map((item) => this.normalizeLabItemForStorage(item));
           }
           report.status = 'confirmed';
           report.confirmedAt = nowText();
@@ -3031,6 +3222,40 @@ const {
             extraction: '',
             report: null
           };
+        },
+        copyIndicatorReport(report) {
+          const sourceReport = this.getReportById(report?.id);
+          if (!sourceReport) return;
+          const reportType = this.getDailyReportType(sourceReport, 'lab');
+          const copy = JSON.parse(JSON.stringify(sourceReport));
+          copy.id = uid('daily_report');
+          copy.title = `${sourceReport.title || (reportType === 'lab' ? '检验报告' : '检查报告')}（副本）`;
+          copy.status = 'parsed';
+          copy.confirmedAt = '';
+          copy.createdAt = nowText();
+          copy.updatedAt = nowText();
+          copy.files = [];
+          copy.linkedDailyRecordIds = [];
+          copy.origin = 'indicator';
+          if (reportType === 'lab') {
+            copy.items = (copy.items || []).map((item) => ({ ...item, id: uid('lab_item') }));
+          }
+          this.indicatorImportDialog = {
+            visible: true,
+            loading: false,
+            stage: 'review',
+            progress: '',
+            memberId: sourceReport.memberId || this.activeIndicatorMemberId || '',
+            reportType,
+            file: null,
+            fileName: '',
+            extraction: 'copy',
+            report: this.normalizeReportLibraryEntry(copy, {
+              memberId: sourceReport.memberId,
+              origin: 'indicator'
+            })
+          };
+          ElementPlus.ElMessage.info('已复制为新报告，请修改日期或指标后确认保存。');
         },
         closeIndicatorImport() {
           this.indicatorImportDialog.visible = false;

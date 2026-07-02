@@ -638,7 +638,14 @@
                           <strong style="font-size:15px;">报告列表</strong>
                           <span class="muted" style="margin-left:8px;">{{ indicatorReportList.length }} 份</span>
                         </div>
-                        <el-button type="primary" size="small" @click="openIndicatorImport('lab')">录入报告</el-button>
+                        <div style="display: flex; gap: 8px;">
+                          <el-button
+                            size="small"
+                            :disabled="indicatorSelectedReportIds.length < 2"
+                            @click="openIndicatorCompare"
+                          >对比所选（{{ indicatorSelectedReportIds.length }}）</el-button>
+                          <el-button type="primary" size="small" @click="openIndicatorImport('lab')">录入报告</el-button>
+                        </div>
                       </div>
 
                       <el-table
@@ -647,7 +654,9 @@
                         border
                         style="width:100%;"
                         empty-text="该科室暂无报告"
+                        @selection-change="handleIndicatorReportSelectionChange"
                       >
+                        <el-table-column type="selection" width="48" :selectable="isIndicatorReportSelectable"></el-table-column>
                         <el-table-column prop="reportDate" label="报告日期" width="130"></el-table-column>
                         <el-table-column prop="title" label="报告名称" min-width="260"></el-table-column>
                         <el-table-column label="报告类型" width="110" align="center">
@@ -667,13 +676,20 @@
                             <span v-else>-</span>
                           </template>
                         </el-table-column>
-                        <el-table-column label="操作" width="250" fixed="right">
+                        <el-table-column label="操作" width="310" fixed="right">
                           <template #default="{ row }">
                             <el-button size="small" type="primary" plain @click="openIndicatorReport(row)">查看报告</el-button>
+                            <el-button size="small" @click="copyIndicatorReport(row)">复制</el-button>
                             <el-button size="small" @click="openIndicatorLinkDialog(row)">关联日常</el-button>
                             <el-button size="small" type="danger" text @click="deleteIndicatorReport(row)">删除</el-button>
                           </template>
                         </el-table-column>
+                        <template #empty>
+                          <div style="padding: 20px 0;">
+                            <div>{{ indicatorFilterMonth ? '当前月份暂无报告' : '该科室暂无报告' }}</div>
+                            <el-button v-if="indicatorFilterMonth" size="small" type="primary" link @click="setIndicatorMonthFilter('')">查看全部月份</el-button>
+                          </div>
+                        </template>
                       </el-table>
 
 
@@ -805,16 +821,16 @@
                 <template #default="{ row }"><el-input v-model="row.name"></el-input></template>
               </el-table-column>
               <el-table-column label="检验值" width="130">
-                <template #default="{ row }"><el-input v-model="row.value"></el-input></template>
+                <template #default="{ row }"><el-input v-model="row.value" @change="refreshLabItemFlag(row)"></el-input></template>
               </el-table-column>
               <el-table-column label="参考值" width="160">
-                <template #default="{ row }"><el-input v-model="row.reference"></el-input></template>
+                <template #default="{ row }"><el-input v-model="row.reference" @change="refreshLabItemFlag(row)"></el-input></template>
               </el-table-column>
               <el-table-column label="异常" width="80" align="center">
                 <template #default="{ row }">
                   <el-checkbox
                     :model-value="row.flag === 'abnormal'"
-                    @change="row.flag = $event ? 'abnormal' : 'normal'"
+                    @change="setLabItemManualFlag(row, $event)"
                   ></el-checkbox>
                 </template>
               </el-table-column>
@@ -903,6 +919,108 @@
         <el-button @click="indicatorLinkDialog.visible = false">取消</el-button>
         <el-button type="primary" @click="confirmIndicatorDailyLink">确认关联</el-button>
       </template>
+    </el-dialog>
+
+    <el-dialog
+      v-model="indicatorCompareDialog.visible"
+      :title="indicatorCompareDialog.mode === 'exam' ? '检查报告内容对比' : '异常检验指标对比'"
+      width="94%"
+      class="indicator-compare-dialog"
+    >
+      <div class="indicator-compare-summary">
+        已选择 {{ getIndicatorSelectedReports().length }} 份{{ indicatorCompareDialog.mode === 'exam' ? '检查' : '检验' }}报告，按报告日期从早到晚排列。
+      </div>
+
+      <template v-if="indicatorCompareDialog.mode === 'lab'">
+      <div class="indicator-trend-panel">
+        <div class="indicator-trend-toolbar">
+          <strong>单项指标趋势</strong>
+          <el-select v-model="indicatorCompareDialog.metricKey" filterable placeholder="选择指标" style="width: 280px;">
+            <el-option
+              v-for="row in getIndicatorAbnormalComparisonRows()"
+              :key="row.key"
+              :label="row.name"
+              :value="row.key"
+            ></el-option>
+          </el-select>
+        </div>
+        <div v-if="getIndicatorTrendChart().points.length >= 2" class="indicator-trend-chart">
+          <svg
+            :viewBox="`0 0 ${getIndicatorTrendChart().width} ${getIndicatorTrendChart().height}`"
+            role="img"
+            aria-label="指标随报告日期变化趋势"
+          >
+            <g v-for="tick in getIndicatorTrendChart().ticks" :key="tick.y">
+              <line
+                :x1="getIndicatorTrendChart().padding.left"
+                :x2="getIndicatorTrendChart().width - getIndicatorTrendChart().padding.right"
+                :y1="tick.y"
+                :y2="tick.y"
+                class="indicator-chart-grid"
+              ></line>
+              <text :x="getIndicatorTrendChart().padding.left - 10" :y="tick.y + 4" text-anchor="end" class="indicator-chart-axis-label">{{ tick.value }}</text>
+            </g>
+            <polyline :points="getIndicatorTrendChart().polyline" class="indicator-chart-line"></polyline>
+            <g v-for="point in getIndicatorTrendChart().points" :key="point.reportId">
+              <circle :cx="point.x" :cy="point.y" r="5" :class="['indicator-chart-point', { abnormal: point.abnormal }]"></circle>
+              <text :x="point.x" :y="point.y - 12" text-anchor="middle" class="indicator-chart-value">{{ point.valueText }}</text>
+              <text :x="point.x" :y="getIndicatorTrendChart().height - 20" text-anchor="middle" class="indicator-chart-axis-label">{{ point.date }}</text>
+            </g>
+          </svg>
+        </div>
+        <div v-else class="indicator-chart-empty">{{ getIndicatorAbnormalComparisonRows().length ? '该异常指标至少需要两次有效数值才能绘制趋势。' : '所选报告中没有标记为异常的指标。' }}</div>
+      </div>
+
+      <div class="indicator-compare-table-wrap">
+        <el-table :data="getIndicatorComparisonRows()" border empty-text="所选报告暂无可对比指标">
+          <el-table-column prop="name" label="检查项目" fixed="left" min-width="190"></el-table-column>
+          <el-table-column prop="unit" label="单位" fixed="left" width="100">
+            <template #default="{ row }">{{ row.unit || '-' }}</template>
+          </el-table-column>
+          <el-table-column
+            v-for="report in getIndicatorSelectedReports()"
+            :key="report.id"
+            :label="report.reportDate || '未填日期'"
+            min-width="180"
+            align="center"
+          >
+            <template #header>
+              <div class="indicator-compare-header">
+                <strong>{{ report.reportDate || '未填日期' }}</strong>
+                <span>{{ report.title || '检验报告' }}</span>
+              </div>
+            </template>
+            <template #default="{ row }">
+              <div v-if="getIndicatorCompareCell(row, report.id)" :class="['indicator-compare-cell', { abnormal: getIndicatorCompareCell(row, report.id).flag === 'abnormal' }]">
+                <strong>{{ getIndicatorCompareCell(row, report.id).valueText || getIndicatorCompareCell(row, report.id).value || '-' }}</strong>
+                <span v-if="getIndicatorCompareCell(row, report.id).reference">参考 {{ getIndicatorCompareCell(row, report.id).reference }}</span>
+              </div>
+              <span v-else class="muted">-</span>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      </template>
+
+      <div v-else class="indicator-exam-compare-grid">
+        <article v-for="report in getIndicatorSelectedReports()" :key="report.id" class="indicator-exam-compare-card">
+          <header>
+            <div>
+              <strong>{{ report.reportDate || '未填日期' }}</strong>
+              <h3>{{ report.title || '检查报告' }}</h3>
+            </div>
+            <el-tag size="small" effect="plain">{{ report.department || '未分类' }}</el-tag>
+          </header>
+          <section>
+            <h4>检查所见</h4>
+            <div class="indicator-exam-text" v-html="getExamComparisonHtml(report, 'findingText')"></div>
+          </section>
+          <section>
+            <h4>检查结论 / 诊断</h4>
+            <div class="indicator-exam-text conclusion" v-html="getExamComparisonHtml(report, 'conclusionText')"></div>
+          </section>
+        </article>
+      </div>
     </el-dialog>
     <el-dialog v-model="dailyEditor.visible" :title="dailyEditor.form.id ? '编辑就诊记录' : '新增就诊记录'" width="680px" @opened="initWangEditor" @closed="destroyWangEditor" destroy-on-close>
       <el-form label-width="90px">
@@ -1041,16 +1159,16 @@
                       <template #default="{ row }"><el-input v-model="row.name" @change="touchDailyReport"></el-input></template>
                     </el-table-column>
                     <el-table-column label="检验值" width="130">
-                      <template #default="{ row }"><el-input v-model="row.value" @change="touchDailyReport"></el-input></template>
+                      <template #default="{ row }"><el-input v-model="row.value" @change="refreshLabItemFlag(row, true)"></el-input></template>
                     </el-table-column>
                     <el-table-column label="参考值" width="150">
-                      <template #default="{ row }"><el-input v-model="row.reference" @change="touchDailyReport"></el-input></template>
+                      <template #default="{ row }"><el-input v-model="row.reference" @change="refreshLabItemFlag(row, true)"></el-input></template>
                     </el-table-column>
                     <el-table-column label="异常" width="80" align="center">
                       <template #default="{ row }">
                         <el-checkbox
                           :model-value="row.flag === 'abnormal'"
-                          @change="row.flag = $event ? 'abnormal' : 'normal'; touchDailyReport()"
+                          @change="setLabItemManualFlag(row, $event, true)"
                         ></el-checkbox>
                       </template>
                     </el-table-column>
